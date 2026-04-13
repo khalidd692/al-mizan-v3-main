@@ -1,0 +1,369 @@
+# ══════════════════════════════════════════════════════════════════
+# 🛡️ PROTOCOLE DE SÉCURITÉ BLINDÉ — mizannnnew (Senior Expert)
+# ══════════════════════════════════════════════════════════════════
+# Toute violation d'une règle ci-dessous est un arrêt immédiat.
+# Ces règles ont priorité absolue sur toute autre instruction.
+# ══════════════════════════════════════════════════════════════════
+
+---
+
+## 🔴 RÈGLE 1 — LE DROIT DE VETO (DIFF)
+**Avant tout `git commit`, afficher obligatoirement :**
+- La liste exacte des fichiers modifiés (`git diff --stat`)
+- Un résumé ligne par ligne des suppressions (`git diff` section `-`)
+- Attendre une validation explicite de l'utilisateur ("oui", "go", "valide")
+- **Aucune exception. Même pour un changement d'une seule ligne.**
+
+## 🔴 RÈGLE 2 — LE SANCTUAIRE
+**Interdiction formelle, sans ordre explicite et mot-clé de déverrouillage :**
+- Modifier la logique de verdict dans `engine.js` (`_getTechnicalGrade`, `_normalizeGrade`, `_gradeColor`, `_gradeLabel`, `_mzVerdictCls`)
+- Modifier les regex `_RE_MAWDU`, `_RE_DAIF`, `_RE_SAHIH`
+- Modifier ou tronquer `_SAHIH_WHITELIST`
+- Modifier les fichiers de données : `data.js`, `db.js`, `preachers.js`, `glossaire.js`, `faq.js`
+- Mot-clé de déverrouillage requis : **"DÉVERROU-SANCTUAIRE"** dans le message utilisateur
+
+## 🔴 RÈGLE 3 — LE VERROU DE SYNTAXE
+**Avant tout `git push`, exécution obligatoire de :**
+```bash
+node --check engine.js && node --check mizan-tree-engine.js && node --check app.js
+```
+- Si `node --check` échoue sur un fichier modifié → **push bloqué, corriger d'abord**
+- Cette vérification s'applique à **tous** les fichiers `.js` touchés dans le commit
+
+---
+
+## 🟠 RÈGLE 4 — INVARIANT JARH > TA'DIL (Ordre des niveaux)
+**Dans `engine.js`, la fonction `_getTechnicalGrade()` doit TOUJOURS respecter cet ordre :**
+1. WHITELIST SAHIH (court-circuit prioritaire)
+2. NIVEAU 1 : `_RE_MAWDU` → REJETÉ (rouge)
+3. NIVEAU 2 : `_RE_DAIF` → DA'IF (orange)
+4. NIVEAU 3 : `_RE_SAHIH` → SAHIH/HASAN (vert)
+5. FALLBACK : DA'IF présumé (jamais de vert/gris par défaut)
+
+**Inverser cet ordre = falsification doctrinale. Interdit sans DÉVERROU-SANCTUAIRE.**
+
+## 🟠 RÈGLE 5 — PROTECTION ANTI-DOUBLON DOM
+**Les gardes d'injection CSS ci-dessous sont sacrés — ne jamais supprimer :**
+- `engine.js` : `if(document.getElementById('mizan-isnad-styles')) return;`
+- `mizan-tree-engine.js` : `var old = document.getElementById('mz-tree-css'); if (old) old.remove();`
+
+Supprimer ces gardes provoque des doublons de styles invisibles qui cassent l'animation et l'affichage mobile. **Toute modification de ces blocs est interdite sans justification explicite.**
+
+## 🟠 RÈGLE 6 — INTÉGRITÉ DU REGISTRE _mzRegistry
+**Dans `mizan-tree-engine.js`, la fonction `mzRenderIsnadTree()` doit TOUJOURS :**
+1. Appeler `_mzRegistry.clear()` avant tout nouveau rendu
+2. Conserver `containerEl._mzRafAbort = true` puis `false` pour l'annulation RAF
+3. Supprimer les anciens listeners (`removeEventListener`) avant d'en ajouter de nouveaux
+
+**Omettre `_mzRegistry.clear()` = crash garanti au clic modal sur un rendu précédent.**
+
+## 🟠 RÈGLE 7 — VERROU DU TRI CHRONOLOGIQUE
+**Le tri `chain.sort((a, b) => a.death_year - b.death_year)` est obligatoire** aux deux endroits :
+- `mzRenderIsnadTree()` (ou son appelant)
+- `mzChainFromDorarData()`
+
+Modifier ou supprimer ce tri inverse l'ordre de la chaîne de transmission (isnad), ce qui est une **erreur scientifique grave**. Interdit sans DÉVERROU-SANCTUAIRE.
+
+## 🟠 RÈGLE 8 — PROTECTION DES ZONES AL-ALBANI
+**La `_SAHIH_WHITELIST` dans `engine.js` est une liste de référence scientifique.**
+- Ne jamais retirer un hadith de la whitelist sans citation de source (Al-Albani, Bukhari, Muslim)
+- Ne jamais ajouter un hadith sans vérification de son statut (`صحيح` confirmé)
+- Le fallback "CONSULTER AL-ALBANI" dans `_gradeLabel` et `_getTechnicalGrade` niveau 4 ne doit jamais être supprimé — c'est un garde-fou doctrinal intentionnel
+
+## 🟣 RÈGLE 9 — LE VETO DE REFACTORING
+**Interdiction absolue de "nettoyer", "simplifier", "réorganiser" ou "refactoriser"**
+du code qui n'est pas directement visé par la tâche en cours.
+
+- Si une fonction ou un bloc de code **n'est pas cassé**, il n'est pas touché
+- Même si le code paraît redondant, verbeux ou "améliorable" — **la stabilité prime sur la propreté**
+- Exemples interdits sans ordre explicite :
+  - Fusionner deux fonctions qui "font la même chose"
+  - Remplacer `var` par `const/let` "pour moderniser"
+  - Extraire un helper "pour factoriser"
+  - Réorganiser l'ordre des fonctions dans un fichier
+  - Supprimer des `console.log` de débogage ("Mouchard de Vérité")
+- **Règle d'or : si ce n'est pas dans le périmètre de la tâche, on n'y touche pas.**
+
+## 🟣 RÈGLE 10 — VERROU DE L'ORDRE DE CHARGEMENT DES SCRIPTS
+**L'ordre `defer` dans `index.html` est une dépendance technique absolue :**
+```
+data.js → db.js → preachers.js → rawi-modal.js → mizan-tree-engine.js → engine.js → glossaire.js → faq.js → app.js
+```
+- `mizan-tree-engine.js` **doit** précéder `engine.js` (engine.js appelle `mzRenderIsnadTree`)
+- `rawi-modal.js` **doit** précéder `engine.js` (engine.js appelle `_openRawiModal`)
+- `data.js` et `db.js` **doivent** précéder tout le reste (données globales)
+- Modifier cet ordre = crash silencieux au chargement. **Interdit sans test complet.**
+
+## 🟣 RÈGLE 11 — PROTECTION DU NAMESPACE GLOBAL `window.*`
+**Ces fonctions sont exposées sur `window` et appelées depuis les `onclick` HTML — elles ne peuvent jamais être renommées, déplacées ou supprimées sans modifier `index.html` en même temps :**
+- `window.goTo` — navigation entre vues (déclaré en position absolue N°1 dans `app.js`)
+- `window.goToList` — raccourci vers la liste
+- `window.renderList` — rendu de la liste des hadiths
+- `window.renderMythes` — rendu des mythes
+- `window.omniSearch` — moteur de recherche global
+- `window.parseSiecle` — parsing des siècles/tabaqât
+- `window.nodeVis` — palette chromatique des nœuds
+- `window.mzRenderIsnadTree` — rendu de l'arbre isnad
+- `window.mzChainFromDorarData` — conversion JSON Python → JS
+
+**Renommer l'une de ces fonctions sans mettre à jour `index.html` = boutons morts, sans erreur visible.**
+
+## ⚫ RÈGLE 12 — LE TEST FANTÔME (Mock Visual Test)
+**Avant de valider une modification d'UI, simulation mentale obligatoire du flux de données :**
+- Tracer chaque champ affiché jusqu'à sa source (event SSE → `_mapHadithRaw` → `h.sanad`/`h.albani`/`h.jarh_tadil` → accordéon DOM)
+- Pour chaque zone visible (`isnad-zone-X`, `sanad-acc-X`, `sec-acc-X`, `#steps-list`, `#loading-box`, `#result-box`) : confirmer que la valeur n'est pas `undefined`, `null`, `""`, ni masquée par `display:none`/`opacity:0`/`visibility:hidden`/z-index inférieur
+- Si un champ peut renvoyer `undefined` en runtime → ajouter un fallback visible (`|| '—'`) ou court-circuiter l'injection
+- **Aucune UI ne part en prod sans ce trace complet documenté dans le message de commit.**
+
+## ⚫ RÈGLE 13 — LE FILET DE SÉCURITÉ (Isolation des Dépendances)
+**Toute restauration ou ajout de code doit passer par une vérification stricte des dépendances :**
+- Lister toutes les variables, fonctions et globales référencées par le bloc restauré
+- Pour chacune : vérifier qu'elle existe encore dans le scope attendu (`window.*`, closure, module)
+- Si une fonction restaurée appelle une variable supprimée → **stop, ne pas commit**, reconstruire ou adapter d'abord
+- Exemples de morts silencieuses interdites : appel à `callClaudeAPI` (supprimée R9), `PROMPT_HADITH` (supprimée R8), `__legacyMapHadithBlock` (supprimée 917baf1)
+- **Un code restauré qui réfère à un symbole mort = bombe silencieuse. Interdit.**
+
+---
+
+# ══════════════════════════════════════════════════════════════════
+# 🔺 PROTOCOLE RED TEAM v2 — BOUCLIERS ANTI-KILL SILENCIEUX
+# Failles identifiées lors de l'audit offensif du 2026-04-10
+# ══════════════════════════════════════════════════════════════════
+
+## ⚫ RÈGLE 14 — VERROU DU SERVICE WORKER (Cache Poisoning)
+**Le Service Worker inline (`index.html:2140-2176`) cache la page HTML entière sous la clé `almizan-v8-final`.**
+- **Toute modification de `index.html` doit s'accompagner d'un bump de la variable `CACHE="almizan-vX-final"`** (incrément du suffixe vX)
+- Sans bump → les utilisateurs mobiles voient l'ancienne version pendant des jours, le `unregister()` ne suffit pas à purger le cache nommé
+- Ne jamais retirer le `getRegistrations().then(unregister)` en tête : c'est le seul garde-fou contre les vieux SW orphelins
+- Ne jamais cacher les appels API (`e.request.url.indexOf('api.mizan.local')!==-1 → return;`) — le skip est critique pour le SSE
+
+## ⚫ RÈGLE 15 — BOUCLIER ANTI-RACE DES STUBS `_mzGuard`
+**Le système `_mzGuard` (`index.html:28-82`) installe des stubs vides pour toutes les fonctions appelées en `onclick`.**
+- Règle : `_mzGuard` ne définit la fonction QUE si `typeof window[name] !== 'function'`
+- Conséquence : **toute fonction définie dans un script `.js` doit être EXPLICITEMENT ré-assignée à `window.name`** — sinon `_mzGuard` gagne et le bouton est muet (cf. commit `3223779`)
+- Checklist obligatoire : pour chaque fonction listée dans `_mzGuard`, vérifier la présence d'un `window.xxx = xxx;` en fin de `engine.js` ou `app.js`
+- Interdit : ajouter un nouveau stub `_mzGuard` sans créer l'implémentation réelle dans la même PR
+
+## ⚫ RÈGLE 16 — GARDE CONTRE LES DOM STALE APRÈS `innerHTML = ''`
+**`_renderDorarCards` (engine.js:989) fait `box.innerHTML = ''` qui invalide tous les IDs `isnad-zone-X`, `sanad-acc-X`, `sec-acc-X`.**
+- Tout `setTimeout`/`Promise.then`/`requestAnimationFrame` qui cible ces IDs DOIT commencer par `var el = document.getElementById(...); if(!el) return;`
+- Une deuxième recherche pendant qu'une première est en cours = enrichissement silencieusement perdu (Zone 2 et Zone 3 vides)
+- Interdit : enrichir un `idx` sans vérifier que l'élément cible existe encore
+- Si une re-render est détectée en cours → abandonner l'enrichissement pour l'ancien `idx`, ne pas injecter dans le néant
+
+## ⚫ RÈGLE 17 — BOUCLIER ANTI-CSS `!important` TUEUR
+**`style.css` contient 131+ déclarations `!important`. Ajouter un `!important` qui masque ou cache un élément peut annihiler des zones entières sans erreur JS.**
+- Interdit d'ajouter `display:none !important`, `visibility:hidden !important`, `opacity:0 !important` ou `height:0 !important` sur un sélecteur ciblant `.mz-details`, `.mz-details-sum`, `#sanad-acc-*`, `#sec-acc-*`, `#isnad-zone-*`, `.loading-box`, `.step-item`, `.steps-line`
+- Tout nouveau `!important` doit être justifié dans le commit, et limité au selecteur le plus spécifique possible
+- Un test manuel visuel est obligatoire après tout ajout d'`!important` dans `style.css`
+
+## ⚫ RÈGLE 18 — GARDE DES PROMESSES SILENCIEUSES
+**`engine.js:815` utilise `arbrePromise.then(...)` SANS `.catch()`. Une rejection silencieuse = Zone 2/3 jamais peuplée.**
+- Toute `Promise.then()` qui injecte du DOM DOIT avoir un `.catch(function(err){ console.error(...); _mzFallbackXXX(); })`
+- Le `fallbackTimer` de 2000ms est un second garde-fou — ne jamais le retirer
+- Interdit : créer une Promise "fire-and-forget" qui touche le DOM critique sans fallback visible
+
+## ⚫ RÈGLE 19 — PROTECTION DES IDs DOM UNIQUES
+**Les IDs `isnad-zone-<idx>`, `sanad-acc-<idx>`, `sec-acc-<idx>`, `step-<i>`, `step-d-<i>` doivent rester uniques dans le document.**
+- Interdit de rendre deux fois les mêmes cartes sans avoir purgé les anciennes (`box.innerHTML = ''` AVANT chaque `_renderDorarCards`)
+- `document.getElementById` ne renvoie que le PREMIER match — un doublon d'ID = enrichissement silencieusement appliqué sur la mauvaise carte
+- Interdit de réutiliser un préfixe d'ID sans suffixe `idx` unique
+
+## ⚫ RÈGLE 20 — VERROU DES LABELS UI SACRÉS
+**Les labels visibles ci-dessous sont ancrés dans l'identité UX — ne jamais les modifier sans ordre explicite :**
+- `index.html:363` → `<p class="loading-label">PROCESSUS AL MIZÂN</p>` (label du loading-box)
+- `engine.js:1446, 1483` → étape `fr:'AL-JARH WA AT-TADIL'` (une des 6 étapes du processus animé)
+- `engine.js:856` → `SHURUT AS-SIHHAH — 5 Conditions` (titre accordéon Zone 2)
+- `engine.js:902` → `GRILLE AL-ALBĀNĪ — Analyse de la Silsilah` (titre accordéon Zone 3)
+- `engine.js:841` → `AQWAL AL-A'IMMAH — Verdicts des Imams sur les Rawis` (titre accordéon Jarh wa Ta'dil)
+- `engine.js:870` → `AL-MUTABA'AT WA ASH-SHAWAHID — Voies de Renfort` (titre accordéon Mutaba'at)
+- `engine.js:890` → `TRÉSOR DES 14 SIÈCLES — Commentaires des Savants` (titre accordéon avis)
+- **Toute modification d'un de ces labels = altération d'identité UX → mot-clé DÉVERROU-SANCTUAIRE requis**
+
+## ⚫ RÈGLE 21 — LE TEST DE RESTAURATION NULLE
+**Avant toute "restauration depuis Git" réclamée par l'utilisateur, exécution obligatoire de :**
+1. `git log --oneline --all --follow -- <fichier>` pour vérifier que le fichier A VRAIMENT été modifié dans l'historique
+2. `git log -S "<texte_réclamé>" --all -- <fichier>` pour vérifier que le texte exact a existé un jour
+3. Si aucune version antérieure ne contient le texte réclamé → **NE PAS FABRIQUER LA RESTAURATION**, rapporter la vérité à l'utilisateur
+4. Une restauration inventée = violation de Rule 1 (VETO) et Rule 13 (Filet de sécurité)
+- **Principe : on ne restaure que ce qui a été perdu. On n'invente jamais un passé qui n'a pas existé dans Git.**
+
+---
+
+# ══════════════════════════════════════════════════════════════════
+# ⚡ PROTOCOLE DE SURVIE TOKEN - mizannnnew
+# Problématique: Gros fichiers (2000+ lignes) + Quota limité + Usage mobile
+# Objectif: -50% à -70% consommation tokens
+
+---
+
+## 🔴 CRITIQUES ABSOLUES (SAVINGS: -30% à -40%)
+
+### [Tip 12] EXTRACTION CHIRURGICALE DE CONTEXTE
+**Pourquoi c'est critique pour toi:** Chaque ligne de code non-pertinente = tokens gaspillés.
+- ❌ JAMAIS copier le fichier entier (index.html 2000 lignes = perte énorme)
+- ✅ Extraire UNIQUEMENT les 50-150 lignes pertinentes
+- ✅ Si besoin structure complète: décrire en 1 phrase au lieu de dumper tout
+- ✅ Exemple: "Ma structure HTML a [section]: balises, [autre]: scripts. Je veux modifier [partie]."
+**Impact:** Réduit input tokens de 80-90% sur gros fichiers
+
+### [Tip 32] CLEAR CONTEXT ENTRE TÂCHES
+**Pourquoi c'est critique pour toi:** Retraitement exponentiel sur mobile tue le quota.
+- ❌ Enchaîner 5 tâches différentes = chaque message retraite les 4 précédents
+- ✅ Utiliser `/clear` entre tâches non-liées pour reset contexte
+- ✅ Lors d'un `/clear`, convient que c'est intentionnel: "On reste sur mizannnnew mais nouvelle tâche"
+**Impact:** Élimine surcoût exponentiel (10-turn chat = 10x plus cher sans /clear)
+
+### [Tip 13 + 14] ASSISTANT PREFILL
+**Pourquoi c'est critique pour toi:** Chaque réponse sans prefill = 30-50 tokens de preamble inutile.
+- ✅ Pour réponses JSON: tu dis "retourne JSON" → je préfil `{"result":` → skip "Here's your JSON:"
+- ✅ Pour code: préfil première ligne directement
+- ✅ Pour listes: préfil le premier bullet
+**Impact:** Réduit output tokens de 10-15% par réponse (énorme cumulé sur 20+ messages)
+
+### [Tip 33] RÉSUMER CONVERSATIONS LONGUES
+**Pourquoi c'est critique pour toi:** Après 10-15 échanges, contexte devient lourd.
+- ✅ Demander résumé: "Je suis passé par X étapes, résume en 200 mots pour continuer"
+- ✅ Remplacer 20 tours par 1 résumé = contexte lean pour suite
+**Impact:** Ramène croissance exponentielle du contexte à linéaire
+
+### [Tip 6 + 7] CONTRAINTES OUTPUT STRICTES
+**Pourquoi c'est critique pour toi:** Output tokens = 40% de ta consommation généralement.
+- ✅ Toujours spécifier limite: "3 points max", "< 50 words", "JSON seulement"
+- ✅ Format explicite: "Return only: name, status. No explanation." = plus court
+**Impact:** Réduit output tokens de 20-40% selon tâche
+
+---
+
+## 🟡 TRÈS IMPORTANTS (SAVINGS: -10% à -20%)
+
+### [Tip 8] TUER LES POLITESSES
+**Pourquoi pour toi:** Chaque "Hi", "I hope", "Thank you" = tokens perdus.
+- ❌ "Hi Claude! I was wondering if you could possibly help me with..."
+- ✅ "Fix syntax error in index.html line 427."
+**Impact:** -5% output tokens par réponse (plamble complètement eliminé)
+
+### [Tip 9 + 10] STRUCTURE PROMPT AVEC XML
+**Pourquoi pour toi:** Structure claire = réponses plus focused = moins de tokens.
+```xml
+<instructions>
+Fix the CSS bug preventing button hover effect in index.html section [name].
+</instructions>
+<context>
+Button selector: .btn-primary. Currently has no :hover rule.
+</context>
+<output_format>
+Return only the CSS fix (3 lines max). No explanation.
+</output_format>
+```
+**Impact:** -5% à -10% output tokens (moins de "padding" explicatif)
+
+### [Tip 3] DÉSACTIVER EXTENDED THINKING
+**Pourquoi pour toi:** Extended thinking = tokens de sortie massifs inutilement.
+- ❌ Ne JAMAIS utiliser pour: édition de code, extraction, formagge
+- ✅ Utiliser UNIQUEMENT pour: architecture complexe, decisions critiques
+**Impact:** Économise 5K-20K tokens par réponse si tu l'utiliserais par défaut
+
+### [Tip 4] CAPPER THINKING BUDGET
+**Pourquoi pour toi:** Sur mobile, moins de temps = moins de tokens dépensés.
+- ✅ Si thinking needed: max 8K-16K tokens, jamais 100K
+**Impact:** -60% sur coûts thinking si nécessaire
+
+### [Tip 5] DISPLAY OMITTED SUR THINKING
+**Pourquoi pour toi:** Tu ne vois pas les thinking blocks? Pas besoin de les streamer.
+- ✅ Réduit latence sur mobile (moins de données à traiter)
+**Impact:** -10% latence output sur mobile
+
+### [Tip 11] NE PAS RÉPÉTER INSTRUCTIONS
+**Pourquoi pour toi:** Repetition = tokens gaspillés.
+- ❌ Demander 2x la même chose
+- ✅ Formuler une fois, clairement
+**Impact:** -2-5% input tokens par cycle
+
+### [Tip 15] STRIP THINKING BLOCKS DE L'HISTORIQUE
+**Pourquoi pour toi:** Passing thinking back in = double coût.
+- ✅ Je dois JAMAIS renvoyer mes thinking blocks dans contexte
+**Impact:** Élimine 10-30% du contexte inutile sur longues conversations
+
+### [Tip 26] NE PAS BASCULER THINKING ENTRE REQUÊTES
+**Pourquoi pour toi:** Changer thinking on/off = cache miss (si utilisé).
+- ✅ Décider: thinking OUI ou NON pour entire session, pas par message
+**Impact:** Protège cache (quand applicable)
+
+### [Tip 30] TOKEN-EFFICIENT TOOL USE
+**Pourquoi pour toi:** Déjà built-in dans Claude 4.5 = sauve 14-70% output auto.
+- ✅ Je fais cela automatiquement, aucune action de ta part
+**Impact:** -14% output tokens « gratuit »
+
+### [Tip 31] CHARGER UNIQUEMENT TOOLS PERTINENTS
+**Pourquoi pour toi:** Chaque tool définition = tokens supplémentaires.
+- ✅ Utiliser uniquement Read, Edit, Write, Bash, Glob, Grep pour mizannnnew
+- ❌ Ne pas invoquer tools github/api inutilement
+**Impact:** -2-5% input tokens
+
+---
+
+## 🟢 IMPORTANTS (SAVINGS: -5%)
+
+### [Tip 1] HAIKU 4.5 PAR DÉFAUT
+**Pourquoi pour toi:** 3-5x moins cher que Sonnet, suffisant pour 70% tâches.
+- ✅ Classification, extraction, formatting, simples modifications = Haiku
+- ✅ Seul complexe = escalade vers Sonnet (si besoin)
+**Impact:** -66% modèle cost vs Sonnet
+
+### [Tip 2] EFFORT PARAMETER LOW
+**Pourquoi pour toi:** Sur mobile, less reasoning = moins de tokens.
+- ✅ Pour tâches simples: effort="low" = skip deep reasoning
+- Applicable: Sonnet/Opus seulement (pas Haiku)
+**Impact:** -15% tokens simples tâches (sur Sonnet)
+
+### [Tip 34] TRIM IRRELEVANT TURNS
+**Pourquoi pour toi:** Après contexte grandit, certains échanges deviennent obsolètes.
+- ✅ Avant de continuer tâche longue: "Drop all turns except X et Y qui sont pertinentes"
+**Impact:** -5-20% contexte selon conversation
+
+### [Tip 35] DÉLÉGUER TÂCHES VERBOSES
+**Pourquoi pour toi:** Tests, fetching docs = output énorme qui pollue contexte.
+- ⚠️ TRADE-OFF: Subagents = +7x usage mais isolation tokens
+- ✅ Utiliser UNIQUEMENT si tâche produit 2K+ tokens de noise
+- ❌ Pour mizannnnew code editing: inutile
+**Impact:** Protège contexte principal (mais coûteux en tokens globaux)
+
+---
+
+## ⚫ HORS-SUJET POUR TOI (API SEULEMENT)
+
+❌ Tips 16-23, 25, 27, 29: Ces stratégies concernent Anthropic API directement
+- Prompt Caching API level (Tips 17-23, 25)
+- Batch API (Tip 29)
+- Token counting API (Tip 16)
+- Concurrent requests (Tip 27)
+
+**Pourquoi pas pertinent:** Tu utilises Claude Code (interface web), pas l'API directement.
+
+---
+
+## 📋 CHECKLIST QUOTIDIENNE (Appliquer immédiatement)
+
+- [ ] Avant de partager code: extraire UNIQUEMENT les lignes pertinentes
+- [ ] Tâche nouvelle, tâche différente? Utiliser `/clear`
+- [ ] Chaque réponse: demander prefill + contrainte output
+- [ ] Pas de thinking sauf architectural decision
+- [ ] Zéro politesse: directe et structurée
+- [ ] Après 15+ messages: demander résumé et `/clear`
+- [ ] Vérifier /cost chaque 10 messages sur mobile
+
+---
+
+## 🎯 RÉSULTAT ATTENDU
+**Sans optimisation:** 2000-3000 tokens par échange simple
+**Avec protocole:** 400-800 tokens par échange simple
+**Économie:** 60-70% réduction, 3-5x plus de conversations avec même quota
+
+---
+
+## NOTES IMPORTANTES
+- Ce protocole est **spécifique** à ton cas: gros fichiers + quota serré + mobile
+- Les chiffres sont des estimations basées sur Meta-Alchemist guide
+- Adapter à tes besoins réels si nécessaire
+- Mesurer avec `/cost` régulièrement

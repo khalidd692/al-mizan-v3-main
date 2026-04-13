@@ -1,0 +1,19 @@
+# ══════════════════════════════════════════════════════════════════
+#  mizannnnew — .gitignore
+# ══════════════════════════════════════════════════════════════════
+
+# ── Python bytecode (créé par python -m py_compile / Règle 3) ──
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ── OS ──
+.DS_Store
+Thumbs.db
+
+# ── Editors ──
+.vscode/
+.idea/
+*.swp
+*~

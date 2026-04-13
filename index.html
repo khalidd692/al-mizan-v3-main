@@ -1,0 +1,2200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Mizan as-Sunnah — ميزان السنة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@900&family=Scheherazade+New:wght@400;600;700&display=swap" rel="stylesheet">
+<script>
+/* ── Tailwind config AVANT le CDN — évite "tailwind is not defined" ── */
+window.tailwind={config:{corePlugins:{preflight:false},theme:{extend:{colors:{gold:'#d4af37','gold-l':'#e8c96a','gold-d':'#8a6420'},keyframes:{ping:{'75%,100%':{transform:'scale(2)',opacity:'0'}},fadeInUp:{'from':{opacity:'0',transform:'translateY(12px)'},'to':{opacity:'1',transform:'translateY(0)'}}},animation:{ping:'ping 1.5s cubic-bezier(0,0,0.2,1) infinite','fade-up':'fadeInUp 0.4s ease both'}}}}};
+</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="style.css">
+<!-- ═══════════════════════════════════════════════════════════
+     MÎZÂN v21.0 — Guard goTo synchrone
+     Les boutons onclick="goTo(...)" s'exécutent avant les scripts defer.
+     Ce guard évite tout ReferenceError si app.js ou engine.js n'est pas encore prêt.
+═══════════════════════════════════════════════════════════════ -->
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   MÎZÂN v21.0 — GUARD SYNCHRONE
+   Toutes les fonctions appelées via onclick/oninput dans le HTML
+   sont définies ici de façon synchrone (sans defer) pour éviter
+   tout ReferenceError avant le chargement des modules.
+   Chaque stub est remplacé par l'implémentation réelle dès que
+   engine.js / app.js sont évalués.
+═══════════════════════════════════════════════════════════════ */
+function _mzGuard(name, fn) {
+  if (typeof window[name] !== 'function') window[name] = fn;
+}
+
+/* Navigation */
+_mzGuard('goTo', function(view) {
+  document.querySelectorAll('.view').forEach(function(v) { v.classList.remove('active'); });
+  var el = document.getElementById('view-' + view);
+  if (el) { el.classList.add('active'); el.scrollTop = 0; }
+  window.scrollTo(0, 0);
+});
+_mzGuard('goToList', function() { window.goTo('list'); });
+_mzGuard('goTab', function(view) { window.goTo(view); });
+
+/* Analyse hadith */
+_mzGuard('analyzeHadith', function() {
+  console.warn('[Mîzân] analyzeHadith appelée avant le chargement de engine.js — veuillez patienter.');
+});
+_mzGuard('startHadithFromHome', function() {
+  console.warn('[Mîzân] startHadithFromHome appelée avant le chargement de engine.js — veuillez patienter.');
+});
+
+/* Recherche omnisciente */
+_mzGuard('omniSearch', function() {});
+
+/* Rendu listes */
+_mzGuard('renderList',   function() {});
+_mzGuard('renderMythes', function() {});
+_mzGuard('renderFiraq',  function() {});
+_mzGuard('renderFAQ',    function() {});
+_mzGuard('filterGlossaire', function() {});
+
+/* UI divers */
+_mzGuard('closeManhajDrawer', function() {});
+_mzGuard('closeOnboarding',   function() {});
+_mzGuard('closeTooltip',      function() {});
+_mzGuard('closeUsulDrawer',   function() {});
+_mzGuard('goOnbSlide',        function() {});
+_mzGuard('mjTog',             function() {});
+_mzGuard('onbNext',           function() {});
+_mzGuard('onbPrev',           function() {});
+_mzGuard('openManhajDrawer',  function() {});
+_mzGuard('openOnboarding',    function() {});
+_mzGuard('openUsulDrawer',    function() {});
+_mzGuard('setDetTab',         function() {});
+_mzGuard('setFilter',         function() {});
+_mzGuard('sharePreacher',     function() {});
+_mzGuard('toggleTT',          function() {});
+</script>
+<!-- ═══════════════════════════════════════════════════════════
+     MÎZÂN v21.0 — Modules chargés en <head> avec defer
+     defer garantit : parsés après le DOM, dans l'ordre strict
+═══════════════════════════════════════════════════════════════ -->
+<script src="data.js" defer></script>
+<script src="db.js" defer></script>
+<script src="preachers.js" defer></script>
+<script src="rawi-modal.js" defer></script>       <!-- Panneau latéral biographique — AVANT engine.js -->
+<script src="mizan-tree-engine.js" defer></script> <!-- Arbre Royal — DOIT être chargé AVANT engine.js -->
+<script src="engine.js" defer></script>    <!-- Moteur rendu UI -->
+<script src="glossaire.js" defer></script>
+<script src="faq.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+
+<div id="basmalah-header" style="text-align:center;padding:14px 16px 8px;border-bottom:1px solid rgba(201,168,76,.12);background:rgba(10,6,0,.6);">
+  <p style="font-family:'Scheherazade New',serif;font-size:28px;color:rgba(201,168,76,.9);margin-bottom:4px;">﷽</p>
+  <p style="font-family:'Cinzel',serif;font-size:6px;letter-spacing:.22em;color:rgba(201,168,76,.4);">MIZAN AS-SUNNAH — ميزان السنة</p>
+</div>
+
+<!-- fond statique uni -->
+
+<!-- HOME VIEW -->
+<div id="view-home" class="view active">
+  <!-- fond uni statique -->
+  <!-- Orbe pulsante -->
+  
+  <div class="home-inner">
+    <span class="home-title-ar">مِيزَانٌ</span>
+    <h1 class="home-title-fr">AL MIZÂN</h1>
+    <p class="home-sub">La Balance du Hadith</p>
+
+    <!-- ══ EMBLÈME AL-MIZÂN — SVG NATIF ══ -->
+    <style>
+      #mizan-emblem{display:block;margin:6px auto 4px;overflow:visible;
+        width:min(280px,80vw);height:auto;}
+      @keyframes mizanSwing{
+        0%,100%{transform:rotate(0deg);}
+        25%{transform:rotate(5deg);}
+        75%{transform:rotate(-5deg);}
+      }
+      @keyframes platL{
+        0%,100%{transform:translateY(0);}
+        25%{transform:translateY(9px);}
+        75%{transform:translateY(-9px);}
+      }
+      @keyframes platR{
+        0%,100%{transform:translateY(0);}
+        25%{transform:translateY(-9px);}
+        75%{transform:translateY(9px);}
+      }
+      #mz-beam-g{transform-origin:100px 28px;animation:mizanSwing 4s ease-in-out infinite;}
+      #mz-plat-l{transform-origin:42px 0;animation:platL 4s ease-in-out infinite;}
+      #mz-plat-r{transform-origin:158px 0;animation:platR 4s ease-in-out infinite;}
+    </style>
+    <svg id="mizan-emblem" viewBox="0 0 200 130"
+         xmlns="http://www.w3.org/2000/svg" aria-label="Balance Al-Mizân">
+      <defs>
+        <linearGradient id="mzGold" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stop-color="#b8922a" stop-opacity="0.6"/>
+          <stop offset="50%"  stop-color="#e8c96a" stop-opacity="1"/>
+          <stop offset="100%" stop-color="#b8922a" stop-opacity="0.6"/>
+        </linearGradient>
+        <linearGradient id="mzGoldV" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#e8c96a" stop-opacity="1"/>
+          <stop offset="100%" stop-color="#b8922a" stop-opacity="0.5"/>
+        </linearGradient>
+        <filter id="mzGlow">
+          <feGaussianBlur stdDeviation="1.5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- Pilier central vertical -->
+      <line x1="100" y1="8" x2="100" y2="100"
+            stroke="url(#mzGoldV)" stroke-width="1.2" stroke-linecap="round"/>
+
+      <!-- Pivot supérieur -->
+      <circle cx="100" cy="10" r="4.5"
+              fill="#0a0600" stroke="#c9a84c" stroke-width="1.2" filter="url(#mzGlow)"/>
+      <circle cx="100" cy="10" r="2"
+              fill="#e8c96a"/>
+
+      <!-- Socle inférieur -->
+      <line x1="82" y1="100" x2="118" y2="100"
+            stroke="url(#mzGold)" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="88" y1="100" x2="88" y2="104"
+            stroke="#c9a84c" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+      <line x1="112" y1="100" x2="112" y2="104"
+            stroke="#c9a84c" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+      <line x1="84" y1="104" x2="116" y2="104"
+            stroke="url(#mzGold)" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
+
+      <!-- Anneau de suspension du fléau -->
+      <circle cx="100" cy="26" r="3.5"
+              fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.7"/>
+
+      <!-- Groupe fléau animé -->
+      <g id="mz-beam-g">
+        <!-- Fléau horizontal -->
+        <line x1="34" y1="28" x2="166" y2="28"
+              stroke="url(#mzGold)" stroke-width="1.6" stroke-linecap="round"
+              filter="url(#mzGlow)"/>
+        <!-- Embouts du fléau -->
+        <circle cx="34"  cy="28" r="2.2" fill="#c9a84c" opacity="0.8"/>
+        <circle cx="166" cy="28" r="2.2" fill="#c9a84c" opacity="0.8"/>
+        <!-- Ornement central du fléau -->
+        <circle cx="100" cy="28" r="3"
+                fill="#0a0600" stroke="#e8c96a" stroke-width="1"/>
+
+        <!-- Plateau gauche animé -->
+        <g id="mz-plat-l">
+          <!-- Cordelettes gauche (3 fils) -->
+          <line x1="34"  y1="30" x2="22"  y2="72"
+                stroke="#c9a84c" stroke-width="0.7" opacity="0.65" stroke-linecap="round"/>
+          <line x1="34"  y1="30" x2="42"  y2="72"
+                stroke="#c9a84c" stroke-width="0.7" opacity="0.65" stroke-linecap="round"/>
+          <line x1="34"  y1="30" x2="32"  y2="72"
+                stroke="#c9a84c" stroke-width="0.7" opacity="0.5"  stroke-linecap="round"/>
+          <!-- Coupe du plateau gauche (arc elliptique) -->
+          <path d="M18,72 Q32,84 46,72"
+                fill="none" stroke="url(#mzGold)" stroke-width="1.5"
+                stroke-linecap="round" filter="url(#mzGlow)"/>
+          <!-- Bord plat du plateau -->
+          <line x1="18" y1="72" x2="46" y2="72"
+                stroke="#c9a84c" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+        </g>
+
+        <!-- Plateau droit animé -->
+        <g id="mz-plat-r">
+          <!-- Cordelettes droite (3 fils) -->
+          <line x1="166" y1="30" x2="154" y2="72"
+                stroke="#c9a84c" stroke-width="0.7" opacity="0.65" stroke-linecap="round"/>
+          <line x1="166" y1="30" x2="174" y2="72"
+                stroke="#c9a84c" stroke-width="0.7" opacity="0.65" stroke-linecap="round"/>
+          <line x1="166" y1="30" x2="164" y2="72"
+                stroke="#c9a84c" stroke-width="0.7" opacity="0.5"  stroke-linecap="round"/>
+          <!-- Coupe du plateau droit -->
+          <path d="M150,72 Q164,84 178,72"
+                fill="none" stroke="url(#mzGold)" stroke-width="1.5"
+                stroke-linecap="round" filter="url(#mzGlow)"/>
+          <!-- Bord plat du plateau -->
+          <line x1="150" y1="72" x2="178" y2="72"
+                stroke="#c9a84c" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+        </g>
+      </g>
+    </svg>
+    <!-- ══ FIN EMBLÈME ══ -->
+
+    <!-- Cadre ornemental -->
+    <div class="home-frame">
+      <!-- Ornement haut -->
+      <div class="frame-ornament">
+        <svg viewBox="0 0 340 20" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="og" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#b8922a" stop-opacity="0"/>
+              <stop offset="20%" stop-color="#b8922a" stop-opacity="0.8"/>
+              <stop offset="50%" stop-color="#e8c96a" stop-opacity="1"/>
+              <stop offset="80%" stop-color="#b8922a" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#b8922a" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <rect y="9" width="340" height="1" fill="url(#og)"/>
+          <!-- Motif répété cercles dorés -->
+          <g fill="none" stroke="#b8922a" stroke-width="0.8" opacity="0.7">
+            <circle cx="20" cy="10" r="5"/><circle cx="20" cy="10" r="3"/>
+            <circle cx="40" cy="10" r="5"/><circle cx="40" cy="10" r="3"/>
+            <circle cx="60" cy="10" r="5"/><circle cx="60" cy="10" r="3"/>
+            <circle cx="80" cy="10" r="5"/><circle cx="80" cy="10" r="3"/>
+            <circle cx="100" cy="10" r="5"/><circle cx="100" cy="10" r="3"/>
+            <circle cx="120" cy="10" r="5"/><circle cx="120" cy="10" r="3"/>
+            <circle cx="140" cy="10" r="5"/><circle cx="140" cy="10" r="3"/>
+            <circle cx="160" cy="10" r="7"/><circle cx="160" cy="10" r="4"/><circle cx="160" cy="10" r="2"/>
+            <circle cx="180" cy="10" r="5"/><circle cx="180" cy="10" r="3"/>
+            <circle cx="200" cy="10" r="5"/><circle cx="200" cy="10" r="3"/>
+            <circle cx="220" cy="10" r="5"/><circle cx="220" cy="10" r="3"/>
+            <circle cx="240" cy="10" r="5"/><circle cx="240" cy="10" r="3"/>
+            <circle cx="260" cy="10" r="5"/><circle cx="260" cy="10" r="3"/>
+            <circle cx="280" cy="10" r="5"/><circle cx="280" cy="10" r="3"/>
+            <circle cx="300" cy="10" r="5"/><circle cx="300" cy="10" r="3"/>
+            <circle cx="320" cy="10" r="5"/><circle cx="320" cy="10" r="3"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="frame-card">
+        <!-- 4 boutons nav -->
+        <!-- Bannière débutant -->
+        <div id="onb-banner" onclick="openOnboarding()">
+          <div id="onb-banner-icon">🌱</div>
+          <div id="onb-banner-text">
+            <span id="onb-banner-title">NOUVEAU ICI ?</span>
+            <span id="onb-banner-sub">Guide de 2 minutes pour bien commencer</span>
+          </div>
+          <svg id="onb-banner-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          <div id="onb-banner-close" onclick="event.stopPropagation();closeOnboarding();" title="Fermer">✕</div>
+        </div>
+
+        <div class="home-nav">
+          <button class="home-nav-btn" onclick="goTo('hadith')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            <span class="btn-fr">VÉRIFIER HADITH</span>
+          </button>
+          <button class="home-nav-btn" onclick="goToList()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span class="btn-fr">VÉRIFIER PRÉDICATEUR</span>
+          </button>
+        </div>
+
+        <!-- Bouton FONDEMENTS / الذَّبُّ عَنِ السُّنَّة -->
+        <button class="usul-trigger-btn" onclick="openUsulDrawer()">
+          <span class="usul-trigger-icon">⚔️</span>
+          <div class="usul-trigger-texts">
+            <span class="usul-trigger-ar">الذَّبُّ عَنِ السُّنَّة — بَيَانُ المَحَجَّة</span>
+            <span class="usul-trigger-fr">LA DÉFENSE DE LA SOUNNAH — L'OBLIGATION DE VÉRIFIER</span>
+            <span class="usul-trigger-cta">« Nommez-nous vos hommes » — Lire les preuves des 12 Géants →</span>
+          </div>
+          <svg class="usul-trigger-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+
+        <!-- Input -->
+        <div class="home-input-wrap">
+          <input type="text" id="home-input" placeholder="Chercher un prédicateur, une secte, un mythe..." oninput="omniSearch(this.value)">
+          <div id="omni-results" style="display:none;max-height:260px;overflow-y:auto;background:#111827;border:1px solid rgba(201,168,76,.2);border-top:none;border-radius:0 0 10px 10px;margin-top:-2px;"></div>
+        </div>
+
+        <!-- Bouton analyser -->
+        <button class="btn-gold" onclick="startHadithFromHome()">VÉRIFIER LE TAKHRÎJ</button>
+      </div>
+
+      <!-- Ornement bas -->
+      <div class="frame-ornament">
+        <svg viewBox="0 0 340 20" xmlns="http://www.w3.org/2000/svg">
+          <rect y="9" width="340" height="1" fill="url(#og)"/>
+          <g fill="none" stroke="#b8922a" stroke-width="0.8" opacity="0.7">
+            <circle cx="20" cy="10" r="5"/><circle cx="20" cy="10" r="3"/>
+            <circle cx="40" cy="10" r="5"/><circle cx="40" cy="10" r="3"/>
+            <circle cx="60" cy="10" r="5"/><circle cx="60" cy="10" r="3"/>
+            <circle cx="80" cy="10" r="5"/><circle cx="80" cy="10" r="3"/>
+            <circle cx="100" cy="10" r="5"/><circle cx="100" cy="10" r="3"/>
+            <circle cx="120" cy="10" r="5"/><circle cx="120" cy="10" r="3"/>
+            <circle cx="140" cy="10" r="5"/><circle cx="140" cy="10" r="3"/>
+            <circle cx="160" cy="10" r="7"/><circle cx="160" cy="10" r="4"/><circle cx="160" cy="10" r="2"/>
+            <circle cx="180" cy="10" r="5"/><circle cx="180" cy="10" r="3"/>
+            <circle cx="200" cy="10" r="5"/><circle cx="200" cy="10" r="3"/>
+            <circle cx="220" cy="10" r="5"/><circle cx="220" cy="10" r="3"/>
+            <circle cx="240" cy="10" r="5"/><circle cx="240" cy="10" r="3"/>
+            <circle cx="260" cy="10" r="5"/><circle cx="260" cy="10" r="3"/>
+            <circle cx="280" cy="10" r="5"/><circle cx="280" cy="10" r="3"/>
+            <circle cx="300" cy="10" r="5"/><circle cx="300" cy="10" r="3"/>
+            <circle cx="320" cy="10" r="5"/><circle cx="320" cy="10" r="3"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="home-stats">
+      <div class="stat"><div class="stat-n" style="color:#22c55e">12</div><div class="stat-l">FIABLES</div></div>
+      <div class="stat"><div class="stat-n" style="color:#ef4444">29</div><div class="stat-l">À ÉVITER</div></div>
+      <div class="stat"><div class="stat-n" style="color:#f59e0b">3</div><div class="stat-l">PRUDENCE</div></div>
+    </div>
+    <p class="home-footer">AL MIZÂN PRESTIGE</p>
+  </div>
+</div>
+<div id="view-hadith" class="view">
+  <div id="mizan-db-bar" style="background:rgba(34,197,94,.07);border-bottom:1px solid rgba(34,197,94,.14);padding:5px 18px;display:none;align-items:center;gap:8px;">
+    <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 5px #22c55e;display:inline-block;flex-shrink:0;"></span>
+    <span style="font-family:'Cinzel',serif;font-size:6.5px;letter-spacing:.22em;color:rgba(34,197,94,.8);">BASE LOCALE ACTIVE — SANAD COMPLET</span>
+    <span id="mizan-db-bar-stats" style="margin-left:auto;font-family:'Cinzel',serif;font-size:6px;color:rgba(34,197,94,.45);"></span>
+  </div>
+  <div class="page-header">
+    <div class="header-row">
+      <button class="btn-back" onclick="goTo('home')"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <div class="header-title"><p>VÉRIFICATEUR DE HADITH</p><span class="ar-sub">مِيزَانُ الحَدِيثِ</span></div>
+      <div class="spacer"></div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="hadith-input-box" style="margin-bottom:14px;">
+      <textarea id="hadith-input" placeholder="Collez votre hadith ici..."></textarea>
+      <button class="btn-gold" onclick="analyzeHadith()">VÉRIFIER LE TAKHRÎJ</button>
+    </div>
+    <div class="loading-box" id="loading-box">
+      <p class="loading-label">PROCESSUS AL MIZÂN</p>
+      <div class="steps-container"><div class="steps-line"></div><div id="steps-list"></div></div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill"></div><div class="progress-diamond" id="progress-diamond"></div></div>
+    </div>
+    <div class="result-box" id="result-box"></div>
+    <div id="examples-section">
+      <p class="examples-title">EXEMPLES RAPIDES</p>
+      <div id="examples-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     VIEW : LIST PRÉDICATEURS
+══════════════════════════════════════ -->
+<div id="view-list" class="view">
+  <div class="list-header">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+      <button class="btn-back" onclick="goTo('home')"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <div class="header-title"><p>MISES EN GARDE</p><span class="ar-sub">الفَرَس</span></div>
+      <div class="spacer"></div>
+    </div>
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="list-search" placeholder="Chercher dans les archives..." oninput="clearTimeout(window._mzLsDb);window._mzLsDb=setTimeout(function(){renderList();},200);">
+    </div>
+    <!-- Échelle des grades Jarh wa Ta'dil -->
+    
+    <div class="filter-row">
+      <button class="filter-btn active-f" style="background:#2a2206;border:2px solid #d4af37;color:#d4af37" data-filter="all" onclick="setFilter('all',this)"><span class="f-ar">Tout</span><span class="f-fr">TOUS</span></button>
+      <button class="filter-btn" style="background:#1e1530;border:2px solid #a78bfa;color:#a78bfa" data-filter="imam" onclick="setFilter('imam',this)"><span class="f-ar">Grand Imam</span><span class="f-fr">IMAM</span></button>
+      <button class="filter-btn" style="background:#0f2318;border:2px solid #22c55e;color:#22c55e" data-filter="fiable" onclick="setFilter('fiable',this)"><span class="f-ar">Fiable</span><span class="f-fr">FIABLE</span></button>
+      <button class="filter-btn" style="background:#0c1f1a;border:2px solid #34d399;color:#34d399" data-filter="sadouq" onclick="setFilter('sadouq',this)"><span class="f-ar">Véridique</span><span class="f-fr">VÉRIDIQUE</span></button>
+      <button class="filter-btn" style="background:#221e07;border:2px solid #facc15;color:#facc15" data-filter="surveiller" onclick="setFilter('surveiller',this)"><span class="f-ar">Surveiller</span><span class="f-fr">SURVEILLER</span></button>
+      <button class="filter-btn" style="background:#221508;border:2px solid #f59e0b;color:#f59e0b" data-filter="layyin" onclick="setFilter('layyin',this)"><span class="f-ar">Affaibli</span><span class="f-fr">AFFAIBLI</span></button>
+      <button class="filter-btn" style="background:#221209;border:2px solid #fb923c;color:#fb923c" data-filter="daif" onclick="setFilter('daif',this)"><span class="f-ar">Faible</span><span class="f-fr">FAIBLE</span></button>
+      <button class="filter-btn" style="background:#230a0a;border:2px solid #ef4444;color:#ef4444" data-filter="eviter" onclick="setFilter('eviter',this)"><span class="f-ar">À Éviter</span><span class="f-fr">À ÉVITER</span></button>
+      <button class="filter-btn" style="background:#1f0808;border:2px solid #dc2626;color:#f87171" data-filter="mubtadi" onclick="setFilter('mubtadi',this)"><span class="f-ar">Innovateur</span><span class="f-fr">INNOVATEUR</span></button>
+      <button class="filter-btn" style="background:#1a0505;border:2px solid #991b1b;color:#fca5a5" data-filter="kadhdhab" onclick="setFilter('kadhdhab',this)"><span class="f-ar">Menteur</span><span class="f-fr">MENTEUR</span></button>
+      <button class="filter-btn" style="background:#111318;border:2px solid #6b7280;color:#9ca3af" data-filter="majhul" onclick="setFilter('majhul',this)"><span class="f-ar">Inconnu</span><span class="f-fr">INCONNU</span></button>
+    </div>
+    <!-- Filtres Région -->
+    
+    <!-- Filtres Affiliation -->
+    
+    
+  </div>
+  <!-- Bannière Manhaj -->
+  <div style="padding:8px 14px 0;">
+    <button onclick="openManhajDrawer()" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(138,100,32,.12));border:1px solid rgba(201,168,76,.28);border-radius:12px;padding:10px 14px;cursor:pointer;margin-bottom:8px;-webkit-tap-highlight-color:transparent;text-align:left;">
+      <div style="display:flex;align-items:center;gap:9px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8" width="17" height="17" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        <div><p style="font-family:'Cinzel',serif;font-size:8.5px;font-weight:700;letter-spacing:.18em;color:#c9a84c;margin-bottom:1px;">MÉTHODOLOGIE — MANHAJ</p><p style="font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;color:rgba(201,168,76,.55);">Jarh wa Ta'dîl · Comment Rabi' évalue un prédicateur</p></div>
+      </div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2" width="13" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+  <div class="list-content" id="list-content"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     VIEW : DETAIL PRÉDICATEUR
+══════════════════════════════════════ -->
+<div id="view-detail" class="view">
+  <div class="det-header">
+    <div class="det-header-row">
+      <div><span class="det-verdict-badge" id="det-badge"></span><div class="det-name" id="det-name"></div><div class="det-ar" id="det-ar"></div></div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button class="btn-close" onclick="sharePreacher()" title="Partager" style="background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.25);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#25d366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        </button>
+        <button class="btn-close" onclick="goTo('list')"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+    </div>
+  </div>
+  <div class="det-tabs">
+    <button class="det-tab-btn active" onclick="setDetTab('essentiel',this)">ESSENTIEL</button>
+    <button class="det-tab-btn" onclick="setDetTab('expert',this)">EXPERT</button>
+    <button class="det-tab-btn" onclick="setDetTab('approfondi',this)">APPROFONDI</button>
+  </div>
+  <div class="det-content" id="det-content"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     VIEW : MYTHES
+══════════════════════════════════════ -->
+<div id="view-mythes" class="view">
+  <div class="page-header">
+    <div class="header-row">
+      <button class="btn-back" onclick="goTo('home')"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <div class="header-title"><p style="color:#ef4444;">KHURAFAT & AHADITH</p><span class="ar-sub" style="color:#ef444466;">الخُرَافَاتُ وَالأَكَاذِيبُ</span></div>
+      <div class="spacer"></div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="myth-intro">
+      <span class="ar">مَنْ كَذَبَ عَلَيَّ مُتَعَمِّدًا فَلْيَتَبَوَّأْ مَقْعَدَهُ مِنَ النَّارِ</span>
+      <p>"Celui qui ment sur moi intentionnellement, qu'il prépare sa place en Enfer." — Bukhari n°110</p>
+    </div>
+    <div id="myths-list"></div>
+  </div>
+</div>
+
+<!-- VIEW : MYTH DETAIL -->
+<div id="view-myth-detail" class="view">
+  <div class="det-header">
+    <div class="det-header-row">
+      <div>
+        <span style="display:inline-block;font-family:'Cinzel',serif;font-size:6px;font-weight:900;padding:3px 9px;border-radius:99px;background:#ef444420;border:1px solid #ef444440;color:#ef4444;margin-bottom:5px;" id="myth-det-badge">HADITH INVENTÉ</span>
+        <div style="font-family:'Cormorant Garamond',serif;color:#e8d490;font-size:14px;font-style:italic;max-width:220px;line-height:1.4;" id="myth-det-title"></div>
+      </div>
+      <button class="btn-close" onclick="goTo('mythes')"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+  </div>
+  <div class="det-content" id="myth-det-content"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     VIEW : AL-FIRAQ
+══════════════════════════════════════ -->
+<div id="view-firaq" class="view">
+  <div class="page-header">
+    <div class="header-row">
+      <button class="btn-back" onclick="goTo('home')"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <div class="header-title"><p style="color:#b45151;">AL-FIRAQ</p><span class="ar-sub" style="color:#7f1d1d88;">الفِرَقُ الضَّالَّة</span></div>
+      <div class="spacer"></div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="firaq-intro">
+      <span class="ar">الفِرَقُ الضَّالَّة</span>
+      <span class="hadith-ref">«وَسَتَفْتَرِقُ أُمَّتِي عَلَى ثَلَاثٍ وَسَبْعِينَ فِرْقَةً كُلُّهَا فِي النَّارِ إِلَّا وَاحِدَةً»</span>
+      <p>"Ma communauté se divisera en 73 groupes, tous en Enfer sauf un." — Tirmidhi n°2641 | Méthode : Selon Cheikh Rabi Al-Madkhali</p>
+    </div>
+
+    <!-- BLOC : LA DÉFENSE DE LA SOUNNAH -->
+    <details style="background:#111827;border:1px solid rgba(201,168,76,.15);border-radius:3px;margin-bottom:16px;overflow:hidden;">
+      <summary style="display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;list-style:none;-webkit-appearance:none;background:#0d1117;border-bottom:1px solid rgba(201,168,76,.08);transition:background .3s;">
+        <div style="width:4px;height:28px;background:#c9a84c;border-radius:1px;flex-shrink:0;"></div>
+        <div style="flex:1;">
+          <span style="font-family:Cinzel,serif;font-size:10px;font-weight:700;letter-spacing:.12em;color:#c9a84c;display:block;line-height:1.3;">LA DÉFENSE DE LA SOUNNAH : DES COMPAGNONS À NOS JOURS</span>
+          <span style="font-family:Scheherazade New,serif;font-size:14px;color:rgba(201,168,76,.4);">الذَّبُّ عَنِ السُّنَّة — مِنَ الصَّحَابَةِ إلى يَوْمِنَا</span>
+        </div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2" width="14" height="14" style="opacity:.4;transition:transform .3s;flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <div style="padding:20px 18px 22px;">
+
+        <p style="font-family:Cormorant Garamond,serif;color:rgba(220,200,160,.8);font-size:1.1rem;line-height:1.8;margin-bottom:16px;">À chaque époque, les innovateurs ont inventé des <strong style="color:#c9a84c;">surnoms diffamatoires</strong> pour repousser les défenseurs de la Sunnah et effrayer la masse. Voici la chaîne ininterrompue de l'oppression lexicale — et la preuve que ceux qu'on insulte sont sur la vérité :</p>
+
+        <div style="background:#0d1117;border:1px solid rgba(201,168,76,.1);border-radius:3px;padding:14px 16px;margin-bottom:12px;">
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);">
+            <span style="width:6px;height:2px;background:#c9a84c;flex-shrink:0;margin-top:10px;"></span>
+            <p style="font-family:Cormorant Garamond,serif;color:rgba(220,200,160,.75);font-size:1.05rem;line-height:1.75;"><strong style="color:#c9a84c;">Les Compagnons (رضي الله عنهم)</strong> — Les Mu'tazilah et les Jahmiyyah les ont qualifiés de <em>« Mushabbiha »</em> (anthropomorphistes) et de <em>« Hashawiyyah »</em> (bourreurs sans intelligence) parce qu'ils affirmaient les Attributs d'Allah tels qu'ils sont venus dans les Textes — sans ta'wil ni ta'til.</p>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);">
+            <span style="width:6px;height:2px;background:#c9a84c;flex-shrink:0;margin-top:10px;"></span>
+            <p style="font-family:Cormorant Garamond,serif;color:rgba(220,200,160,.75);font-size:1.05rem;line-height:1.75;"><strong style="color:#c9a84c;">L'Imam Ahmad ibn Hanbal (رحمه الله · 164-241H)</strong> — Surnommé <em>« Hashawi »</em> et <em>« Mujassim »</em> par les Jahmiyyah lors de la Mihna (l'Inquisition sur le Coran créé). Il a été emprisonné, fouetté et torturé pendant 28 mois par le calife Al-Mu'tasim — et n'a jamais cédé. Son crime ? Avoir dit : « Le Coran est la Parole d'Allah, non créée. » Les innovateurs l'insultaient — et il est devenu l'Imam de Ahl as-Sunnah.</p>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);">
+            <span style="width:6px;height:2px;background:#c9a84c;flex-shrink:0;margin-top:10px;"></span>
+            <p style="font-family:Cormorant Garamond,serif;color:rgba(220,200,160,.75);font-size:1.05rem;line-height:1.75;"><strong style="color:#c9a84c;">Sheikh al-Islam Ibn Taymiyyah (رحمه الله · 661-728H)</strong> — Surnommé <em>« Mujassim »</em> (anthropomorphiste) et emprisonné à la Citadelle de Damas par les Ash'arites de son époque. Son crime ? Avoir réfuté le Kalam grec et défendu la voie des Salaf dans les Noms et Attributs. Il est mort en prison — et ses écrits (Majmu' Al-Fatawa, 37 volumes) sont devenus la référence de Ahl as-Sunnah pour les siècles suivants.</p>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);">
+            <span style="width:6px;height:2px;background:#c9a84c;flex-shrink:0;margin-top:10px;"></span>
+            <p style="font-family:Cormorant Garamond,serif;color:rgba(220,200,160,.75);font-size:1.05rem;line-height:1.75;"><strong style="color:#c9a84c;">L'Imam Muhammad ibn 'Abdel-Wahhab (رحمه الله · 1115-1206H)</strong> — Surnommé <em>« Wahhabi »</em> par les Soufis, les Ottomans et les ennemis du Tawhid. Son crime ? Avoir appelé à l'Unicité d'Allah et détruit les idoles et les tombes vénérées dans la Péninsule Arabique — exactement ce qu'Ibrahim (عليه السلام) avait fait avec les idoles de son peuple. Cheikh Ibn Baz (binbaz.org.sa) : « L'appellation 'Wahhabisme' est utilisée par les ennemis du Tawhid pour éloigner les gens de la vérité. »</p>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);">
+            <span style="width:6px;height:2px;background:#c9a84c;flex-shrink:0;margin-top:10px;"></span>
+            <p style="font-family:Cormorant Garamond,serif;color:rgba(220,200,160,.75);font-size:1.05rem;line-height:1.75;"><strong style="color:#c9a84c;">L'Imam Al-Albani (رحمه الله · 1914-1999)</strong> — Surnommé <em>« Dhahiri »</em> (littéraliste) et <em>« Mujaddid bid'i »</em> (réformateur innovateur) par les traditionalistes Hanafites et les Soufis. Son crime ? Avoir passé 60 ans à authentifier les Hadiths et à séparer le Sahih du Da'if — détruisant ainsi des siècles de hadiths faibles sur lesquels reposaient les pratiques des innovateurs. La Oumma entière lui doit la purification de la Sunnah.</p>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;">
+            <span style="width:6px;height:2px;background:#c9a84c;flex-shrink:0;margin-top:10px;"></span>
+            <p style="font-family:Cormorant Garamond,serif;color:rgba(220,200,160,.75);font-size:1.05rem;line-height:1.75;"><strong style="color:#c9a84c;">Cheikh Rabi' Al-Madkhali (حفظه الله · né 1932)</strong> — Surnommé <em>« Madkhali »</em> et <em>« Jami »</em> par les Ikhwanistes, les Qutbistes et les Surouristes. Son crime ? Avoir appliqué la science du Jarh wa Ta'dil aux prédicateurs contemporains — exactement comme Al-Bukhari l'appliquait aux narrateurs. Recommandé par l'Imam Al-Albani (« porte-étendard du Jarh wa Ta'dil »), l'Imam Ibn Baz, l'Imam Ibn 'Uthaymin, Cheikh Al-Fawzan, Cheikh Muqbil et la Lajnah Da'imah.</p>
+          </div>
+        </div>
+
+        <div style="background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.15);border-radius:3px;padding:14px 16px;text-align:center;">
+          <p style="font-family:Cormorant Garamond,serif;color:rgba(232,201,106,.8);font-size:1.05rem;line-height:1.7;font-weight:600;">La même chaîne, la même oppression, la même vérité. Quiconque est insulté pour avoir défendu la Sunnah marche sur les traces d'Ahmad, d'Ibn Taymiyyah et d'Al-Albani. Et quiconque invente un surnom pour repousser la vérité marche sur les traces des Jahmiyyah et des Mu'tazilah.</p>
+        </div>
+      </div>
+    </details>
+
+    <div id="firaq-list"></div>
+  </div>
+</div>
+
+<!-- VIEW : FIRAQ DETAIL -->
+<div id="view-firaq-detail" class="view">
+  <div class="det-header">
+    <div class="det-header-row">
+      <div>
+        <span style="display:inline-block;font-family:'Cinzel',serif;font-size:6px;font-weight:900;padding:3px 9px;border-radius:99px;margin-bottom:5px;" id="firaq-det-badge"></span>
+        <div class="det-name" id="firaq-det-name"></div>
+        <div class="det-ar" id="firaq-det-ar"></div>
+      </div>
+      <button class="btn-close" onclick="goTo('firaq')"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+  </div>
+  <div class="det-content" id="firaq-det-content"></div>
+</div>
+
+
+<!-- ══ VIEW MANHAJ ══ -->
+<div id="view-manhaj" class="view" style="background:linear-gradient(180deg,#0a0600 0%,#120c02 100%);flex-direction:column;align-items:stretch;overflow-y:auto;">
+  <div style="position:sticky;top:0;z-index:50;background:rgba(10,6,0,.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,168,76,.18);padding:14px 18px 10px;box-shadow:0 2px 20px rgba(0,0,0,.5);">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+      <button class="btn-back" onclick="goTab('list');renderList();" style="flex-shrink:0;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <div style="width:3px;height:28px;background:linear-gradient(to bottom,var(--gold),var(--gold-d));border-radius:2px;flex-shrink:0;"></div>
+      <div>
+        <p style="font-family:'Cinzel',serif;font-size:7px;letter-spacing:.28em;color:rgba(201,168,76,.55);margin-bottom:2px;">SCIENCES DU MANHAJ</p>
+        <h1 style="font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:var(--gold-l);letter-spacing:.05em;line-height:1.3;">Méthodologie pour Juger un Prédicateur</h1>
+      </div>
+    </div>
+    <p style="font-family:'Scheherazade New',serif;color:rgba(201,168,76,.4);font-size:18px;text-align:center;letter-spacing:3px;">الجَرْحُ وَالتَّعْدِيلُ</p>
+  </div>
+  <div style="padding:20px 18px 0;">
+    <div style="background:linear-gradient(135deg,rgba(26,92,48,.15),rgba(201,168,76,.05));border:1px solid rgba(26,92,48,.3);border-radius:16px;padding:16px;margin-bottom:20px;text-align:center;">
+      <p style="font-family:'Scheherazade New',serif;font-size:28px;color:var(--gold-l);margin-bottom:8px;">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:rgba(200,180,120,.75);line-height:1.7;">Frère / Sœur, qu'Allah te bénisse et t'augmente en science utile. Voici une présentation exhaustive et structurée de la méthodologie pour juger un prédicateur, basée sur les enseignements des <strong style="color:var(--gold);">Salaf as-Salih</strong> et de <strong style="color:var(--gold);">Sheikh Rabî' al-Madkhalî</strong> (qu'Allah le préserve). Cette méthodologie, connue sous le nom de <strong style="color:var(--gold);">Jarh wa Ta'dîl</strong>, est un pilier pour protéger la Oummah des erreurs, des innovations (bid'ah) et des déviances. Elle n'est pas une invention personnelle de Sheikh Rabî', mais une continuation fidèle du manhaj des Salaf.</p>
+    </div>
+    <div style="background:rgba(18,12,2,.8);border:1px solid rgba(201,168,76,.18);border-radius:14px;padding:14px 16px;margin-bottom:22px;">
+      <p style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.22em;color:rgba(201,168,76,.6);margin-bottom:10px;">TABLE DES MATIÈRES</p>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <a href="#" onclick="document.getElementById('mj-s1').scrollIntoView({behavior:'smooth'});return false;" style="text-decoration:none;display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.1);"><span style="font-family:'Cinzel',serif;font-size:9px;color:var(--gold);font-weight:700;min-width:18px;">01</span><span style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(232,201,106,.8);">Pourquoi une Méthodologie ?</span></a>
+        <a href="#" onclick="document.getElementById('mj-s2').scrollIntoView({behavior:'smooth'});return false;" style="text-decoration:none;display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.1);"><span style="font-family:'Cinzel',serif;font-size:9px;color:var(--gold);font-weight:700;min-width:18px;">02</span><span style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(232,201,106,.8);">Les Deux Critères Principaux</span></a>
+        <a href="#" onclick="document.getElementById('mj-s3').scrollIntoView({behavior:'smooth'});return false;" style="text-decoration:none;display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.1);"><span style="font-family:'Cinzel',serif;font-size:9px;color:var(--gold);font-weight:700;min-width:18px;">03</span><span style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(232,201,106,.8);">Les Degrés de Classification</span></a>
+        <a href="#" onclick="document.getElementById('mj-s4').scrollIntoView({behavior:'smooth'});return false;" style="text-decoration:none;display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.1);"><span style="font-family:'Cinzel',serif;font-size:9px;color:var(--gold);font-weight:700;min-width:18px;">04</span><span style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(232,201,106,.8);">Les Règles d'Or</span></a>
+        <a href="#" onclick="document.getElementById('mj-s5').scrollIntoView({behavior:'smooth'});return false;" style="text-decoration:none;display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.1);"><span style="font-family:'Cinzel',serif;font-size:9px;color:var(--gold);font-weight:700;min-width:18px;">05</span><span style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(232,201,106,.8);">Étape par Étape</span></a>
+        <a href="#" onclick="document.getElementById('mj-s6').scrollIntoView({behavior:'smooth'});return false;" style="text-decoration:none;display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.1);"><span style="font-family:'Cinzel',serif;font-size:9px;color:var(--gold);font-weight:700;min-width:18px;">06</span><span style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(232,201,106,.8);">Exemples Pratiques</span></a>
+      </div>
+    </div>
+    <section id="mj-s1" style="margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"><span style="font-family:'Cinzel',serif;font-size:9px;font-weight:700;color:var(--gold);background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);padding:4px 8px;border-radius:6px;">01</span><h2 style="font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:var(--gold-l);">Pourquoi une Méthodologie ?</h2></div>
+      <div style="background:rgba(18,12,2,.6);border:1px solid rgba(201,168,76,.12);border-radius:14px;padding:15px;">
+        <p style="font-family:'Cormorant Garamond',serif;font-size:14px;color:rgba(220,200,150,.85);line-height:1.75;margin-bottom:12px;">Dans les sciences islamiques, juger un prédicateur est un <strong style="color:var(--gold);">devoir</strong> pour protéger la Oummah des erreurs qui peuvent diviser ou affaiblir la foi. Le Prophète (ﷺ) a dit :</p>
+        <blockquote style="border-left:3px solid var(--gold);padding:10px 14px;margin:12px 0;background:rgba(201,168,76,.06);border-radius:0 10px 10px 0;">
+          <p style="font-family:'Scheherazade New',serif;font-size:20px;color:var(--gold-l);text-align:right;direction:rtl;margin-bottom:4px;">«العلماءُ وَرَثَةُ الأنبياء»</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:rgba(201,168,76,.7);">"Les savants sont les héritiers des prophètes" — Abû Dâwûd, n° 3641 (authentique)</p>
+        </blockquote>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:14px;color:rgba(220,200,150,.85);line-height:1.75;margin-bottom:10px;">Les <strong style="color:var(--gold);">Salaf as-Salih</strong> (Compagnons, Tâbi'ûn, Tâbi' al-Tâbi'ûn) ont établi cette méthodologie pour sauvegarder la Sunnah, et Sheikh Rabî' la suit exactement pour notre époque.</p>
+        <div style="background:rgba(26,92,48,.12);border:1px solid rgba(26,92,48,.25);border-radius:10px;padding:11px 13px;">
+          <p style="font-family:'Cinzel',serif;font-size:7px;letter-spacing:.2em;color:rgba(100,200,120,.6);margin-bottom:5px;">SHEIKH RABÎ' — MAJMÛ' KUTUB WA RASÂ'IL, VOL. 4, P. 123</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:rgba(150,220,160,.8);">"C'est pour unir la communauté sur la vérité et la protéger des innovations."</p>
+        </div>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(200,180,120,.7);line-height:1.7;margin-top:10px;font-style:italic;">Sheikh Rabî' insiste : le <strong style="color:var(--gold);font-style:normal;">Jarh wa Ta'dîl</strong> reste valable jusqu'au Jour du Jugement, y compris pour avertir contre les gens d'innovation et d'égarement.</p>
+      </div>
+    </section>
+    <section id="mj-s2" style="margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"><span style="font-family:'Cinzel',serif;font-size:9px;font-weight:700;color:var(--gold);background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);padding:4px 8px;border-radius:6px;">02</span><h2 style="font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:var(--gold-l);">Les Deux Critères Principaux</h2></div>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(200,180,120,.7);line-height:1.7;margin-bottom:12px;font-style:italic;">La méthodologie repose sur deux piliers essentiels. Sheikh Rabî' applique la même chose pour les contemporains :</p>
+      <details style="margin-bottom:10px;" open>
+        <summary style="list-style:none;cursor:pointer;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:13px 15px;display:flex;align-items:center;justify-content:space-between;" aria-expanded="true">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:'Scheherazade New',serif;font-size:22px;color:var(--gold);">العَدَالَة</span><div><p style="font-family:'Cinzel',serif;font-size:10px;font-weight:700;color:var(--gold-l);">Al-'Adâlah</p><p style="font-family:'Cormorant Garamond',serif;font-size:11px;color:rgba(201,168,76,.6);">L'intégrité morale et religieuse</p></div></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" width="16"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div style="padding:14px 15px;background:rgba(12,8,0,.5);border:1px solid rgba(201,168,76,.1);border-top:none;border-radius:0 0 12px 12px;">
+          <p style="font-family:'Cormorant Garamond',serif;font-size:14px;color:rgba(220,200,150,.85);line-height:1.75;margin-bottom:10px;">La personne est-elle honnête, pieuse, attachée au <strong style="color:var(--gold);">tawḥîd</strong> pur, respectueuse de la Sharî'ah, et éloignée des grands péchés et des innovations (<strong style="color:var(--gold);">bid'ah</strong>) comme l'<strong style="color:var(--gold);">irjâ'</strong> ou le <strong style="color:var(--gold);">takfîr</strong> excessif ?</p>
+          <div style="background:rgba(139,26,26,.08);border:1px solid rgba(139,26,26,.2);border-radius:10px;padding:11px 13px;margin-bottom:8px;"><p style="font-family:'Cinzel',serif;font-size:7px;letter-spacing:.18em;color:rgba(220,100,100,.6);margin-bottom:4px;">IMÂM AHMAD IBN HANBAL — AL-'ILAL, VOL. 1, P. 89</p><p style="font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:rgba(220,160,160,.8);">"L''Adâlah est la base, sans elle, pas de fiabilité."</p></div>
+          <div style="background:rgba(26,92,48,.1);border:1px solid rgba(26,92,48,.22);border-radius:10px;padding:11px 13px;"><p style="font-family:'Cinzel',serif;font-size:7px;letter-spacing:.18em;color:rgba(100,200,120,.6);margin-bottom:4px;">SHEIKH RABÎ' — AL-INTIQÂD AL-MUKHLIS, P. 45</p><p style="font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:rgba(150,220,160,.8);">"Si déviance dans 'aqîdah, jarḥ même si bon ailleurs."</p></div>
+        </div>
+      </details>
+      <details style="margin-bottom:14px;">
+        <summary style="list-style:none;cursor:pointer;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:13px 15px;display:flex;align-items:center;justify-content:space-between;" aria-expanded="false">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:'Scheherazade New',serif;font-size:22px;color:var(--gold);">الضَّبْط</span><div><p style="font-family:'Cinzel',serif;font-size:10px;font-weight:700;color:var(--gold-l);">Al-Ḍabṭ</p><p style="font-family:'Cormorant Garamond',serif;font-size:11px;color:rgba(201,168,76,.6);">La précision et la mémoire</p></div></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" width="16"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div style="padding:14px 15px;background:rgba(12,8,0,.5);border:1px solid rgba(201,168,76,.1);border-top:none;border-radius:0 0 12px 12px;">
+          <p style="font-family:'Cormorant Garamond',serif;font-size:14px;color:rgba(220,200,150,.85);line-height:1.75;margin-bottom:10px;">Est-elle capable de transmettre exactement la Sunnah sans erreur, oubli, confusion ou mélange avec des idées non authentiques ?</p>
+          <div style="background:rgba(139,26,26,.08);border:1px solid rgba(139,26,26,.2);border-radius:10px;padding:11px 13px;margin-bottom:8px;"><p style="font-family:'Cinzel',serif;font-size:7px;letter-spacing:.18em;color:rgba(220,100,100,.6);margin-bottom:4px;">AL-DHAHABÎ — MÎZÂN AL-I'TIDÂL, VOL. 1, P. 5</p><p style="font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:rgba(220,160,160,.8);">"Le Ḍabṭ est essentiel, sans lui le hadith ou la da'wah est faible."</p></div>
+          <div style="background:rgba(26,92,48,.1);border:1px solid rgba(26,92,48,.22);border-radius:10px;padding:11px 13px;"><p style="font-family:'Cinzel',serif;font-size:7px;letter-spacing:.18em;color:rgba(100,200,120,.6);margin-bottom:4px;">SHEIKH RABÎ' — USÛL AL-JARH WA AL-TA'DÎL, CASSETTE N°1</p><p style="font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:rgba(150,220,160,.8);">"La précision évite les erreurs qui égarent la Oummah."</p></div>
+        </div>
+      </details>
+      <div style="background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.18);border-radius:10px;padding:12px 14px;"><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(201,168,76,.85);line-height:1.7;text-align:center;font-style:italic;">Si un critère manque → <strong style="color:#dc2626;">jarḥ</strong> (critique). Si les deux sont réunis → <strong style="color:#16a34a;">ta'dîl</strong> (éloge).</p></div>
+    </section>
+    <section id="mj-s3" style="margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"><span style="font-family:'Cinzel',serif;font-size:9px;font-weight:700;color:var(--gold);background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);padding:4px 8px;border-radius:6px;">03</span><h2 style="font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:var(--gold-l);">Les Degrés de Classification</h2></div>
+      <details style="margin-bottom:10px;">
+        <summary style="list-style:none;cursor:pointer;background:rgba(26,92,48,.12);border:1px solid rgba(26,92,48,.28);border-radius:12px;padding:13px 15px;display:flex;align-items:center;justify-content:space-between;" aria-expanded="false">
+          <div style="display:flex;align-items:center;gap:8px;"><svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" width="16"><polyline points="20 6 9 17 4 12"/></svg><span style="font-family:'Cinzel',serif;font-size:11px;font-weight:700;color:#4ade80;">Degrés de Ta'dîl — Éloge &amp; Fiabilisation</span></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2" width="16"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div style="padding:14px 15px;background:rgba(12,8,0,.5);border:1px solid rgba(26,92,48,.2);border-top:none;border-radius:0 0 12px 12px;">
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;gap:10px;padding:9px 11px;background:rgba(26,92,48,.1);border-radius:8px;border-left:3px solid #22c55e;"><span style="font-family:'Cinzel',serif;font-size:8px;color:#4ade80;font-weight:700;min-width:16px;">①</span><div><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:#86efac;font-weight:700;margin-bottom:2px;">Thiqah thiqah / Imâm / Ḥujjah</p><p style="font-family:'Cormorant Garamond',serif;font-size:12px;color:rgba(134,239,172,.65);font-style:italic;">Très fiable, référence absolue (ex. Ibn Bâz, Al-Albânî). — Ibn Ḥajar, Taqrîb al-Tahdhîb, p. 23</p></div></div>
+            <div style="display:flex;gap:10px;padding:9px 11px;background:rgba(26,92,48,.08);border-radius:8px;border-left:3px solid rgba(34,197,94,.6);"><span style="font-family:'Cinzel',serif;font-size:8px;color:#4ade80;font-weight:700;min-width:16px;">②</span><div><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:#86efac;font-weight:700;margin-bottom:2px;">Thiqah</p><p style="font-family:'Cormorant Garamond',serif;font-size:12px;color:rgba(134,239,172,.65);font-style:italic;">Fiable sans réserve.</p></div></div>
+            <div style="display:flex;gap:10px;padding:9px 11px;background:rgba(26,92,48,.06);border-radius:8px;border-left:3px solid rgba(34,197,94,.4);"><span style="font-family:'Cinzel',serif;font-size:8px;color:#4ade80;font-weight:700;min-width:16px;">③</span><div><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:#86efac;font-weight:700;margin-bottom:2px;">Ṣadûq</p><p style="font-family:'Cormorant Garamond',serif;font-size:12px;color:rgba(134,239,172,.65);font-style:italic;">Véridique/honnête — possibles petites erreurs.</p></div></div>
+            <div style="display:flex;gap:10px;padding:9px 11px;background:rgba(26,92,48,.04);border-radius:8px;border-left:3px solid rgba(34,197,94,.25);"><span style="font-family:'Cinzel',serif;font-size:8px;color:#4ade80;font-weight:700;min-width:16px;">④</span><div><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:#86efac;font-weight:700;margin-bottom:2px;">Ṣadûq lâ ba'sa bihi</p><p style="font-family:'Cormorant Garamond',serif;font-size:12px;color:rgba(134,239,172,.65);font-style:italic;">Acceptable avec corroboration.</p></div></div>
+            <div style="display:flex;gap:10px;padding:9px 11px;background:rgba(26,92,48,.03);border-radius:8px;border-left:3px solid rgba(34,197,94,.15);"><span style="font-family:'Cinzel',serif;font-size:8px;color:#4ade80;font-weight:700;min-width:16px;">⑤</span><div><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:#86efac;font-weight:700;margin-bottom:2px;">Maqbûl</p><p style="font-family:'Cormorant Garamond',serif;font-size:12px;color:rgba(134,239,172,.65);font-style:italic;">Acceptable — pas de preuve contre.</p></div></div>
+          </div>
+        </div>
+      </details>
+      <details style="margin-bottom:14px;">
+        <summary style="list-style:none;cursor:pointer;background:rgba(139,26,26,.12);border:1px solid rgba(139,26,26,.28);border-radius:12px;padding:13px 15px;display:flex;align-items:center;justify-content:space-between;" aria-expanded="false">
+          <div style="display:flex;align-items:center;gap:8px;"><svg viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2" width="16"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg><span style="font-family:'Cinzel',serif;font-size:11px;font-weight:700;color:#f87171;">Degrés de Jarḥ — Critique &amp; Affaiblissement</span></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2" width="16"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div style="padding:14px 15px;background:rgba(12,8,0,.5);border:1px solid rgba(139,26,26,.2);border-top:none;border-radius:0 0 12px 12px;">
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;gap:10px;padding:9px 11px;background:rgba(251,191,36,.07);border-radius:8px;border-left:3px solid #fbbf24;"><span style="font-family:'Cinzel',serif;font-size:8px;color:#fbbf24;font-weight:700;min-width:16px;">①</span><div><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:#fde68a;font-weight:700;margin-bottom:2px;">Layyin al-ḥadîth</p><p style="font-family:'Cormorant Garamond',serif;font-size:12px;color:rgba(253,230,138,.65);font-style:italic;">Faible léger — erreurs mineures.</p></div></div>
+            <div style="display:flex;gap:10px;padding:9px 11px;background:rgba(249,115,22,.07);border-radius:8px;border-left:3px solid #f97316;"><span style="font-family:'Cinzel',serif;font-size:8px;color:#fb923c;font-weight:700;min-width:16px;">②</span><div><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:#fdba74;font-weight:700;margin-bottom:2px;">Ḍa'îf</p><p style="font-family:'Cormorant Garamond',serif;font-size:12px;color:rgba(253,186,116,.65);font-style:italic;">Faible — erreurs répétées ou bid'ah légère.</p></div></div>
+            <div style="display:flex;gap:10px;padding:9px 11px;background:rgba(220,38,38,.08);border-radius:8px;border-left:3px solid #dc2626;"><span style="font-family:'Cinzel',serif;font-size:8px;color:#f87171;font-weight:700;min-width:16px;">③</span><div><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:#fca5a5;font-weight:700;margin-bottom:2px;">Matrûk</p><p style="font-family:'Cormorant Garamond',serif;font-size:12px;color:rgba(252,165,165,.65);font-style:italic;">Abandonné — déviance grave.</p></div></div>
+            <div style="display:flex;gap:10px;padding:9px 11px;background:rgba(139,26,26,.12);border-radius:8px;border-left:3px solid #7f1d1d;"><span style="font-family:'Cinzel',serif;font-size:8px;color:#f87171;font-weight:700;min-width:16px;">④</span><div><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:#fca5a5;font-weight:700;margin-bottom:2px;">Kadhdhâb / Wâḍi'</p><p style="font-family:'Cormorant Garamond',serif;font-size:12px;color:rgba(252,165,165,.65);font-style:italic;">Menteur / fabricateur.</p></div></div>
+            <div style="display:flex;gap:10px;padding:9px 11px;background:rgba(100,100,100,.08);border-radius:8px;border-left:3px solid #6b7280;"><span style="font-family:'Cinzel',serif;font-size:8px;color:#9ca3af;font-weight:700;min-width:16px;">⑤</span><div><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:#d1d5db;font-weight:700;margin-bottom:2px;">Majhûl</p><p style="font-family:'Cormorant Garamond',serif;font-size:12px;color:rgba(209,213,219,.65);font-style:italic;">Inconnu — prudence totale.</p></div></div>
+            <div style="display:flex;gap:10px;padding:9px 11px;background:rgba(139,26,26,.1);border-radius:8px;border-left:3px solid #b91c1c;"><span style="font-family:'Cinzel',serif;font-size:8px;color:#f87171;font-weight:700;min-width:16px;">⑥</span><div><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:#fca5a5;font-weight:700;margin-bottom:2px;">Mubtadi'</p><p style="font-family:'Cormorant Garamond',serif;font-size:12px;color:rgba(252,165,165,.65);font-style:italic;">Innovateur (bid'ah dans sciences). — Rabî', Jamâ'ah Wâhidah, p. 56</p></div></div>
+            <div style="display:flex;gap:10px;padding:9px 11px;background:rgba(139,26,26,.1);border-radius:8px;border-left:3px solid #991b1b;"><span style="font-family:'Cinzel',serif;font-size:8px;color:#f87171;font-weight:700;min-width:16px;">⑦</span><div><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:#fca5a5;font-weight:700;margin-bottom:2px;">Ḥizbî</p><p style="font-family:'Cormorant Garamond',serif;font-size:12px;color:rgba(252,165,165,.65);font-style:italic;">Partisan (priorise groupe sur Sunnah). — Rabî', Majmû', vol. 5, p. 78</p></div></div>
+          </div>
+        </div>
+      </details>
+    </section>
+    <section id="mj-s4" style="margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"><span style="font-family:'Cinzel',serif;font-size:9px;font-weight:700;color:var(--gold);background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);padding:4px 8px;border-radius:6px;">04</span><h2 style="font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:var(--gold-l);">Les Règles d'Or</h2></div>
+      <details>
+        <summary style="list-style:none;cursor:pointer;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:13px 15px;display:flex;align-items:center;justify-content:space-between;" aria-expanded="false">
+          <div style="display:flex;align-items:center;gap:8px;"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" width="16"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span style="font-family:'Cinzel',serif;font-size:11px;font-weight:700;color:var(--gold-l);">Voir les 5 Règles d'Or</span></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" width="16"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div style="padding:14px 15px;background:rgba(12,8,0,.5);border:1px solid rgba(201,168,76,.1);border-top:none;border-radius:0 0 12px 12px;">
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="padding:11px 13px;background:rgba(201,168,76,.06);border-radius:10px;border-left:3px solid var(--gold);"><p style="font-family:'Cinzel',serif;font-size:9px;color:var(--gold);letter-spacing:.15em;margin-bottom:4px;">RÈGLE 1</p><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(220,200,150,.9);line-height:1.65;margin-bottom:6px;"><strong>Jarḥ motivé prioritaire sur ta'dîl.</strong></p><p style="font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;color:rgba(201,168,76,.55);">Ibn Ḥajar — Nukat 'alâ Kitâb Ibn al-Salâh, p. 34</p></div>
+            <div style="padding:11px 13px;background:rgba(201,168,76,.06);border-radius:10px;border-left:3px solid var(--gold);"><p style="font-family:'Cinzel',serif;font-size:9px;color:var(--gold);letter-spacing:.15em;margin-bottom:4px;">RÈGLE 2</p><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(220,200,150,.9);line-height:1.65;margin-bottom:6px;"><strong>Pas de jarḥ sans preuve claire</strong> (jamais de rumeur ou hawa).</p><p style="font-family:'Cormorant Garamond',serif;font-size:12px;font-style:italic;color:rgba(150,220,160,.7);margin-bottom:4px;">"Jamais sans mot exact, sinon invalide." — Sheikh Rabî'</p><p style="font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;color:rgba(201,168,76,.55);">Usûl al-Jarḥ wa al-Ta'dîl, cassette n°3</p></div>
+            <div style="padding:11px 13px;background:rgba(201,168,76,.06);border-radius:10px;border-left:3px solid var(--gold);"><p style="font-family:'Cinzel',serif;font-size:9px;color:var(--gold);letter-spacing:.15em;margin-bottom:4px;">RÈGLE 3</p><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(220,200,150,.9);line-height:1.65;margin-bottom:6px;"><strong>Critique la parole fausse, pas la personne.</strong></p><p style="font-family:'Cormorant Garamond',serif;font-size:12px;font-style:italic;color:rgba(150,220,160,.7);margin-bottom:4px;">"Je critique la parole contraire à Sunnah, pour hikma." — Sheikh Rabî'</p><p style="font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;color:rgba(201,168,76,.55);">Al-Intiqâd al-Mukhlis, p. 67</p></div>
+            <div style="padding:11px 13px;background:rgba(201,168,76,.06);border-radius:10px;border-left:3px solid var(--gold);"><p style="font-family:'Cinzel',serif;font-size:9px;color:var(--gold);letter-spacing:.15em;margin-bottom:4px;">RÈGLE 4</p><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(220,200,150,.9);line-height:1.65;margin-bottom:6px;"><strong>Témoignage d'un savant fiable suffit</strong> si non contredit.</p><p style="font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;color:rgba(201,168,76,.55);">Al-Dhahabî — Mîzân al-I'tidâl, vol. 1, p. 5</p></div>
+            <div style="padding:11px 13px;background:rgba(201,168,76,.06);border-radius:10px;border-left:3px solid var(--gold);"><p style="font-family:'Cinzel',serif;font-size:9px;color:var(--gold);letter-spacing:.15em;margin-bottom:4px;">RÈGLE 5</p><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(220,200,150,.9);line-height:1.65;margin-bottom:6px;"><strong>Pas de raghba ni hawa</strong> — objectivité totale.</p><p style="font-family:'Cormorant Garamond',serif;font-size:12px;font-style:italic;color:rgba(150,220,160,.7);margin-bottom:4px;">"Le jarḥ est pour Allah, pas pour la personnalité." — Sheikh Rabî'</p><p style="font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;color:rgba(201,168,76,.55);">Majmû', vol. 4, p. 123</p></div>
+          </div>
+        </div>
+      </details>
+    </section>
+    <section id="mj-s5" style="margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"><span style="font-family:'Cinzel',serif;font-size:9px;font-weight:700;color:var(--gold);background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);padding:4px 8px;border-radius:6px;">05</span><h2 style="font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:var(--gold-l);">Étape par Étape</h2></div>
+      <details>
+        <summary style="list-style:none;cursor:pointer;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:13px 15px;display:flex;align-items:center;justify-content:space-between;" aria-expanded="false">
+          <div style="display:flex;align-items:center;gap:8px;"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" width="16"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span style="font-family:'Cinzel',serif;font-size:11px;font-weight:700;color:var(--gold-l);">Voir les 5 Étapes du Processus</span></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" width="16"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div style="padding:14px 15px;background:rgba(12,8,0,.5);border:1px solid rgba(201,168,76,.1);border-top:none;border-radius:0 0 12px 12px;">
+          <div style="position:relative;display:flex;flex-direction:column;gap:0;">
+            <div style="position:absolute;left:19px;top:24px;bottom:24px;width:1px;background:linear-gradient(to bottom,rgba(201,168,76,.4),rgba(201,168,76,.1));"></div>
+            <div style="display:flex;gap:12px;padding:0 0 14px 0;"><div style="width:38px;height:38px;border-radius:50%;background:rgba(201,168,76,.15);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;"><span style="font-family:'Cinzel',serif;font-size:11px;font-weight:700;color:var(--gold);">1</span></div><div style="flex:1;padding-top:8px;"><p style="font-family:'Cinzel',serif;font-size:10px;font-weight:700;color:var(--gold-l);margin-bottom:5px;">Recueillir les preuves</p><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(220,200,150,.85);line-height:1.65;margin-bottom:5px;">Écoutez/lisez les paroles <strong>exactes</strong> du prédicateur. <strong>Jamais de ouï-dire.</strong></p><p style="font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;color:rgba(201,168,76,.55);">Rabî' : "Citer les mots précis, sinon silence" — Al-Intiqâd, p. 45</p></div></div>
+            <div style="display:flex;gap:12px;padding:0 0 14px 0;"><div style="width:38px;height:38px;border-radius:50%;background:rgba(201,168,76,.15);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;"><span style="font-family:'Cinzel',serif;font-size:11px;font-weight:700;color:var(--gold);">2</span></div><div style="flex:1;padding-top:8px;"><p style="font-family:'Cinzel',serif;font-size:10px;font-weight:700;color:var(--gold-l);margin-bottom:5px;">Évaluer 'Adâlah et Ḍabṭ</p><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(220,200,150,.85);line-height:1.65;margin-bottom:5px;">Adhère-t-il au tawḥîd pur ? Si bid'ah, jarḥ.</p><p style="font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;color:rgba(201,168,76,.55);">Aḥmad ibn Ḥanbal — Al-'Ilal, vol. 1, p. 89</p></div></div>
+            <div style="display:flex;gap:12px;padding:0 0 14px 0;"><div style="width:38px;height:38px;border-radius:50%;background:rgba(201,168,76,.15);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;"><span style="font-family:'Cinzel',serif;font-size:11px;font-weight:700;color:var(--gold);">3</span></div><div style="flex:1;padding-top:8px;"><p style="font-family:'Cinzel',serif;font-size:10px;font-weight:700;color:var(--gold-l);margin-bottom:5px;">Classer dans un degré</p><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(220,200,150,.85);line-height:1.65;margin-bottom:5px;">Utilisez les degrés de ta'dîl ou de jarḥ ci-dessus.</p><p style="font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;color:rgba(201,168,76,.55);">Rabî' applique Tahdhîb d'Ibn Ḥajar — Majmû', vol. 5, p. 78</p></div></div>
+            <div style="display:flex;gap:12px;padding:0 0 14px 0;"><div style="width:38px;height:38px;border-radius:50%;background:rgba(201,168,76,.15);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;"><span style="font-family:'Cinzel',serif;font-size:11px;font-weight:700;color:var(--gold);">4</span></div><div style="flex:1;padding-top:8px;"><p style="font-family:'Cinzel',serif;font-size:10px;font-weight:700;color:var(--gold-l);margin-bottom:5px;">Appliquer les Règles d'Or</p><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(220,200,150,.85);line-height:1.65;margin-bottom:5px;">Motivez avec preuve, priorisez jarḥ si authentique.</p><p style="font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;color:rgba(201,168,76,.55);">Rabî' — cassette Usûl, n°3</p></div></div>
+            <div style="display:flex;gap:12px;"><div style="width:38px;height:38px;border-radius:50%;background:rgba(26,92,48,.25);border:2px solid #22c55e;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;"><span style="font-family:'Cinzel',serif;font-size:11px;font-weight:700;color:#4ade80;">5</span></div><div style="flex:1;padding-top:8px;"><p style="font-family:'Cinzel',serif;font-size:10px;font-weight:700;color:#4ade80;margin-bottom:5px;">Conseiller avec Hikma</p><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(220,200,150,.85);line-height:1.65;margin-bottom:5px;">Expliquez doucement pour protéger avec rahma.</p><p style="font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;color:rgba(201,168,76,.55);">Rabî' : "Dialogue avec rahma pour guider la Oummah" — Al-Majmû', p. 112</p></div></div>
+          </div>
+        </div>
+      </details>
+    </section>
+    <section id="mj-s6" style="margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"><span style="font-family:'Cinzel',serif;font-size:9px;font-weight:700;color:var(--gold);background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);padding:4px 8px;border-radius:6px;">06</span><h2 style="font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:var(--gold-l);">Exemples Pratiques</h2></div>
+      <details>
+        <summary style="list-style:none;cursor:pointer;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:13px 15px;display:flex;align-items:center;justify-content:space-between;" aria-expanded="false">
+          <div style="display:flex;align-items:center;gap:8px;"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" width="16"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span style="font-family:'Cinzel',serif;font-size:11px;font-weight:700;color:var(--gold-l);">Voir les Exemples</span></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" width="16"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div style="padding:14px 15px;background:rgba(12,8,0,.5);border:1px solid rgba(201,168,76,.1);border-top:none;border-radius:0 0 12px 12px;display:flex;flex-direction:column;gap:10px;">
+          <div style="padding:12px 14px;background:rgba(26,92,48,.1);border:1px solid rgba(26,92,48,.25);border-radius:10px;display:flex;gap:10px;"><span style="font-size:20px;flex-shrink:0;">✅</span><div><p style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:.15em;color:#4ade80;margin-bottom:4px;">FIABLE — THIQAH</p><p style="font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:700;color:#86efac;margin-bottom:4px;">Al-Albânî</p><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(134,239,172,.75);line-height:1.6;">Fiable sur hadith. Rabî' l'éloge dans Al-Majmû' (p. 112).</p></div></div>
+          <div style="padding:12px 14px;background:rgba(139,26,26,.1);border:1px solid rgba(139,26,26,.25);border-radius:10px;display:flex;gap:10px;"><span style="font-size:20px;flex-shrink:0;">⛔</span><div><p style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:.15em;color:#f87171;margin-bottom:4px;">MISE EN GARDE — MATRÛK</p><p style="font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:700;color:#fca5a5;margin-bottom:4px;">Sayyid Qutb</p><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(252,165,165,.75);line-height:1.6;">Pour idées takfîries. Rabî' dans Adwâ' Islâmiyyah (p. 78).</p></div></div>
+          <div style="padding:12px 14px;background:rgba(139,26,26,.08);border:1px solid rgba(139,26,26,.2);border-radius:10px;display:flex;gap:10px;"><span style="font-size:20px;flex-shrink:0;">⚠️</span><div><p style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:.15em;color:#fbbf24;margin-bottom:4px;">ḤIZBÎ</p><p style="font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:700;color:#fde68a;margin-bottom:4px;">Certains Ikhwânî</p><p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(253,230,138,.75);line-height:1.6;">Priorisent le groupe sur la Sunnah. Rabî' dans Majmû', vol. 5, p. 78.</p></div></div>
+        </div>
+      </details>
+    </section>
+    <div style="margin-bottom:22px;text-align:center;"><button onclick="goTab('list');renderList();" style="background:linear-gradient(135deg,rgba(201,168,76,.18),rgba(138,100,32,.25));border:1px solid rgba(201,168,76,.4);color:var(--gold-l);font-family:'Cinzel',serif;font-size:10px;letter-spacing:.2em;padding:14px 28px;border-radius:12px;cursor:pointer;width:100%;">⚖️ VÉRIFIER UN PRÉDICATEUR</button></div>
+    <div style="background:linear-gradient(135deg,rgba(26,92,48,.12),rgba(201,168,76,.06));border:1px solid rgba(26,92,48,.25);border-radius:16px;padding:18px;margin-bottom:24px;">
+      <p style="font-family:'Scheherazade New',serif;font-size:22px;color:var(--gold-l);text-align:center;margin-bottom:10px;">خَاتِمَة</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:14px;color:rgba(220,200,150,.85);line-height:1.8;margin-bottom:12px;">Frère / Sœur, cette méthodologie est un trésor des Salaf pour préserver la pureté de la da'wah. En l'appliquant avec sagesse, nous protégeons notre Oummah des égarés tout en unissant les cœurs sur la vérité. Sheikh Rabî' nous rappelle d'adhérer au manhaj salafi et de critiquer les gens de bid'ah avec <strong style="color:var(--gold);">hikma</strong>, sans exagération.</p>
+      <p style="font-family:'Scheherazade New',serif;font-size:18px;color:var(--gold);text-align:center;line-height:1.8;">اللَّهُمَّ اهْدِنَا وَثَبِّتْنَا عَلَى السُّنَّةِ</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:12px;font-style:italic;color:rgba(201,168,76,.55);text-align:center;margin-top:4px;">Qu'Allah nous protège, nous guide et nous unisse sur la Sunnah.</p>
+    </div>
+    <div style="height:80px;"></div>
+  </div>
+</div>
+
+<!-- ══ TAB BAR ══ -->
+<nav class="tab-bar" id="main-tab-bar">
+  <button class="tab-item active" id="tab-home" onclick="goTab('home')">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/>
+      <polyline points="9 21 9 12 15 12 15 21"/>
+    </svg>
+    <span class="tab-label">ACCUEIL</span>
+  </button>
+
+  <button class="tab-item" id="tab-list" onclick="goTab('list');renderList();">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+      <line x1="12" y1="6" x2="16" y2="6"/><line x1="12" y1="10" x2="16" y2="10"/>
+    </svg>
+    <span class="tab-label">MISES EN GARDE</span>
+  </button>
+  <button class="tab-item" id="tab-mythes" onclick="goTab('mythes');renderMythes();">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+      <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+    </svg>
+    <span class="tab-label">KHURAFAT</span>
+  </button>
+  <button class="tab-item" id="tab-firaq" onclick="goTab('firaq');renderFiraq();">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="2" y1="12" x2="22" y2="12"/>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+    </svg>
+    <span class="tab-label">TAHDHIR</span>
+  </button>
+
+  <button class="tab-item" id="tab-glossaire" onclick="goTab('glossaire');">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+    </svg>
+    <span class="tab-label">MU'JAM</span>
+    <span class="tab-ar">المُعجَم</span>
+  </button>
+  <!-- bouton IA supprimé — R10 -->
+  <button class="tab-item" id="tab-faq" onclick="goTab('faq');renderFAQ();">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+    </svg>
+    <span class="tab-label">SHUBUHÂT</span>
+    <span class="tab-ar">كَشْفُ الشُّبُهَات</span>
+  </button>
+</nav>
+
+<!-- DISCLAIMER R13 — HORS NAV : DOM RESTAURÉ -->
+<div id="mizan-disclaimer" style="position:fixed;bottom:65px;left:0;right:0;z-index:9998;background:rgba(10,6,0,.95);border-top:1px solid rgba(201,168,76,.15);padding:6px 16px;text-align:center;font-family:'Cinzel',serif;font-size:6.5px;letter-spacing:.12em;color:rgba(201,168,76,.55);display:none;">
+  ⚠ RETRANSCRIPTION STATIQUE DES VERDICTS — CONSULTEZ UN SAVANT QUALIFIÉ POUR TOUTE QUESTION JURIDIQUE
+</div>
+
+<script>
+function goTab(view){
+  document.querySelectorAll('.tab-item').forEach(function(t){t.classList.remove('active');});
+  var tabEl = document.getElementById('tab-'+view);
+  if(tabEl) tabEl.classList.add('active');
+  if(typeof window.goTo === 'function') window.goTo(view);
+  var bar = document.getElementById('main-tab-bar');
+  var hideViews = ['detail','myth-detail','firaq-detail'];
+  if(bar) bar.style.display = (hideViews.indexOf(view) !== -1) ? 'none' : 'flex';
+  if(view === 'glossaire') renderGlossaire();
+  if(view === 'faq') renderFAQ();
+  if(view==='manhaj'){
+    document.querySelectorAll('.tab-item').forEach(function(t){t.classList.remove('active');});
+    var lt=document.getElementById('tab-list');
+    if(lt) lt.classList.add('active');
+  }
+}
+
+/* goTo est déclaré dans app.js — on enveloppe après DOMContentLoaded */
+/* defer garantit que goTo existe ici */
+window.addEventListener('load', function() {
+  if(typeof window.goTo === 'function') {
+    var _origGoTo = window.goTo;
+    window.goTo = function(view){
+      _origGoTo(view);
+      var bar = document.getElementById('main-tab-bar');
+      if(!bar) return;
+      var hideViews = ['detail','myth-detail','firaq-detail'];
+      if(hideViews.indexOf(view) !== -1){
+        bar.style.display='none';
+      } else {
+        bar.style.display='flex';
+        document.querySelectorAll('.tab-item').forEach(function(t){t.classList.remove('active');});
+        var el = document.getElementById('tab-'+view);
+        if(el) el.classList.add('active');
+      }
+    };
+  }
+});
+</script>
+
+<!-- ══════════════════════════════════════
+     ANIMATION MIZAN — SPECTACULAIRE
+══════════════════════════════════════ -->
+<div id="mizan-overlay" style="display:none;position:fixed;inset:0;z-index:3000;overflow:hidden;flex-direction:column;align-items:stretch;">
+  <!-- Fond animé -->
+  <canvas id="mz-particles" style="position:absolute;inset:0;z-index:0;pointer-events:none;"></canvas>
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,#1a0d00 0%,#0a0500 55%,#050200 100%);z-index:0;"></div>
+
+  <!-- Lignes déco latérales -->
+  <div style="position:absolute;left:14px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(201,168,76,.2) 20%,rgba(201,168,76,.2) 80%,transparent);z-index:1;"></div>
+  <div style="position:absolute;right:14px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(201,168,76,.2) 20%,rgba(201,168,76,.2) 80%,transparent);z-index:1;"></div>
+
+  <!-- HEADER -->
+  <div style="position:relative;z-index:2;flex-shrink:0;text-align:center;padding:28px 24px 0;">
+    <p style="font-family:'Scheherazade New',serif;color:rgba(201,168,76,.35);font-size:14px;letter-spacing:3px;margin-bottom:10px;">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
+    <!-- Balance animée SVG -->
+    <div style="margin:0 auto 12px;display:flex;align-items:center;justify-content:center;">
+      <svg id="mz-scale-svg" viewBox="0 0 100 60" width="90" height="54" style="overflow:visible;">
+        <!-- Pivot -->
+        <circle cx="50" cy="10" r="3.5" fill="#c9a84c" opacity=".9"/>
+        <line x1="50" y1="13" x2="50" y2="30" stroke="#c9a84c" stroke-width="1.5" opacity=".7"/>
+        <!-- Fléau -->
+        <line id="mz-beam" x1="18" y1="30" x2="82" y2="30" stroke="#c9a84c" stroke-width="1.8" opacity=".8" stroke-linecap="round"/>
+        <!-- Chaînes gauche -->
+        <line id="mz-lc" x1="18" y1="30" x2="18" y2="44" stroke="#c9a84c" stroke-width="1" opacity=".6"/>
+        <!-- Plateau gauche -->
+        <ellipse id="mz-lp" cx="18" cy="47" rx="10" ry="4" fill="none" stroke="#c9a84c" stroke-width="1.2" opacity=".7"/>
+        <!-- Chaînes droite -->
+        <line id="mz-rc" x1="82" y1="30" x2="82" y2="44" stroke="#c9a84c" stroke-width="1" opacity=".6"/>
+        <!-- Plateau droit -->
+        <ellipse id="mz-rp" cx="82" cy="47" rx="10" ry="4" fill="none" stroke="#c9a84c" stroke-width="1.2" opacity=".7"/>
+      </svg>
+    </div>
+    <p style="font-family:'Cinzel',serif;color:rgba(201,168,76,.4);font-size:6.5px;letter-spacing:.6em;margin-bottom:10px;">MÉTHODE DE CHEIKH RABI' AL-MADKHALI — الجَرْحُ وَالتَّعْدِيل</p>
+    <p id="mz-name-ar" style="font-family:'Scheherazade New',serif;font-weight:700;color:#fff;font-size:24px;text-shadow:0 0 30px rgba(201,168,76,.5);margin-bottom:2px;line-height:1.2;"></p>
+    <p id="mz-name-fr" style="font-family:'Cinzel',serif;color:rgba(201,168,76,.6);font-size:9.5px;letter-spacing:.12em;"></p>
+  </div>
+
+  <!-- ÉTAPES CRITÈRES -->
+  <div id="mz-steps" style="position:relative;z-index:2;flex:1;padding:16px 20px 0;display:flex;flex-direction:column;gap:7px;overflow:hidden;"></div>
+
+  <!-- PROGRESS -->
+  <div style="position:relative;z-index:2;padding:12px 24px 26px;flex-shrink:0;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+      <div style="flex:1;height:2px;background:rgba(201,168,76,.1);border-radius:2px;overflow:hidden;">
+        <div id="mz-pbar" style="height:100%;width:0%;background:linear-gradient(90deg,#6b4a08,#e8c96a,#c9a84c);transition:width .5s cubic-bezier(.4,0,.2,1);box-shadow:0 0 8px rgba(232,201,106,.5);border-radius:2px;"></div>
+      </div>
+      <div style="width:7px;height:7px;background:#e8c96a;transform:rotate(45deg);box-shadow:0 0 8px rgba(232,201,106,.8);flex-shrink:0;"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;">
+      <p style="font-family:'Cinzel',serif;color:rgba(201,168,76,.28);font-size:6px;letter-spacing:.35em;">AL-JARH WA AL-TA'DÎL</p>
+      <p id="mz-pct" style="font-family:'Cinzel',serif;color:rgba(201,168,76,.5);font-size:6.5px;font-weight:700;">0%</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TOOLTIP THÈMES MODAL ══ -->
+<div id="tooltip-modal" style="display:none;position:fixed;inset:0;z-index:4000;background:rgba(6,2,0,.92);backdrop-filter:blur(10px);align-items:flex-end;justify-content:center;padding:0 0 20px;" onclick="closeTooltip(event)">
+  <div id="tooltip-sheet" style="width:100%;max-width:420px;background:rgba(255,255,255,.025);border-radius:20px 20px 0 0;padding:20px 20px 30px;border-top:2px solid rgba(184,146,42,.3);animation:slideUp .3s ease forwards;" onclick="event.stopPropagation()">
+    <div style="width:36px;height:3px;background:rgba(140,100,30,.2);border-radius:3px;margin:0 auto 16px;"></div>
+    <div id="tt-header" style="display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(140,100,30,.1);">
+      <div id="tt-icon" style="width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(184,146,42,.1);border:1px solid rgba(184,146,42,.2);font-family:'Cinzel',serif;color:#c9a84c;font-size:13px;font-weight:700;"></div>
+      <div><span id="tt-title" style="font-family:'Cinzel',serif;color:#e8d490;font-size:11px;font-weight:700;letter-spacing:.25em;display:block;"></span><span style="font-family:'Cinzel',serif;color:rgba(100,60,10,.4);font-size:7px;letter-spacing:.2em;">TAPEZ CHAQUE SECTION POUR EN SAVOIR PLUS</span></div>
+    </div>
+    <!-- Niveau 1 -->
+    <div class="tt-section" id="tt-s1" onclick="toggleTT(1)">
+      <div class="tt-sec-hd"><span class="tt-sec-num">1</span><span class="tt-sec-lbl">C'EST QUOI ?</span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" width="11" height="11" style="margin-left:auto;transition:transform .3s;"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="tt-sec-body" id="tt-b1"><p id="tt-t1"></p></div>
+    </div>
+    <!-- Niveau 2 -->
+    <div class="tt-section" id="tt-s2" onclick="toggleTT(2)">
+      <div class="tt-sec-hd"><span class="tt-sec-num">2</span><span class="tt-sec-lbl">POUR CE PRÉDICATEUR</span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" width="11" height="11" style="margin-left:auto;transition:transform .3s;"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="tt-sec-body" id="tt-b2"><p id="tt-t2"></p></div>
+    </div>
+    <!-- Niveau 3 -->
+    <div class="tt-section" id="tt-s3" onclick="toggleTT(3)">
+      <div class="tt-sec-hd"><span class="tt-sec-num">3</span><span class="tt-sec-lbl">COMMENT L'EXPLIQUER ?</span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" width="11" height="11" style="margin-left:auto;transition:transform .3s;"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="tt-sec-body" id="tt-b3"><p id="tt-t3"></p></div>
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
+.tt-section{border:1px solid rgba(140,100,30,.12);border-radius:12px;overflow:hidden;margin-bottom:8px;background:rgba(255,255,255,.028);cursor:pointer;transition:border-color .2s;}
+.tt-section:hover{border-color:rgba(201,168,76,.3);}
+.tt-sec-hd{display:flex;align-items:center;gap:8px;padding:11px 13px;}
+.tt-sec-num{width:20px;height:20px;border-radius:50%;background:rgba(184,146,42,.12);border:1px solid rgba(184,146,42,.2);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;color:#c9a84c;font-size:7px;font-weight:700;flex-shrink:0;}
+.tt-sec-lbl{font-family:'Cinzel',serif;color:rgba(212,170,100,.72);font-size:8px;font-weight:700;letter-spacing:.2em;}
+.tt-sec-body{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1);}
+.tt-sec-body.open{max-height:300px;}
+.tt-sec-body p{font-family:'Cormorant Garamond',serif;color:rgba(201,168,76,.55);font-size:13px;font-style:italic;line-height:1.78;padding:0 13px 13px;border-top:1px solid rgba(140,100,30,.08);}
+</style>
+<script>
+(function(){
+  var stars = document.getElementById('mizan-stars');
+  if(!stars) return;
+  for(var i=0;i<60;i++){
+    var s=document.createElement('div');
+    s.className='mizan-star';
+    var size = Math.random()*2+0.5;
+    s.style.cssText='width:'+size+'px;height:'+size+'px;top:'+(Math.random()*100)+'%;left:'+(Math.random()*100)+'%;animation-duration:'+(Math.random()*3+2)+'s;animation-delay:'+(Math.random()*3)+'s;';
+    stars.appendChild(s);
+  }
+})();
+
+function showPredLoading(nomFr, nomAr, callback){
+  var ov = document.getElementById('mizan-overlay');
+  ov.style.display = 'flex';
+  ov.style.animation = 'none';
+  ov.offsetHeight; // reflow
+  ov.style.animation = 'mzFadeIn .4s ease forwards';
+
+  // Noms
+  document.getElementById('mz-name-ar').textContent = nomAr || nomFr;
+  document.getElementById('mz-name-fr').textContent = nomFr;
+
+  // Les 7 critères de Rabi Al-Madkhali avec description
+  var criteres = [
+    {ar:'عَقِيدَةُ الرَّجُل',      fr:'1 — EXAMEN DE L\'AQIDA',          desc:'Le fondement : quelle est sa croyance sur Allah, Ses Attributs, la Qadar ?', color:'#a78bfa'},
+    {ar:'مَنْهَجُهُ فِي الدَّعْوَة', fr:'2 — ANALYSE DU MANHAJ',          desc:'Suit-il la méthode des Salaf As-Salih dans sa da\'wah ?', color:'#60a5fa'},
+    {ar:'مَوْقِفُهُ مِنَ الفِرَق',   fr:'3 — POSITION SUR LES SECTES',     desc:'Met-il en garde contre Tabligh, Ikhwan, Soufis... ou les défend-il ?', color:'#f59e0b'},
+    {ar:'الإِجَازَاتُ وَالدِّرَاسَة', fr:'4 — ÉTUDES & IJAZAS',             desc:'A-t-il étudié avec des savants reconnus ? Quelle chaîne de transmission ?', color:'#34d399'},
+    {ar:'مَوْقِفُهُ مِنَ الوُلَاة',  fr:'5 — RAPPORT AUX DIRIGEANTS',      desc:'Suit-il la méthode du conseil privé ou le discours d\'opposition publique ?', color:'#fb923c'},
+    {ar:'تَزْكِيَاتُ الثِّقَات',    fr:'6 — TAZKIYAT DES SAVANTS',         desc:'A-t-il une recommandation nominative d\'un grand savant reconnu ?', color:'#e8c96a'},
+    {ar:'الحُكْمُ المَنْهَجِي',   fr:'7 — VERDICT FINAL',               desc:'En appliquant le Jarh wa Ta\'dil : FIABLE, À SURVEILLER ou DANGER ?', color:'#f43f5e'},
+  ];
+
+  var stepsEl = document.getElementById('mz-steps');
+  stepsEl.innerHTML = '';
+  var stepEls = [];
+
+  criteres.forEach(function(c, i){
+    var isLeft = (i % 2 === 0);
+    var div = document.createElement('div');
+    div.style.cssText = 'display:flex;align-items:center;gap:12px;opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease;flex-shrink:0;';
+
+    var dotSide = '<div style="width:11px;height:11px;border-radius:50%;background:#1a0d00;border:1.5px solid rgba(201,168,76,.25);flex-shrink:0;transition:all .4s;" id="mzd'+i+'"></div>';
+
+    var textBlock = '<div style="flex:1;'+(isLeft?'text-align:left;':'text-align:left;')+'">'
+      +'<div style="display:flex;align-items:baseline;gap:7px;margin-bottom:2px;">'
+      +'<span style="font-family:\'Scheherazade New\',serif;font-size:16px;color:rgba(255,255,255,.75);line-height:1.1;" id="mzar'+i+'">'+c.ar+'</span>'
+      +'</div>'
+      +'<p style="font-family:\'Cinzel\',serif;font-size:6px;letter-spacing:.2em;color:rgba(201,168,76,.38);margin-bottom:3px;" id="mzfr'+i+'">'+c.fr+'</p>'
+      +'<p style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:11px;color:rgba(201,168,76,.28);line-height:1.45;max-height:0;overflow:hidden;transition:max-height .5s ease,opacity .5s;" id="mzdesc'+i+'">'+c.desc+'</p>'
+      +'</div>';
+
+    var numBadge = '<div style="width:22px;height:22px;border-radius:50%;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:\'Cinzel\',serif;font-size:7.5px;color:rgba(201,168,76,.4);font-weight:700;" id="mznum'+i+'">'+(i+1)+'</div>';
+
+    div.innerHTML = textBlock + numBadge;
+    stepsEl.appendChild(div);
+    stepEls.push({el:div, c:c, i:i});
+  });
+
+  // Reset progress
+  document.getElementById('mz-pbar').style.width = '0%';
+  document.getElementById('mz-pct').textContent = '0%';
+
+  // Lancer les particules
+  startMizanParticles();
+  // Lancer balance
+  startBalanceAnim();
+
+  var delay = 320;
+  var total = criteres.length;
+
+  stepEls.forEach(function(s, idx){
+    setTimeout(function(){
+      // Activer l'étape courante
+      s.el.style.opacity = '1';
+      s.el.style.transform = 'translateY(0)';
+
+      var dot = document.getElementById('mzd'+idx);
+      var arEl = document.getElementById('mzar'+idx);
+      var frEl = document.getElementById('mzfr'+idx);
+      var descEl = document.getElementById('mzdesc'+idx);
+      var numEl = document.getElementById('mznum'+idx);
+
+      if(dot){
+        dot.style.background = s.c.color + '33';
+        dot.style.borderColor = s.c.color;
+        dot.style.boxShadow = '0 0 10px ' + s.c.color + '88, 0 0 20px ' + s.c.color + '44';
+        dot.style.transform = 'scale(1.3)';
+      }
+      if(arEl){ arEl.style.color = '#fff'; arEl.style.textShadow = '0 0 20px ' + s.c.color + '66'; }
+      if(frEl){ frEl.style.color = s.c.color; frEl.style.letterSpacing = '.22em'; }
+      if(descEl){ descEl.style.maxHeight = '50px'; descEl.style.opacity = '1'; descEl.style.color = 'rgba(255,255,255,.5)'; }
+      if(numEl){ numEl.style.background = s.c.color + '22'; numEl.style.borderColor = s.c.color + '88'; numEl.style.color = s.c.color; }
+
+      // Marquer les précédentes done
+      if(idx > 0){
+        var prevDot = document.getElementById('mzd'+(idx-1));
+        var prevAr = document.getElementById('mzar'+(idx-1));
+        var prevDesc = document.getElementById('mzdesc'+(idx-1));
+        if(prevDot){prevDot.style.transform='scale(1)'; prevDot.style.boxShadow='none';}
+        if(prevAr){prevAr.style.color='rgba(201,168,76,.4)'; prevAr.style.textShadow='none';}
+        if(prevDesc){prevDesc.style.maxHeight='0'; prevDesc.style.opacity='0';}
+      }
+
+      // Progress
+      var pct = Math.round(((idx+1)/total)*100);
+      document.getElementById('mz-pbar').style.width = pct + '%';
+      document.getElementById('mz-pct').textContent = pct + '%';
+
+    }, idx * delay);
+  });
+
+  // Fermeture
+  var totalTime = total * delay + 500;
+  setTimeout(function(){
+    ov.style.animation = 'mzFadeOut .4s ease forwards';
+    setTimeout(function(){
+      ov.style.display = 'none';
+      stopMizanParticles();
+      if(callback) callback();
+    }, 380);
+  }, totalTime);
+}
+
+var _mzRAF = null;
+var _mzCanvas = null;
+var _mzCtx = null;
+var _mzParts = [];
+
+function startMizanParticles(){
+  _mzCanvas = document.getElementById('mz-particles');
+  if(!_mzCanvas) return;
+  _mzCanvas.width = window.innerWidth;
+  _mzCanvas.height = window.innerHeight;
+  _mzCtx = _mzCanvas.getContext('2d');
+  _mzParts = [];
+  for(var i=0;i<55;i++){
+    _mzParts.push({
+      x: Math.random()*_mzCanvas.width,
+      y: Math.random()*_mzCanvas.height,
+      r: Math.random()*1.5+0.3,
+      vx: (Math.random()-.5)*0.4,
+      vy: (Math.random()-.5)*0.4,
+      a: Math.random()*.6+.1,
+      da: (Math.random()-.5)*0.008
+    });
+  }
+  function frame(){
+    if(!_mzCtx) return;
+    _mzCtx.clearRect(0,0,_mzCanvas.width,_mzCanvas.height);
+    _mzParts.forEach(function(p){
+      p.x += p.vx; p.y += p.vy;
+      p.a += p.da;
+      if(p.a>0.7||p.a<0.05) p.da*=-1;
+      if(p.x<0) p.x=_mzCanvas.width;
+      if(p.x>_mzCanvas.width) p.x=0;
+      if(p.y<0) p.y=_mzCanvas.height;
+      if(p.y>_mzCanvas.height) p.y=0;
+      _mzCtx.beginPath();
+      _mzCtx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      _mzCtx.fillStyle='rgba(201,168,76,'+p.a+')';
+      _mzCtx.fill();
+    });
+    _mzRAF = requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+function stopMizanParticles(){
+  if(_mzRAF){cancelAnimationFrame(_mzRAF);_mzRAF=null;}
+  if(_mzCtx&&_mzCanvas) _mzCtx.clearRect(0,0,_mzCanvas.width,_mzCanvas.height);
+}
+
+var _balRAF = null;
+function startBalanceAnim(){
+  if(_balRAF){cancelAnimationFrame(_balRAF);}
+  var t = 0;
+  var beam = document.getElementById('mz-beam');
+  var lc = document.getElementById('mz-lc');
+  var lp = document.getElementById('mz-lp');
+  var rc = document.getElementById('mz-rc');
+  var rp = document.getElementById('mz-rp');
+  if(!beam) return;
+  function frame(){
+    t += 0.025;
+    var tilt = Math.sin(t) * 5;
+    // Beam incline
+    var lY = 30 - tilt;
+    var rY = 30 + tilt;
+    beam.setAttribute('y1', lY); beam.setAttribute('y2', rY);
+    // Left chain & pan
+    lc.setAttribute('y1', lY); lc.setAttribute('y2', lY+14);
+    lp.setAttribute('cy', lY+17);
+    // Right chain & pan
+    rc.setAttribute('y1', rY); rc.setAttribute('y2', rY+14);
+    rp.setAttribute('cy', rY+17);
+    _balRAF = requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+
+function openTooltip(key){
+  var themes=window._themes||[];
+  var th=themes.find(function(t){return t.k===key;});
+  if(!th)return;
+  document.getElementById('tt-title').textContent=th.label;
+  document.getElementById('tt-icon').textContent=th.label.charAt(0);
+  document.getElementById('tt-t1').textContent=th.t1;
+  document.getElementById('tt-t2').textContent=th.t2;
+  document.getElementById('tt-t3').textContent=th.t3;
+  [1,2,3].forEach(function(n){document.getElementById('tt-b'+n).classList.remove('open');});
+  document.getElementById('tt-b1').classList.add('open');
+  document.getElementById('tooltip-modal').style.display='flex';
+}
+function closeTooltip(e){
+  document.getElementById('tooltip-modal').style.display='none';
+}
+function toggleTT(n){
+  var body=document.getElementById('tt-b'+n);
+  body.classList.toggle('open');
+}
+</script>
+
+<!-- ══ MANHAJ DRAWER STYLE BIBLIOTHÈQUE ══ -->
+<div id="mj-backdrop" onclick="closeManhajDrawer()"></div>
+<div id="mj-drawer">
+  <div class="mj-handle"></div>
+  <div class="mj-head">
+    <p class="mj-eyebrow">MÉTHODOLOGIE AL MIZÂN · الجَرْح وَالتَّعْدِيل</p>
+    <p class="mj-title-ar">مَنْهَجُ التَّقْيِيم</p>
+    <p class="mj-title-fr">MANHAJ AL-TAQYÎM</p>
+    <p class="mj-sub">Évaluer un prédicateur selon la méthode des Imams Salaf et de Cheikh Rabi' Al-Madkhali</p>
+  </div>
+  <!-- Chaîne isnad avec particule mobile -->
+  <div class="mj-chain">
+    <div class="mj-node"><div class="mj-ball">ﷺ</div><span class="mj-ball-lbl">PROPHÈTE</span></div>
+    <div class="mj-link"></div>
+    <div class="mj-node"><div class="mj-ball">ص</div><span class="mj-ball-lbl">SAHABI</span></div>
+    <div class="mj-link"></div>
+    <div class="mj-node"><div class="mj-ball">ت</div><span class="mj-ball-lbl">TABI'I</span></div>
+    <div class="mj-link"></div>
+    <div class="mj-node"><div class="mj-ball">م</div><span class="mj-ball-lbl">MUHADDITH</span></div>
+    <div class="mj-link"></div>
+    <div class="mj-node"><div class="mj-ball">أ</div><span class="mj-ball-lbl">VOUS</span></div>
+  </div>
+  <!-- Principe fondateur -->
+  <div class="mj-princ">
+    <p class="mj-princ-ar">الجَرْحُ الـمُفَسَّرُ مُقَدَّمٌ عَلَى التَّعْدِيل</p>
+    <p class="mj-princ-fr">Le Jarh détaillé et argumenté prime sur la recommandation générale</p>
+    <p class="mj-princ-who">— CHEIKH RABI' IBN HADI AL-MADKHALI حفظه الله</p>
+  </div>
+  <!-- Accordéon 6 étapes -->
+  <div class="mj-scroll">
+    <p class="mj-sec-hd">LES 6 ÉTAPES DU JUGEMENT</p>
+
+    <div class="mj-ac open" id="mj1">
+      <button class="mj-ac-btn" onclick="mjTog(1)">
+        <div class="mj-ac-num">١</div>
+        <div class="mj-ac-texts">
+          <span class="mj-ac-ar">عَقِيدَةُ الرَّجُل</span>
+          <span class="mj-ac-fr">EXAMEN DE L'AQIDA</span>
+        </div>
+        <svg class="mj-ac-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="mj-ac-body"><div class="mj-ac-inner">
+        <p>L'aqida est le premier critère absolu. La croyance doit être conforme aux Salaf as-Salih : Tawhid pur, Asma wa Sifat sans ta'til ni tashbih, position correcte sur le Qadar et les Compagnons.</p>
+        <div class="mj-hadith">
+          <p class="mj-hadith-ar">مَنْ أَحْدَثَ فِي أَمْرِنَا هَذَا مَا لَيْسَ مِنْهُ فَهُوَ رَدٌّ</p>
+          <p class="mj-hadith-src">SAHIH AL-BUKHARI · SAHIH MUSLIM — AUTHENTIQUE</p>
+        </div>
+        <div class="mj-tags">
+          <span class="mj-tag">IRJA'</span><span class="mj-tag">TASHBIH</span><span class="mj-tag">TA'TIL</span>
+          <span class="mj-tag w">ASH'ARIYYA</span><span class="mj-tag w">MATURIDIYYA</span>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="mj-ac" id="mj2">
+      <button class="mj-ac-btn" onclick="mjTog(2)">
+        <div class="mj-ac-num">٢</div>
+        <div class="mj-ac-texts">
+          <span class="mj-ac-ar">مَنْهَجُهُ فِي الدَّعْوَة</span>
+          <span class="mj-ac-fr">SON MANHAJ EN DA'WA</span>
+        </div>
+        <svg class="mj-ac-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="mj-ac-body"><div class="mj-ac-inner">
+        <p>Suit-il le Coran, la Sunnah et la compréhension des Salaf ? Ou mélange-t-il avec des méthodologies d'innovation — Ikhwan Al-Muslimin, Tabligh, harakiyyun, qutubiyyun ?</p>
+        <div class="mj-quote">
+          <p class="mj-quote-t">« Celui qui adopte le manhaj des harakiyyins dans la da'wa s'est éloigné du manhaj des Salaf, même s'il prétend être salafi. »</p>
+          <p class="mj-quote-w">— CHEIKH RABI' AL-MADKHALI حفظه الله</p>
+        </div>
+        <div class="mj-tags">
+          <span class="mj-tag">IKHWAN</span><span class="mj-tag">TABLIGH</span>
+          <span class="mj-tag">SUROURI</span><span class="mj-tag w">QUTUBI</span>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="mj-ac" id="mj3">
+      <button class="mj-ac-btn" onclick="mjTog(3)">
+        <div class="mj-ac-num">٣</div>
+        <div class="mj-ac-texts">
+          <span class="mj-ac-ar">مَوْقِفُهُ مِنَ الفِتَن</span>
+          <span class="mj-ac-fr">POSITION SUR LES SECTES</span>
+        </div>
+        <svg class="mj-ac-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="mj-ac-body"><div class="mj-ac-inner">
+        <p>Le silence face à la bid'ah est lui-même révélateur. Réfute-t-il les innovateurs avec clarté, ou les défend-il ? Sa position sur les grandes fitn de l'époque est un critère essentiel.</p>
+        <div class="mj-quote">
+          <p class="mj-quote-t">« Celui qui ne réfute pas les innovations n'est pas de ceux qui défendent la Sunnah. »</p>
+          <p class="mj-quote-w">— CHEIKH RABI' AL-MADKHALI حفظه الله</p>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="mj-ac" id="mj4">
+      <button class="mj-ac-btn" onclick="mjTog(4)">
+        <div class="mj-ac-num">٤</div>
+        <div class="mj-ac-texts">
+          <span class="mj-ac-ar">أَقْوَالُ أَهْلِ العِلْم</span>
+          <span class="mj-ac-fr">AVIS DES SAVANTS MAJEURS</span>
+        </div>
+        <svg class="mj-ac-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="mj-ac-body"><div class="mj-ac-inner">
+        <p>Les jugements de Cheikh Rabi', Ibn Baz, Ibn Uthaymin, Al-Albani et Al-Fawzan sont consultés. Un jarh mufassar (détaillé avec preuve) d'un savant reconnu prime sur le ta'dil général.</p>
+        <div class="mj-quote">
+          <p class="mj-quote-t">« Celui qui est connu pour la déviation, le ta'dil vague ne lui bénéficie pas. »</p>
+          <p class="mj-quote-w">— CHEIKH AL-ALBANI رحمه الله</p>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="mj-ac" id="mj5">
+      <button class="mj-ac-btn" onclick="mjTog(5)">
+        <div class="mj-ac-num">٥</div>
+        <div class="mj-ac-texts">
+          <span class="mj-ac-ar">تَزْكِيَاتُ الثِّقَات</span>
+          <span class="mj-ac-fr">TAZKIYAT DES FIABLES</span>
+        </div>
+        <svg class="mj-ac-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="mj-ac-body"><div class="mj-ac-inner">
+        <p>Une tazkiya n'est valide que d'un savant connu pour son suivi de la Sunnah. Elle doit être explicite, récente, et directe — non relayée par des harakiyyins ou des innovateurs.</p>
+        <p>Si un savant salafi reconnu donne une tazkiya générale sans connaître directement le prédicateur, elle a peu de poids face à un jarh mufassar.</p>
+      </div></div>
+    </div>
+
+    <div class="mj-ac" id="mj6">
+      <button class="mj-ac-btn" onclick="mjTog(6)">
+        <div class="mj-ac-num">٦</div>
+        <div class="mj-ac-texts">
+          <span class="mj-ac-ar">الحُكْمُ وَالنَّصِيحَة</span>
+          <span class="mj-ac-fr">VERDICT & NASSIHA</span>
+        </div>
+        <svg class="mj-ac-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="mj-ac-body"><div class="mj-ac-inner">
+        <p>Le verdict porte sur la da'wa, non sur l'âme. Il est rendu dans un esprit de nassiha sincère pour protéger la communauté — non par haine personnelle ni jalousie.</p>
+        <div class="mj-hadith">
+          <p class="mj-hadith-ar">الدِّيـنُ النَّصِيحَة · قُلْنَا لِمَنْ؟ قَالَ لِلَّهِ وَلِكِتَابِهِ وَلِرَسُولِهِ وَلأَئِمَّةِ المُسْلِمِينَ وَعَامَّتِهِم</p>
+          <p class="mj-hadith-src">SAHIH MUSLIM — HADITH AUTHENTIQUE</p>
+        </div>
+      </div></div>
+    </div>
+
+  </div>
+</div>
+<script>
+function openManhajDrawer(){
+  try{
+    var drawer=document.getElementById('mj-drawer');
+    var backdrop=document.getElementById('mj-backdrop');
+    if(!drawer||!backdrop){ console.error('[Al-Mizan] openManhajDrawer: éléments DOM introuvables'); return; }
+    drawer.classList.add('mj-open');
+    backdrop.classList.add('mj-open');
+    requestAnimationFrame(function(){ var sc=document.querySelector('.mj-scroll'); if(sc) sc.scrollTop=0; });
+  }catch(e){ console.error('[Al-Mizan] openManhajDrawer:'+e.message); }
+}
+function closeManhajDrawer(){
+  document.getElementById('mj-drawer').classList.remove('mj-open');
+  document.getElementById('mj-backdrop').classList.remove('mj-open');
+}
+function mjTog(n){
+  var item = document.getElementById('mj'+n);
+  var wasOpen = item.classList.contains('open');
+  for(var i=1;i<=6;i++){
+    var el = document.getElementById('mj'+i);
+    if(el) el.classList.remove('open');
+  }
+  if(!wasOpen) item.classList.add('open');
+}
+</script>
+
+<!-- ══════════════════════════════════════════════════
+     USUL DRAWER — الأصول — بيان المنهج / LES FONDEMENTS
+     Destruction de la Shubha du "Madkhalisme"
+══════════════════════════════════════════════════ -->
+<div id="usul-backdrop" onclick="closeUsulDrawer()"></div>
+<div id="usul-drawer">
+  <div class="usul-handle"></div>
+  <div class="usul-head">
+    <p class="usul-eyebrow">بيان المنهج · FONDEMENTS DU JARH WA TA'DÎL</p>
+    <p class="usul-title-ar" style="font-size:28px;line-height:1.3;">أُصُولُ السُّنَّةِ وَمَنْهَجُ السَّلَفِ فِي الجَرْحِ وَالتَّعْدِيلِ</p>
+    <p class="usul-title-fr" style="font-size:10px;letter-spacing:.15em;line-height:1.5;">LES FONDEMENTS DE LA SOUNNAH ET LA VOIE DES SALAF<br>DANS LA CRITIQUE ET L'ÉLOGE</p>
+    <p class="usul-sub">Preuves irréfutables que la mise en garde est la voie unanime des Salaf et des grands savants — non l'invention d'un seul homme.</p>
+  </div>
+  <div class="usul-scroll">
+
+    <!-- ═══ POINT 1 ═══ -->
+    <details class="usul-section" open>
+      <summary>
+        <span class="usul-acc-icon">🛡️</span>
+        <div class="usul-acc-titles">
+          <span class="usul-acc-fr">1. L'innocence de la vérité face aux surnoms inventés</span>
+          <span class="usul-acc-ar">بَرَاءَةُ الحَقِّ مِنَ الأَلْقَابِ المُحْدَثَة</span>
+        </div>
+        <svg class="usul-acc-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <div class="usul-sec-head">
+        <p class="usul-sec-num">POINT I</p>
+        <p class="usul-sec-title-ar">بَرَاءَةُ الحَقِّ مِنَ الأَلْقَابِ المُحْدَثَة</p>
+        <p class="usul-sec-title-fr">L'INNOCENCE DE LA VÉRITÉ FACE AUX SURNOMS INVENTÉS</p>
+      </div>
+      <div class="usul-sec-body">
+        <div class="usul-ar-block">
+          قال الإمام البربهاري رحمه الله:
+          «وَإِذَا سَمِعْتَ الرَّجُلَ يَقُولُ: فُلانٌ حَشَوِيٌّ، أَوْ يَطْعَنُ عَلَى أَهْلِ الأَثَر، فَاعْلَمْ أَنَّهُ صَاحِبُ بِدْعَة. وَإِذَا سَمِعْتَ الرَّجُلَ يَقُولُ: فُلانٌ مُشَبِّهٌ، فَاعْلَمْ أَنَّهُ جَهْمِيٌّ. وَإِذَا سَمِعْتَ الرَّجُلَ يَقُولُ: فُلانٌ نَاصِبِيٌّ، فَاعْلَمْ أَنَّهُ رَافِضِيٌّ.»
+          <br>— شرح السنة للبربهاري
+        </div>
+        <p>
+          L'Imam Al-Barbahari (رحمه الله), l'un des plus illustres protecteurs de la croyance des Salaf au IVe siècle de l'Hégire, a établi une règle d'airain : <strong>lorsqu'un homme colle une étiquette péjorative sur les gens de la Sunnah pour les discréditer, c'est la preuve qu'il est lui-même un innovateur.</strong>
+        </p>
+        <p>
+          À chaque époque, les gens de l'innovation ont inventé des surnoms pour repousser la vérité.
+          Les Jahmiyyah appelaient les gens du Hadith <em>« Hashawiyyah »</em> (les bourreurs, ceux qui remplissent sans comprendre).
+          Les Mu'tazilah les qualifiaient de <em>« Mujassimah »</em> (anthropomorphistes).
+          Les Ash'arites les ont nommés <em>« Mushabbiha »</em>.
+          Les Soufis les traitaient de <em>« Dhahiriyyah »</em> (littéralistes).
+          Les Ikhwan al-Muslimin les ont surnommés <em>« Jâmiyyah »</em>.
+        </p>
+        <p>
+          Aujourd'hui, le même stratagème se perpétue : ceux qui refusent d'accepter les mises en garde des grands savants — des hommes dont la science et la piété sont reconnues par la Oumma entière — ont forgé le terme <strong>« Madkhaliste »</strong> pour effrayer les gens de la Sunnah et les éloigner de la vérité. De même, le terme <strong>« Wahhabite »</strong> est une étiquette diffamatoire inventée de toutes pièces par les ennemis du Tawhid pour discréditer la Da'wa de l'Imam Muhammad ibn 'Abdel-Wahhab (رحمه الله) — qui n'est autre que la Da'wa du Tawhid prêchée par tous les Prophètes. Cheikh Ibn Baz a dit : <em>« L'appellation 'wahhabisme' est utilisée par les ennemis du Tawhid pour éloigner les gens de la vérité. »</em> (binbaz.org.sa)
+        </p>
+        <p>
+          <strong>Déclaration de principe :</strong> Al-Mizân utilise exclusivement les termes <em>Ahl as-Sunnah wal-Jama'ah</em>, <em>Ahl al-Athar</em> (les Gens du Hadith), et <em>la voie des pieux prédécesseurs (Salaf as-Salih)</em> pour désigner la voie de la vérité. Les surnoms « Wahhabite », « Madkhaliste », « Jâmiste » sont des étiquettes inventées par les innovateurs — exactement comme « Hashawiyyah » à l'époque des Salaf — et sont rejetées en totalité.
+        </p>
+        <p>
+          L'objectif est toujours le même : <strong>réduire une science unanime — celle du Jarh wa at-Ta'dîl — à l'opinion d'un seul homme</strong>, afin de s'en affranchir et de protéger les prédicateurs déviants du jugement légitime. Or cette science n'est pas l'invention d'un individu ; elle est l'héritage des Prophètes, pratiquée par chaque génération de savants depuis l'époque des Compagnons (رضي الله عنهم).
+        </p>
+        <div class="usul-quote">
+          <p>Quiconque qualifie les gens de la Sunnah d'un surnom inventé pour les discréditer a dévoilé sa propre innovation. Cette ruse est aussi ancienne que la déviation elle-même.</p>
+          <span class="usul-q-src">— PRINCIPE TIRÉ DE SHARH AS-SUNNAH, IMAM AL-BARBAHARI رحمه الله</span>
+        </div>
+        <p>
+          <strong>Le verdict est clair :</strong> dire « Madkhaliste » pour rejeter le Jarh des savants, c'est exactement comme dire « Hashawi » pour rejeter le Hadith : c'est le signe de la bid'ah, non un argument scientifique.
+        </p>
+      </div>
+    </details>
+
+    <!-- ═══ POINT 2 ═══ -->
+    <details class="usul-section">
+      <summary>
+        <span class="usul-acc-icon">📚</span>
+        <div class="usul-acc-titles">
+          <span class="usul-acc-fr">2. La voie des Quatre Imams et des Salaf</span>
+          <span class="usul-acc-ar">سَبِيلُ الأَئِمَّةِ الأَرْبَعَةِ وَأَهْلِ الحَدِيث</span>
+        </div>
+        <svg class="usul-acc-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <div class="usul-sec-head">
+        <p class="usul-sec-num">POINT II</p>
+        <p class="usul-sec-title-ar">سَبِيلُ الأَئِمَّةِ الأَرْبَعَةِ وَأَهْلِ الحَدِيث</p>
+        <p class="usul-sec-title-fr">LA VOIE DES QUATRE IMAMS ET DES SALAF</p>
+      </div>
+      <div class="usul-sec-body">
+        <p>
+          La science du Jarh wa at-Ta'dîl (la critique et la recommandation des transmetteurs) n'est pas née au XXe siècle. Elle est le fondement même sur lequel repose la préservation de la Sunnah. <strong>Sans elle, aucun hadith ne serait authentifié, aucune chaîne de transmission ne serait vérifiée, et la religion serait livrée aux menteurs et aux inventeurs.</strong>
+        </p>
+
+        <div class="usul-ar-block">
+          قال الإمام مالك بن أنس رحمه الله:
+          «لا يُؤخذ العلمُ مِن أربعة: صاحبِ هوى يدعو إليه، ومِن سفيهٍ مُعلنِ السَّفَه، ومِن كذّابٍ يكذب في أحاديث الناس وإن كان لا يتّهم في أحاديث النبي ﷺ، ومِن عابدٍ فاضل لا يحفظ ما يُحدِّث به.»
+        </div>
+        <p>
+          <strong>L'Imam Abou Hanifa (رحمه الله)</strong> interdisait de prendre la science auprès des gens de la passion (Ahl al-Ahwa') et mettait en garde ses élèves contre les assemblées des innovateurs. Il a dit : <em>« Si le partisan de la bid'ah t'appelle vers sa bid'ah, fuis-le. »</em>
+        </p>
+        <p>
+          <strong>L'Imam Malik ibn Anas (رحمه الله)</strong> — l'Imam de Dar al-Hijrah — a posé la règle citée ci-dessus : on ne prend pas la science de quatre catégories de personnes, parmi lesquelles le partisan de la passion qui appelle à son innovation. C'est du Jarh explicite : critiquer pour protéger la religion.
+        </p>
+        <p>
+          <strong>L'Imam Ach-Chafi'i (رحمه الله)</strong> a dit : <em>« Mon jugement sur les gens des passions (Ahl al-Ahwâ') est de les frapper avec les sandales et les branches de palmier, et de les promener dans les tribus et les clans en disant : voilà la punition de celui qui a abandonné le Coran et la Sunnah et s'est tourné vers le Kalâm. »</em> Ceci est rapporté dans « Al-Intisâr li-As'hâb al-Hadîth » d'As-Sam'ani.
+        </p>
+        <p>
+          <strong>L'Imam Ahmad ibn Hanbal (رحمه الله)</strong> est la montagne du Jarh wa at-Ta'dîl. Il a enduré l'épreuve de la Mihna (l'Inquisition sur le Coran créé) et a refusé de céder. Il disait : <em>« Mettez en garde les gens contre Untel »</em>, et il boycottait les innovateurs — y compris ceux qui refusaient de déclarer les Jahmiyyah mécréants.
+        </p>
+        <p>
+          Après eux, les géants du Hadith ont érigé cette science en discipline systématique :
+        </p>
+        <div class="usul-tazkiya-grid">
+          <span class="usul-scholar"><span class="usul-scholar-emoji">📚</span> YAHYA IBN MA'IN (m. 233H)</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">📚</span> AL-IMAM AL-BUKHARI (m. 256H)</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">📚</span> AL-IMAM MUSLIM (m. 261H)</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">📚</span> ABOU HATIM AR-RAZI (m. 277H)</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">📚</span> ABOU ZUR'AH AR-RAZI (m. 264H)</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">📚</span> IBN HIBBAN (m. 354H)</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">📚</span> AD-DARAQUTNI (m. 385H)</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">📚</span> ADH-DHAHABI (m. 748H)</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">📚</span> IBN HAJAR AL-'ASQALANI (m. 852H)</span>
+        </div>
+        <p>
+          Ces Imams — que personne n'a jamais qualifiés de « secte » — passaient leur vie entière à classer les narrateurs en <em>thiqah</em> (fiable), <em>da'if</em> (faible), <em>kadhdhab</em> (menteur), <em>matruk</em> (délaissé). Ils détruisaient des réputations mensongères pour protéger le Hadith du Prophète ﷺ. C'est exactement ce que font les savants contemporains envers les prédicateurs déviants : <strong>la même science, la même méthode, le même objectif — protéger la religion d'Allah.</strong>
+        </p>
+        <div class="usul-conclusion">
+          <p>Quiconque rejette le Jarh des savants contemporains a, en réalité, rejeté la voie des quatre Imams et des Muhaddithin. Ce n'est pas une affaire d'un seul homme : c'est l'héritage de quatorze siècles de science.</p>
+        </div>
+      </div>
+    </details>
+
+    <!-- ═══ POINT 3 — LE BOUCLIER HISTORIQUE ═══ -->
+    <details class="usul-section">
+      <summary>
+        <span class="usul-acc-icon">⛓️</span>
+        <div class="usul-acc-titles">
+          <span class="usul-acc-fr">3. La Chaîne en Or : Les 12 Géants de la Oumma</span>
+          <span class="usul-acc-ar">سَبِيلُ عَمَالِقَةِ الأُمَّة — سِلْسِلَةُ الذَّهَب</span>
+        </div>
+        <svg class="usul-acc-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <div class="usul-sec-head">
+        <p class="usul-sec-num">POINT III — LE BOUCLIER HISTORIQUE</p>
+        <p class="usul-sec-title-ar">سَبِيلُ عَمَالِقَةِ الأُمَّة — سِلْسِلَةُ الذَّهَب</p>
+        <p class="usul-sec-title-fr">LA VOIE DES GÉANTS DE LA OUMMA — LA CHAÎNE EN OR</p>
+      </div>
+      <div class="usul-sec-body">
+        <p>
+          Cette section prouve, par des citations directes et vérifiables, que la mise en garde contre les innovateurs (Ahl al-Ahwa') est la voie unanime de <strong>plus de 12 montagnes de l'Islam</strong> — une chaîne en or ininterrompue de quatorze siècles. Quiconque prétend que cette science est « l'invention d'un seul homme » a menti contre l'ensemble de ces Imams.
+        </p>
+
+        <p style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:rgba(201,168,76,.5);margin:18px 0 8px;">① L'IMAM ABOU HANIFA AN-NU'MAN (80-150H) رحمه الله</p>
+        <div class="usul-ar-block">
+          قال الإمام أبو حنيفة رحمه الله:
+          «إذا دعاك صاحب بدعة إلى بدعته فاهرب منه.»
+        </div>
+        <div class="usul-quote">
+          <p>Si le partisan de l'innovation t'appelle vers sa bid'ah, fuis-le.</p>
+          <span class="usul-q-src">— IMAM ABOU HANIFA · RAPPORTÉ PAR AL-LALAKA'I DANS SHARH USUL I'TIQAD AHL AS-SUNNA</span>
+        </div>
+
+        <p style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:rgba(201,168,76,.5);margin:18px 0 8px;">② L'IMAM MALIK IBN ANAS (93-179H) رحمه الله</p>
+        <div class="usul-ar-block">
+          قال الإمام مالك بن أنس رحمه الله:
+          «لا يُؤخذ العلم من أربعة: سفيه يُعلن السفه، وصاحب هوى يدعو إليه، ورجل معروف بالكذب في أحاديث الناس، وعابد فاضل لا يحفظ ما يُحدّث به.»
+        </div>
+        <div class="usul-quote">
+          <p>On ne prend pas la science de quatre personnes : l'insensé déclaré, le partisan de la passion qui y appelle, le menteur connu, et le dévot vertueux qui ne retient pas ce qu'il transmet.</p>
+          <span class="usul-q-src">— IMAM MALIK · RAPPORTÉ DANS AL-JAMI' DE AL-KHATIB AL-BAGHDADI ET MUQADDIMA IBN AS-SALAH</span>
+        </div>
+
+        <p style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:rgba(201,168,76,.5);margin:18px 0 8px;">③ L'IMAM ACH-CHAFI'I (150-204H) رحمه الله</p>
+        <div class="usul-ar-block">
+          قال الإمام الشافعي رحمه الله:
+          «لو أنّ رجلاً تصوّف بكرة النهار لم يأتِ عليه الظهر حتى يصير أحمقَ. وما لزم أحدٌ أصحابَ البدع إلا فارقه الله عزّ وجلّ.»
+        </div>
+        <div class="usul-quote">
+          <p>Si un homme s'adonnait au Soufisme le matin, le midi ne viendrait pas qu'il serait déjà devenu sot. Et quiconque accompagne les gens de l'innovation, Allah l'abandonne.</p>
+          <span class="usul-q-src">— IMAM ACH-CHAFI'I · RAPPORTÉ PAR AL-BAYHAQI DANS MANAQIB ACH-CHAFI'I</span>
+        </div>
+
+        <p style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:rgba(201,168,76,.5);margin:18px 0 8px;">④ L'IMAM AHMAD IBN HANBAL (164-241H) رحمه الله</p>
+        <div class="usul-ar-block">
+          قال الإمام أحمد بن حنبل رحمه الله:
+          «لا تجالس صاحب بدعة وإن ذبّ عن السنة، فإنه لا يؤول أمره إلى خير.»
+        </div>
+        <div class="usul-quote">
+          <p>Ne t'assois pas avec le partisan de l'innovation, même s'il prétend défendre la Sunnah, car son affaire ne mènera à rien de bon.</p>
+          <span class="usul-q-src">— IMAM AHMAD · RAPPORTÉ PAR IBN BATTAH DANS AL-IBANA AL-KUBRA</span>
+        </div>
+
+        <p style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:rgba(201,168,76,.5);margin:18px 0 8px;">⑤ YAHYA IBN MA'IN (158-233H) رحمه الله — LE MAÎTRE DU JARH</p>
+        <div class="usul-ar-block">
+          قال يحيى بن معين رحمه الله:
+          «الذبّ عن السنة أفضل من الجهاد في سبيل الله.»
+        </div>
+        <div class="usul-quote">
+          <p>Défendre la Sunnah est meilleur que le Jihad dans le sentier d'Allah.</p>
+          <span class="usul-q-src">— YAHYA IBN MA'IN · RAPPORTÉ PAR AL-KHATIB AL-BAGHDADI DANS TARIKH BAGHDAD</span>
+        </div>
+        <p>Ibn Ma'in a passé sa vie entière à critiquer les narrateurs, les classant en <em>thiqah</em>, <em>da'if</em>, <em>kadhdhab</em> et <em>matruk</em>. Personne ne l'a jamais qualifié de « sectaire » pour cela.</p>
+
+        <p style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:rgba(201,168,76,.5);margin:18px 0 8px;">⑥ L'IMAM AL-BUKHARI (194-256H) رحمه الله</p>
+        <div class="usul-quote">
+          <p>L'Imam Al-Bukhari a compilé « Ad-Du'afa as-Saghir » (le livre des narrateurs faibles) et « At-Tarikh al-Kabir » — des milliers de biographies où il classe les hommes en fiables et en rejetés. Son Sahih lui-même est un acte de Jarh wa Ta'dil : chaque narrateur inclus a été passé au crible, et chaque narrateur exclu a été jugé insuffisant. C'est la même méthode appliquée aujourd'hui aux prédicateurs.</p>
+          <span class="usul-q-src">— MÉTHODOLOGIE D'AL-BUKHARI · AD-DU'AFA AS-SAGHIR + AT-TARIKH AL-KABIR</span>
+        </div>
+
+        <p style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:rgba(201,168,76,.5);margin:18px 0 8px;">⑦ L'IMAM MUSLIM IBN AL-HAJJAJ (206-261H) رحمه الله</p>
+        <div class="usul-ar-block">
+          قال الإمام مسلم في مقدمة صحيحه:
+          «اعلم — رحمك الله — أنّ الواجب على كل أحد عرف التمييز بين صحيح الروايات وسقيمها وثقات الناقلين لها من المتّهمين أن لا يروي منها إلا ما عرف صحة مخارجه والستارة في ناقليه.»
+        </div>
+        <div class="usul-quote">
+          <p>Sache — qu'Allah te fasse miséricorde — qu'il est obligatoire pour quiconque sait distinguer le sain du corrompu dans les narrations, et les transmetteurs fiables des accusés, de ne rapporter que ce dont il connaît l'authenticité des sources et la droiture des transmetteurs.</p>
+          <span class="usul-q-src">— IMAM MUSLIM · MUQADDIMA SAHIH MUSLIM — L'INTRODUCTION FONDATRICE DE LA SCIENCE DU JARH</span>
+        </div>
+
+        <p style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:rgba(201,168,76,.5);margin:18px 0 8px;">⑧ ABOU HATIM AR-RAZI (195-277H) رحمه الله</p>
+        <div class="usul-ar-block">
+          قال أبو حاتم وأبو زرعة الرازيان رحمهما الله:
+          «أدركنا العلماء في جميع الأمصار — حجازاً وعراقاً ومصراً وشاماً — فوجدناهم على أن القرآن كلام الله غير مخلوق، ومن قال بخلق القرآن فهو كافر. ومن لم يُكفّر هؤلاء فهو مثلهم.»
+        </div>
+        <div class="usul-quote">
+          <p>Nous avons rencontré les savants dans toutes les contrées — Hijaz, Irak, Égypte, Shâm — et nous les avons trouvés unanimes : le Coran est la Parole d'Allah non créée. Quiconque dit qu'il est créé est mécréant, et quiconque ne déclare pas leur mécréance leur ressemble.</p>
+          <span class="usul-q-src">— ABOU HATIM ET ABOU ZUR'AH AR-RAZI · RAPPORTÉ DANS SHARH USUL I'TIQAD AHL AS-SUNNA D'AL-LALAKA'I</span>
+        </div>
+        <p>Les deux Razi ont voyagé à travers le monde musulman pour collectionner et vérifier les opinions des savants — exactement le travail de Jarh wa Ta'dil à l'échelle de la Oumma.</p>
+
+        <p style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:rgba(201,168,76,.5);margin:18px 0 8px;">⑨ SUFYAN ATH-THAWRI (97-161H) رحمه الله</p>
+        <div class="usul-ar-block">
+          قال سفيان الثوري رحمه الله:
+          «من أصغى بسمعه إلى صاحب بدعة خرج من ولاية الله وَوُكِلَ إلى نفسه.»
+        </div>
+        <div class="usul-quote">
+          <p>Quiconque prête l'oreille à un innovateur sort de la protection d'Allah et est livré à lui-même.</p>
+          <span class="usul-q-src">— SUFYAN ATH-THAWRI · RAPPORTÉ PAR ABOU NU'AYM DANS HILYAT AL-AWLIYA'</span>
+        </div>
+
+        <p style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:rgba(201,168,76,.5);margin:18px 0 8px;">⑩ ABDALLAH IBN AL-MUBARAK (118-181H) رحمه الله</p>
+        <div class="usul-ar-block">
+          قال عبد الله بن المبارك رحمه الله:
+          «الإسناد من الدين، ولولا الإسناد لقال من شاء ما شاء.»
+        </div>
+        <div class="usul-quote">
+          <p>L'Isnad (la chaîne de transmission) fait partie de la religion. Sans lui, quiconque dirait ce qu'il veut.</p>
+          <span class="usul-q-src">— IBN AL-MUBARAK · RAPPORTÉ PAR IMAM MUSLIM DANS LA MUQADDIMA DE SON SAHIH</span>
+        </div>
+
+        <p style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:rgba(201,168,76,.5);margin:18px 0 8px;">⑪ CHEIKH AL-ISLAM IBN TAYMIYYAH (661-728H) رحمه الله</p>
+        <div class="usul-ar-block">
+          قال شيخ الإسلام ابن تيمية رحمه الله:
+          «من روّج بدعة أو أيّد صاحب بدعة فقد أعان على هدم الدين. وبيان حال أهل البدع واجب على الكفاية بل قد يتعيّن.»
+        </div>
+        <div class="usul-quote">
+          <p>Celui qui propage une innovation ou soutient un innovateur a aidé à démolir la religion. Et clarifier l'état des innovateurs est une obligation communautaire, voire individuelle.</p>
+          <span class="usul-q-src">— IBN TAYMIYYAH · MAJMU' AL-FATAWA (28/231-232)</span>
+        </div>
+
+        <p style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:rgba(201,168,76,.5);margin:18px 0 8px;">⑫ L'IMAM ADH-DHAHABI (673-748H) رحمه الله</p>
+        <div class="usul-ar-block">
+          قال الإمام الذهبي رحمه الله:
+          «إذا رأيتَ المتكلّم المبتدع يقول: دعونا من الكتاب والأحاديث وهاتوا العقل، فاعلم أنه أبو جهل.»
+        </div>
+        <div class="usul-quote">
+          <p>Lorsque tu vois l'innovateur du Kalam dire : « Laissez le Livre et les Hadiths, apportez-nous la raison », sache qu'il est Abou Jahl (le père de l'ignorance).</p>
+          <span class="usul-q-src">— ADH-DHAHABI · SIYAR A'LAM AN-NUBALA'</span>
+        </div>
+
+        <div class="usul-tazkiya-grid">
+          <span class="usul-scholar"><span class="usul-scholar-emoji">🕌</span> ABOU HANIFA (m.150H)</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">🕌</span> MALIK (m.179H)</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">🕌</span> ACH-CHAFI'I (m.204H)</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">🕌</span> AHMAD (m.241H)</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">📚</span> IBN MA'IN (m.233H)</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">📚</span> AL-BUKHARI (m.256H)</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">📚</span> MUSLIM (m.261H)</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">📚</span> ABOU HATIM (m.277H)</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">📚</span> ATH-THAWRI (m.161H)</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">📚</span> IBN AL-MUBARAK (m.181H)</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">⭐</span> IBN TAYMIYYAH (m.728H)</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">⭐</span> ADH-DHAHABI (m.748H)</span>
+        </div>
+
+        <div class="usul-conclusion">
+          <p>Voici 12 montagnes de l'Islam, couvrant 7 siècles, unanimes sur un seul principe : mettre en garde contre les innovateurs est une obligation religieuse, non une invention moderne. Cheikh Rabi', Cheikh Ibn Baz et Cheikh Al-Albani ne font que prolonger cette chaîne en or — exactement comme Al-Bukhari prolongeait la chaîne de Malik, qui prolongeait celle de Nafi', qui prolongeait celle d'Ibn 'Umar رضي الله عنه.</p>
+        </div>
+      </div>
+    </details>
+
+    <!-- ═══ POINT 4 ═══ -->
+    <details class="usul-section">
+      <summary>
+        <span class="usul-acc-icon">⭐</span>
+        <div class="usul-acc-titles">
+          <span class="usul-acc-fr">4. L'unanimité contemporaine — Les Tazkiyât</span>
+          <span class="usul-acc-ar">إِجْمَاعُ العُلَمَاءِ المُعَاصِرِين — التَّزْكِيَات</span>
+        </div>
+        <svg class="usul-acc-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <div class="usul-sec-head">
+        <p class="usul-sec-num">POINT IV</p>
+        <p class="usul-sec-title-ar">إِجْمَاعُ العُلَمَاءِ المُعَاصِرِين — التَّزْكِيَات</p>
+        <p class="usul-sec-title-fr">L'UNANIMITÉ CONTEMPORAINE — LES TAZKIYÂT</p>
+      </div>
+      <div class="usul-sec-body">
+        <p>
+          Si la science du Jarh wa at-Ta'dîl est la voie des Salaf, alors qui la pratique aujourd'hui ? La réponse est unanime chez les Kibâr al-'Ulama (les grands savants) de cette époque. Ils ont tous reconnu, recommandé et soutenu Cheikh Rabi' ibn Hadi al-Madkhali (حفظه الله) comme l'un des porte-étendards de cette science à notre époque. Voici leurs témoignages — qu'on ne pourra jamais réduire à « un seul homme » :
+        </p>
+
+        <p style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:rgba(201,168,76,.5);margin:18px 0 10px;">❖ LA LAJNAH AD-DÂ'IMAH (COMITÉ PERMANENT DES GRANDS SAVANTS)</p>
+        <div class="usul-quote">
+          <p>Le Comité Permanent pour la Recherche Scientifique et la Délivrance des Fatwas — présidé par l'Imam Ibn Baz, avec pour membres Cheikh Abdelaziz Aal ach-Cheikh, Cheikh Salih al-Fawzan et Cheikh Bakr Abou Zayd — a défendu les écrits de Cheikh Rabi' et affirmé la légitimité de ses réfutations. Il a été établi que ses livres réfutant les déviances de certains prédicateurs sont conformes à la voie des Ahl as-Sunnah et sont bénéfiques pour la Oumma.</p>
+          <span class="usul-q-src">— FATAWA DE LA LAJNAH AD-DÂ'IMAH</span>
+        </div>
+
+        <p style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:rgba(201,168,76,.5);margin:18px 0 10px;">❖ L'IMAM 'ABDEL'AZIZ IBN BAZ رحمه الله (m. 1420H)</p>
+        <div class="usul-quote">
+          <p>L'Imam Ibn Baz — le Mufti Général du Royaume d'Arabie Saoudite, l'Imam de Ahl as-Sunnah de son époque — a soutenu Cheikh Rabi' dans ses réfutations, l'a encouragé à poursuivre sa défense de la Sunnah, et a témoigné de sa science et de sa droiture. Il a déclaré que ses écrits sont sur la vérité et bénéfiques.</p>
+          <span class="usul-q-src">— RECOMMANDATION DE L'IMAM IBN BAZ رحمه الله</span>
+        </div>
+
+        <p style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:rgba(201,168,76,.5);margin:18px 0 10px;">❖ L'IMAM MUHAMMAD NASIR AD-DIN AL-ALBANI رحمه الله (m. 1420H) — LE PORTE-ÉTENDARD DU HADITH</p>
+        <div class="usul-quote">
+          <p>L'Imam Al-Albani — le Muhaddith du siècle, le revivificateur de la science du Hadith — a donné un témoignage historique. Il a qualifié Cheikh Rabi' de « porte-étendard du Jarh wa at-Ta'dîl à notre époque » (حامل راية الجرح والتعديل في هذا العصر). Il a également affirmé que ce que Cheikh Rabi' écrit dans ses réfutations est la vérité, et que personne ne peut le contrer avec des arguments scientifiques.</p>
+          <span class="usul-q-src">— PAROLE DE L'IMAM AL-ALBANI رحمه الله · ENREGISTREMENT AUDIO CONNU</span>
+        </div>
+        <div class="usul-ar-block">
+          قال الإمام الألباني رحمه الله:
+          «أنا أقول إنّ حامل راية الجرح والتعديل اليوم في هذا العصر هو الشيخ ربيع، والذين يردّون عليه لا يردّون بعلم أبداً.»
+        </div>
+
+        <p style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:rgba(201,168,76,.5);margin:18px 0 10px;">❖ L'IMAM MUHAMMAD IBN SALIH AL-'UTHAYMIN رحمه الله (m. 1421H)</p>
+        <div class="usul-quote">
+          <p>L'Imam Ibn 'Uthaymin — le Faqih de son époque, l'un des trois grands de la Triade contemporaine — a témoigné de la science, de la droiture et du suivi de la Sunnah de Cheikh Rabi'. Il a conseillé aux étudiants de visiter Cheikh Rabi' et de profiter de sa science. Interrogé sur ceux qui critiquent Cheikh Rabi', il a pris sa défense et a affirmé sa confiance en son manhaj.</p>
+          <span class="usul-q-src">— RECOMMANDATION DE L'IMAM IBN 'UTHAYMIN رحمه الله</span>
+        </div>
+
+        <p style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:rgba(201,168,76,.5);margin:18px 0 10px;">❖ CHEIKH MUQBIL IBN HADI AL-WADI'I رحمه الله (m. 1422H)</p>
+        <div class="usul-quote">
+          <p>Cheikh Muqbil — l'Imam du Yémen, le revivificateur de la Sunnah dans cette terre — a fait l'éloge de Cheikh Rabi' à de nombreuses reprises. Il a déclaré que Cheikh Rabi' est un étendard de la Sunnah en Arabie Saoudite, que ses réfutations sont bâties sur la science et les preuves, et qu'il est parmi les plus grands défenseurs de la Sunnah de cette époque. Il conseillait à ses propres élèves au Yémen de se référer à Cheikh Rabi' dans les questions de Jarh wa Ta'dîl.</p>
+          <span class="usul-q-src">— ÉLOGES MULTIPLES DE CHEIKH MUQBIL رحمه الله</span>
+        </div>
+
+        <p style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:rgba(201,168,76,.5);margin:18px 0 10px;">❖ CHEIKH SALIH IBN FAWZAN AL-FAWZAN حفظه الله</p>
+        <div class="usul-quote">
+          <p>Cheikh Al-Fawzan — membre du Comité des Grands Savants, du Comité Permanent, et l'un des savants les plus éminents vivants — a soutenu le manhaj de Cheikh Rabi' dans la critique des innovateurs. Il a affirmé la légitimité des réfutations et du Jarh mufassar, et a confirmé que celui qui dénonce les innovateurs fait partie des défenseurs de la Sunnah — non des semeurs de discorde.</p>
+          <span class="usul-q-src">— FATAWA ET PAROLES DE CHEIKH AL-FAWZAN حفظه الله</span>
+        </div>
+
+        <p style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:rgba(201,168,76,.5);margin:18px 0 10px;">❖ CHEIKH 'ABDEL-MUHSIN AL-'ABBAD حفظه الله</p>
+        <div class="usul-quote">
+          <p>Cheikh Al-'Abbad — le Muhaddith de Médine, l'enseignant de la Mosquée du Prophète ﷺ — a témoigné de la science et du mérite de Cheikh Rabi'. Il a reconnu son rôle dans la défense de la Sunnah et dans la clarification de la voie des Salaf face aux innovateurs et aux partisans des mouvements hizbis.</p>
+          <span class="usul-q-src">— TÉMOIGNAGE DE CHEIKH AL-'ABBAD حفظه الله</span>
+        </div>
+
+        <div class="usul-tazkiya-grid">
+          <span class="usul-scholar"><span class="usul-scholar-emoji">🏛️</span> LA LAJNAH AD-DÂ'IMAH</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">⭐</span> IMAM IBN BÂZ</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">⭐</span> IMAM AL-ALBÂNI</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">⭐</span> IMAM IBN 'UTHAYMIN</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">⭐</span> CH. MUQBIL</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">⭐</span> CH. AL-FAWZÂN</span>
+          <span class="usul-scholar"><span class="usul-scholar-emoji">⭐</span> CH. AL-'ABBÂD</span>
+        </div>
+
+        <div class="usul-conclusion">
+          <p>Ce n'est pas un homme. C'est un consensus. Lorsque le Comité Permanent, le Mufti Général, le Muhaddith du siècle, le Faqih de l'époque, l'Imam du Yémen, et les plus grands savants vivants s'accordent tous sur la recommandation d'un homme et la validité de sa méthode — rejeter ce Manhaj, c'est rejeter leur unanimité.</p>
+        </div>
+      </div>
+    </details>
+
+    <!-- ═══ POINT 5 ═══ -->
+    <details class="usul-section">
+      <summary>
+        <span class="usul-acc-icon">⚖️</span>
+        <div class="usul-acc-titles">
+          <span class="usul-acc-fr">5. « Cette science est une religion » — Le boycott de l'innovateur</span>
+          <span class="usul-acc-ar">إِنَّ هَذَا العِلْمَ دِينٌ — وُجُوبُ هَجْرِ المُبْتَدِع</span>
+        </div>
+        <svg class="usul-acc-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <div class="usul-sec-head">
+        <p class="usul-sec-num">POINT V</p>
+        <p class="usul-sec-title-ar">إِنَّ هَذَا العِلْمَ دِينٌ — وُجُوبُ هَجْرِ المُبْتَدِع</p>
+        <p class="usul-sec-title-fr">« CETTE SCIENCE EST UNE RELIGION » — L'OBLIGATION DU BOYCOTT DE L'INNOVATEUR</p>
+      </div>
+      <div class="usul-sec-body">
+        <div class="usul-ar-block">
+          قال محمد بن سيرين رحمه الله:
+          «إِنَّ هَذَا العِلْمَ دِينٌ، فَانْظُرُوا عَمَّنْ تَأْخُذُونَ دِينَكُمْ.»
+          <br>— مقدمة صحيح مسلم
+        </div>
+        <p>
+          <strong>Muhammad ibn Sirin (رحمه الله)</strong> — le grand Tabi'i — a prononcé cette parole fondatrice que l'Imam Muslim a placée dans l'introduction même de son Sahih : <em>« Cette science est une religion, regardez donc de qui vous prenez votre religion. »</em>
+        </p>
+        <p>
+          Cette parole contient un principe absolu : <strong>la science religieuse n'est pas une marchandise que l'on prend de n'importe quel étal.</strong> L'Islam est un dépôt sacré (Amânah). Si le porteur est corrompu — dans sa croyance, sa méthodologie ou son intégrité — alors ce qu'il transmet est corrompu. C'est pourquoi les Salaf n'acceptaient le Hadith que de narrateurs fiables, et c'est pourquoi les savants de notre époque ne valident un prédicateur que s'il est conforme à la voie des Salaf dans sa totalité.
+        </p>
+        <p>
+          De ce principe découle l'obligation du <strong>Hajr al-Mubtadi'</strong> (le boycott de l'innovateur). Les Salaf as-Salih pratiquaient le boycott non par haine personnelle, mais par <em>nassiha</em> (conseil sincère) envers la Oumma et par protection de la religion contre la corruption.
+        </p>
+
+        <div class="usul-quote">
+          <p>L'Imam Ahmad ibn Hanbal disait : « Ne t'assois pas avec les gens des passions (Ahl al-Ahwa'), ne leur adresse pas le Salam, et ne prie pas derrière eux. » — Il faisait cela par protection de la Sunnah, non par animosité personnelle.</p>
+          <span class="usul-q-src">— USUL AS-SUNNAH, IMAM AHMAD IBN HANBAL رحمه الله</span>
+        </div>
+
+        <p>
+          L'Imam Al-Barbahari (رحمه الله) a dit dans Sharh as-Sunnah : <em>« Si tu vois un homme fréquenter un innovateur, mets-le en garde contre lui. S'il persiste, joins-le à l'innovateur, car quiconque ne boycotte pas l'innovateur lui ressemble. »</em>
+        </p>
+        <p>
+          L'Imam Sufyan ath-Thawri (رحمه الله) disait : <em>« Quiconque prête l'oreille à un innovateur sort de la protection d'Allah et est livré à cette innovation. »</em>
+        </p>
+        <p>
+          L'Imam Al-Fudayl ibn 'Iyad (رحمه الله) a dit : <em>« Quiconque aime un innovateur, Allah annule ses œuvres et retire la lumière de l'Islam de son cœur. »</em> Et il disait aussi : <em>« Ne t'assois pas avec l'innovateur, car je crains pour toi la malédiction. »</em>
+        </p>
+
+        <div class="usul-conclusion">
+          <p>Le boycott de l'innovateur n'est ni un excès ni une injustice : c'est une obligation légitime pratiquée par les meilleurs de cette Oumma pour protéger la masse des musulmans. Si tu sais qu'un prédicateur propage l'innovation, tu as le devoir — par fidélité à Allah et à Son Messager ﷺ — de mettre en garde les gens contre lui. Tel est le Manhaj des Salaf, et telle est la mission de cette application.</p>
+        </div>
+      </div>
+    </details>
+
+  </div>
+</div>
+<script>
+function openUsulDrawer(){
+  try{
+    var drawer=document.getElementById('usul-drawer');
+    var backdrop=document.getElementById('usul-backdrop');
+    if(!drawer||!backdrop){console.error('[Al-Mizan] openUsulDrawer: éléments DOM introuvables');return;}
+    drawer.classList.add('usul-open');
+    backdrop.classList.add('usul-open');
+    requestAnimationFrame(function(){var sc=document.querySelector('.usul-scroll');if(sc) sc.scrollTop=0;});
+  }catch(e){console.error('[Al-Mizan] openUsulDrawer:'+e.message);}
+}
+function closeUsulDrawer(){
+  try{
+    var drawer=document.getElementById('usul-drawer');
+    var backdrop=document.getElementById('usul-backdrop');
+    if(drawer) drawer.classList.remove('usul-open');
+    if(backdrop) backdrop.classList.remove('usul-open');
+  }catch(e){console.error('[Al-Mizan] closeUsulDrawer:'+e.message);}
+}
+</script>
+
+
+<!-- ══════════════════════════════════════
+     MU'JAM AL-MUSTALAHAT ASH-SHAR'IYYAH
+     معجم المصطلحات الشرعية
+══════════════════════════════════════ -->
+<style>
+@keyframes argCardIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+#view-glossaire{background:var(--dark);padding-bottom:100px;}
+.glos-header{padding:15px 18px 12px;background:rgba(9,5,0,.97);border-bottom:1px solid rgba(140,100,30,.18);position:sticky;top:0;z-index:100;backdrop-filter:blur(20px);}
+.glos-intro{background:linear-gradient(135deg,rgba(201,168,76,.07),rgba(184,146,42,.03));border:1px solid rgba(201,168,76,.15);border-radius:14px;padding:14px 16px;margin:16px 16px 0;}
+.glos-intro p{font-family:Cormorant Garamond,serif;font-style:italic;color:rgba(201,168,76,.6);font-size:13px;line-height:1.75;}
+.glos-search-wrap{position:relative;margin:12px 16px 0;}
+.glos-search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:14px;height:14px;stroke:rgba(201,168,76,.35);}
+.glos-search{width:100%;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:12px;padding:11px 12px 11px 36px;font-family:Cormorant Garamond,serif;font-style:italic;font-size:14px;color:rgba(201,168,76,.8);outline:none;transition:border-color .25s;box-sizing:border-box;}
+.glos-search:focus{border-color:rgba(201,168,76,.4);}
+.glos-search::placeholder{color:rgba(201,168,76,.25);}
+.glos-category{margin:16px 0 8px;padding:0 16px;}
+.glos-cat-title{font-family:Cinzel,serif;font-size:6.5px;font-weight:700;letter-spacing:.4em;color:rgba(201,168,76,.35);display:flex;align-items:center;gap:8px;}
+.glos-cat-title::after{content:"";flex:1;height:1px;background:linear-gradient(to right,rgba(201,168,76,.15),transparent);}
+.glos-list{padding:0 14px;display:flex;flex-direction:column;gap:7px;padding-bottom:100px;}
+.glos-item{background:rgba(255,255,255,.022);border:1px solid rgba(201,168,76,.1);border-radius:14px;overflow:hidden;cursor:pointer;transition:all .25s;}
+.glos-item:hover,.glos-item.open{border-color:rgba(201,168,76,.28);background:rgba(201,168,76,.04);}
+.glos-item-head{display:flex;align-items:center;gap:10px;padding:12px 14px;}
+.glos-item-ar{font-family:Scheherazade New,serif;font-size:18px;color:rgba(201,168,76,.75);min-width:32px;text-align:center;flex-shrink:0;}
+.glos-item-fr{font-family:Cinzel,serif;font-size:9px;font-weight:700;color:rgba(220,185,100,.85);letter-spacing:.08em;flex:1;}
+.glos-item-tag{font-family:Cinzel,serif;font-size:5.5px;font-weight:700;padding:3px 9px;border-radius:99px;flex-shrink:0;}
+.glos-item-arrow{width:14px;height:14px;flex-shrink:0;transition:transform .3s;}
+.glos-item.open .glos-item-arrow{transform:rotate(180deg);}
+.glos-item-body{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1);}
+.glos-item.open .glos-item-body{max-height:600px;}
+.glos-def{padding:0 14px 14px;border-top:1px solid rgba(201,168,76,.08);}
+.glos-def-simple{font-family:Cormorant Garamond,serif;font-style:italic;color:rgba(201,168,76,.7);font-size:13.5px;line-height:1.8;margin-bottom:10px;padding:10px 0 0;}
+.glos-def-detail{background:rgba(201,168,76,.04);border-left:2px solid rgba(201,168,76,.25);border-radius:0 8px 8px 0;padding:9px 11px;margin-bottom:8px;}
+.glos-def-detail p{font-family:Cormorant Garamond,serif;color:rgba(201,168,76,.55);font-size:12px;line-height:1.7;}
+.glos-exemple{background:rgba(34,197,94,.05);border:1px solid rgba(34,197,94,.15);border-radius:8px;padding:8px 10px;margin-bottom:6px;}
+.glos-exemple-label{font-family:Cinzel,serif;font-size:5.5px;letter-spacing:.25em;color:rgba(34,197,94,.6);display:block;margin-bottom:4px;}
+.glos-exemple p{font-family:Cormorant Garamond,serif;font-style:italic;color:rgba(34,197,94,.7);font-size:11.5px;line-height:1.6;}
+.glos-attention{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.18);border-radius:8px;padding:8px 10px;}
+.glos-attention-label{font-family:Cinzel,serif;font-size:5.5px;letter-spacing:.25em;color:rgba(245,158,11,.6);display:block;margin-bottom:4px;}
+.glos-attention p{font-family:Cormorant Garamond,serif;font-style:italic;color:rgba(245,158,11,.65);font-size:11.5px;line-height:1.6;}
+
+/* ══ ONBOARDING DÉBUTANT ══ */
+#onb-banner{
+  position:relative;
+  background:linear-gradient(135deg,rgba(34,197,94,.1),rgba(16,185,129,.06));
+  border:1px solid rgba(34,197,94,.25);
+  border-radius:14px;
+  padding:12px 14px;
+  margin:0 0 14px;
+  display:flex;align-items:center;gap:10px;
+  cursor:pointer;
+  transition:all .3s;
+  animation:argCardIn .5s ease both;
+}
+#onb-banner:hover{border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.12);}
+#onb-banner-icon{width:34px;height:34px;border-radius:50%;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;}
+#onb-banner-text{flex:1;}
+#onb-banner-title{font-family:Cinzel,serif;font-size:8.5px;font-weight:700;letter-spacing:.15em;color:rgba(134,239,172,.9);display:block;margin-bottom:2px;}
+#onb-banner-sub{font-family:Cormorant Garamond,serif;font-style:italic;font-size:12px;color:rgba(134,239,172,.55);line-height:1.4;}
+#onb-banner-arrow{color:rgba(134,239,172,.5);flex-shrink:0;}
+#onb-banner-close{width:22px;height:22px;border-radius:50%;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;color:rgba(134,239,172,.5);cursor:pointer;transition:all .2s;}
+#onb-banner-close:hover{background:rgba(34,197,94,.2);color:rgba(134,239,172,.9);}
+
+/* Overlay onboarding */
+#onb-overlay{
+  position:fixed;inset:0;z-index:4000;
+  background:rgba(0,0,0,.85);
+  backdrop-filter:blur(12px);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:flex-end;
+  padding-bottom:0;
+  opacity:0;pointer-events:none;
+  transition:opacity .35s cubic-bezier(.4,0,.2,1);
+}
+#onb-overlay.onb-open{opacity:1;pointer-events:all;}
+#onb-sheet{
+  width:100%;max-width:420px;
+  background:linear-gradient(180deg,#0d0800 0%,#090500 100%);
+  border:1px solid rgba(201,168,76,.2);
+  border-radius:24px 24px 0 0;
+  padding:0 0 40px;
+  transform:translateY(100%);
+  transition:transform .4s cubic-bezier(.4,0,.2,1);
+  max-height:88vh;
+  overflow:hidden;
+}
+#onb-overlay.onb-open #onb-sheet{transform:translateY(0);}
+#onb-handle{width:36px;height:4px;border-radius:2px;background:rgba(201,168,76,.2);margin:12px auto 0;}
+#onb-slides{display:flex;overflow:hidden;width:100%;}
+.onb-slide{
+  min-width:100%;padding:24px 22px 20px;
+  animation:argCardIn .4s ease both;
+}
+.onb-slide-icon{font-size:36px;text-align:center;display:block;margin-bottom:12px;}
+.onb-slide-title{font-family:Cinzel,serif;font-size:14px;font-weight:700;letter-spacing:.1em;color:#e8c96a;text-align:center;margin-bottom:6px;}
+.onb-slide-ar{font-family:Scheherazade New,serif;font-size:18px;color:rgba(201,168,76,.45);text-align:center;display:block;margin-bottom:14px;}
+.onb-slide-text{font-family:Cormorant Garamond,serif;font-style:italic;font-size:14.5px;color:rgba(201,168,76,.7);text-align:center;line-height:1.8;margin-bottom:20px;}
+.onb-tip{background:rgba(255,255,255,.03);border:1px solid rgba(201,168,76,.12);border-radius:12px;padding:10px 14px;margin-bottom:8px;display:flex;align-items:flex-start;gap:9px;}
+.onb-tip-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+.onb-tip-text{font-family:Cormorant Garamond,serif;font-style:italic;font-size:13px;color:rgba(201,168,76,.6);line-height:1.6;}
+#onb-dots{display:flex;gap:7px;justify-content:center;margin:4px 0 16px;}
+.onb-dot{width:7px;height:7px;border-radius:50%;background:rgba(201,168,76,.15);transition:all .3s;cursor:pointer;}
+.onb-dot.active{background:#c9a84c;width:22px;border-radius:4px;}
+#onb-nav{display:flex;gap:10px;padding:0 22px;}
+#onb-prev{flex:0 0 auto;padding:13px 18px;background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.15);border-radius:12px;font-family:Cinzel,serif;font-size:8px;font-weight:700;letter-spacing:.2em;color:rgba(201,168,76,.4);cursor:pointer;transition:all .25s;}
+#onb-prev:hover{color:rgba(201,168,76,.7);border-color:rgba(201,168,76,.3);}
+#onb-next{flex:1;padding:14px;background:linear-gradient(135deg,#3d2800,#6b4500);border:1px solid rgba(201,168,76,.35);border-radius:12px;font-family:Cinzel,serif;font-size:9px;font-weight:700;letter-spacing:.25em;color:#e8c96a;cursor:pointer;transition:all .25s;text-align:center;}
+#onb-next:hover{background:linear-gradient(135deg,#4d3200,#7d5200);box-shadow:0 4px 16px rgba(201,168,76,.2);}
+#onb-skip{text-align:center;margin-top:12px;padding:0 22px;}
+#onb-skip button{font-family:Cinzel,serif;font-size:7px;letter-spacing:.3em;color:rgba(201,168,76,.25);background:none;border:none;cursor:pointer;padding:6px;}
+#onb-skip button:hover{color:rgba(201,168,76,.45);}
+
+/* Tooltip hints */
+.hint-bubble{
+  position:absolute;
+  background:rgba(9,5,0,.97);
+  border:1px solid rgba(201,168,76,.3);
+  border-radius:10px;padding:8px 12px;
+  font-family:Cormorant Garamond,serif;font-style:italic;
+  font-size:12px;color:rgba(201,168,76,.8);
+  white-space:nowrap;z-index:200;
+  animation:argCardIn .3s ease both;
+  pointer-events:none;
+  box-shadow:0 4px 20px rgba(0,0,0,.5);
+}
+.hint-bubble::before{content:'▲';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);color:rgba(201,168,76,.3);font-size:8px;}
+
+</style>
+
+<div id="view-glossaire" class="view">
+  <div class="glos-header">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+      <button class="btn-back" onclick="goTab('home')">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div style="flex:1;text-align:center;">
+        <div style="font-family:Cinzel,serif;font-size:9px;font-weight:700;letter-spacing:.25em;color:#c9a84c;">MU'JAM AL-MUSTALAHAT ASH-SHAR'IYYAH</div>
+        <span style="font-family:Scheherazade New,serif;color:rgba(201,168,76,.55);font-size:18px;font-weight:700;">مُعجَمُ المُصطَلَحَاتِ الشَّرعِيَّة</span>
+      </div>
+      <div style="width:36px;"></div>
+    </div>
+    <div class="glos-search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="glos-search" id="glos-input" placeholder="Chercher un terme legiferé..." oninput="filterGlossaire()">
+    </div>
+  </div>
+  <div class="glos-intro">
+    <p>Ce dictionnaire rassemble les termes fondamentaux de la science legiferee tels que definis par les grands savants de la Sounnah — Ibn Baz, Al-Albani et Ibn 'Uthaymin, qu'Allah leur fasse misericorde. La maitrise de ces termes est une condition prealable a la comprehension correcte du Manhaj Salafi et de la science du Jarh wa at-Ta'dil.</p>
+  </div>
+  <div id="glos-list" class="glos-list" style="margin-top:14px;"></div>
+</div>
+
+
+
+<!-- ══════════════════════════════════════
+     MODE DÉBUTANT — ONBOARDING
+══════════════════════════════════════ -->
+<div id="onb-overlay">
+  <div id="onb-sheet">
+    <div id="onb-handle"></div>
+    <div id="onb-slides">
+
+      <!-- Slide 1 : Bienvenue -->
+      <div class="onb-slide" id="onb-slide-0">
+        <span class="onb-slide-icon">⚖️</span>
+        <div class="onb-slide-title">BIENVENUE SUR AL MIZÂN</div>
+        <span class="onb-slide-ar">مِيزَانٌ — La Balance</span>
+        <p class="onb-slide-text">Al Mizân t'aide à savoir si un prédicateur que tu suis est fiable — ou s'il enseigne des choses contraires à l'Islam authentique des Salaf.</p>
+        <div class="onb-tip"><span class="onb-tip-dot" style="background:#a78bfa;"></span><span class="onb-tip-text">Tu n'as pas besoin de connaître les sciences islamiques. L'app explique tout simplement.</span></div>
+        <div class="onb-tip"><span class="onb-tip-dot" style="background:#22c55e;"></span><span class="onb-tip-text">Toutes les évaluations sont basées sur les travaux des grands savants — pas des opinions personnelles.</span></div>
+      </div>
+
+      <!-- Slide 2 : Comment ça marche -->
+      <div class="onb-slide" id="onb-slide-1" style="display:none;">
+        <span class="onb-slide-icon">🔍</span>
+        <div class="onb-slide-title">COMMENT ÇA MARCHE ?</div>
+        <span class="onb-slide-ar">كَيفَ يَعمَل ؟</span>
+        <p class="onb-slide-text">Tape le nom d'un prédicateur ou d'un hadith. Al Mizân l'analyse selon la méthode du Jarh wa Ta'dil — la science islamique d'évaluation des transmetteurs.</p>
+        <div class="onb-tip"><span class="onb-tip-dot" style="background:#c9a84c;"></span><span class="onb-tip-text"><strong style="color:rgba(201,168,76,.85);">VERT</strong> = Fiable · <strong style="color:rgba(250,204,21,.85);">JAUNE</strong> = Prudence · <strong style="color:rgba(239,68,68,.85);">ROUGE</strong> = À éviter</span></div>
+        <div class="onb-tip"><span class="onb-tip-dot" style="background:#6366f1;"></span><span class="onb-tip-text">Chaque verdict cite les savants qui ont évalué le prédicateur — avec leurs paroles exactes.</span></div>
+      </div>
+
+      <!-- Slide 3 : Les sections -->
+      <div class="onb-slide" id="onb-slide-2" style="display:none;">
+        <span class="onb-slide-icon">📚</span>
+        <div class="onb-slide-title">LES 5 SECTIONS</div>
+        <span class="onb-slide-ar">الأَقسَام الخَمسَة</span>
+        <p class="onb-slide-text">L'app est organisée en sections accessibles en bas de l'écran :</p>
+        <div class="onb-tip"><span class="onb-tip-dot" style="background:#c9a84c;"></span><span class="onb-tip-text"><strong style="color:rgba(201,168,76,.85);">MISES EN GARDE</strong> — Liste complète avec filtres par grade</span></div>
+        <div class="onb-tip"><span class="onb-tip-dot" style="background:#ef4444;"></span><span class="onb-tip-text"><strong style="color:rgba(239,68,68,.85);">TAHDHIR</strong> — Groupes déviants présents en France (Frères, Tabligh, Soufis...)</span></div>
+        <div class="onb-tip"><span class="onb-tip-dot" style="background:#f59e0b;"></span><span class="onb-tip-text"><strong style="color:rgba(245,158,11,.85);">KHURAFAT</strong> — Hadiths faibles ou mal interprétés souvent cités</span></div>
+        <div class="onb-tip"><span class="onb-tip-dot" style="background:#a78bfa;"></span><span class="onb-tip-text"><strong style="color:rgba(167,139,250,.85);">MU'JAM</strong> — Dictionnaire des termes legiferés selon les savants de la Sounnah</span></div>
+      </div>
+
+      <!-- Slide 4 : Conseil final -->
+      <div class="onb-slide" id="onb-slide-3" style="display:none;">
+        <span class="onb-slide-icon">🤲</span>
+        <div class="onb-slide-title">UN CONSEIL AVANT DE COMMENCER</div>
+        <span class="onb-slide-ar">نَصِيحَةٌ أَخِيرَة</span>
+        <p class="onb-slide-text">Critiquer un prédicateur déviant n'est pas de la médisance (ghibah). C'est de la nasiha — un conseil sincère pour protéger la communauté.</p>
+        <div class="onb-tip" style="background:rgba(201,168,76,.06);border-color:rgba(201,168,76,.2);"><span class="onb-tip-dot" style="background:#c9a84c;"></span><span class="onb-tip-text" style="font-family:Scheherazade New,serif;font-size:15px;direction:rtl;color:rgba(201,168,76,.75);">الجَرحُ المُفَسَّر مُقَدَّمٌ عَلَى التَّعدِيل</span></div>
+        <div class="onb-tip"><span class="onb-tip-dot" style="background:#22c55e;"></span><span class="onb-tip-text">"Le Jarh documenté prime toujours sur la recommandation." — Règle d'or du Jarh wa Ta'dil</span></div>
+      </div>
+
+    </div>
+
+    <!-- Dots -->
+    <div id="onb-dots">
+      <div class="onb-dot active" onclick="goOnbSlide(0)"></div>
+      <div class="onb-dot" onclick="goOnbSlide(1)"></div>
+      <div class="onb-dot" onclick="goOnbSlide(2)"></div>
+      <div class="onb-dot" onclick="goOnbSlide(3)"></div>
+    </div>
+
+    <!-- Navigation -->
+    <div id="onb-nav">
+      <button id="onb-prev" onclick="onbPrev()" style="opacity:0;pointer-events:none;">← RETOUR</button>
+      <button id="onb-next" onclick="onbNext()">COMMENCER →</button>
+    </div>
+    <div id="onb-skip"><button onclick="closeOnboarding()">PASSER L'INTRODUCTION</button></div>
+  </div>
+</div>
+
+<script>
+// ══ ONBOARDING STATE ══
+var onbCurrentSlide = 0;
+var onbTotalSlides = 4;
+var onbSeen = false;
+
+function openOnboarding(){
+  document.getElementById('onb-overlay').classList.add('onb-open');
+}
+function closeOnboarding(){
+  onbSeen = true;
+  var overlay = document.getElementById('onb-overlay');
+  overlay.classList.remove('onb-open');
+  // Hide banner permanently
+  var banner = document.getElementById('onb-banner');
+  if(banner) banner.style.display = 'none';
+}
+
+function goOnbSlide(n){
+  // Hide all
+  for(var i=0;i<onbTotalSlides;i++){
+    var s=document.getElementById('onb-slide-'+i);
+    if(s){s.style.display='none';}
+  }
+  // Show current
+  var cur=document.getElementById('onb-slide-'+n);
+  if(cur){cur.style.display='block';cur.style.animation='argCardIn .35s ease both';}
+  
+  // Update dots
+  document.querySelectorAll('.onb-dot').forEach(function(d,i){
+    d.classList.toggle('active', i===n);
+  });
+  
+  // Update buttons
+  var prev=document.getElementById('onb-prev');
+  var next=document.getElementById('onb-next');
+  prev.style.opacity = n===0?'0':'1';
+  prev.style.pointerEvents = n===0?'none':'all';
+  
+  if(n === onbTotalSlides-1){
+    next.textContent = "C'EST PARTI ✓";
+    next.style.background = 'linear-gradient(135deg,rgba(20,83,45,.8),rgba(15,60,30,.7))';
+    next.style.borderColor = 'rgba(34,197,94,.4)';
+    next.style.color = '#4ade80';
+  } else {
+    next.textContent = 'SUIVANT →';
+    next.style.background = 'linear-gradient(135deg,#3d2800,#6b4500)';
+    next.style.borderColor = 'rgba(201,168,76,.35)';
+    next.style.color = '#e8c96a';
+  }
+  
+  onbCurrentSlide = n;
+}
+
+function onbNext(){
+  if(onbCurrentSlide < onbTotalSlides-1){
+    goOnbSlide(onbCurrentSlide+1);
+  } else {
+    closeOnboarding();
+  }
+}
+function onbPrev(){
+  if(onbCurrentSlide > 0) goOnbSlide(onbCurrentSlide-1);
+}
+
+// Close on backdrop click
+document.getElementById('onb-overlay').addEventListener('click', function(e){
+  if(e.target === this) closeOnboarding();
+});
+
+// Swipe support
+(function(){
+  var sheet = document.getElementById('onb-sheet');
+  var startX = 0;
+  sheet.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+  sheet.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - startX;
+    if(Math.abs(dx) > 50){
+      if(dx < 0) onbNext();
+      else onbPrev();
+    }
+  }, {passive:true});
+})();
+
+function sharePreacher(){
+  var p = currentPreacher;
+  if(!p) return;
+  var emoji = p.verdict==='IMAM'?'🟣': p.verdict==='FIABLE'?'🟢': p.verdict==='SADOUQ'?'🟩': (p.verdict.indexOf('SURVEILLER')!==-1||p.verdict==='PRUDENCE')?'🟡': p.verdict==='LAYYIN'?'🟠': (p.verdict.indexOf('ÉVITER')!==-1||p.verdict==='MATRUK')?'🔴': p.verdict==='DANGER'?'⛔':'⚫';
+  var msg = '⚖️ *AL MIZÂN — Évaluation Jarh wa Tadil*\n\n';
+  msg += emoji + ' *' + p.nomFr + '*';
+  if(p.nomAr) msg += ' (' + p.nomAr + ')';
+  msg += '\n📍 ' + (p.pays||'FRANCOPHONIE');
+  msg += '\n\n*Verdict :* ' + p.verdict;
+  msg += '\n\n_' + p.phraseChoc + '_';
+  msg += '\n\n🔎 *Points evaluation :*\n' + (p.data && p.data.points ? p.data.points : '—');
+  msg += '\n\n━━━━━━━━━━━━━━\n📖 Methodologie Jarh wa Tadil — Sheikh Rabi Al-Madkhali\nالجرح المفسَّر مقدَّم على التعديل';
+  var url = 'https://wa.me/?text=' + encodeURIComponent(msg);
+  window.open(url, '_blank');
+}
+
+</script>
+
+
+<!-- ══════════════════════════════════════
+     VIEW : KASHF ASH-SHUBUHAT — DÉVOILEMENT DES AMBIGUÏTÉS
+══════════════════════════════════════ -->
+<style>
+.faq-header{padding:15px 18px 12px;background:rgba(9,5,0,.97);border-bottom:1px solid rgba(140,100,30,.18);position:sticky;top:0;z-index:100;backdrop-filter:blur(20px);}
+.faq-item{background:rgba(255,255,255,.022);border:1px solid rgba(201,168,76,.1);border-radius:14px;overflow:hidden;cursor:pointer;transition:all .25s;margin-bottom:8px;}
+.faq-item.open{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.04);}
+.faq-item-head{display:flex;align-items:center;gap:10px;padding:14px 16px;}
+.faq-q-icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-family:Cinzel,serif;font-weight:700;}
+.faq-q-text{flex:1;font-family:Cormorant Garamond,serif;font-size:14px;color:rgba(220,185,100,.85);line-height:1.45;}
+.faq-arrow{width:14px;height:14px;flex-shrink:0;transition:transform .3s;color:rgba(201,168,76,.3);}
+.faq-item.open .faq-arrow{transform:rotate(180deg);}
+.faq-body{max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.4,0,.2,1);}
+.faq-item.open .faq-body{max-height:800px;}
+.faq-answer{padding:0 16px 16px;border-top:1px solid rgba(201,168,76,.08);}
+.faq-answer-text{font-family:Cormorant Garamond,serif;font-style:italic;font-size:13.5px;color:rgba(201,168,76,.65);line-height:1.8;padding-top:12px;margin-bottom:10px;}
+.faq-dalil{background:rgba(201,168,76,.05);border-left:2px solid rgba(201,168,76,.3);border-radius:0 8px 8px 0;padding:8px 12px;margin-bottom:8px;}
+.faq-dalil-label{font-family:Cinzel,serif;font-size:5.5px;letter-spacing:.3em;color:rgba(201,168,76,.4);display:block;margin-bottom:4px;}
+.faq-dalil p{font-family:Cormorant Garamond,serif;color:rgba(201,168,76,.6);font-size:12.5px;line-height:1.65;}
+.faq-verdict{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:99px;font-family:Cinzel,serif;font-size:7px;font-weight:700;letter-spacing:.12em;margin-top:6px;}
+.faq-category-title{font-family:Cinzel,serif;font-size:6.5px;font-weight:700;letter-spacing:.4em;color:rgba(201,168,76,.3);display:flex;align-items:center;gap:8px;margin:18px 0 10px;}
+.faq-category-title::after{content:"";flex:1;height:1px;background:linear-gradient(to right,rgba(201,168,76,.15),transparent);}
+.faq-search{width:100%;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:12px;padding:11px 14px;font-family:Cormorant Garamond,serif;font-style:italic;font-size:14px;color:rgba(201,168,76,.8);outline:none;margin:12px 0 0;box-sizing:border-box;}
+.faq-search::placeholder{color:rgba(201,168,76,.25);}
+</style>
+
+<div id="view-faq" class="view">
+  <div class="faq-header">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+      <button class="btn-back" onclick="goTab('home')">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div style="flex:1;text-align:center;">
+        <div style="font-family:Cinzel,serif;font-size:9px;font-weight:700;letter-spacing:.25em;color:#c9a84c;">KASHF ASH-SHUBUHÂT</div>
+        <span style="font-family:Scheherazade New,serif;color:rgba(201,168,76,.4);font-size:16px;">كَشْفُ الشُّبُهَات</span>
+        <p style="font-family:Cormorant Garamond,serif;font-style:italic;font-size:10px;color:rgba(201,168,76,.3);margin-top:3px;">Le dévoilement des ambiguïtés</p>
+      </div>
+      <div style="width:36px;"></div>
+    </div>
+    <input class="faq-search" id="faq-search" placeholder="Chercher une ambiguïté..." oninput="renderFAQ()">
+  </div>
+  <div style="padding:14px 14px 100px;" id="faq-list"></div>
+</div>
+
+
+
+<!-- view-ia SUPPRIMÉE — R10 -->
+<!-- Bloc IA supprimé R10 -->
+
+<script>
+// ── #5 SERVICE WORKER (mode hors ligne partiel) ──────────────
+if('serviceWorker' in navigator){
+  /* Force purge de l'ancien cache — unregister puis re-register */
+  navigator.serviceWorker.getRegistrations().then(function(regs){
+    regs.forEach(function(r){ r.unregister(); });
+  }).catch(function(){});
+  // SW inline via blob — pas besoin de fichier séparé
+  var swCode=[
+    'var CACHE="almizan-v8-final";',
+    'var ASSETS=self.location.href;',  // Cache le fichier HTML lui-même
+    'self.addEventListener("install",function(e){',
+    '  e.waitUntil(',
+    '    caches.open(CACHE).then(function(cache){',
+    '      return cache.addAll([ASSETS]);',
+    '    })',
+    '  );',
+    '  self.skipWaiting();',
+    '});',
+    'self.addEventListener("fetch",function(e){',
+    '  if(e.request.url.indexOf("api.mizan.local")!==-1) return;',  // Ne pas cacher les appels API
+    '  e.respondWith(',
+    '    caches.match(e.request).then(function(r){',
+    '      return r||fetch(e.request).catch(function(){',
+    '        return caches.match(ASSETS);',
+    '      });',
+    '    })',
+    '  );',
+    '});'
+  ].join('\n');
+  try{
+    var blob=new Blob([swCode],{type:'application/javascript'});
+    var swUrl=URL.createObjectURL(blob);
+    navigator.serviceWorker.register(swUrl,{scope:'/'}).then(function(){
+      console.log('[Al-Mizân] Service Worker actif — mode hors ligne disponible');
+    }).catch(function(){});
+  }catch(e){}
+}
+</script>
+
+<script>
+/* R22 — Dabt al-Kitab : protection copier-coller */
+document.addEventListener('copy', function(e){
+  var sel = window.getSelection();
+  if(!sel || sel.isCollapsed) return;
+  var txt = sel.toString();
+  if(txt.length < 10) return;
+  // Chercher le verdict actuel affiché
+  var verdictEl = document.querySelector('.mz-verdict-grade');
+  var refEl     = document.querySelector('.mz-takhrij p');
+  var verdict = verdictEl ? verdictEl.textContent : '';
+  var ref     = refEl   ? refEl.textContent   : '';
+  if(verdict || ref){
+    var append = '\n\n— Source : Mizan as-Sunnah | Verdict : ' + verdict + (ref ? ' | Référence : ' + ref : '') + ' | Consultez un savant qualifié.';
+    e.clipboardData.setData('text/plain', txt + append);
+    e.preventDefault();
+  }
+});
+</script>
+
+</body>
+</html>
