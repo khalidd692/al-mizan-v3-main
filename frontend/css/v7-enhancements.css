@@ -1,0 +1,381 @@
+/* AL-MĪZĀN V7.0 — Améliorations UI */
+
+/* ============================================================
+   BADGES SOURCES
+   ============================================================ */
+
+.mz-source-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  margin: 0 4px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Cinzel', serif;
+}
+
+.mz-source-badge.fawazahmed0 {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.mz-source-badge.hadeethenc {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}
+
+.mz-source-badge.dorar {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+}
+
+.mz-source-badge.manual {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  color: white;
+}
+
+.mz-source-badge.unknown {
+  background: #555;
+  color: #aaa;
+}
+
+/* ============================================================
+   BOUTON "VOIR LA SOURCE"
+   ============================================================ */
+
+.mz-source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  margin-top: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: var(--mz-gold);
+  text-decoration: none;
+  font-size: 13px;
+  font-family: 'Cormorant Garamond', serif;
+  transition: all 0.3s ease;
+}
+
+.mz-source-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--mz-gold);
+  transform: translateY(-2px);
+}
+
+.mz-source-link::before {
+  content: '🔗';
+  font-size: 14px;
+}
+
+/* ============================================================
+   ACCORDION EXPLICATION SAVANTE
+   ============================================================ */
+
+.mz-explanation-accordion {
+  margin-top: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.mz-explanation-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: background 0.3s ease;
+  user-select: none;
+}
+
+.mz-explanation-header:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.mz-explanation-title {
+  font-family: 'Scheherazade New', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--mz-gold);
+  margin: 0;
+}
+
+.mz-explanation-toggle {
+  font-size: 20px;
+  color: var(--mz-gold);
+  transition: transform 0.3s ease;
+}
+
+.mz-explanation-accordion.open .mz-explanation-toggle {
+  transform: rotate(180deg);
+}
+
+.mz-explanation-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.mz-explanation-accordion.open .mz-explanation-content {
+  max-height: 1000px;
+}
+
+.mz-explanation-body {
+  padding: 20px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--mz-text);
+  direction: ltr;
+  text-align: left;
+}
+
+.mz-explanation-body p {
+  margin: 0 0 12px 0;
+}
+
+.mz-explanation-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================================
+   ATTRIBUTION HADEETHENC
+   ============================================================ */
+
+.mz-attribution {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: rgba(245, 87, 108, 0.1);
+  border-left: 3px solid #f5576c;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #ddd;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.mz-attribution a {
+  color: #f5576c;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.mz-attribution a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
+   NAVIGATION 32 ZONES
+   ============================================================ */
+
+.mz-zones-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.mz-zone-card {
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.mz-zone-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--mz-gold);
+  transform: translateY(-2px);
+}
+
+.mz-zone-card.active {
+  background: rgba(212, 175, 55, 0.2);
+  border-color: var(--mz-gold);
+}
+
+.mz-zone-number {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  color: var(--mz-gold);
+  margin-bottom: 8px;
+}
+
+.mz-zone-name-ar {
+  font-family: 'Scheherazade New', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--mz-text);
+  margin-bottom: 4px;
+}
+
+.mz-zone-name-fr {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  color: var(--mz-text-dim);
+}
+
+/* ============================================================
+   FILTRE MUHADDITHÎN
+   ============================================================ */
+
+.mz-muhaddith-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.mz-muhaddith-chip {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  font-family: 'Scheherazade New', serif;
+  font-size: 14px;
+  color: var(--mz-text);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.mz-muhaddith-chip:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--mz-gold);
+}
+
+.mz-muhaddith-chip.active {
+  background: var(--mz-gold);
+  color: #1a1a1a;
+  border-color: var(--mz-gold);
+}
+
+/* ============================================================
+   GRADING MULTI-SAVANTS
+   ============================================================ */
+
+.mz-grading-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.mz-grade-card {
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 3px solid var(--mz-gold);
+  border-radius: 4px;
+}
+
+.mz-grade-scholar {
+  font-family: 'Scheherazade New', serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--mz-gold);
+  margin-bottom: 6px;
+}
+
+.mz-grade-value {
+  font-family: 'Scheherazade New', serif;
+  font-size: 16px;
+  color: var(--mz-text);
+}
+
+.mz-grade-value.sahih {
+  color: #4ade80;
+}
+
+.mz-grade-value.hasan {
+  color: #fbbf24;
+}
+
+.mz-grade-value.daif {
+  color: #f87171;
+}
+
+.mz-grade-value.mawdu {
+  color: #dc2626;
+}
+
+/* ============================================================
+   ANALYSE SANAD (5 CONDITIONS)
+   ============================================================ */
+
+.mz-sanad-analysis {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-top: 16px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+.mz-sanad-condition {
+  text-align: center;
+  padding: 12px 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+}
+
+.mz-sanad-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.mz-sanad-icon.ok {
+  color: #4ade80;
+}
+
+.mz-sanad-icon.fail {
+  color: #f87171;
+}
+
+.mz-sanad-icon.unknown {
+  color: #6b7280;
+}
+
+.mz-sanad-label {
+  font-family: 'Scheherazade New', serif;
+  font-size: 12px;
+  color: var(--mz-text-dim);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .mz-zones-nav {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 8px;
+    padding: 12px;
+  }
+  
+  .mz-grading-panel {
+    grid-template-columns: 1fr;
+  }
+  
+  .mz-sanad-analysis {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .mz-muhaddith-filter {
+    padding: 12px;
+  }
+}
