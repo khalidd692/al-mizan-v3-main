@@ -1,0 +1,132 @@
+:root {
+  --mz-bg: #0c0800;
+  --mz-bg-elevated: #1a1408;
+  --mz-gold: #c9a84c;
+  --mz-gold-light: #e0c070;
+  --mz-gold-dim: rgba(201, 168, 76, 0.3);
+  --mz-text: #dcc896;
+  --mz-text-dim: rgba(220, 200, 150, 0.6);
+  --mz-border: rgba(201, 168, 76, 0.18);
+  --mz-green: #22c55e;
+  --mz-yellow: #f59e0b;
+  --mz-red: #dc2626;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; overflow: hidden; }
+
+body {
+  background: var(--mz-bg);
+  color: var(--mz-text);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: 'Cinzel', serif;
+  color: var(--mz-gold);
+  font-weight: 600;
+}
+
+.mz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--mz-border);
+  background: var(--mz-bg-elevated);
+  height: 72px;
+}
+
+.mz-logo {
+  font-family: 'Scheherazade New', serif;
+  font-size: 2.5rem;
+  color: var(--mz-gold);
+  margin: 0;
+}
+
+#mz-search-form {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  max-width: 600px;
+  margin-left: 32px;
+}
+
+#mz-query {
+  flex: 1;
+  padding: 10px 16px;
+  background: var(--mz-bg);
+  border: 1px solid var(--mz-border);
+  border-radius: 8px;
+  color: var(--mz-text);
+  font-family: 'Scheherazade New', 'Cormorant Garamond', serif;
+  font-size: 18px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#mz-query:focus { border-color: var(--mz-gold); }
+
+#mz-search-form button {
+  padding: 10px 24px;
+  background: var(--mz-gold);
+  color: var(--mz-bg);
+  border: none;
+  border-radius: 8px;
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#mz-search-form button:hover { background: var(--mz-gold-light); }
+
+.mz-empty {
+  color: var(--mz-text-dim);
+  font-style: italic;
+  text-align: center;
+  padding: 32px 16px;
+}
+
+.mz-status-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  background: var(--mz-bg-elevated);
+  border-top: 1px solid var(--mz-border);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.mz-progress {
+  flex: 1;
+  height: 3px;
+  background: var(--mz-gold-dim);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-right: 16px;
+}
+
+.mz-progress::before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--mz-gold);
+  transition: width 0.3s;
+}
+
+.mz-progress.active::before { width: var(--progress, 0%); }
+
+.mz-status-text {
+  font-size: 12px;
+  color: var(--mz-text-dim);
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.1em;
+}
