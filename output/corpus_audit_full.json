@@ -1,0 +1,353 @@
+{
+  "timestamp": "2026-04-17T06:35:56.454713",
+  "version": "V6.0",
+  "stats": {
+    "corpus_total": 1,
+    "backend_total": 54,
+    "corpus_by_ext": {
+      ".pyc": 1
+    },
+    "backend_by_ext": {
+      ".py": 24,
+      ".md": 4,
+      ".pyc": 25,
+      ".sql": 1
+    },
+    "total_size_corpus": 22112,
+    "total_size_backend": 166743
+  },
+  "corpus_files": [
+    {
+      "path": "corpus\\__pycache__\\Smart_Harvester.cpython-312.pyc",
+      "name": "Smart_Harvester.cpython-312.pyc",
+      "size": 22112,
+      "ext": ".pyc"
+    }
+  ],
+  "backend_files": [
+    {
+      "path": "backend\\harvester.py",
+      "name": "harvester.py",
+      "size": 9707,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\main.py",
+      "name": "main.py",
+      "size": 3297,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\orchestrator.py",
+      "name": "orchestrator.py",
+      "size": 5150,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\pipeline.py",
+      "name": "pipeline.py",
+      "size": 10295,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\__init__.py",
+      "name": "__init__.py",
+      "size": 17,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\agents\\agent_aqidah.py",
+      "name": "agent_aqidah.py",
+      "size": 2195,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\agents\\agent_fawaid.py",
+      "name": "agent_fawaid.py",
+      "size": 1133,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\agents\\agent_ilal.py",
+      "name": "agent_ilal.py",
+      "size": 656,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\agents\\agent_isnad.py",
+      "name": "agent_isnad.py",
+      "size": 2281,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\agents\\agent_matn.py",
+      "name": "agent_matn.py",
+      "size": 1140,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\agents\\agent_tarjih.py",
+      "name": "agent_tarjih.py",
+      "size": 1614,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\agents\\agent_validator.py",
+      "name": "agent_validator.py",
+      "size": 9232,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\agents\\base.py",
+      "name": "base.py",
+      "size": 1430,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\agents\\__init__.py",
+      "name": "__init__.py",
+      "size": 16,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\agents\\prompts\\ilal.md",
+      "name": "ilal.md",
+      "size": 295,
+      "ext": ".md"
+    },
+    {
+      "path": "backend\\agents\\prompts\\isnad.md",
+      "name": "isnad.md",
+      "size": 296,
+      "ext": ".md"
+    },
+    {
+      "path": "backend\\agents\\prompts\\matn.md",
+      "name": "matn.md",
+      "size": 295,
+      "ext": ".md"
+    },
+    {
+      "path": "backend\\agents\\prompts\\tarjih.md",
+      "name": "tarjih.md",
+      "size": 297,
+      "ext": ".md"
+    },
+    {
+      "path": "backend\\agents\\__pycache__\\agent_aqidah.cpython-312.pyc",
+      "name": "agent_aqidah.cpython-312.pyc",
+      "size": 1491,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\agents\\__pycache__\\agent_fawaid.cpython-312.pyc",
+      "name": "agent_fawaid.cpython-312.pyc",
+      "size": 1079,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\agents\\__pycache__\\agent_ilal.cpython-312.pyc",
+      "name": "agent_ilal.cpython-312.pyc",
+      "size": 1011,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\agents\\__pycache__\\agent_isnad.cpython-312.pyc",
+      "name": "agent_isnad.cpython-312.pyc",
+      "size": 2119,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\agents\\__pycache__\\agent_matn.cpython-312.pyc",
+      "name": "agent_matn.cpython-312.pyc",
+      "size": 1329,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\agents\\__pycache__\\agent_tarjih.cpython-312.pyc",
+      "name": "agent_tarjih.cpython-312.pyc",
+      "size": 1496,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\agents\\__pycache__\\agent_validator.cpython-312.pyc",
+      "name": "agent_validator.cpython-312.pyc",
+      "size": 10539,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\agents\\__pycache__\\albani_agent.cpython-312.pyc",
+      "name": "albani_agent.cpython-312.pyc",
+      "size": 2396,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\agents\\__pycache__\\base.cpython-312.pyc",
+      "name": "base.cpython-312.pyc",
+      "size": 2718,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\agents\\__pycache__\\dorar_agent.cpython-312.pyc",
+      "name": "dorar_agent.cpython-312.pyc",
+      "size": 2822,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\agents\\__pycache__\\jarh_agent.cpython-312.pyc",
+      "name": "jarh_agent.cpython-312.pyc",
+      "size": 2267,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\agents\\__pycache__\\shurut_agent.cpython-312.pyc",
+      "name": "shurut_agent.cpython-312.pyc",
+      "size": 2467,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\agents\\__pycache__\\__init__.cpython-312.pyc",
+      "name": "__init__.cpython-312.pyc",
+      "size": 163,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\corpus\\audit_initial.py",
+      "name": "audit_initial.py",
+      "size": 6850,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\corpus\\db.py",
+      "name": "db.py",
+      "size": 8030,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\corpus\\loader.py",
+      "name": "loader.py",
+      "size": 52,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\corpus\\schema.sql",
+      "name": "schema.sql",
+      "size": 5498,
+      "ext": ".sql"
+    },
+    {
+      "path": "backend\\corpus\\__init__.py",
+      "name": "__init__.py",
+      "size": 16,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\corpus\\__pycache__\\db.cpython-312.pyc",
+      "name": "db.cpython-312.pyc",
+      "size": 13103,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\corpus\\__pycache__\\__init__.cpython-312.pyc",
+      "name": "__init__.cpython-312.pyc",
+      "size": 163,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\dorar\\client.py",
+      "name": "client.py",
+      "size": 6947,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\dorar\\__init__.py",
+      "name": "__init__.py",
+      "size": 15,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\dorar\\__pycache__\\client.cpython-312.pyc",
+      "name": "client.cpython-312.pyc",
+      "size": 8876,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\dorar\\__pycache__\\__init__.cpython-312.pyc",
+      "name": "__init__.cpython-312.pyc",
+      "size": 162,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\utils\\constitution.py",
+      "name": "constitution.py",
+      "size": 396,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\utils\\logging.py",
+      "name": "logging.py",
+      "size": 485,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\utils\\sse.py",
+      "name": "sse.py",
+      "size": 379,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\utils\\__init__.py",
+      "name": "__init__.py",
+      "size": 15,
+      "ext": ".py"
+    },
+    {
+      "path": "backend\\utils\\__pycache__\\logging.cpython-312.pyc",
+      "name": "logging.cpython-312.pyc",
+      "size": 1058,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\utils\\__pycache__\\sse.cpython-312.pyc",
+      "name": "sse.cpython-312.pyc",
+      "size": 790,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\utils\\__pycache__\\__init__.cpython-312.pyc",
+      "name": "__init__.cpython-312.pyc",
+      "size": 162,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\__pycache__\\harvester.cpython-312.pyc",
+      "name": "harvester.cpython-312.pyc",
+      "size": 12068,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\__pycache__\\main.cpython-312.pyc",
+      "name": "main.cpython-312.pyc",
+      "size": 4174,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\__pycache__\\orchestrator.cpython-312.pyc",
+      "name": "orchestrator.cpython-312.pyc",
+      "size": 5859,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\__pycache__\\pipeline.cpython-312.pyc",
+      "name": "pipeline.cpython-312.pyc",
+      "size": 10246,
+      "ext": ".pyc"
+    },
+    {
+      "path": "backend\\__pycache__\\__init__.cpython-312.pyc",
+      "name": "__init__.cpython-312.pyc",
+      "size": 156,
+      "ext": ".pyc"
+    }
+  ]
+}
