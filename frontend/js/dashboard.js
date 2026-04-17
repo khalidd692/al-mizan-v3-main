@@ -23,11 +23,15 @@
 
   // Mapping zones → tabs selon Constitution v4
   const ZONE_TO_TAB = {
-    'zone_2': 'isnad', 'zone_3': 'isnad',
+    'zone_2': 'isnad', 'zone_3': 'isnad', 'zone_5': 'isnad',
     'zone_6': 'ilal', 'zone_7': 'ilal', 'zone_8': 'ilal',
-    'zone_9': 'gharib', 'zone_10': 'sabab',
+    'zone_9': 'gharib', 'zone_10': 'sabab', 'zone_11': 'shuruh',
     'zone_12': 'athar', 'zone_13': 'athar', 'zone_14': 'athar',
     'zone_15': 'ijma', 'zone_16': 'mukhtalif', 'zone_17': 'mukhtalif',
+    'zone_18': 'naskh', 'zone_19': 'naskh',
+    'zone_20': 'fawaid', 'zone_21': 'fawaid', 'zone_22': 'fawaid',
+    'zone_23': 'aqidah', 'zone_24': 'aqidah', 'zone_25': 'aqidah',
+    'zone_26': 'aqidah', 'zone_27': 'aqidah',
     'zone_28': 'tarjih', 'zone_29': 'tarjih',
   };
 
