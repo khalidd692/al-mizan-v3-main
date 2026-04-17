@@ -90,6 +90,46 @@ _mzGuard('toggleTT',          function() {});
 </head>
 <body>
 
+<!-- ═══════════════════════════════════════════════════════════
+     MÎZÂN — BANNIÈRE MODE DÉMONSTRATION
+     Injectée selon la réponse de GET /api/health (demo_mode:true).
+     Preuve visuelle que le backend déployé est bien la bonne build.
+═══════════════════════════════════════════════════════════════ -->
+<div id="mizan-demo-banner" role="status" aria-live="polite" hidden
+     style="display:none;align-items:center;justify-content:center;gap:12px;
+            padding:10px 16px;background:#f5c518;color:#1a1200;
+            font-family:'Cinzel',serif;font-weight:700;letter-spacing:.18em;
+            font-size:12px;text-transform:uppercase;text-align:center;
+            border-bottom:2px solid #8a6420;z-index:9999;
+            box-shadow:0 2px 8px rgba(0,0,0,.3);">
+  <span aria-hidden="true">⚠</span>
+  <span id="mizan-demo-banner-label">MODE DÉMONSTRATION</span>
+  <span aria-hidden="true">⚠</span>
+</div>
+<script>
+(function(){
+  try {
+    fetch('/api/health', { cache: 'no-store' })
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(j){
+        if (!j) return;
+        window.__MIZAN_HEALTH__ = j;
+        if (j.demo_mode === true) {
+          var b = document.getElementById('mizan-demo-banner');
+          if (b) {
+            var lbl = document.getElementById('mizan-demo-banner-label');
+            if (lbl && j.demo_banner) lbl.textContent = j.demo_banner;
+            b.hidden = false;
+            b.style.display = 'flex';
+          }
+          console.log('%c[Mîzân] MODE DÉMONSTRATION (fixtures)', 'background:#f5c518;color:#1a1200;font-weight:bold;padding:2px 6px;');
+        }
+      })
+      .catch(function(){ /* silencieux : l'UI reste utilisable hors /api/health */ });
+  } catch(e) { /* no-op */ }
+})();
+</script>
+
 <div id="basmalah-header" style="text-align:center;padding:14px 16px 8px;border-bottom:1px solid rgba(201,168,76,.12);background:rgba(10,6,0,.6);">
   <p style="font-family:'Scheherazade New',serif;font-size:28px;color:rgba(201,168,76,.9);margin-bottom:4px;">﷽</p>
   <p style="font-family:'Cinzel',serif;font-size:6px;letter-spacing:.22em;color:rgba(201,168,76,.4);">MIZAN AS-SUNNAH — ميزان السنة</p>
