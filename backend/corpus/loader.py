@@ -1,0 +1,1 @@
+"""Chargement du corpus. À implémenter phase 2."""
