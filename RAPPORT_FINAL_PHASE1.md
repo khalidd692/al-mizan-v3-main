@@ -293,8 +293,7 @@ LOG_LEVEL=INFO
 
 ### Fichiers de Configuration
 - `.gitignore` : Exclusions Git (venv, .env, __pycache__)
-- `vercel.json` : Configuration déploiement Vercel
-- `.vercelignore` : Exclusions déploiement
+- `render.yaml` : Configuration déploiement Render (https://al-mizan-v3.onrender.com)
 
 ---
 
