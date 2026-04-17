@@ -3,10 +3,7 @@
 (function() {
   'use strict';
 
-  console.log('[Dashboard] Initialisation...');
-
   const form = document.getElementById('mz-search-form');
-  console.log('[Dashboard] Form trouvé:', form);
   const queryInput = document.getElementById('mz-query');
   const matnAr = document.getElementById('matn-arabic');
   const matnFr = document.getElementById('matn-french');
@@ -18,16 +15,21 @@
   const progressBar = document.getElementById('progress-bar');
   const isnadContainer = document.getElementById('isnad-tree');
 
-  console.log('[Dashboard] IsnadTree:', typeof IsnadTree);
-  console.log('[Dashboard] MizanSSEClient:', typeof MizanSSEClient);
-
   const tree = new IsnadTree(isnadContainer);
   const sse = new MizanSSEClient(onZone);
 
-  console.log('[Dashboard] Instances créées');
-
   let zonesReceived = 0;
   const TOTAL_ZONES = 32;
+
+  // Mapping zones → tabs selon Constitution v4
+  const ZONE_TO_TAB = {
+    'zone_2': 'isnad', 'zone_3': 'isnad',
+    'zone_6': 'ilal', 'zone_7': 'ilal', 'zone_8': 'ilal',
+    'zone_9': 'gharib', 'zone_10': 'sabab',
+    'zone_12': 'athar', 'zone_13': 'athar', 'zone_14': 'athar',
+    'zone_15': 'ijma', 'zone_16': 'mukhtalif', 'zone_17': 'mukhtalif',
+    'zone_28': 'tarjih', 'zone_29': 'tarjih',
+  };
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -48,20 +50,15 @@
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    console.log('[Dashboard] Submit déclenché');
     const query = queryInput.value.trim();
-    console.log('[Dashboard] Query:', query);
     if (!query) return;
     resetUI();
     setStatus('Recherche en cours...');
     setProgress(2);
-    console.log('[Dashboard] Connexion SSE...');
     await sse.connect(query);
     setStatus('Terminé');
     setProgress(100);
   });
-
-  console.log('[Dashboard] Event listener ajouté au formulaire');
 
   function resetUI() {
     matnAr.textContent = '';
@@ -81,16 +78,29 @@
   }
 
   function onZone(event, data) {
-    console.log(`[ZONE] ${event}`, data);
     zonesReceived++;
     setProgress(Math.min(95, (zonesReceived / TOTAL_ZONES) * 100));
 
-    if (event === 'zone_1') setStatus('Initialisation');
-    else if (event === 'zone_4') renderHadithCore(data.data);
-    else if (event === 'zone_2') renderIsnad(data);
-    else if (event === 'zone_32') setStatus('Terminé ✓');
-    else if (event === 'error') setStatus('Erreur : ' + (data.message || 'inconnue'));
-    else renderTabPanel(event.replace('zone_', ''), data);
+    if (event === 'zone_1') {
+      setStatus('Initialisation');
+    } else if (event === 'zone_4') {
+      renderHadithCore(data.data);
+    } else if (event === 'zone_2') {
+      renderIsnad(data);
+    } else if (event === 'zone_32') {
+      setStatus('Terminé ✓');
+    } else if (event === 'error') {
+      setStatus('Erreur : ' + (data.message || 'inconnue'));
+    } else if (event.startsWith('meta_')) {
+      // Events système (pipeline_*) : ignorer silencieusement
+      return;
+    } else {
+      // Mapper zone_X → tab correspondant
+      const tab = ZONE_TO_TAB[event];
+      if (tab) {
+        renderTabPanel(tab, data);
+      }
+    }
   }
 
   function renderHadithCore(data) {

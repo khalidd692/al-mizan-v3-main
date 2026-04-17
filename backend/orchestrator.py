@@ -5,6 +5,7 @@ Streame les 32 zones au fur et à mesure via SSE.
 """
 
 import asyncio
+import time
 from typing import AsyncGenerator
 
 from backend.agents.agent_isnad import AgentIsnad
@@ -42,6 +43,9 @@ class Orchestrator:
             yield emit("zone_32", {"type": "done", "error": True})
 
     async def _process_inner(self, query: str) -> AsyncGenerator[str, None]:
+        # Deadline global pour éviter les blocages indéfinis
+        deadline = time.monotonic() + GLOBAL_TIMEOUT_S
+        
         # ── Zone 1 : INITIALISATION ───────────────────────────
         yield emit("zone_1", {
             "zone": 1, "step": "INITIALISATION",
@@ -50,13 +54,13 @@ class Orchestrator:
 
         # ── Zone 2 : TRADUCTION (mock pour l'instant) ──────────
         # Note : la vraie traduction FR→AR sera réintroduite phase 2
-        yield emit("zone_pipeline_traduction", {
+        yield emit("meta_pipeline_traduction", {
             "step": "TRADUCTION",
             "message": f"Requête: {query}"
         })
 
         # ── Zones 3-4 : DORAR (mock pour l'instant) ────────────
-        yield emit("zone_3", {"zone": 3, "step": "DORAR_REQUETE"})
+        yield emit("meta_pipeline_dorar", {"step": "DORAR_REQUETE"})
         
         hadith_data = {
             "matn": "إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى",
@@ -83,13 +87,28 @@ class Orchestrator:
         agent_task = asyncio.create_task(run_all_agents())
         
         while True:
+            # Vérifier le deadline global
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                log.warning("[TIMEOUT] Deadline globale atteinte")
+                agent_task.cancel()
+                raise asyncio.TimeoutError()
+            
+            # Timeout dynamique : min entre keepalive et temps restant
+            timeout = min(KEEPALIVE_INTERVAL_S, remaining)
+            
             try:
-                chunk = await asyncio.wait_for(queue.get(), timeout=KEEPALIVE_INTERVAL_S)
+                chunk = await asyncio.wait_for(queue.get(), timeout=timeout)
                 if chunk is None:
                     break
                 yield chunk
             except asyncio.TimeoutError:
-                yield keepalive()
+                # Simple keepalive si on n'a pas atteint le deadline
+                if time.monotonic() < deadline:
+                    yield keepalive()
+                else:
+                    agent_task.cancel()
+                    raise
 
         await agent_task
 
