@@ -89,12 +89,13 @@ routes = [
 ]
 
 # CORS : restreindre en production via variable d'env
-_allowed_origins = os.environ.get("MIZAN_ALLOWED_ORIGINS", "http://localhost:8000").split(",")
+raw = os.environ.get("MIZAN_ALLOWED_ORIGINS","*")
+origins = ["*"] if raw.strip()=="*" else [o.strip() for o in raw.split(",") if o.strip()]
 
 middleware = [
     Middleware(
         CORSMiddleware,
-        allow_origins=_allowed_origins,
+        allow_origins=origins,
         allow_methods=["GET", "OPTIONS"],
         allow_headers=["Content-Type", "Accept", "Cache-Control"],
     ),
