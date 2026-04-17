@@ -113,6 +113,9 @@ class Orchestrator:
         await agent_task
 
         # ── Zones 30-32 : CLÔTURE ──────────────────────────────
-        yield emit("zone_30", {"zone": 30, "step": "SYNTHESE", "message": "Pipeline terminé"})
-        yield emit("zone_31", {"zone": 31, "step": "VERIFICATION"})
-        yield emit("zone_32", {"zone": 32, "type": "done"})
+        if time.monotonic() < deadline:
+            yield emit("zone_30", {"zone": 30, "step": "SYNTHESE"})
+            yield emit("zone_31", {"zone": 31, "step": "VERIFICATION"})
+            yield emit("zone_32", {"zone": 32, "type": "done"})
+        else:
+            yield emit("zone_32", {"zone": 32, "type": "done", "partial": True, "reason": "deadline_exceeded"})
