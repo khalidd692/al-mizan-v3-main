@@ -83,7 +83,7 @@ routes = [
     Route("/api/search", search),
     Route("/api/harvest-and-process", harvest_and_process),
     Mount("/", app=StaticFiles(
-        directory=str(_REPO_ROOT / "frontend"),
+        directory=str(_REPO_ROOT),
         html=True
     )),
 ]
