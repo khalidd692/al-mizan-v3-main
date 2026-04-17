@@ -80,12 +80,13 @@ log = logging.getLogger("mizan_v24")
 # ─────────────────────────────────────────────────────────────────────────────
 #  CONSTANTES
 # ─────────────────────────────────────────────────────────────────────────────
-VERSION         = "25.0"
-DORAR_API_URL   = "https://dorar.net/dorar_api.json"
-DORAR_BASE      = "https://dorar.net"
-ANTHROPIC_URL   = "https://api.anthropic.com/v1/messages"
-ANTHROPIC_MODEL = "claude-sonnet-4-6"
-MAX_RESULTS     = 3
+VERSION               = "25.0"
+DORAR_API_URL         = "https://dorar.net/dorar_api.json"
+DORAR_BASE            = "https://dorar.net"
+ANTHROPIC_URL         = "https://api.anthropic.com/v1/messages"
+ANTHROPIC_MODEL       = "claude-sonnet-4-6"         # Sonnet : Matn + Verdict
+ANTHROPIC_MODEL_HAIKU = "claude-haiku-4-5-20251001" # Haiku  : traduction requête
+MAX_RESULTS           = 3
 
 # ── Mode Démo : MIZAN_DEMO_MODE=1 → fixtures sans appel Dorar/Claude ───────
 DEMO_MODE = bool(os.environ.get("MIZAN_DEMO_MODE"))
@@ -2876,7 +2877,43 @@ def _derive_shurut_sihhah_from_silsila(
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-#  ⑥ TRADUCTION FR→AR VIA CLAUDE HAIKU
+#  GLOSSAIRE PROTÉGÉ — Escalade automatique Haiku → Sonnet
+#
+#  Si un terme théologique ('Aqîdah / Sifât) est détecté dans la requête,
+#  on escalade vers Sonnet même pour la traduction de la requête.
+#  Règle de fer : une mauvaise traduction d'un attribut divin est pire
+#  qu'un surcoût de quelques centimes.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Termes arabes protégés (Sifât Allâh + eschatologie)
+_GLOSSAIRE_AR: frozenset[str] = frozenset({
+    "استوى", "العرش", "عرش", "نزول", "ينزل", "نزل",
+    "يد الله", "يد", "وجه الله", "وجه", "ساق", "قدم",
+    "صراط", "شفاعة", "جنة", "جهنم", "نار", "رؤية", "تجلى",
+    "فوقية", "علو", "استواء",
+})
+
+# Termes français protégés (translittérations + traductions courantes)
+_GLOSSAIRE_FR: frozenset[str] = frozenset({
+    "trône", "arsh", "descente", "nuzul", "main d'allah", "yad",
+    "visage d'allah", "wajh", "tibia", "saq", "pont", "sirat",
+    "intercession", "shafaa", "paradis", "janna", "enfer", "nar",
+    "vision d'allah", "ru'ya", "attributs", "sifat", "essence divine",
+    "istawâ", "istawa",
+})
+
+
+def _needs_sonnet_routing(text: str) -> bool:
+    """Détecte si la requête contient un terme du glossaire protégé."""
+    tl = text.lower()
+    return (
+        any(t in tl for t in _GLOSSAIRE_FR)
+        or any(t in text for t in _GLOSSAIRE_AR)
+    )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+#  ⑥ TRADUCTION FR→AR — Haiku par défaut, Sonnet si glossaire détecté
 # ─────────────────────────────────────────────────────────────────────────────
 
 async def _translate_query_fr_to_ar(
@@ -2884,10 +2921,21 @@ async def _translate_query_fr_to_ar(
     query_fr: str,
     api_key: str,
 ) -> str:
-    """Traduit la requête de recherche française en arabe classique."""
+    """Traduit la requête de recherche française en arabe classique.
+
+    Modèle : Haiku par défaut (économie).
+    Escalade automatique vers Sonnet si un terme du glossaire protégé
+    ('Aqîdah / Sifât) est détecté — la vérité théologique prime.
+    """
     if not api_key:
         log.warning("ANTHROPIC_API_KEY manquante — traduction ignorée")
         return query_fr
+
+    # Escalade : terme protégé → Sonnet obligatoire
+    model = ANTHROPIC_MODEL_HAIKU
+    if _needs_sonnet_routing(query_fr):
+        model = ANTHROPIC_MODEL
+        log.info(f"Escalade Sonnet (glossaire protégé) : «{query_fr}»")
 
     system_prompt = (
         "Tu es un traducteur spécialisé en arabe classique (fusha) pour la "
@@ -2906,7 +2954,7 @@ async def _translate_query_fr_to_ar(
                 "content-type": "application/json",
             },
             json={
-                "model": ANTHROPIC_MODEL,
+                "model": model,
                 "max_tokens": 150,
                 "system": system_prompt,
                 "messages": [{"role": "user", "content": f"Requête : {query_fr}"}],
@@ -2917,7 +2965,7 @@ async def _translate_query_fr_to_ar(
             translated = (
                 resp.json().get("content", [{}])[0].get("text", "").strip()
             )
-            log.info(f"Traduction : «{query_fr}» → «{translated}»")
+            log.info(f"Traduction [{model.split('-')[1]}] : «{query_fr}» → «{translated}»")
             return translated or query_fr
         else:
             log.error(f"ANTHROPIC FAILURE {resp.status_code} | URL: {resp.url} | Body: {resp.text}")
