@@ -14,7 +14,13 @@ async def test_orchestrator_mock_pipeline():
             event_name = chunk.split("\n")[0].replace("event:", "").strip()
             zones_received.append(event_name)
     
-    assert "zone_1" in zones_received
-    assert "zone_4" in zones_received
-    assert "zone_32" in zones_received
-    assert len(zones_received) >= 10  # Au moins quelques zones
+    # Filtrer les events meta_pipeline_* qui ne sont pas des zones
+    zones_only = [z for z in zones_received if z.startswith("zone_")]
+    
+    # Vérifier que les 32 zones sont émises
+    expected_zones = [f"zone_{i}" for i in range(1, 33)]
+    for zone in expected_zones:
+        assert zone in zones_only, f"Zone manquante: {zone}"
+    
+    # Vérifier le nombre total
+    assert len(zones_only) == 32, f"Attendu 32 zones, reçu {len(zones_only)}"
