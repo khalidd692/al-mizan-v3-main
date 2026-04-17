@@ -20,6 +20,13 @@ from backend.utils.logging import get_logger
 
 log = get_logger("mizan.main")
 
+_orch = None
+def _get_orch():
+    global _orch
+    if _orch is None:
+        _orch = Orchestrator(api_key=os.environ.get("ANTHROPIC_API_KEY",""))
+    return _orch
+
 _REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 VERSION = "5.0.0-dev"
@@ -38,12 +45,8 @@ async def search(request):
     
     log.info(f"[SEARCH] Query: {query}")
     
-    # Instance paresseuse pour permettre rotation de clé en runtime
-    api_key = os.environ.get("ANTHROPIC_API_KEY", "")
-    orchestrator = Orchestrator(api_key=api_key)
-    
     return StreamingResponse(
-        orchestrator.process(query),
+        _get_orch().process(query),
         media_type="text/event-stream",
         headers={
             "Cache-Control": "no-cache, no-transform",
