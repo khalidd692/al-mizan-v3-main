@@ -78,6 +78,7 @@
   }
 
   function onZone(event, data) {
+    if (event.startsWith('meta_')) return;
     zonesReceived++;
     setProgress(Math.min(95, (zonesReceived / TOTAL_ZONES) * 100));
 
@@ -91,9 +92,6 @@
       setStatus('Terminé ✓');
     } else if (event === 'error') {
       setStatus('Erreur : ' + (data.message || 'inconnue'));
-    } else if (event.startsWith('meta_')) {
-      // Events système (pipeline_*) : ignorer silencieusement
-      return;
     } else {
       // Mapper zone_X → tab correspondant
       const tab = ZONE_TO_TAB[event];
