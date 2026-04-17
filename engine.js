@@ -1277,6 +1277,29 @@ async function _searchDorarTopic(query) {
   _currentStepIdx = 0;
   _advanceStep('INITIALISATION');
 
+  /* ── CACHE LOCALSTORAGE : si requête identique < 1h, zéro appel serveur ── */
+  var _mzCacheKey = 'mizan_v3_' + query.trim().toLowerCase().replace(/\s+/g,'_').substring(0,80);
+  var _MZ_TTL = 3600000;
+  var _cachedDorar = null;
+  var _cachedHadiths = [];
+  try {
+    var _raw = localStorage.getItem(_mzCacheKey);
+    if (_raw) {
+      var _parsed = JSON.parse(_raw);
+      if (_parsed && (Date.now() - (_parsed.ts || 0)) < _MZ_TTL) {
+        _renderDorarCards(_parsed.dorar, query);
+        _advanceStep('TAKHRIJ');
+        (_parsed.hadiths || []).forEach(function(h) {
+          _enrichCardSSE(h.index, h.data);
+          _advanceStep('HUKM');
+        });
+        _finishLoading();
+        return;
+      }
+    }
+  } catch(_ce) {}
+  /* ───────────────────────────────────────────────────────────────────────── */
+
   var searchUrl = MIZAN_SEARCH_IA + '?q=' + encodeURIComponent(query);
   var sseOK = typeof ReadableStream !== 'undefined' && typeof TextDecoder !== 'undefined';
 
@@ -1338,6 +1361,7 @@ async function _searchDorarTopic(query) {
 
             /* ── EVENT : dorar ──────────────────────────────── */
             if (evtName === 'dorar' && Array.isArray(msg)) {
+              _cachedDorar = msg;
               _renderDorarCards(msg, query);
               dorarOK = true;
               _advanceStep('TAKHRIJ');
@@ -1373,6 +1397,7 @@ async function _searchDorarTopic(query) {
               }
               delete _chunkBuffers[msg.index];
 
+              _cachedHadiths.push({index: msg.index, data: hd});
               _enrichCardSSE(msg.index, hd);
               _advanceStep('HUKM');
               evtName = '';
@@ -1384,6 +1409,14 @@ async function _searchDorarTopic(query) {
               if (!dorarOK && Array.isArray(msg) && msg.length) {
                 _renderDorarCards(msg.map(_mapHadithRaw), query);
                 dorarOK = true;
+              }
+              /* ── Sauvegarder en cache LocalStorage ── */
+              if (_cachedDorar && _cachedHadiths.length) {
+                try {
+                  localStorage.setItem(_mzCacheKey, JSON.stringify({
+                    ts: Date.now(), dorar: _cachedDorar, hadiths: _cachedHadiths
+                  }));
+                } catch(_se) {}
               }
               /* ── MASQUAGE LOADING-BOX — signal done reçu du backend ── */
               (function() {
