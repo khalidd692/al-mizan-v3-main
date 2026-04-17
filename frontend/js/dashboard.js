@@ -3,7 +3,10 @@
 (function() {
   'use strict';
 
+  console.log('[Dashboard] Initialisation...');
+
   const form = document.getElementById('mz-search-form');
+  console.log('[Dashboard] Form trouvé:', form);
   const queryInput = document.getElementById('mz-query');
   const matnAr = document.getElementById('matn-arabic');
   const matnFr = document.getElementById('matn-french');
@@ -15,8 +18,13 @@
   const progressBar = document.getElementById('progress-bar');
   const isnadContainer = document.getElementById('isnad-tree');
 
+  console.log('[Dashboard] IsnadTree:', typeof IsnadTree);
+  console.log('[Dashboard] MizanSSEClient:', typeof MizanSSEClient);
+
   const tree = new IsnadTree(isnadContainer);
   const sse = new MizanSSEClient(onZone);
+
+  console.log('[Dashboard] Instances créées');
 
   let zonesReceived = 0;
   const TOTAL_ZONES = 32;
@@ -40,15 +48,20 @@
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    console.log('[Dashboard] Submit déclenché');
     const query = queryInput.value.trim();
+    console.log('[Dashboard] Query:', query);
     if (!query) return;
     resetUI();
     setStatus('Recherche en cours...');
     setProgress(2);
+    console.log('[Dashboard] Connexion SSE...');
     await sse.connect(query);
     setStatus('Terminé');
     setProgress(100);
   });
+
+  console.log('[Dashboard] Event listener ajouté au formulaire');
 
   function resetUI() {
     matnAr.textContent = '';
