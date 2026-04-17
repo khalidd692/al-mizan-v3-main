@@ -12,6 +12,8 @@ from backend.agents.agent_isnad import AgentIsnad
 from backend.agents.agent_ilal import AgentIlal
 from backend.agents.agent_matn import AgentMatn
 from backend.agents.agent_tarjih import AgentTarjih
+from backend.agents.agent_fawaid import AgentFawaid
+from backend.agents.agent_aqidah import AgentAqidah
 from backend.utils.sse import emit, keepalive
 from backend.utils.logging import get_logger
 
@@ -27,6 +29,8 @@ class Orchestrator:
             AgentIlal(api_key),
             AgentMatn(api_key),
             AgentTarjih(api_key),
+            AgentFawaid(api_key),
+            AgentAqidah(api_key),
         ]
 
     async def process(self, query: str) -> AsyncGenerator[str, None]:
