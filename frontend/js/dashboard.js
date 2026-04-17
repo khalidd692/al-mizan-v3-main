@@ -128,10 +128,48 @@
       panel.dataset.panel = tabName;
       tabsContent.appendChild(panel);
     }
+    
     const content = document.createElement('div');
-    content.innerHTML = `<pre style="font-size:11px;white-space:pre-wrap;color:var(--mz-text-dim);">${JSON.stringify(data, null, 2)}</pre>`;
+    
+    // Rendu spécial pour les zones en tawaqquf
+    if (data && data.tawaqquf === true) {
+      const typeLabel = getZoneTypeLabel(data.type);
+      content.className = 'mz-tawaqquf-block';
+      content.innerHTML = `
+        <div style="padding: 20px; text-align: center; color: var(--mz-text-dim);">
+          <h3 style="font-family: 'Scheherazade New', serif; font-size: 18px; margin-bottom: 10px; color: var(--mz-gold);">
+            ${typeLabel}
+          </h3>
+          <div style="display: inline-block; padding: 6px 12px; background: #444; border-radius: 4px; font-size: 12px; color: #aaa;">
+            En attente du corpus
+          </div>
+        </div>
+      `;
+    } else {
+      // Rendu JSON standard pour les autres zones
+      content.innerHTML = `<pre style="font-size:11px;white-space:pre-wrap;color:var(--mz-text-dim);">${JSON.stringify(data, null, 2)}</pre>`;
+    }
+    
     panel.appendChild(content);
     if (!tabsContent.querySelector('.mz-tab-panel.active')) panel.classList.add('active');
+  }
+  
+  function getZoneTypeLabel(type) {
+    const labels = {
+      'isnad_5_conditions': 'شروط الإسناد الخمسة',
+      'shuruh': 'الشروح',
+      'naskh': 'النسخ والمنسوخ',
+      'takhrij_mawsuu': 'التخريج الموسع',
+      'fawaid_fiqhiyyah': 'الفوائد الفقهية',
+      'fawaid_aqadiyyah': 'الفوائد العقدية',
+      'fawaid_tarbiyyah': 'الفوائد التربوية',
+      'mawduu_alerte': 'تنبيه الموضوع',
+      'aqidah_attribut': 'صفات الله',
+      'dhahir_muqtada': 'الظاهر والمقتضى',
+      'corroboration_coranique': 'المطابقة القرآنية',
+      'khulafa_rashidun': 'عمل الخلفاء الراشدين'
+    };
+    return labels[type] || type.toUpperCase();
   }
 
 })();
