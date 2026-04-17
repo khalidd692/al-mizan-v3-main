@@ -80,12 +80,16 @@ log = logging.getLogger("mizan_v24")
 # ─────────────────────────────────────────────────────────────────────────────
 #  CONSTANTES
 # ─────────────────────────────────────────────────────────────────────────────
-VERSION         = "25.0"
-DORAR_API_URL   = "https://dorar.net/dorar_api.json"
-DORAR_BASE      = "https://dorar.net"
-ANTHROPIC_URL   = "https://api.anthropic.com/v1/messages"
-ANTHROPIC_MODEL = "claude-sonnet-4-6"
-MAX_RESULTS     = 5
+VERSION               = "25.0"
+DORAR_API_URL         = "https://dorar.net/dorar_api.json"
+DORAR_BASE            = "https://dorar.net"
+ANTHROPIC_URL         = "https://api.anthropic.com/v1/messages"
+ANTHROPIC_MODEL       = "claude-sonnet-4-6"         # Sonnet : Matn + Verdict
+ANTHROPIC_MODEL_HAIKU = "claude-haiku-4-5-20251001" # Haiku  : traduction requête
+MAX_RESULTS           = 3
+
+# ── Mode Démo : MIZAN_DEMO_MODE=1 → fixtures sans appel Dorar/Claude ───────
+DEMO_MODE = bool(os.environ.get("MIZAN_DEMO_MODE"))
 TIMEOUT_DORAR   = 18.0
 TIMEOUT_DETAIL  = 10.0
 TIMEOUT_CLAUDE  = 12.0
@@ -2873,7 +2877,43 @@ def _derive_shurut_sihhah_from_silsila(
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-#  ⑥ TRADUCTION FR→AR VIA CLAUDE HAIKU
+#  GLOSSAIRE PROTÉGÉ — Escalade automatique Haiku → Sonnet
+#
+#  Si un terme théologique ('Aqîdah / Sifât) est détecté dans la requête,
+#  on escalade vers Sonnet même pour la traduction de la requête.
+#  Règle de fer : une mauvaise traduction d'un attribut divin est pire
+#  qu'un surcoût de quelques centimes.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Termes arabes protégés (Sifât Allâh + eschatologie)
+_GLOSSAIRE_AR: frozenset[str] = frozenset({
+    "استوى", "العرش", "عرش", "نزول", "ينزل", "نزل",
+    "يد الله", "يد", "وجه الله", "وجه", "ساق", "قدم",
+    "صراط", "شفاعة", "جنة", "جهنم", "نار", "رؤية", "تجلى",
+    "فوقية", "علو", "استواء",
+})
+
+# Termes français protégés (translittérations + traductions courantes)
+_GLOSSAIRE_FR: frozenset[str] = frozenset({
+    "trône", "arsh", "descente", "nuzul", "main d'allah", "yad",
+    "visage d'allah", "wajh", "tibia", "saq", "pont", "sirat",
+    "intercession", "shafaa", "paradis", "janna", "enfer", "nar",
+    "vision d'allah", "ru'ya", "attributs", "sifat", "essence divine",
+    "istawâ", "istawa",
+})
+
+
+def _needs_sonnet_routing(text: str) -> bool:
+    """Détecte si la requête contient un terme du glossaire protégé."""
+    tl = text.lower()
+    return (
+        any(t in tl for t in _GLOSSAIRE_FR)
+        or any(t in text for t in _GLOSSAIRE_AR)
+    )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+#  ⑥ TRADUCTION FR→AR — Haiku par défaut, Sonnet si glossaire détecté
 # ─────────────────────────────────────────────────────────────────────────────
 
 async def _translate_query_fr_to_ar(
@@ -2881,10 +2921,21 @@ async def _translate_query_fr_to_ar(
     query_fr: str,
     api_key: str,
 ) -> str:
-    """Traduit la requête de recherche française en arabe classique."""
+    """Traduit la requête de recherche française en arabe classique.
+
+    Modèle : Haiku par défaut (économie).
+    Escalade automatique vers Sonnet si un terme du glossaire protégé
+    ('Aqîdah / Sifât) est détecté — la vérité théologique prime.
+    """
     if not api_key:
         log.warning("ANTHROPIC_API_KEY manquante — traduction ignorée")
         return query_fr
+
+    # Escalade : terme protégé → Sonnet obligatoire
+    model = ANTHROPIC_MODEL_HAIKU
+    if _needs_sonnet_routing(query_fr):
+        model = ANTHROPIC_MODEL
+        log.info(f"Escalade Sonnet (glossaire protégé) : «{query_fr}»")
 
     system_prompt = (
         "Tu es un traducteur spécialisé en arabe classique (fusha) pour la "
@@ -2903,7 +2954,7 @@ async def _translate_query_fr_to_ar(
                 "content-type": "application/json",
             },
             json={
-                "model": ANTHROPIC_MODEL,
+                "model": model,
                 "max_tokens": 150,
                 "system": system_prompt,
                 "messages": [{"role": "user", "content": f"Requête : {query_fr}"}],
@@ -2914,7 +2965,7 @@ async def _translate_query_fr_to_ar(
             translated = (
                 resp.json().get("content", [{}])[0].get("text", "").strip()
             )
-            log.info(f"Traduction : «{query_fr}» → «{translated}»")
+            log.info(f"Traduction [{model.split('-')[1]}] : «{query_fr}» → «{translated}»")
             return translated or query_fr
         else:
             log.error(f"ANTHROPIC FAILURE {resp.status_code} | URL: {resp.url} | Body: {resp.text}")
@@ -3027,22 +3078,18 @@ async def _enrich_via_claude(
     system_prompt = (
         "Tu es un savant du hadith travaillant pour Mîzân as-Sunnah, "
         "projet de science du hadith présenté à Médine.\n\n"
-        "╔══════════════════════════════════════════════════════════════════╗\n"
-        "║   PROTOCOLE AMÂNA — VERROU ABSOLU ZÉRO HALLUCINATION            ║\n"
-        "╠══════════════════════════════════════════════════════════════════╣\n"
-        "║  SOURCES AUTORISÉES — DEUX OUVRAGES UNIQUEMENT :                ║\n"
-        "║    ① Fath al-Bârî  (ابن حجر العسقلاني)                         ║\n"
-        "║    ② An-Nihâyah fî Gharîb al-Hadîth  (ابن الأثير)              ║\n"
-        "║  RÈGLES ABSOLUES :                                               ║\n"
-        "║  • Remplir un champ UNIQUEMENT si l'information est explicitement║\n"
-        "║    attestée dans l'un de ces deux ouvrages.                      ║\n"
-        "║  • Dans le DOUTE : chaîne vide \"\" — TOUJOURS.                  ║\n"
-        "║  • NE JAMAIS deviner, extrapoler ou reformuler un champ.         ║\n"
-        "║  • Mots interdits : « probablement », « sans doute »,           ║\n"
-        "║    « peut-être », « il semble », « on peut dire ».              ║\n"
-        "║  • Aucun texte hors du JSON (pas de markdown, pas de commentaire)║\n"
-        "║  • Chaque valeur absente ou incertaine = chaîne vide \"\"         ║\n"
-        "╚══════════════════════════════════════════════════════════════════╝"
+        "PROTOCOLE AMÂNA — VERROU ABSOLU ZÉRO HALLUCINATION\n"
+        "SOURCES AUTORISÉES — DEUX OUVRAGES UNIQUEMENT :\n"
+        "  ① Fath al-Bârî (ابن حجر العسقلاني)\n"
+        "  ② An-Nihâyah fî Gharîb al-Hadîth (ابن الأثير)\n"
+        "RÈGLES ABSOLUES :\n"
+        "• Remplir un champ UNIQUEMENT si l'information est explicitement"
+        " attestée dans l'un de ces deux ouvrages.\n"
+        "• Dans le DOUTE : chaîne vide \"\" — TOUJOURS.\n"
+        "• NE JAMAIS deviner, extrapoler ou reformuler un champ.\n"
+        "• Mots interdits : probablement, sans doute, peut-être, il semble, on peut dire.\n"
+        "• Aucun texte hors du JSON (pas de markdown, pas de commentaire)\n"
+        "• Chaque valeur absente ou incertaine = chaîne vide \"\""
     )
 
     user_content = (
@@ -3178,6 +3225,25 @@ async def _run_takhrij(query: str) -> dict[str, Any]:
       TRADUCTION → Matn AR→FR via Claude Haiku
       ENVOI      → Résultat JSON structuré complet
     """
+    # ── MODE DÉMO : retourne les fixtures directement ────────────────────────
+    if DEMO_MODE:
+        demo_path = os.path.join(os.path.dirname(__file__), "demo_responses.json")
+        try:
+            with open(demo_path, encoding="utf-8") as _f:
+                _events = json.load(_f)
+            _hadiths = [
+                e["data"]["data"]
+                for e in _events
+                if e["event"] == "hadith"
+            ]
+            return {
+                "status": "ok", "demo": True, "results": _hadiths,
+                "total": len(_hadiths), "version": VERSION,
+            }
+        except Exception as _exc:
+            return _error(f"[DÉMO] Erreur chargement fixtures : {_exc}")
+    # ─────────────────────────────────────────────────────────────────────────
+
     api_key = os.environ.get("ANTHROPIC_API_KEY", "")
 
     async with httpx.AsyncClient(
@@ -3389,6 +3455,21 @@ def _sse(event: str, data: Any) -> str:
 
 async def _stream_takhrij(query: str) -> AsyncGenerator[str, None]:
     """Générateur SSE : pipeline complet avec signalement de chaque étape."""
+
+    # ── MODE DÉMO : kill-switch total — aucun appel externe ──────────────────
+    if DEMO_MODE:
+        demo_path = os.path.join(os.path.dirname(__file__), "demo_responses.json")
+        try:
+            with open(demo_path, encoding="utf-8") as _f:
+                _demo_events = json.load(_f)
+            for _evt in _demo_events:
+                yield _sse(_evt["event"], _evt["data"])
+                await asyncio.sleep(0.04)
+        except Exception as _exc:
+            yield _sse("error", {"message": f"[DÉMO] Erreur chargement fixtures : {_exc}"})
+            yield _sse("done", {"total": 0})
+        return
+    # ─────────────────────────────────────────────────────────────────────────
 
     yield _sse("status", {"step": "INITIALISATION", "message": "Ouverture des registres"})
     await asyncio.sleep(0)
