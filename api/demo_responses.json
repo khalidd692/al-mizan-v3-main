@@ -1,0 +1,144 @@
+[
+  {
+    "event": "status",
+    "data": {"step": "INITIALISATION", "message": "Ouverture des registres [MODE DÉMO ACTIF]"}
+  },
+  {
+    "event": "status",
+    "data": {"step": "TRADUCTION", "message": "Traduction : «les actions ne valent que par les intentions» → النيات الأعمال"}
+  },
+  {
+    "event": "dorar",
+    "data": [
+      {
+        "arabic_text": "إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى",
+        "savant": "البخاري",
+        "source": "صحيح البخاري",
+        "grade": "صحيح",
+        "rawi": "عمر بن الخطاب"
+      },
+      {
+        "arabic_text": "إِنَّمَا الْأَعْمَالُ بِالنِّيَّةِ، وَلِكُلِّ امْرِئٍ مَا نَوَى",
+        "savant": "مسلم",
+        "source": "صحيح مسلم",
+        "grade": "صحيح",
+        "rawi": "عمر بن الخطاب"
+      }
+    ]
+  },
+  {
+    "event": "status",
+    "data": {"step": "SANAD", "message": "Extraction silsila hadith 1/2"}
+  },
+  {
+    "event": "status",
+    "data": {"step": "HUKM", "message": "Application du dictionnaire Hukm — hadith 1"}
+  },
+  {
+    "event": "hadith",
+    "data": {
+      "index": 0,
+      "data": {
+        "arabic_text": "إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى، فَمَنْ كَانَتْ هِجْرَتُهُ إِلَى اللَّهِ وَرَسُولِهِ فَهِجْرَتُهُ إِلَى اللَّهِ وَرَسُولِهِ، وَمَنْ كَانَتْ هِجْرَتُهُ لِدُنْيَا يُصِيبُهَا أَوِ امْرَأَةٍ يَنْكِحُهَا فَهِجْرَتُهُ إِلَى مَا هَاجَرَ إِلَيْهِ",
+        "french_text": "Les actions ne valent que par les intentions, et chaque homme n'obtient que ce qu'il a eu l'intention d'accomplir. Celui dont l'émigration (hijra) était pour Allah et Son messager, son émigration est bien pour Allah et Son messager. Celui dont l'émigration était pour obtenir quelque bien de ce monde ou pour épouser une femme, son émigration n'est que pour ce pour quoi il a émigré.",
+        "savant": "البخاري",
+        "source": "صحيح البخاري",
+        "rawi": "عمر بن الخطاب",
+        "grade_ar": "صحيح",
+        "grade_fr": "Authentique (Sahîh)",
+        "grade_level": "sahih",
+        "grade_color": "#22c55e",
+        "grade_def": "Hadith dont la chaîne est continue de bout en bout, transmis par des narrateurs intègres ('adl) et précis (dâbit), sans anomalie (shudh) ni défaut caché ('illah).",
+        "grade_by_mohadd": [
+          {"mohaddith": "البخاري", "hukm_fr": "Authentique (Sahîh)", "hukm_raw": "صحيح", "source": "صحيح البخاري"},
+          {"mohaddith": "مسلم", "hukm_fr": "Authentique (Sahîh)", "hukm_raw": "صحيح", "source": "صحيح مسلم"}
+        ],
+        "silsila": [
+          {"rank": 1, "name_ar": "النبي محمد ﷺ", "fr_name": "Le Prophète Muhammad ﷺ", "role": "prophet", "century": "1H", "death_year": 11, "verified": true},
+          {"rank": 2, "name_ar": "عمر بن الخطاب", "fr_name": "Umar ibn al-Khattâb", "role": "sahabi", "century": "1H", "death_year": 23, "verified": true},
+          {"rank": 3, "name_ar": "علقمة بن وقاص الليثي", "fr_name": "Alqama ibn Waqqâs al-Laythî", "role": "narrator", "century": "1H", "death_year": 88, "verified": true},
+          {"rank": 4, "name_ar": "محمد بن إبراهيم التيمي", "fr_name": "Muhammad ibn Ibrâhîm al-Taymî", "role": "narrator", "century": "2H", "death_year": 120, "verified": true},
+          {"rank": 5, "name_ar": "يحيى بن سعيد الأنصاري", "fr_name": "Yahyâ ibn Sa'îd al-Ansârî", "role": "narrator", "century": "2H", "death_year": 143, "verified": true},
+          {"rank": 6, "name_ar": "البخاري", "fr_name": "Al-Bukhârî", "role": "collector", "century": "3H", "death_year": 256, "verified": true}
+        ],
+        "silsila_nodes": 6,
+        "silsila_valid": true,
+        "takhrij": {
+          "source": "صحيح البخاري",
+          "source_url": "https://dorar.net/hadith/source/1",
+          "volume": "Vol. 1",
+          "page": "P. 6",
+          "hadith_number": "N° 1",
+          "full_ref": "Sahîh al-Bukhârî — Vol. 1 — P. 6 — N° 1",
+          "detail_url": "https://dorar.net/hadith/1"
+        },
+        "_authority_score": 100,
+        "grille_albani": "Authentique — Classé Sahîh par Al-Albânî dans Sahîh al-Jâmi' (N° 2355)",
+        "sanad_conditions": "**1. Ittisâl as-Sanad** (Continuité) : ✅ — Chaîne ininterrompue de 6 maillons\n\n**2. 'Adâlat ar-Ruwât** (Intégrité) : ✅ — Tous les narrateurs classifiés Thiqah\n\n**3. Dabt ar-Ruwât** (Précision) : ✅ — Mémorisé par les deux Sahîhâyn\n\n**4. 'Adam ash-Shudhûdh** (Absence d'anomalie) : ✅ — Aucune anomalie\n\n**5. 'Adam al-'Illah** (Absence de défaut caché) : ✅ — Aucun défaut caché détecté",
+        "gharib": "نِيَّة (niyya) : intention ferme du cœur précédant l'acte ; هِجْرَة (hijra) : émigration — quitter un lieu pour un autre pour la cause d'Allah",
+        "sabab_wurud": "",
+        "fawaid": "• L'intention conditionne la validité et la récompense de tout acte cultuel\n• La sincérité (ikhlâs) est le critère de distinction entre l'adoration et l'habitude\n• Ce hadith est l'un des fondements de la jurisprudence islamique (قواعد الفقه)"
+      }
+    }
+  },
+  {
+    "event": "status",
+    "data": {"step": "SANAD", "message": "Extraction silsila hadith 2/2"}
+  },
+  {
+    "event": "status",
+    "data": {"step": "HUKM", "message": "Application du dictionnaire Hukm — hadith 2"}
+  },
+  {
+    "event": "hadith",
+    "data": {
+      "index": 1,
+      "data": {
+        "arabic_text": "إِنَّمَا الْأَعْمَالُ بِالنِّيَّةِ، وَلِكُلِّ امْرِئٍ مَا نَوَى",
+        "french_text": "Les actions ne valent que par l'intention, et chaque homme n'obtient que ce qu'il a eu l'intention d'accomplir.",
+        "savant": "مسلم",
+        "source": "صحيح مسلم",
+        "rawi": "عمر بن الخطاب",
+        "grade_ar": "صحيح",
+        "grade_fr": "Authentique (Sahîh)",
+        "grade_level": "sahih",
+        "grade_color": "#22c55e",
+        "grade_def": "Hadith dont la chaîne est continue de bout en bout, transmis par des narrateurs intègres ('adl) et précis (dâbit), sans anomalie (shudh) ni défaut caché ('illah).",
+        "grade_by_mohadd": [
+          {"mohaddith": "مسلم", "hukm_fr": "Authentique (Sahîh)", "hukm_raw": "صحيح", "source": "صحيح مسلم"}
+        ],
+        "silsila": [
+          {"rank": 1, "name_ar": "النبي محمد ﷺ", "fr_name": "Le Prophète Muhammad ﷺ", "role": "prophet", "century": "1H", "death_year": 11, "verified": true},
+          {"rank": 2, "name_ar": "عمر بن الخطاب", "fr_name": "Umar ibn al-Khattâb", "role": "sahabi", "century": "1H", "death_year": 23, "verified": true},
+          {"rank": 3, "name_ar": "يحيى بن سعيد الأنصاري", "fr_name": "Yahyâ ibn Sa'îd al-Ansârî", "role": "narrator", "century": "2H", "death_year": 143, "verified": true},
+          {"rank": 4, "name_ar": "مسلم بن الحجاج", "fr_name": "Muslim ibn al-Hajjâj", "role": "collector", "century": "3H", "death_year": 261, "verified": true}
+        ],
+        "silsila_nodes": 4,
+        "silsila_valid": true,
+        "takhrij": {
+          "source": "صحيح مسلم",
+          "source_url": "https://dorar.net/hadith/source/2",
+          "volume": "Vol. 3",
+          "page": "P. 1515",
+          "hadith_number": "N° 1907",
+          "full_ref": "Sahîh Muslim — Vol. 3 — P. 1515 — N° 1907",
+          "detail_url": "https://dorar.net/hadith/1907"
+        },
+        "_authority_score": 100,
+        "grille_albani": "Authentique — Mentionné dans Sahîh al-Jâmi' (N° 2356)",
+        "sanad_conditions": "**1. Ittisâl as-Sanad** (Continuité) : ✅ — Chaîne continue\n\n**2. 'Adâlat ar-Ruwât** (Intégrité) : ✅ — Tous les narrateurs Thiqah\n\n**3. Dabt ar-Ruwât** (Précision) : ✅ — Transmis dans Muslim\n\n**4. 'Adam ash-Shudhûdh** (Absence d'anomalie) : ✅\n\n**5. 'Adam al-'Illah** (Absence de défaut caché) : ✅",
+        "gharib": "نِيَّة (niyya) : intention ferme du cœur",
+        "sabab_wurud": "",
+        "fawaid": "• L'intention est le moteur de toute action\n• Hadith du consensus (mutawâtir ma'nawî) selon les muhaddithîn"
+      }
+    }
+  },
+  {
+    "event": "status",
+    "data": {"step": "HUKM", "message": "Pipeline terminé — résultats prêts [MODE DÉMO]"}
+  },
+  {
+    "event": "done",
+    "data": {"total": 2}
+  }
+]

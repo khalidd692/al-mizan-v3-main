@@ -85,7 +85,10 @@ DORAR_API_URL   = "https://dorar.net/dorar_api.json"
 DORAR_BASE      = "https://dorar.net"
 ANTHROPIC_URL   = "https://api.anthropic.com/v1/messages"
 ANTHROPIC_MODEL = "claude-sonnet-4-6"
-MAX_RESULTS     = 5
+MAX_RESULTS     = 3
+
+# ── Mode Démo : MIZAN_DEMO_MODE=1 → fixtures sans appel Dorar/Claude ───────
+DEMO_MODE = bool(os.environ.get("MIZAN_DEMO_MODE"))
 TIMEOUT_DORAR   = 18.0
 TIMEOUT_DETAIL  = 10.0
 TIMEOUT_CLAUDE  = 12.0
@@ -3178,6 +3181,25 @@ async def _run_takhrij(query: str) -> dict[str, Any]:
       TRADUCTION → Matn AR→FR via Claude Haiku
       ENVOI      → Résultat JSON structuré complet
     """
+    # ── MODE DÉMO : retourne les fixtures directement ────────────────────────
+    if DEMO_MODE:
+        demo_path = os.path.join(os.path.dirname(__file__), "demo_responses.json")
+        try:
+            with open(demo_path, encoding="utf-8") as _f:
+                _events = json.load(_f)
+            _hadiths = [
+                e["data"]["data"]
+                for e in _events
+                if e["event"] == "hadith"
+            ]
+            return {
+                "status": "ok", "demo": True, "results": _hadiths,
+                "total": len(_hadiths), "version": VERSION,
+            }
+        except Exception as _exc:
+            return _error(f"[DÉMO] Erreur chargement fixtures : {_exc}")
+    # ─────────────────────────────────────────────────────────────────────────
+
     api_key = os.environ.get("ANTHROPIC_API_KEY", "")
 
     async with httpx.AsyncClient(
@@ -3389,6 +3411,21 @@ def _sse(event: str, data: Any) -> str:
 
 async def _stream_takhrij(query: str) -> AsyncGenerator[str, None]:
     """Générateur SSE : pipeline complet avec signalement de chaque étape."""
+
+    # ── MODE DÉMO : kill-switch total — aucun appel externe ──────────────────
+    if DEMO_MODE:
+        demo_path = os.path.join(os.path.dirname(__file__), "demo_responses.json")
+        try:
+            with open(demo_path, encoding="utf-8") as _f:
+                _demo_events = json.load(_f)
+            for _evt in _demo_events:
+                yield _sse(_evt["event"], _evt["data"])
+                await asyncio.sleep(0.04)
+        except Exception as _exc:
+            yield _sse("error", {"message": f"[DÉMO] Erreur chargement fixtures : {_exc}"})
+            yield _sse("done", {"total": 0})
+        return
+    # ─────────────────────────────────────────────────────────────────────────
 
     yield _sse("status", {"step": "INITIALISATION", "message": "Ouverture des registres"})
     await asyncio.sleep(0)

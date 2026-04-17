@@ -1500,6 +1500,14 @@ window.startHadithFromHome = startHadithFromHome;
 ══════════════════════════════════════════════ */
 
 function omniSearch(val){
+  clearTimeout(window._mzOmniDebounce);
+  var box=document.getElementById('omni-results');
+  if(!box)return;
+  var q=normalize(val||'');
+  if(q.length<2){box.style.display='none';box.innerHTML='';return;}
+  window._mzOmniDebounce=setTimeout(function(){_omniSearchRun(val);},400);
+}
+function _omniSearchRun(val){
   var box=document.getElementById('omni-results');
   if(!box)return;
   var q=normalize(val||'');
