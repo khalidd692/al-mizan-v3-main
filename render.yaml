@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: al-mizan
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHONPATH
+        value: .
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: MIZAN_ALLOWED_ORIGINS
+        value: "*"
+      - key: DEBUG
+        value: false

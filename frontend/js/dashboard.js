@@ -100,7 +100,7 @@
       // Mapper zone_X → tab correspondant
       const tab = ZONE_TO_TAB[event];
       if (tab) {
-        renderTabPanel(tab, data);
+        renderTabPanel(tab, event, data);
       }
     }
   }
@@ -120,7 +120,7 @@
     if (data && data.chain) tree.render(data.chain);
   }
 
-  function renderTabPanel(tabName, data) {
+  function renderTabPanel(tabName, zoneId, data) {
     let panel = tabsContent.querySelector(`[data-panel="${tabName}"]`);
     if (!panel) {
       panel = document.createElement('div');
@@ -128,28 +128,37 @@
       panel.dataset.panel = tabName;
       tabsContent.appendChild(panel);
     }
-    
+
+    // Déduplique : supprime le bloc existant pour cette zone avant d'en injecter un nouveau
+    const existing = panel.querySelector(`[data-zone="${zoneId}"]`);
+    if (existing) existing.remove();
+
     const content = document.createElement('div');
-    
+    content.dataset.zone = zoneId;
+
     // Rendu spécial pour les zones en tawaqquf
     if (data && data.tawaqquf === true) {
       const typeLabel = getZoneTypeLabel(data.type);
       content.className = 'mz-tawaqquf-block';
-      content.innerHTML = `
-        <div style="padding: 20px; text-align: center; color: var(--mz-text-dim);">
-          <h3 style="font-family: 'Scheherazade New', serif; font-size: 18px; margin-bottom: 10px; color: var(--mz-gold);">
-            ${typeLabel}
-          </h3>
-          <div style="display: inline-block; padding: 6px 12px; background: #444; border-radius: 4px; font-size: 12px; color: #aaa;">
-            En attente du corpus
-          </div>
-        </div>
-      `;
+      const h3 = document.createElement('div');
+      h3.style.cssText = 'padding:20px;text-align:center;color:var(--mz-text-dim)';
+      const title = document.createElement('h3');
+      title.style.cssText = "font-family:'Scheherazade New',serif;font-size:18px;margin-bottom:10px;color:var(--mz-gold)";
+      title.textContent = typeLabel;
+      const badge = document.createElement('div');
+      badge.style.cssText = 'display:inline-block;padding:6px 12px;background:#444;border-radius:4px;font-size:12px;color:#aaa';
+      badge.textContent = 'En attente du corpus';
+      h3.appendChild(title);
+      h3.appendChild(badge);
+      content.appendChild(h3);
     } else {
-      // Rendu JSON standard pour les autres zones
-      content.innerHTML = `<pre style="font-size:11px;white-space:pre-wrap;color:var(--mz-text-dim);">${JSON.stringify(data, null, 2)}</pre>`;
+      // Rendu JSON standard pour les autres zones (textContent évite toute injection XSS)
+      const pre = document.createElement('pre');
+      pre.style.cssText = 'font-size:11px;white-space:pre-wrap;color:var(--mz-text-dim)';
+      pre.textContent = JSON.stringify(data, null, 2);
+      content.appendChild(pre);
     }
-    
+
     panel.appendChild(content);
     if (!tabsContent.querySelector('.mz-tab-panel.active')) panel.classList.add('active');
   }
