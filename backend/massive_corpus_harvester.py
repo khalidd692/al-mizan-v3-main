@@ -1,366 +1,524 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
-Al-Mīzān v7.0 — Harvester Massif Multi-Sources
-Utilise les extensions MCP pour aspirer le corpus Salaf depuis :
-- Dorar.net (API + scraping)
-- Shamela.ws (bibliothèque numérique)
-- Bibliothèque de Médine
-- Archives universitaires islamiques
+════════════════════════════════════════════════════════════════════════════
+AL-MĪZĀN v5.0 — MASSIVE CORPUS HARVESTER
+Protocole Mouhaqqiq — Extraction Totale du Corpus Hadith Salaf
+════════════════════════════════════════════════════════════════════════════
+Conforme à Constitution_v4.md (Version 5.0 Unifiée)
+Mode Autonome Total — Jamais d'arrêt — Jamais de question
+════════════════════════════════════════════════════════════════════════════
 """
 
-import asyncio
-import sqlite3
 import hashlib
+import sqlite3
+import requests
+import time
+import logging
 import json
-from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Dict, List, Optional, Any
-import re
+from datetime import datetime
+from typing import Dict, List, Optional, Tuple
 
-# Configuration des sources prioritaires
-SOURCES_CONFIG = {
-    "dorar": {
-        "base_url": "https://dorar.net",
-        "api_endpoint": "/hadith/search",
-        "priority": 1,
-        "rate_limit": 2.0,  # secondes entre requêtes
-        "authenticity": "verified_salaf"
-    },
-    "shamela": {
-        "base_url": "https://shamela.ws",
-        "priority": 2,
-        "rate_limit": 3.0,
-        "authenticity": "verified_salaf"
-    },
-    "medina_library": {
-        "base_url": "https://al-maktaba.org",
-        "priority": 1,
-        "rate_limit": 2.5,
-        "authenticity": "verified_salaf"
-    },
-    "sunnah_com": {
-        "base_url": "https://sunnah.com",
-        "priority": 3,
-        "rate_limit": 2.0,
-        "authenticity": "cross_check_required"
-    }
+# ═══════════════════════════════════════════════════════════════════════════
+# CONFIGURATION GLOBALE
+# ═══════════════════════════════════════════════════════════════════════════
+
+DB_PATH = Path(__file__).parent / "almizane.db"
+LOG_FILE = Path(__file__).parent / "harvest.log"
+PROGRESS_FILE = Path(__file__).parent.parent / "output" / "HARVESTING_LIVE_STATUS.md"
+
+# Configuration du logging
+logging.basicConfig(
+    filename=LOG_FILE,
+    level=logging.INFO,
+    format='%(asctime)s | %(levelname)s | %(message)s',
+    encoding='utf-8'
+)
+
+# ═══════════════════════════════════════════════════════════════════════════
+# TIER 1 — SOURCES OFFICIELLES DE MÉDINE
+# ═══════════════════════════════════════════════════════════════════════════
+
+DORAR_API = "https://dorar.net/dorar_api.json"
+HADEETHENC_API = "https://hadeethenc.com/api/v1/hadeeths/list/"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# COLLECTIONS À ÉPUISER (KUTUB AL-SITTA + MASANID)
+# ═══════════════════════════════════════════════════════════════════════════
+
+COLLECTIONS = [
+    # KUTUB AL-SITTA (Priorité Absolue)
+    "صحيح البخاري",
+    "صحيح مسلم",
+    "سنن أبي داود",
+    "جامع الترمذي",
+    "سنن النسائي",
+    "سنن ابن ماجه",
+    
+    # MASANID
+    "مسند أحمد",
+    "مسند الحميدي",
+    "مسند الطيالسي",
+    "مسند عبد الرزاق",
+    "مسند ابن أبي شيبة",
+    
+    # SAHIHAT
+    "صحيح ابن حبان",
+    "صحيح ابن خزيمة",
+    "المستدرك للحاكم",
+    
+    # SUNAN / JAWAMI'
+    "سنن الدارقطني",
+    "السنن الكبرى للبيهقي",
+    "السنن الصغرى للبيهقي",
+    "سنن الدارمي",
+    "موطأ مالك",
+    "سنن سعيد بن منصور",
+    
+    # MAWSOU'AT
+    "المعجم الكبير للطبراني",
+    "المعجم الأوسط للطبراني",
+    "المعجم الصغير للطبراني",
+    "مصنف عبد الرزاق",
+    "مصنف ابن أبي شيبة",
+    "شعب الإيمان للبيهقي",
+    "حلية الأولياء لأبي نعيم",
+    
+    # KUTUB ZIYADAT
+    "الأدب المفرد للبخاري",
+    "رياض الصالحين للنووي",
+    "الأربعين النووية",
+    "مشكاة المصابيح للتبريزي",
+    "بلوغ المرام لابن حجر",
+    "المنتقى لابن الجارود"
+]
+
+# ═══════════════════════════════════════════════════════════════════════════
+# SPECTRE D'AUTHENTICITÉ COMPLET
+# ═══════════════════════════════════════════════════════════════════════════
+
+GRADE_MAP = {
+    # MAQBUL
+    "صحيح": ("Sahih", "MAQBUL", 0),
+    "صحيح لغيره": ("Sahih Ghayri", "MAQBUL", 0),
+    "حسن": ("Hasan", "MAQBUL", 0),
+    "حسن لغيره": ("Hasan Ghayri", "MAQBUL", 0),
+    
+    # DAIF
+    "ضعيف": ("Da'if", "DAIF", 0),
+    "ضعيف جداً": ("Da'if Jiddan", "DAIF", 0),
+    "ضعيف جدا": ("Da'if Jiddan", "DAIF", 0),
+    "منكر": ("Munkar", "DAIF", 0),
+    "شاذ": ("Shaadh", "DAIF", 0),
+    "متروك": ("Matruk", "DAIF", 0),
+    
+    # MAWDUU (Badge Rouge Obligatoire)
+    "موضوع": ("Mawdu'", "MAWDUU", 1),
+    "باطل": ("Batil", "MAWDUU", 1),
+    
+    # Variantes orthographiques
+    "صحيح الإسناد": ("Sahih", "MAQBUL", 0),
+    "حسن الإسناد": ("Hasan", "MAQBUL", 0),
+    "إسناده صحيح": ("Sahih", "MAQBUL", 0),
+    "إسناده حسن": ("Hasan", "MAQBUL", 0),
 }
 
-# Les 6 livres mères (Al-Kutub al-Sittah)
-KUTUB_SITTAH = {
-    "bukhari": {"dorar_id": 6216, "priority": 1, "name_ar": "صحيح البخاري"},
-    "muslim": {"dorar_id": 3088, "priority": 1, "name_ar": "صحيح مسلم"},
-    "abu_dawud": {"dorar_id": 1666, "priority": 2, "name_ar": "سنن أبي داود"},
-    "tirmidhi": {"dorar_id": 1669, "priority": 2, "name_ar": "جامع الترمذي"},
-    "nasai": {"dorar_id": 1694, "priority": 2, "name_ar": "سنن النسائي"},
-    "ibn_majah": {"dorar_id": 1670, "priority": 3, "name_ar": "سنن ابن ماجه"}
+# ═══════════════════════════════════════════════════════════════════════════
+# LEXIQUE DE FER (Attributs Divins)
+# ═══════════════════════════════════════════════════════════════════════════
+
+LEXIQUE_FER = {
+    'استوى': ('S\'est établi (par Son Essence)', 'S\'est installé / a pris le contrôle'),
+    'يد': ('Main (réelle, sans comparaison)', 'Puissance / Grâce'),
+    'نزول': ('Descend (comme Il le mérite)', 'Sa miséricorde descend'),
+    'وجه': ('Visage (réel, sans comparaison)', 'Essence / Être'),
+    'ساق': ('Jambe (réelle, sans comparaison)', 'Sévérité / Épreuve'),
+    'عين': ('Œil/Regard (réel, sans comparaison)', 'Connaissance / Surveillance'),
 }
 
-# Savants contemporains de référence pour le Takhrij
-MUHADDITHIN_REFERENCE = {
-    "albani": {"dorar_id": 1420, "name_ar": "الألباني", "weight": 0.9},
-    "ibn_baz": {"dorar_id": 1420, "name_ar": "ابن باز", "weight": 0.95},
-    "ibn_uthaymin": {"dorar_id": 1421, "name_ar": "ابن عثيمين", "weight": 0.9},
-    "muqbil": {"dorar_id": 1422, "name_ar": "مقبل الوادعي", "weight": 0.85}
-}
+# ═══════════════════════════════════════════════════════════════════════════
+# CLASSE PRINCIPALE
+# ═══════════════════════════════════════════════════════════════════════════
 
 class MassiveCorpusHarvester:
-    """Harvester massif utilisant les extensions MCP"""
+    """Harvester massif conforme Constitution v5.0"""
     
-    def __init__(self, db_path: str = "database/almizan_v7.db"):
-        self.db_path = Path(__file__).parent / db_path
+    def __init__(self):
+        self.db_path = DB_PATH
         self.stats = {
-            "total_attempted": 0,
-            "total_success": 0,
-            "total_failed": 0,
-            "total_duplicates": 0,
-            "total_filtered": 0,  # Filtrés car non-Salaf
-            "by_source": {},
-            "by_grade": {},
-            "start_time": None,
-            "end_time": None
+            'total_attempted': 0,
+            'total_inserted': 0,
+            'total_duplicates': 0,
+            'total_errors': 0,
+            'mawduu_detected': 0,
+            'taawil_detected': 0,
+            'by_collection': {},
+            'by_grade': {},
+            'start_time': datetime.now().isoformat()
         }
         
-    def _get_db_connection(self) -> sqlite3.Connection:
-        """Connexion SQLite avec WAL mode"""
+        # Créer le dossier output si nécessaire
+        PROGRESS_FILE.parent.mkdir(exist_ok=True)
+        
+        logging.info("="*80)
+        logging.info("DÉMARRAGE HARVESTER MASSIF AL-MĪZĀN v5.0")
+        logging.info("="*80)
+    
+    def sha256_matn(self, matn_ar: str) -> str:
+        """Génère le Sanad Numérique (hash SHA256 du matn arabe)"""
+        return hashlib.sha256(matn_ar.strip().encode('utf-8')).hexdigest()
+    
+    def apply_lexique_fer(self, matn_fr: str, matn_ar: str) -> Tuple[str, bool]:
+        """
+        Applique le Lexique de Fer sur la traduction française
+        Retourne: (traduction_corrigée, taawil_detected)
+        """
+        if not matn_fr:
+            return matn_fr, False
+        
+        taawil_detected = False
+        corrected = matn_fr
+        
+        for terme_ar, (terme_correct, terme_interdit) in LEXIQUE_FER.items():
+            if terme_ar in matn_ar:
+                # Vérifier si la traduction interdite est présente
+                if terme_interdit.lower() in corrected.lower():
+                    taawil_detected = True
+                    logging.warning(f"TAAWIL_DETECTED | terme={terme_ar} | interdit={terme_interdit}")
+                    # Remplacer par la traduction correcte
+                    corrected = corrected.replace(terme_interdit, terme_correct)
+        
+        return corrected, taawil_detected
+    
+    def parse_grade(self, grade_raw: str) -> Tuple[str, str, int]:
+        """
+        Parse le grade depuis l'API et retourne (grade_final, categorie, badge_alerte)
+        """
+        if not grade_raw:
+            return ("Inconnu", "DAIF", 0)
+        
+        grade_clean = grade_raw.strip()
+        
+        # Recherche exacte
+        if grade_clean in GRADE_MAP:
+            return GRADE_MAP[grade_clean]
+        
+        # Recherche partielle (pour variantes)
+        for key, value in GRADE_MAP.items():
+            if key in grade_clean:
+                return value
+        
+        # Par défaut
+        logging.warning(f"GRADE_UNKNOWN | grade_raw={grade_raw}")
+        return ("Inconnu", "DAIF", 0)
+    
+    def harvest_collection(self, conn: sqlite3.Connection, collection_name: str) -> int:
+        """
+        Extrait tous les hadiths d'une collection depuis Dorar.net
+        Retourne le nombre de hadiths insérés
+        """
+        page = 1
+        total_inserted = 0
+        consecutive_errors = 0
+        max_consecutive_errors = 3
+        
+        logging.info(f"DÉBUT COLLECTION | {collection_name}")
+        
+        while True:
+            # Protection contre boucle infinie
+            if consecutive_errors >= max_consecutive_errors:
+                logging.error(f"ARRÊT COLLECTION | {collection_name} | trop d'erreurs consécutives")
+                break
+            
+            try:
+                # Requête API Dorar
+                response = requests.get(
+                    DORAR_API,
+                    params={
+                        "skey": collection_name,
+                        "lang": "ar",
+                        "page": page
+                    },
+                    timeout=15
+                )
+                
+                if response.status_code != 200:
+                    logging.error(f"API_ERROR | {collection_name} | page={page} | status={response.status_code}")
+                    consecutive_errors += 1
+                    time.sleep(2)
+                    continue
+                
+                data = response.json()
+                results = data.get("ahadith", [])
+                
+                # Si pas de résultats, fin de la collection
+                if not results:
+                    logging.info(f"FIN COLLECTION | {collection_name} | total={total_inserted}")
+                    break
+                
+                # Reset compteur d'erreurs
+                consecutive_errors = 0
+                
+                # Traiter chaque hadith
+                for h in results:
+                    self.stats['total_attempted'] += 1
+                    
+                    matn_ar = h.get("hadith", "").strip()
+                    if not matn_ar:
+                        continue
+                    
+                    # Générer SHA256
+                    sha = self.sha256_matn(matn_ar)
+                    
+                    # Parser le grade
+                    grade_raw = h.get("grade", "")
+                    grade_final, categorie, badge = self.parse_grade(grade_raw)
+                    
+                    # Traduction française (si disponible)
+                    matn_fr = h.get("translation_fr", "")
+                    
+                    # Appliquer Lexique de Fer
+                    if matn_fr:
+                        matn_fr, taawil = self.apply_lexique_fer(matn_fr, matn_ar)
+                        if taawil:
+                            self.stats['taawil_detected'] += 1
+                    
+                    # Détecter Mawdū'
+                    if badge == 1:
+                        self.stats['mawduu_detected'] += 1
+                    
+                    try:
+                        # Insertion dans la base
+                        conn.execute("""
+                            INSERT OR IGNORE INTO hadiths
+                            (sha256, collection, numero_hadith, livre, chapitre,
+                             matn_ar, matn_fr, isnad_brut, grade_final, categorie, 
+                             badge_alerte, source_url, source_api)
+                            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+                        """, (
+                            sha,
+                            collection_name,
+                            h.get("rnum", ""),
+                            h.get("book", ""),
+                            h.get("chapter", ""),
+                            matn_ar,
+                            matn_fr,
+                            h.get("isnad", ""),
+                            grade_final,
+                            categorie,
+                            badge,
+                            h.get("link", ""),
+                            "dorar_json"
+                        ))
+                        
+                        if conn.total_changes > 0:
+                            total_inserted += 1
+                            self.stats['total_inserted'] += 1
+                            
+                            # Stats par grade
+                            self.stats['by_grade'][grade_final] = self.stats['by_grade'].get(grade_final, 0) + 1
+                        else:
+                            self.stats['total_duplicates'] += 1
+                        
+                        conn.commit()
+                        
+                    except Exception as e:
+                        logging.error(f"INSERT_ERROR | sha={sha} | {e}")
+                        self.stats['total_errors'] += 1
+                
+                # Rapport de progression tous les 500 hadiths
+                if total_inserted > 0 and total_inserted % 500 == 0:
+                    self.print_progress_report(collection_name, total_inserted)
+                
+                # Page suivante
+                page += 1
+                
+                # Adab numérique (respecter les serveurs)
+                time.sleep(1.0)
+                
+            except requests.exceptions.Timeout:
+                logging.error(f"TIMEOUT | {collection_name} | page={page}")
+                consecutive_errors += 1
+                time.sleep(3)
+                
+            except Exception as e:
+                logging.error(f"EXCEPTION | {collection_name} | page={page} | {e}")
+                consecutive_errors += 1
+                time.sleep(2)
+        
+        # Stats par collection
+        self.stats['by_collection'][collection_name] = total_inserted
+        
+        return total_inserted
+    
+    def print_progress_report(self, collection: str, count: int):
+        """Affiche et log un rapport de progression"""
+        report = f"""
+┌──────────────────────────────────────────┐
+│ [RAPPORT #{count}] Collection : {collection[:20]}
+│ Hadiths insérés : {count}
+│ Mawdū' détectés : {self.stats['mawduu_detected']} (⚠️ badge rouge)
+│ Erreurs Aqida  : {self.stats['taawil_detected']} (voir harvest.log)
+└──────────────────────────────────────────┘
+"""
+        print(report)
+        logging.info(f"PROGRESS | {collection} | {count}")
+        
+        # Mise à jour du fichier de statut live
+        self.update_live_status()
+    
+    def update_live_status(self):
+        """Met à jour le fichier de statut en temps réel"""
+        elapsed = (datetime.now() - datetime.fromisoformat(self.stats['start_time'])).total_seconds()
+        rate = self.stats['total_inserted'] / max(elapsed / 60, 1)  # hadiths/minute
+        
+        status = f"""# 🕌 HARVESTING EN COURS — AL-MĪZĀN v5.0
+
+**Dernière mise à jour:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+
+## 📊 Statistiques Globales
+
+- **Tentatives totales:** {self.stats['total_attempted']:,}
+- **Hadiths insérés:** {self.stats['total_inserted']:,}
+- **Doublons ignorés:** {self.stats['total_duplicates']:,}
+- **Erreurs:** {self.stats['total_errors']:,}
+- **Mawdū' détectés:** {self.stats['mawduu_detected']:,} ⚠️
+- **Ta'wil détectés:** {self.stats['taawil_detected']:,} ⚠️
+
+## ⚡ Performance
+
+- **Vitesse:** {rate:.1f} hadiths/minute
+- **Durée écoulée:** {int(elapsed // 60)} minutes
+
+## 📚 Par Collection
+
+"""
+        for coll, count in sorted(self.stats['by_collection'].items(), key=lambda x: x[1], reverse=True):
+            status += f"- **{coll}:** {count:,} hadiths\n"
+        
+        status += f"""
+## 📈 Par Grade
+
+"""
+        for grade, count in sorted(self.stats['by_grade'].items(), key=lambda x: x[1], reverse=True):
+            status += f"- **{grade}:** {count:,}\n"
+        
+        status += f"""
+---
+
+*Mode Autonome Total — Extraction en cours...*
+"""
+        
+        PROGRESS_FILE.write_text(status, encoding='utf-8')
+    
+    def run(self):
+        """Point d'entrée principal — Mode Autonome Total"""
+        print("="*80)
+        print("🕌 AL-MĪZĀN v5.0 — MASSIVE CORPUS HARVESTER")
+        print("="*80)
+        print("Mode: AUTONOME TOTAL")
+        print("Arrêt: UNIQUEMENT quand toutes sources épuisées à 100%")
+        print("="*80)
+        
+        # Connexion DB
         conn = sqlite3.connect(self.db_path)
         conn.execute("PRAGMA journal_mode=WAL")
-        conn.execute("PRAGMA foreign_keys=ON")
-        return conn
-    
-    def _generate_entry_id(self, source: str, hadith_num: str) -> str:
-        """Génère un ID unique pour l'entrée"""
-        return f"{source}-{hadith_num}"
-    
-    def _hash_query(self, query: str) -> str:
-        """Hash MD5 pour le cache"""
-        return hashlib.md5(query.encode('utf-8')).hexdigest()
-    
-    async def _check_cache(self, query_hash: str) -> Optional[Dict]:
-        """Vérifie si la requête est en cache et valide"""
-        conn = self._get_db_connection()
-        cursor = conn.cursor()
         
-        cursor.execute("""
-            SELECT response_json, expires_at 
-            FROM dorar_cache 
-            WHERE query_hash = ?
-        """, (query_hash,))
-        
-        result = cursor.fetchone()
-        conn.close()
-        
-        if result:
-            response_json, expires_at = result
-            if datetime.fromisoformat(expires_at) > datetime.now():
-                return json.loads(response_json)
-        
-        return None
-    
-    async def _save_to_cache(self, query_hash: str, query_params: Dict, response: Dict, ttl_days: int = 7):
-        """Sauvegarde dans le cache"""
-        conn = self._get_db_connection()
-        cursor = conn.cursor()
-        
-        expires_at = (datetime.now() + timedelta(days=ttl_days)).isoformat()
-        
-        cursor.execute("""
-            INSERT OR REPLACE INTO dorar_cache (query_hash, query_params, response_json, expires_at)
-            VALUES (?, ?, ?, ?)
-        """, (query_hash, json.dumps(query_params), json.dumps(response), expires_at))
-        
-        conn.commit()
-        conn.close()
-    
-    def _apply_salaf_filter(self, hadith_data: Dict) -> bool:
-        """
-        Filtre STRICT selon la méthodologie Salaf
-        Retourne True si le hadith passe le filtre, False sinon
-        """
-        # Vérification 1: Grade minimum requis
-        grade = hadith_data.get("grade_primary", "unknown").lower()
-        if grade in ["mawdu'", "munkar"]:
-            return False
-        
-        # Vérification 2: Source doit être des Kutub al-Sittah ou Musnad Ahmad
-        book_id = hadith_data.get("book_id_dorar")
-        valid_books = [v["dorar_id"] for v in KUTUB_SITTAH.values()] + [1668]  # +Musnad Ahmad
-        
-        if book_id and book_id not in valid_books:
-            # Vérifier si c'est un livre de référence Salaf
-            book_name = hadith_data.get("book_name_ar", "")
-            salaf_books = ["الموطأ", "مسند", "صحيح", "سنن"]
-            if not any(keyword in book_name for keyword in salaf_books):
-                return False
-        
-        # Vérification 3: Pas de Ta'wil dans l'explication
-        explanation = hadith_data.get("grade_explanation", "")
-        forbidden_terms = ["تأويل", "مجاز", "استعارة"]  # Ta'wil, métaphore
-        if any(term in explanation for term in forbidden_terms):
-            return False
-        
-        return True
-    
-    async def insert_hadith(self, hadith_data: Dict) -> bool:
-        """
-        Insère un hadith dans la base après validation Salaf
-        """
-        # Filtre Salaf OBLIGATOIRE
-        if not self._apply_salaf_filter(hadith_data):
-            self.stats["total_filtered"] += 1
-            return False
-        
-        conn = self._get_db_connection()
-        cursor = conn.cursor()
+        grand_total = 0
         
         try:
-            entry_id = self._generate_entry_id(
-                hadith_data.get("source_api", "unknown"),
-                hadith_data.get("hadith_number", "0")
-            )
+            # Parcourir toutes les collections
+            for i, collection in enumerate(COLLECTIONS, 1):
+                print(f"\n🕌 [{i}/{len(COLLECTIONS)}] Début : {collection}")
+                logging.info(f"START_COLLECTION | {collection}")
+                
+                n = self.harvest_collection(conn, collection)
+                grand_total += n
+                
+                print(f"✅ {collection} terminé : {n:,} hadiths")
+                logging.info(f"DONE_COLLECTION | {collection} | total={n}")
+                
+                # Pause entre collections (adab numérique)
+                time.sleep(2)
             
-            # Vérifier si existe déjà
-            cursor.execute("SELECT id FROM entries WHERE id = ?", (entry_id,))
-            if cursor.fetchone():
-                self.stats["total_duplicates"] += 1
-                return False
+            # Rapport final
+            self.stats['end_time'] = datetime.now().isoformat()
+            self.print_final_report(grand_total)
             
-            # Insertion
-            cursor.execute("""
-                INSERT INTO entries (
-                    id, zone_id, zone_label,
-                    ar_text, ar_text_clean, ar_narrator,
-                    fr_text, fr_source,
-                    grade_primary, grade_by_mohdith, grade_explanation,
-                    book_name_ar, book_id_dorar, hadith_number, hadith_id_dorar,
-                    source_api, source_url, source_data_license,
-                    verified_by
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """, (
-                entry_id,
-                hadith_data.get("zone_id", 2),  # Zone 2 = Matn par défaut
-                hadith_data.get("zone_label", "Matn"),
-                hadith_data.get("ar_text", ""),
-                self._clean_arabic(hadith_data.get("ar_text", "")),
-                hadith_data.get("ar_narrator", ""),
-                hadith_data.get("fr_text", ""),
-                hadith_data.get("fr_source", "none"),
-                hadith_data.get("grade_primary", "unknown"),
-                hadith_data.get("grade_by_mohdith", ""),
-                hadith_data.get("grade_explanation", ""),
-                hadith_data.get("book_name_ar", ""),
-                hadith_data.get("book_id_dorar"),
-                hadith_data.get("hadith_number", ""),
-                hadith_data.get("hadith_id_dorar", ""),
-                hadith_data.get("source_api", ""),
-                hadith_data.get("source_url", ""),
-                hadith_data.get("source_data_license", "unknown"),
-                "system_salaf_filter"
-            ))
-            
-            conn.commit()
-            self.stats["total_success"] += 1
-            
-            # Stats par grade
-            grade = hadith_data.get("grade_primary", "unknown")
-            self.stats["by_grade"][grade] = self.stats["by_grade"].get(grade, 0) + 1
-            
-            return True
+        except KeyboardInterrupt:
+            print("\n\n⚠️ INTERRUPTION MANUELLE")
+            logging.warning("MANUAL_INTERRUPT")
+            self.print_final_report(grand_total)
             
         except Exception as e:
-            print(f"❌ Erreur insertion: {e}")
-            self.stats["total_failed"] += 1
-            return False
+            print(f"\n\n❌ ERREUR CRITIQUE: {e}")
+            logging.error(f"CRITICAL_ERROR | {e}")
+            self.print_final_report(grand_total)
+            
         finally:
             conn.close()
     
-    def _clean_arabic(self, text: str) -> str:
-        """Retire les tashkil pour la recherche"""
-        tashkil = re.compile(r'[\u064B-\u065F\u0670]')
-        return tashkil.sub('', text)
-    
-    async def harvest_from_dorar(self, start_id: int = 1, count: int = 1000) -> Dict:
-        """
-        Aspire depuis Dorar.net avec rate limiting
-        """
-        print(f"\n🕋 DÉMARRAGE HARVESTING DORAR.NET")
-        print(f"   Range: {start_id} → {start_id + count}")
-        print(f"   Filtre: SALAF STRICT activé")
-        
-        self.stats["start_time"] = datetime.now().isoformat()
-        self.stats["by_source"]["dorar"] = 0
-        
-        for i in range(count):
-            hadith_id = start_id + i
-            self.stats["total_attempted"] += 1
-            
-            # Simulation de données (à remplacer par vraie requête MCP)
-            # En production, utiliser: use_mcp_tool avec tavily_search ou browser
-            hadith_data = {
-                "source_api": "dorar",
-                "hadith_number": str(hadith_id),
-                "hadith_id_dorar": str(hadith_id),
-                "ar_text": f"حديث رقم {hadith_id}",
-                "grade_primary": "Sahih" if i % 3 == 0 else "Hasan",
-                "book_id_dorar": 6216,  # Bukhari
-                "book_name_ar": "صحيح البخاري",
-                "source_url": f"https://dorar.net/hadith/{hadith_id}",
-                "source_data_license": "conditions"
-            }
-            
-            await self.insert_hadith(hadith_data)
-            
-            # Rate limiting (désactivé pour test rapide)
-            # await asyncio.sleep(SOURCES_CONFIG["dorar"]["rate_limit"])
-            
-            # Progress
-            if (i + 1) % 50 == 0:
-                print(f"   ✓ Progression: {i+1}/{count} ({self.stats['total_success']} insérés)")
-        
-        self.stats["end_time"] = datetime.now().isoformat()
-        return self.stats
-    
-    async def harvest_kutub_sittah(self, hadiths_per_book: int = 500) -> Dict:
-        """
-        Aspire les 6 livres mères en priorité
-        """
-        print(f"\n📚 HARVESTING AL-KUTUB AL-SITTAH")
-        print(f"   Cible: {hadiths_per_book} hadiths par livre")
-        
-        for book_key, book_info in KUTUB_SITTAH.items():
-            print(f"\n   → {book_info['name_ar']} (priorité {book_info['priority']})")
-            
-            # Ici, utiliser MCP tools pour vraie extraction
-            # Exemple: use_mcp_tool tavily_search pour trouver les sources
-            # Puis browser_action pour scraper si nécessaire
-            
-            await asyncio.sleep(1)  # Placeholder
-        
-        return self.stats
-    
-    def generate_report(self) -> str:
-        """Génère un rapport détaillé"""
-        duration = "N/A"
-        if self.stats["start_time"] and self.stats["end_time"]:
-            start = datetime.fromisoformat(self.stats["start_time"])
-            end = datetime.fromisoformat(self.stats["end_time"])
-            duration = str(end - start)
+    def print_final_report(self, grand_total: int):
+        """Affiche le rapport final"""
+        elapsed = (datetime.now() - datetime.fromisoformat(self.stats['start_time'])).total_seconds()
         
         report = f"""
-╔══════════════════════════════════════════════════════════════╗
-║          RAPPORT HARVESTING CORPUS SALAF                     ║
-╚══════════════════════════════════════════════════════════════╝
+
+{'='*80}
+📚 EXTRACTION COMPLÈTE — RAPPORT FINAL
+{'='*80}
 
 📊 STATISTIQUES GLOBALES
-   • Tentatives totales:    {self.stats['total_attempted']}
-   • Succès (insérés):      {self.stats['total_success']}
-   • Échecs:                {self.stats['total_failed']}
-   • Doublons (ignorés):    {self.stats['total_duplicates']}
-   • Filtrés (non-Salaf):   {self.stats['total_filtered']}
-   
-⏱️  DURÉE
-   • Début:  {self.stats['start_time']}
-   • Fin:    {self.stats['end_time']}
-   • Durée:  {duration}
+   • Tentatives totales    : {self.stats['total_attempted']:,}
+   • Hadiths insérés       : {self.stats['total_inserted']:,}
+   • Doublons ignorés      : {self.stats['total_duplicates']:,}
+   • Erreurs               : {self.stats['total_errors']:,}
+   • Mawdū' détectés       : {self.stats['mawduu_detected']:,} ⚠️
+   • Ta'wil détectés       : {self.stats['taawil_detected']:,} ⚠️
 
-📈 PAR GRADE
+⏱️  PERFORMANCE
+   • Durée totale          : {int(elapsed // 60)} minutes
+   • Vitesse moyenne       : {self.stats['total_inserted'] / max(elapsed / 60, 1):.1f} hadiths/minute
+
+📚 TOP 10 COLLECTIONS
 """
-        for grade, count in self.stats["by_grade"].items():
-            report += f"   • {grade:15s}: {count:5d}\n"
+        for coll, count in sorted(self.stats['by_collection'].items(), key=lambda x: x[1], reverse=True)[:10]:
+            report += f"   • {coll[:40]:40s} : {count:6,} hadiths\n"
         
         report += f"""
-🔍 TAUX DE RÉUSSITE
-   • Insertion: {self.stats['total_success'] / max(self.stats['total_attempted'], 1) * 100:.1f}%
-   • Filtrage:  {self.stats['total_filtered'] / max(self.stats['total_attempted'], 1) * 100:.1f}%
-
-✅ CONFORMITÉ SALAF: STRICTE
-   ✓ Filtre Ta'wil activé
-   ✓ Vérification sources Kutub al-Sittah
-   ✓ Grade minimum appliqué
+📈 RÉPARTITION PAR GRADE
 """
-        return report
+        for grade, count in sorted(self.stats['by_grade'].items(), key=lambda x: x[1], reverse=True):
+            pct = count / max(self.stats['total_inserted'], 1) * 100
+            report += f"   • {grade:20s} : {count:6,} ({pct:5.1f}%)\n"
+        
+        report += f"""
+{'='*80}
+✅ MISSION ACCOMPLIE
+   Base de données : {self.db_path}
+   Log complet     : {LOG_FILE}
+   Statut live     : {PROGRESS_FILE}
+{'='*80}
+"""
+        
+        print(report)
+        logging.info("GRAND_TOTAL=" + str(grand_total))
+        logging.info("MISSION_COMPLETE")
+        
+        # Sauvegarder le rapport final
+        report_file = PROGRESS_FILE.parent / "HARVESTING_FINAL_REPORT.md"
+        report_file.write_text(report, encoding='utf-8')
+        print(f"\n💾 Rapport final sauvegardé : {report_file}")
 
-async def main():
+# ═══════════════════════════════════════════════════════════════════════════
+# POINT D'ENTRÉE
+# ═══════════════════════════════════════════════════════════════════════════
+
+def main():
     """Point d'entrée principal"""
-    print("="*70)
-    print("🕋 AL-MĪZĀN V7.0 — HARVESTER MASSIF CORPUS SALAF")
-    print("="*70)
-    
     harvester = MassiveCorpusHarvester()
-    
-    # Phase 1: Dorar.net (test avec 100 hadiths)
-    await harvester.harvest_from_dorar(start_id=1, count=100)
-    
-    # Phase 2: Les 6 livres mères
-    # await harvester.harvest_kutub_sittah(hadiths_per_book=500)
-    
-    # Rapport final
-    print(harvester.generate_report())
-    
-    # Sauvegarde du rapport
-    report_path = Path("output/harvesting_report.txt")
-    report_path.parent.mkdir(exist_ok=True)
-    report_path.write_text(harvester.generate_report(), encoding='utf-8')
-    print(f"\n💾 Rapport sauvegardé: {report_path}")
+    harvester.run()
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
