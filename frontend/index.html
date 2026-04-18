@@ -17,6 +17,7 @@
     <form id="mz-search-form" dir="rtl">
       <input type="text" id="mz-query" placeholder="ابحث عن حديث..." autocomplete="off">
       <button type="submit">بحث</button>
+      <button type="button" id="clear-cache-btn" title="Vider le cache" style="margin-right: 8px; padding: 8px 12px; background: #f0f0f0; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; font-size: 12px;">🗑️ Cache</button>
     </form>
   </header>
 
@@ -66,6 +67,7 @@
     <div id="status-text" class="mz-status-text">Prêt</div>
   </footer>
 
+  <script src="/js/cache-manager.js"></script>
   <script src="/js/sse-client.js"></script>
   <script src="/js/isnad-tree.js"></script>
   <script src="/js/dashboard.js"></script>
