@@ -391,7 +391,15 @@ _mzGuard('toggleTT',          function() {});
     <div class="header-row">
       <button class="btn-back" onclick="goTo('home')"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
       <div class="header-title"><p>VÉRIFICATEUR DE HADITH</p><span class="ar-sub">مِيزَانُ الحَدِيثِ</span></div>
-      <div class="spacer"></div>
+      <button id="mz-cache-clear-btn" onclick="clearMizanCache()"
+        title="Vider le cache des résultats (LocalStorage)"
+        style="font-family:'Cinzel',serif;font-size:7px;letter-spacing:.12em;
+               padding:6px 10px;background:rgba(201,168,76,.07);
+               border:1px solid rgba(201,168,76,.25);border-radius:6px;
+               color:rgba(201,168,76,.55);cursor:pointer;transition:all .2s;
+               white-space:nowrap;flex-shrink:0;">
+        &#x1F5D1; CACHE
+      </button>
     </div>
   </div>
   <div class="content">
@@ -2234,6 +2242,35 @@ document.addEventListener('copy', function(e){
     e.preventDefault();
   }
 });
+</script>
+
+<script>
+/* ── Bouton "Vider le cache" — purge les entrées mizan_v3_* du localStorage ── */
+function clearMizanCache() {
+  var keys = [];
+  try {
+    for (var i = 0; i < localStorage.length; i++) {
+      var k = localStorage.key(i);
+      if (k && k.indexOf('mizan_v3_') === 0) keys.push(k);
+    }
+    keys.forEach(function(k) { localStorage.removeItem(k); });
+  } catch(e) {}
+
+  var btn = document.getElementById('mz-cache-clear-btn');
+  if (!btn) return;
+  var orig = btn.innerHTML;
+  var count = keys.length;
+  btn.innerHTML = '&#x2713; ' + count + ' entr\u00e9e' + (count !== 1 ? 's' : '') + ' supprim\u00e9e' + (count !== 1 ? 's' : '');
+  btn.style.background = 'rgba(34,197,94,.1)';
+  btn.style.borderColor = 'rgba(34,197,94,.4)';
+  btn.style.color = '#22c55e';
+  setTimeout(function() {
+    btn.innerHTML = orig;
+    btn.style.background = '';
+    btn.style.borderColor = '';
+    btn.style.color = '';
+  }, 2500);
+}
 </script>
 
 </body>
