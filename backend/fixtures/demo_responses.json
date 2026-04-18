@@ -1,0 +1,134 @@
+{
+  "niyya": {
+    "query": "Niyya",
+    "hadith": {
+      "matn_ar": "إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى",
+      "matn_fr": "Les actions ne valent que par les intentions, et chacun n'a que ce qu'il a eu l'intention de faire",
+      "reference": "Sahih al-Bukhari 1, Sahih Muslim 1907",
+      "narrator": "Umar ibn al-Khattab"
+    },
+    "analysis": {
+      "isnad": {
+        "grade": "SAHIH",
+        "confidence": 0.98,
+        "chain": "Umar → Alqama → Muhammad ibn Ibrahim → Yahya ibn Sa'id → Sufyan",
+        "notes": "Chaîne authentique unanimement acceptée"
+      },
+      "matn": {
+        "coherence": 0.95,
+        "variants": "Aucune variante significative",
+        "context": "Hadith fondamental sur l'intention dans l'Islam"
+      },
+      "aqidah": {
+        "status": "CONFORME",
+        "level": "SAFE",
+        "notes": "Principe fondamental de la jurisprudence islamique"
+      },
+      "tarjih": {
+        "final_grade": "SAHIH",
+        "scholarly_consensus": "Unanimité des savants",
+        "reliability": 0.98
+      },
+      "fawaid": {
+        "lessons": [
+          "L'intention est la base de toute action",
+          "La sincérité est essentielle dans l'adoration",
+          "Chaque personne sera jugée selon son intention"
+        ],
+        "applications": [
+          "Purifier son intention avant toute action",
+          "Vérifier régulièrement ses motivations",
+          "Rechercher la satisfaction d'Allah uniquement"
+        ]
+      }
+    }
+  },
+  "science": {
+    "query": "Science",
+    "hadith": {
+      "matn_ar": "طَلَبُ الْعِلْمِ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ",
+      "matn_fr": "La quête de la science est une obligation pour tout musulman",
+      "reference": "Sunan Ibn Majah 224",
+      "narrator": "Anas ibn Malik"
+    },
+    "analysis": {
+      "isnad": {
+        "grade": "HASAN",
+        "confidence": 0.75,
+        "chain": "Anas → Anas ibn Malik al-Qushayri → Sulayman ibn Amr",
+        "notes": "Chaîne acceptable avec quelques faiblesses mineures"
+      },
+      "matn": {
+        "coherence": 0.88,
+        "variants": "Quelques variantes dans la formulation",
+        "context": "Importance de la science dans l'Islam"
+      },
+      "aqidah": {
+        "status": "CONFORME",
+        "level": "SAFE",
+        "notes": "Encourage l'acquisition de la science religieuse"
+      },
+      "tarjih": {
+        "final_grade": "HASAN",
+        "scholarly_consensus": "Accepté par la majorité des savants",
+        "reliability": 0.75
+      },
+      "fawaid": {
+        "lessons": [
+          "La science est une obligation religieuse",
+          "L'ignorance n'est pas une excuse",
+          "L'apprentissage est un acte d'adoration"
+        ],
+        "applications": [
+          "Consacrer du temps à l'étude",
+          "Chercher des enseignants qualifiés",
+          "Appliquer ce qu'on apprend"
+        ]
+      }
+    }
+  },
+  "default": {
+    "query": "Recherche générale",
+    "hadith": {
+      "matn_ar": "خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ",
+      "matn_fr": "Le meilleur d'entre vous est celui qui apprend le Coran et l'enseigne",
+      "reference": "Sahih al-Bukhari 5027",
+      "narrator": "Uthman ibn Affan"
+    },
+    "analysis": {
+      "isnad": {
+        "grade": "SAHIH",
+        "confidence": 0.96,
+        "chain": "Uthman → Abd al-Rahman ibn Abi Bakra → Abu Abd al-Rahman al-Sulami",
+        "notes": "Chaîne authentique"
+      },
+      "matn": {
+        "coherence": 0.93,
+        "variants": "Aucune variante significative",
+        "context": "Mérite de l'enseignement du Coran"
+      },
+      "aqidah": {
+        "status": "CONFORME",
+        "level": "SAFE",
+        "notes": "Encourage l'apprentissage et l'enseignement du Coran"
+      },
+      "tarjih": {
+        "final_grade": "SAHIH",
+        "scholarly_consensus": "Unanimité",
+        "reliability": 0.96
+      },
+      "fawaid": {
+        "lessons": [
+          "Le Coran est la meilleure science",
+          "Enseigner est un acte noble",
+          "Partager la connaissance est une vertu"
+        ],
+        "applications": [
+          "Mémoriser le Coran",
+          "Enseigner aux autres",
+          "Transmettre le savoir"
+        ]
+      }
+    }
+  }
+}
