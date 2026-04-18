@@ -1,0 +1,13 @@
+{
+  "book_key": "bukhari",
+  "last_hadith": 1801,
+  "stats": {
+    "attempted": 1800,
+    "inserted": 1800,
+    "filtered": 0,
+    "errors": 0,
+    "start_time": "2026-04-18T03:12:27.209584",
+    "batches_completed": 18
+  },
+  "timestamp": "2026-04-18T04:12:58.277946"
+}

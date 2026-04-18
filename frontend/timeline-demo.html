@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al-Mīzān - Module de Confrontation (Timeline de la Science)</title>
+    <link rel="stylesheet" href="css/timeline-module.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f3f4f6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .demo-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .demo-header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.5rem;
+        }
+        
+        .demo-header p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .demo-controls {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .control-panel {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .control-panel h3 {
+            margin-top: 0;
+            color: #1f2937;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .input-group input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        
+        .input-group button {
+            padding: 0.75rem 2rem;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .input-group button:hover {
+            background: #2563eb;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+        
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+        
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-header">
+        <h1>📜 Module de Confrontation</h1>
+        <p>Timeline de la Science - Visualisation de l'évolution des avis à travers les siècles</p>
+    </div>
+    
+    <div class="demo-controls">
+        <div class="control-panel">
+            <h3>🔍 Rechercher un Hadith</h3>
+            <div class="input-group">
+                <input 
+                    type="number" 
+                    id="hadith-id-input" 
+                    placeholder="Entrez l'ID du hadith (ex: 1, 2, 3...)"
+                    value="1"
+                    min="1"
+                >
+                <button onclick="loadTimeline()">Afficher la Timeline</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="timeline-container"></div>
+    
+    <script src="js/timeline-module.js"></script>
+    <script>
+        // Configuration de l'API
+        const API_BASE_URL = 'http://localhost:8001';
+        
+        // Instance de la visualisation
+        const timeline = new TimelineVisualization('timeline-container');
+        
+        // Fonction pour charger la timeline
+        async function loadTimeline() {
+            const hadithId = document.getElementById('hadith-id-input').value;
+            
+            if (!hadithId || hadithId < 1) {
+                alert('Veuillez entrer un ID de hadith valide');
+                return;
+            }
+            
+            // Afficher le chargement
+            document.getElementById('timeline-container').innerHTML = `
+                <div class="loading">Chargement de la timeline</div>
+            `;
+            
+            try {
+                await timeline.loadTimeline(hadithId);
+            } catch (error) {
+                console.error('Erreur:', error);
+                document.getElementById('timeline-container').innerHTML = `
+                    <div class="timeline-error">
+                        <p>❌ Erreur lors du chargement</p>
+                        <p>${error.message}</p>
+                        <button onclick="loadTimeline()">Réessayer</button>
+                    </div>
+                `;
+            }
+        }
+        
+        // Charger automatiquement le premier hadith au démarrage
+        window.addEventListener('DOMContentLoaded', () => {
+            loadTimeline();
+        });
+        
+        // Permettre la recherche avec Enter
+        document.getElementById('hadith-id-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                loadTimeline();
+            }
+        });
+    </script>
+</body>
+</html>
