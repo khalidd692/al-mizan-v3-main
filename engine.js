@@ -383,9 +383,13 @@ function _renderTopicList(hadiths, query) {
   var html = '<div class="mz-source"><span class="mz-source-dot" style="background:#c9a84c;box-shadow:0 0 6px rgba(201,168,76,.5);"></span><span class="mz-source-text">'+hadiths.length+' RESULTAT(S) · DORAR.NET · AL MIZAN</span></div>';
 
   hadiths.forEach(function(h, idx) {
+    /* Détection Tawaqquf : champ backend OU grade explicite ── */
+    var _isTawaqquf = (h.tawaqquf === true) || (h.grade === 'TAWAQQUF') || (h.grade_ar === 'TAWAQQUF');
     /* Utiliser le dictionnaire universel sur la chaîne arabe brute (grade_ar)
        pour appliquer la règle Jarh > Ta'dil sur la phrase complète de Dorar */
-    var tg  = _getTechnicalGrade(h.grade_ar || h.grade || '');
+    var tg  = _isTawaqquf
+      ? { key:'TAWAQQUF', color:MZ_COLORS.TAWAQQUF, colorBg:'rgba(167,139,250,.06)', colorBd:'rgba(167,139,250,.22)', cssClass:'v-TAWAQQUF' }
+      : _getTechnicalGrade(h.grade_ar || h.grade || '');
     var g   = tg.key;
     var col = tg.color;
 
@@ -427,8 +431,11 @@ function _renderTopicList(hadiths, query) {
     }
     html += '</div>'; /* /mz-matn */
 
-    /* Badge de verdict — dictionnaire universel utilise grade_ar brut */
-    html += _mzVerdict(g, h.grade_ar || h.grade);
+    /* Badge de verdict — Tawaqquf passe les raisons et termes protégés */
+    var _verdictExtra = _isTawaqquf
+      ? { tawaqquf_reasons: h.tawaqquf_reasons || [], protected_terms: h.protected_terms || [] }
+      : null;
+    html += _mzVerdict(g, h.grade_ar || h.grade, _verdictExtra);
     html += '</div>'; /* /mz-niv1 */
 
     /* ═══ NIVEAU 2 : Al-Hukm ═══ */
@@ -1750,6 +1757,7 @@ var MZ_ICONS={
   HASAN:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>',
   DAIF:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
   MAWDU:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>',
+  TAWAQQUF:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="10" y1="15" x2="10" y2="9"/><line x1="14" y1="15" x2="14" y2="9"/></svg>',
   INCONNU:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
   chev:'<svg class="mz-acc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>',
   check:'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
@@ -1761,11 +1769,22 @@ var MZ_LABELS={
   HASAN: {ar:'\u062D\u064E\u0633\u064E\u0646',       fr:'HASAN \u2014 BON'},
   DAIF:  {ar:'\u0636\u064E\u0639\u0650\u064A\u0641', fr:"DA'IF \u2014 FAIBLE"},
   MAWDU: {ar:'\u0645\u064E\u0648\u0636\u064F\u0648\u0639', fr:"REJET\u00c9 \u2014 CE N'EST PAS UN HADITH (MAWDU')"},
+  TAWAQQUF:{ar:'\u062a\u064e\u0648\u064e\u0642\u064f\u0651\u0641', fr:'TAWAQQUF \u2014 VERDICT SUSPENDU'},
   INCONNU:{ar:'\u063a\u064a\u0631 \u0645\u062d\u062f\u062f', fr:"\u26a0\ufe0f DA'IF \u2014 STATUT NON CONFIRM\u00c9 (CONSULTER AL-ALBANI)"}
 };
 var MZ_COLORS={
   SAHIH:'#22c55e', HASAN:'#4ade80', DAIF:'#f59e0b',
-  MAWDU:'#e63946', INCONNU:'rgba(156,163,175,.6)'
+  MAWDU:'#e63946', TAWAQQUF:'#a78bfa', INCONNU:'rgba(156,163,175,.6)'
+};
+
+/* Libellés FR des raisons de Tawaqquf — affichés dans le badge UI */
+var _MZ_TAWAQQUF_REASONS = {
+  'terme_protege_detecte': '\uD83D\uDD34 Terme prot\u00e9g\u00e9 d\u00e9tect\u00e9 (Bid\u02bfah ou Ta\u02bcw\u012bl interdit)',
+  'grade_ambigu':          '\uD83D\uDFE0 Grade ambigu \u2014 classification impossible',
+  'savant_inconnu':        '\uD83D\uDFE0 Savant inconnu ou non-Salaf',
+  'tawil_suspecte':        '\uD83D\uDD34 Ta\u02bcw\u012bl suspect\u00e9 dans la traduction',
+  'bidah_detectee':        '\uD83D\uDD34 Bid\u02bfah d\u00e9tect\u00e9e dans le texte',
+  'confiance_insuffisante':'\uD83D\uDFE0 Confiance insuffisante (< 50\u00a0%)'
 };
 
 function mzToggleAcc(el){
@@ -1787,7 +1806,70 @@ function mzToggleAcc(el){
  * RÈGLE DOCTRINALE : si gradeKey est une clé valide, on s'y fie directement.
  * On n'écrase JAMAIS un 'Da'if' en 'Sahih' par re-classification depuis grade_ar.
  */
-function _mzVerdict(gradeKey, gradeRaw) {
+function _mzVerdict(gradeKey, gradeRaw, extra) {
+  /* extra (optionnel) : { tawaqquf_reasons: string[], protected_terms: object[] } */
+
+  /* ── CAS TAWAQQUF : rendu dédié ─────────────────────────────────────────── */
+  if (gradeKey === 'TAWAQQUF') {
+    var col = MZ_COLORS.TAWAQQUF;
+    var bg  = 'rgba(167,139,250,.06)';
+    var bd  = 'rgba(167,139,250,.22)';
+    var reasons = (extra && extra.tawaqquf_reasons) ? extra.tawaqquf_reasons : [];
+    var protectedTerms = (extra && extra.protected_terms) ? extra.protected_terms : [];
+
+    var reasonsHtml = '';
+    if (reasons.length) {
+      reasonsHtml = '<ul style="margin:8px 0 0;padding:0 0 0 14px;list-style:disc;">';
+      reasons.forEach(function(r) {
+        var label = _MZ_TAWAQQUF_REASONS[r] || r;
+        reasonsHtml += '<li style="font-family:Cormorant Garamond,serif;font-size:12px;color:rgba(167,139,250,.85);line-height:1.7;margin-bottom:2px;">' + label + '</li>';
+      });
+      reasonsHtml += '</ul>';
+    }
+
+    var protectedHtml = '';
+    if (protectedTerms.length) {
+      protectedHtml = '<div style="margin-top:10px;padding:8px 12px;background:rgba(167,139,250,.04);border:1px solid rgba(167,139,250,.15);border-radius:8px;">';
+      protectedHtml += '<p style="font-family:Cinzel,serif;font-size:7px;letter-spacing:.18em;color:rgba(167,139,250,.5);margin:0 0 6px;">'
+        + 'TERMES BLOQU\u00c9S PAR LE FILTRE DOCTRINAL</p>';
+      protectedTerms.forEach(function(t) {
+        var icon = (t.severity === 'critique') ? '\uD83D\uDD34' : '\uD83D\uDFE0';
+        protectedHtml += '<div style="display:flex;gap:6px;align-items:flex-start;margin-bottom:4px;">'
+          + '<span style="flex-shrink:0;font-size:11px;">' + icon + '</span>'
+          + '<span style="font-family:Scheherazade New,serif;font-size:13px;color:rgba(167,139,250,.9);">' + (t.term || '') + '</span>'
+          + (t.note_fr ? '<span style="font-family:Cormorant Garamond,serif;font-style:italic;font-size:10px;color:rgba(167,139,250,.5);margin-left:4px;">— ' + t.note_fr + '</span>' : '')
+          + '</div>';
+      });
+      protectedHtml += '</div>';
+    }
+
+    return '<div class="mz-verdict v-TAWAQQUF" style="background:' + bg + ';border:1px solid ' + bd + ';flex-direction:column;align-items:stretch;padding:20px;">'
+      + '<div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">'
+      + '<div class="mz-verdict-icon" style="border-color:' + col + '44;background:' + bg + ';color:' + col + ';">' + MZ_ICONS.TAWAQQUF + '</div>'
+      + '<div style="flex:1;">'
+      + '<span style="font-family:Cinzel,serif;font-size:5.5px;letter-spacing:.55em;color:' + col + ';opacity:.7;display:block;margin-bottom:4px;">VERDICT \u2014 SUSPENDU</span>'
+      + '<div style="display:flex;align-items:center;gap:10px;">'
+      + '<span style="font-family:Scheherazade New,serif;font-size:28px;font-weight:700;color:' + col + ';text-shadow:0 0 20px ' + col + '44;">\u062a\u064e\u0648\u064e\u0642\u064f\u0651\u0641</span>'
+      + '<span style="font-family:Cinzel,serif;font-size:16px;font-weight:900;letter-spacing:.06em;color:' + col + ';">TAWAQQUF</span>'
+      + '</div></div></div>'
+      + '<div style="background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.18);border-radius:10px;padding:12px 16px;margin-bottom:10px;">'
+      + '<p style="font-family:Cinzel,serif;font-size:9px;font-weight:700;letter-spacing:.1em;color:' + col + ';margin:0 0 4px;">'
+      + '\u26d4 CE HADITH NE PEUT PAS \u00caTRE PUBLI\u00c9 EN L\'\u00c9TAT</p>'
+      + '<p style="font-family:Cormorant Garamond,serif;font-style:italic;font-size:11px;color:rgba(167,139,250,.65);margin:0;line-height:1.6;">'
+      + 'Le syst\u00e8me a d\u00e9tect\u00e9 un ou plusieurs \u00e9l\u00e9ments n\u00e9cessitant '
+      + 'v\u00e9rification humaine avant toute diffusion \u2014 conform\u00e9ment au manhaj des Salaf al-\u1e62\u0101li\u1e25.'
+      + '</p>'
+      + reasonsHtml
+      + '</div>'
+      + protectedHtml
+      + '<div style="padding:8px 12px;border-top:1px solid rgba(167,139,250,.15);margin-top:4px;">'
+      + '<p style="font-family:Cormorant Garamond,serif;font-style:italic;font-size:11px;color:rgba(167,139,250,.4);line-height:1.6;margin:0;">'
+      + 'Note scientifique : Le Tawaqquf est une position \u00e9pist\u00e9mologique l\u00e9gitime chez les Mu\u1e25addith\u012bn. '
+      + 'Consulter un savant qualifi\u00e9 avant toute citation.'
+      + '</p></div>'
+      + '</div>';
+  }
+
   var tg;
   var _VALID_KEYS = ['SAHIH', 'HASAN', 'DAIF', 'MAWDU'];
   if (gradeKey && _VALID_KEYS.indexOf(gradeKey) !== -1) {
