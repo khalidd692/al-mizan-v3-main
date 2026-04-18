@@ -357,6 +357,28 @@ _TAWIL_FR_FORBIDDEN: Dict[str, Tuple] = {
 
 _CONTEXT_WINDOW = 60
 
+# Plages Unicode couvrant tous les signes diacritiques arabes (tashkeel) :
+# U+0610–U+061A : Arabic extended signs
+# U+064B–U+065F : Fatha/Damma/Kasra/Shadda/Sukun/Tanwin et variantes
+# U+0670       : Arabic letter superscript alef
+# U+06D6–U+06DC : Arabic small high letters
+# U+06DF–U+06E4 : Arabic small high marks
+# U+06E7–U+06E8 : Arabic small high ya / noon
+# U+06EA–U+06ED : Arabic small low marks
+_RE_TASHKEEL = re.compile(
+    r'[\u0610-\u061A\u064B-\u065F\u0670'
+    r'\u06D6-\u06DC\u06DF-\u06E4\u06E7\u06E8\u06EA-\u06ED]'
+)
+
+
+def strip_tashkeel(text: str) -> str:
+    """
+    Supprime les signes diacritiques arabes (tashkeel / حركات) d'un texte arabe.
+    Nécessaire pour que les patterns regex sans voyelles reconnaissent
+    les textes vocalisés (ex : يَنْزِلُ → ينزل).
+    """
+    return _RE_TASHKEEL.sub('', text)
+
 
 def _extract_context(text: str, start: int, end: int) -> str:
     ctx_start = max(0, start - _CONTEXT_WINDOW)
@@ -372,17 +394,21 @@ def scan_arabic(text: str) -> List[TermMatch]:
     Scanne un texte arabe :
     - Termes Bid'ah (Ḥulūl, Ittiḥād, Waḥdat al-wujūd, Ta'ṭīl, Ta'wīl, Tafwīḍ…)
     - Attributs divins protégés (vérifie la présence pour forcer Lexique de Fer)
+
+    Le texte est normalisé (strip_tashkeel) avant matching pour garantir la
+    détection sur les textes vocalisés (يَنْزِلُ → ينزل, etc.).
     """
+    normalized = strip_tashkeel(text)
     matches: List[TermMatch] = []
     all_patterns = {**_BIDAH_AR, **_SIFAT_AR_PROTECTED}
 
     for pattern, (category, severity, note_ar, note_fr) in all_patterns.items():
-        for m in re.finditer(pattern, text, re.UNICODE):
+        for m in re.finditer(pattern, normalized, re.UNICODE):
             matches.append(TermMatch(
                 term=m.group(),
                 category=category,
                 severity=severity,
-                context=_extract_context(text, m.start(), m.end()),
+                context=_extract_context(normalized, m.start(), m.end()),
                 position=m.start(),
                 requires_tawaqquf=(severity == TermSeverity.CRITIQUE),
                 note_ar=note_ar,

@@ -5,6 +5,7 @@ from typing import Dict, Any, Optional
 from anthropic import Anthropic
 
 from backend.utils.logging import get_logger
+from backend.utils.constitution import run_full_doctrinal_check
 
 log = get_logger("mizan.agent.validator")
 
@@ -48,7 +49,26 @@ class AgentValidator:
         
         # Étape 2: Traduction avec Haiku
         translation_result = await self._translate_haiku(hadith_raw)
-        
+
+        # Étape 2b: Contrôle doctrinal de la traduction (regex, coût LLM = 0)
+        # Doit précéder toute escalade Sonnet — un ta'wîl détecté ici est bloquant.
+        _tawaqquf_doc, _doc_report = run_full_doctrinal_check(
+            text_ar=hadith_raw.get('matn_ar', ''),
+            text_fr=translation_result.get('translation', ''),
+        )
+        if _tawaqquf_doc:
+            log.warning(f"[VALIDATOR] Tawaqquf doctrinal forcé — {_doc_report[:120]}")
+            return {
+                "grade_normalized": "TAWAQQUF",
+                "translation_fr": translation_result.get('translation', ''),
+                "scholar_verdict": "TAWAQQUF",
+                "scholar_location": "TAWAQQUF",
+                "confidence_score": 0.0,
+                "reasoning": _doc_report,
+                "tawaqquf": True,
+                "tawaqquf_reasons": ["terme_protege_detecte"],
+            }
+
         # Étape 3: Validation savant avec Haiku
         scholar_result = await self._validate_scholar_haiku(hadith_raw, grade_result)
         
@@ -71,7 +91,9 @@ class AgentValidator:
             "scholar_verdict": scholar_result["scholar_name"],
             "scholar_location": scholar_result["location"],
             "confidence_score": confidence,
-            "reasoning": scholar_result["reasoning"]
+            "reasoning": scholar_result["reasoning"],
+            "tawaqquf": False,
+            "tawaqquf_reasons": [],
         }
     
     async def _normalize_grade_haiku(self, hadith: Dict[str, Any]) -> Dict[str, Any]:

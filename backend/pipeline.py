@@ -109,8 +109,13 @@ class ValidationPipeline:
                 })
                 
                 # Décision: insertion auto ou review manuelle
-                if validation_result["confidence_score"] >= self.CONFIDENCE_THRESHOLD:
-                    # Insertion automatique
+                # RÈGLE DOCTRINALE : un hadith sous Tawaqquf n'entre jamais en DB
+                # sans vérification humaine, quelle que soit la confiance LLM.
+                _tawaqquf = validation_result.get("tawaqquf", False)
+                _above_threshold = validation_result["confidence_score"] >= self.CONFIDENCE_THRESHOLD
+
+                if _above_threshold and not _tawaqquf:
+                    # Insertion automatique — confiance OK + aucun Tawaqquf doctrinal
                     await self.db.insert_validated_hadith(
                         hadith_raw_id=hadith_raw["id"],
                         matn_ar=hadith_raw["matn_ar"],
@@ -124,31 +129,37 @@ class ValidationPipeline:
                         agent_matn_output="{}",
                         agent_tarjih_output=json.dumps(validation_result)
                     )
-                    
+
                     await self.db.mark_as_processed(hadith_raw["id"])
                     self.stats["total_inserted"] += 1
-                    
+
                     yield emit("hadith_inserted", {
                         "hadith_id": hadith_raw["id"],
                         "confidence": validation_result["confidence_score"],
                         "grade": validation_result["grade_normalized"]
                     })
                 else:
-                    # Review manuelle
+                    # Review manuelle — confiance insuffisante OU Tawaqquf doctrinal
+                    if _tawaqquf:
+                        reason = f"TAWAQQUF doctrinal — {', '.join(validation_result.get('tawaqquf_reasons', []))}"
+                    else:
+                        reason = f"Confiance {validation_result['confidence_score']:.1f}% < {self.CONFIDENCE_THRESHOLD}%"
+
                     await self.db.insert_pending_review(
                         hadith_raw_id=hadith_raw["id"],
-                        reason=f"Confiance {validation_result['confidence_score']:.1f}% < {self.CONFIDENCE_THRESHOLD}%",
+                        reason=reason,
                         confidence_score=validation_result["confidence_score"],
                         agent_outputs=json.dumps(validation_result)
                     )
-                    
+
                     await self.db.mark_as_processed(hadith_raw["id"])
                     self.stats["total_pending_review"] += 1
-                    
+
                     yield emit("hadith_pending_review", {
                         "hadith_id": hadith_raw["id"],
                         "confidence": validation_result["confidence_score"],
-                        "reason": validation_result["reasoning"]
+                        "tawaqquf": _tawaqquf,
+                        "reason": reason,
                     })
             
             except Exception as e:
@@ -201,7 +212,10 @@ class ValidationPipeline:
                 validation_result = await self.validator.validate_hadith(hadith_raw)
                 self.stats["total_validated"] += 1
                 
-                if validation_result["confidence_score"] >= self.CONFIDENCE_THRESHOLD:
+                _tawaqquf = validation_result.get("tawaqquf", False)
+                _above_threshold = validation_result["confidence_score"] >= self.CONFIDENCE_THRESHOLD
+
+                if _above_threshold and not _tawaqquf:
                     await self.db.insert_validated_hadith(
                         hadith_raw_id=hadith_raw["id"],
                         matn_ar=hadith_raw["matn_ar"],
@@ -217,14 +231,19 @@ class ValidationPipeline:
                     )
                     self.stats["total_inserted"] += 1
                 else:
+                    _reason = (
+                        f"TAWAQQUF — {', '.join(validation_result.get('tawaqquf_reasons', []))}"
+                        if _tawaqquf
+                        else "Confiance insuffisante"
+                    )
                     await self.db.insert_pending_review(
                         hadith_raw_id=hadith_raw["id"],
-                        reason=f"Confiance insuffisante",
+                        reason=_reason,
                         confidence_score=validation_result["confidence_score"],
                         agent_outputs=json.dumps(validation_result)
                     )
                     self.stats["total_pending_review"] += 1
-                
+
                 await self.db.mark_as_processed(hadith_raw["id"])
             
             except Exception as e:
