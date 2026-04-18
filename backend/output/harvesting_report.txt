@@ -1,0 +1,29 @@
+
+╔══════════════════════════════════════════════════════════════╗
+║          RAPPORT HARVESTING CORPUS SALAF                     ║
+╚══════════════════════════════════════════════════════════════╝
+
+📊 STATISTIQUES GLOBALES
+   • Tentatives totales:    100
+   • Succès (insérés):      100
+   • Échecs:                0
+   • Doublons (ignorés):    0
+   • Filtrés (non-Salaf):   0
+   
+⏱️  DURÉE
+   • Début:  2026-04-18T03:01:12.208345
+   • Fin:    2026-04-18T03:01:12.993771
+   • Durée:  0:00:00.785426
+
+📈 PAR GRADE
+   • Sahih          :    34
+   • Hasan          :    66
+
+🔍 TAUX DE RÉUSSITE
+   • Insertion: 100.0%
+   • Filtrage:  0.0%
+
+✅ CONFORMITÉ SALAF: STRICTE
+   ✓ Filtre Ta'wil activé
+   ✓ Vérification sources Kutub al-Sittah
+   ✓ Grade minimum appliqué

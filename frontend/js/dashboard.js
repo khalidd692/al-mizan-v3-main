@@ -16,10 +16,14 @@
   const isnadContainer = document.getElementById('isnad-tree');
 
   const tree = new IsnadTree(isnadContainer);
-  const sse = new MizanSSEClient(onZone);
+  const cache = new MizanCacheManager();
+  const sse = new MizanSSEClient(onZone, { cache: cache, demoMode: true });
 
   let zonesReceived = 0;
   const TOTAL_ZONES = 32;
+  
+  // Nettoyage du cache au démarrage
+  cache.cleanup();
 
   // Mapping zones → tabs selon Constitution v4
   const ZONE_TO_TAB = {
@@ -52,17 +56,33 @@
 
   if (tabs.length > 0) tabs[0].click();
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const query = queryInput.value.trim();
-    if (!query) return;
+  // Throttle pour le bouton de recherche (1 seconde)
+  const throttledSearch = MizanUtils.throttle(async (query) => {
     resetUI();
     setStatus('Recherche en cours...');
     setProgress(2);
     await sse.connect(query);
     setStatus('Terminé');
     setProgress(100);
+  }, 1000);
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const query = queryInput.value.trim();
+    if (!query) return;
+    throttledSearch(query);
   });
+  
+  // Bouton de nettoyage du cache
+  const clearCacheBtn = document.getElementById('clear-cache-btn');
+  if (clearCacheBtn) {
+    clearCacheBtn.addEventListener('click', () => {
+      const count = cache.clear();
+      const stats = cache.getStats();
+      alert(`Cache vidé : ${count} entrées supprimées`);
+      console.log('[CACHE] Stats après nettoyage:', stats);
+    });
+  }
 
   function resetUI() {
     matnAr.textContent = '';
@@ -95,7 +115,23 @@
     } else if (event === 'zone_32') {
       setStatus('Terminé ✓');
     } else if (event === 'error') {
-      setStatus('Erreur : ' + (data.message || 'inconnue'));
+      const errorMsg = data.message || 'inconnue';
+      const errorCode = data.code || '';
+      
+      if (errorCode === 'NO_RESULT') {
+        setStatus('Aucun résultat trouvé');
+        verdictBanner.textContent = 'Aucun hadith trouvé pour cette recherche';
+        verdictBanner.className = 'mz-verdict-banner mz-verdict-warning';
+      } else if (errorCode === 'RATE_LIMIT_EXCEEDED') {
+        setStatus('Limite atteinte - Patientez');
+        alert('Trop de requêtes. Veuillez patienter quelques instants.');
+      } else if (errorCode === 'SECURITY_BLOCK') {
+        setStatus('Sécurité - Requête bloquée');
+        verdictBanner.textContent = 'Service momentanément indisponible pour raisons de sécurité';
+        verdictBanner.className = 'mz-verdict-banner mz-verdict-danger';
+      } else {
+        setStatus('Erreur : ' + errorMsg);
+      }
     } else {
       // Mapper zone_X → tab correspondant
       const tab = ZONE_TO_TAB[event];
