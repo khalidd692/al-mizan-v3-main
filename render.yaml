@@ -13,3 +13,5 @@ services:
         value: "*"
       - key: DEBUG
         value: false
+      - key: MIZAN_DEMO_MODE
+        value: "1"
