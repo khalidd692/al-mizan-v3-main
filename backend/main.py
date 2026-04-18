@@ -38,11 +38,17 @@ _REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 VERSION = "5.0.0-dev"
 
+def _is_demo_mode() -> bool:
+    raw = os.environ.get("MIZAN_DEMO_MODE", "1").strip().lower()
+    return raw in ("1", "true", "yes", "on")
+
 async def health(request):
     return JSONResponse({
         "status": "ok",
         "version": VERSION,
         "service": "Al-Mīzān — Moteur de Takhrīj",
+        "demo_mode": _is_demo_mode(),
+        "demo_banner": "MODE DÉMONSTRATION" if _is_demo_mode() else None,
     })
 
 def _check_rate_limit(ip: str) -> tuple[bool, str]:
@@ -121,7 +127,7 @@ routes = [
     Route("/api/search", search),
     Route("/api/harvest-and-process", harvest_and_process),
     Mount("/", app=StaticFiles(
-        directory=str(_REPO_ROOT / "frontend"),
+        directory=str(_REPO_ROOT),
         html=True
     )),
 ]
