@@ -113,3 +113,6 @@
 2026-04-18 04:46:22,202 | ERROR | EXCEPTION | صحيح البخاري | page=1 | 'str' object has no attribute 'get'
 2026-04-18 04:46:24,838 | ERROR | EXCEPTION | صحيح البخاري | page=1 | 'str' object has no attribute 'get'
 2026-04-18 04:46:27,394 | ERROR | EXCEPTION | صحيح البخاري | page=1 | 'str' object has no attribute 'get'
+2026-04-18 17:59:36,862 | INFO | ================================================================================
+2026-04-18 17:59:36,863 | INFO | DÉMARRAGE HARVESTER MASSIF AL-MĪZĀN v5.0
+2026-04-18 17:59:36,863 | INFO | ================================================================================

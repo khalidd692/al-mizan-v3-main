@@ -4,6 +4,10 @@
 Test des APIs Tier 3 pour sélection sources primaires
 """
 
+import sys
+import io
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+
 import requests
 import json
 import time

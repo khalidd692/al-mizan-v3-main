@@ -1,0 +1,943 @@
+{
+  "Sunnah.com - Collections": {
+    "name": "Sunnah.com - Collections",
+    "url": "https://api.sunnah.com/v1/collections",
+    "accessible": true,
+    "response_time": 0.84,
+    "status_code": 403,
+    "format": null,
+    "sample_data": null,
+    "error": "HTTP 403"
+  },
+  "Sunnah.com - Hadith": {
+    "name": "Sunnah.com - Hadith",
+    "url": "https://api.sunnah.com/v1/hadiths/bukhari/1",
+    "accessible": true,
+    "response_time": 0.24,
+    "status_code": 403,
+    "format": null,
+    "sample_data": null,
+    "error": "HTTP 403"
+  },
+  "Hadith Gading - Books": {
+    "name": "Hadith Gading - Books",
+    "url": "https://api.hadith.gading.dev/books",
+    "accessible": true,
+    "response_time": 0.66,
+    "status_code": 200,
+    "format": "JSON",
+    "sample_data": {
+      "type": "dict",
+      "keys": [
+        "code",
+        "message",
+        "data",
+        "error"
+      ],
+      "count": null,
+      "first_item": {
+        "code": 200
+      }
+    },
+    "error": null
+  },
+  "Hadith Gading - Bukhari": {
+    "name": "Hadith Gading - Bukhari",
+    "url": "https://api.hadith.gading.dev/books/bukhari?range=1-5",
+    "accessible": true,
+    "response_time": 0.21,
+    "status_code": 200,
+    "format": "JSON",
+    "sample_data": {
+      "type": "dict",
+      "keys": [
+        "code",
+        "message",
+        "data",
+        "error"
+      ],
+      "count": null,
+      "first_item": {
+        "code": 200
+      }
+    },
+    "error": null
+  },
+  "JSDelivr - Editions": {
+    "name": "JSDelivr - Editions",
+    "url": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions.json",
+    "accessible": true,
+    "response_time": 0.47,
+    "status_code": 200,
+    "format": "JSON",
+    "sample_data": {
+      "type": "dict",
+      "keys": [
+        "abudawud",
+        "bukhari",
+        "dehlawi",
+        "ibnmajah",
+        "malik"
+      ],
+      "count": null,
+      "first_item": {
+        "abudawud": {
+          "name": "Sunan Abu Dawud",
+          "collection": [
+            {
+              "name": "ara-abudawud",
+              "book": "abudawud",
+              "author": "Unknown",
+              "language": "Arabic",
+              "has_sections": true,
+              "direction": "rtl",
+              "source": "",
+              "comments": "",
+              "link": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-abudawud.json",
+              "linkmin": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-abudawud.min.json"
+            },
+            {
+              "name": "ara-abudawud1",
+              "book": "abudawud",
+              "author": "Unknown",
+              "language": "Arabic",
+              "has_sections": true,
+              "direction": "rtl",
+              "source": "",
+              "comments": "Diacritics removed for easier searching",
+              "link": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-abudawud1.json",
+              "linkmin": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-abudawud1.min.json"
+            },
+            {
+              "name": "ben-abudawud",
+              "book": "abudawud",
+              "author": "Unknown",
+              "language": "Bengali",
+              "has_sections": true,
+              "direction": "ltr",
+              "source": "",
+              "comments": "",
+              "link": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ben-abudawud.json",
+              "linkmin": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ben-abudawud.min.json"
+            },
+            {
+              "name": "eng-abudawud",
+              "book": "abudawud",
+              "author": "Unknown",
+              "language": "English",
+              "has_sections": true,
+              "direction": "ltr",
+              "source": "",
+              "comments": "",
+              "link": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/eng-abudawud.json",
+              "linkmin": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/eng-abudawud.min.json"
+            },
+            {
+              "name": "fra-abudawud",
+              "book": "abudawud",
+              "author": "Unknown",
+              "language": "French",
+              "has_sections": true,
+              "direction": "ltr",
+              "source": "",
+              "comments": "",
+              "link": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/fra-abudawud.json",
+              "linkmin": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/fra-abudawud.min.json"
+            },
+            {
+              "name": "ind-abudawud",
+              "book": "abudawud",
+              "author": "Unknown",
+              "language": "Indonesian",
+              "has_sections": true,
+              "direction": "ltr",
+              "source": "",
+              "comments": "",
+              "link": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ind-abudawud.json",
+              "linkmin": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ind-abudawud.min.json"
+            },
+            {
+              "name": "rus-abudawud",
+              "book": "abudawud",
+              "author": "Unknown",
+              "language": "Russian",
+              "has_sections": true,
+              "direction": "ltr",
+              "source": "https://isnad.link/",
+              "comments": "",
+              "link": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/rus-abudawud.json",
+              "linkmin": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/rus-abudawud.min.json"
+            },
+            {
+              "name": "tur-abudawud",
+              "book": "abudawud",
+              "author": "Unknown",
+              "language": "Turkish",
+              "has_sections": true,
+              "direction": "ltr",
+              "source": "",
+              "comments": "",
+              "link": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/tur-abudawud.json",
+              "linkmin": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/tur-abudawud.min.json"
+            },
+            {
+              "name": "urd-abudawud",
+              "book": "abudawud",
+              "author": "Unknown",
+              "language": "Urdu",
+              "has_sections": true,
+              "direction": "rtl",
+              "source": "",
+              "comments": "",
+              "link": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/urd-abudawud.json",
+              "linkmin": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/urd-abudawud.min.json"
+            }
+          ]
+        }
+      }
+    },
+    "error": null
+  },
+  "JSDelivr - Bukhari": {
+    "name": "JSDelivr - Bukhari",
+    "url": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari.json",
+    "accessible": true,
+    "response_time": 1.72,
+    "status_code": 200,
+    "format": "JSON",
+    "sample_data": {
+      "type": "dict",
+      "keys": [
+        "metadata",
+        "hadiths"
+      ],
+      "count": null,
+      "first_item": {
+        "metadata": {
+          "name": "Sahih al Bukhari",
+          "sections": {
+            "0": "",
+            "1": "Revelation",
+            "2": "Belief",
+            "3": "Knowledge",
+            "4": "Ablutions (Wudu')",
+            "5": "Bathing (Ghusl)",
+            "6": "Menstrual Periods",
+            "7": "Rubbing hands and feet with dust (Tayammum)",
+            "8": "Prayers (Salat)",
+            "9": "Times of the Prayers",
+            "10": "Call to Prayers (Adhaan)",
+            "11": "Friday Prayer",
+            "12": "Fear Prayer",
+            "13": "The Two Festivals (Eids)",
+            "14": "Witr Prayer",
+            "15": "Invoking Allah for Rain (Istisqaa)",
+            "16": "Eclipses",
+            "17": "Prostration During Recital of Qur'an",
+            "18": "Shortening the Prayers (At-Taqseer)",
+            "19": "Prayer at Night (Tahajjud)",
+            "20": "Virtues of Prayer at Masjid Makkah and Madinah",
+            "21": "Actions while Praying",
+            "22": "Forgetfulness in Prayer",
+            "23": "Funerals (Al-Janaa'iz)",
+            "24": "Obligatory Charity Tax (Zakat)",
+            "25": "Hajj (Pilgrimage)",
+            "26": "`Umrah (Minor pilgrimage)",
+            "27": "Pilgrims Prevented from Completing the Pilgrimage",
+            "28": "Penalty of Hunting while on Pilgrimage",
+            "29": "Virtues of Madinah",
+            "30": "Fasting",
+            "31": "Praying at Night in Ramadaan (Taraweeh)",
+            "32": "Virtues of the Night of Qadr",
+            "33": "Retiring to a Mosque for Remembrance of Allah (I'tikaf)",
+            "34": "Sales and Trade",
+            "35": "Sales in which a Price is paid for Goods to be Delivered Later (As-Salam)",
+            "36": "Shuf'a",
+            "37": "Hiring",
+            "38": "Transferance of a Debt from One Person to Another (Al-Hawaala)",
+            "39": "Kafalah",
+            "40": "Representation, Authorization, Business by Proxy",
+            "41": "Agriculture",
+            "42": "Distribution of Water",
+            "43": "Loans, Payment of Loans, Freezing of Property, Bankruptcy",
+            "44": "Khusoomaat",
+            "45": "Lost Things Picked up by Someone (Luqatah)",
+            "46": "Oppressions",
+            "47": "Partnership",
+            "48": "Mortgaging",
+            "49": "Manumission of Slaves",
+            "50": "Makaatib",
+            "51": "Gifts",
+            "52": "Witnesses",
+            "53": "Peacemaking",
+            "54": "Conditions",
+            "55": "Wills and Testaments (Wasaayaa)",
+            "56": "Fighting for the Cause of Allah (Jihaad)",
+            "57": "One-fifth of Booty to the Cause of Allah (Khumus)",
+            "58": "Jizyah and Mawaada'ah",
+            "59": "Beginning of Creation",
+            "60": "Prophets",
+            "61": "Virtues and Merits of the Prophet (pbuh) and his Companions",
+            "62": "Companions of the Prophet",
+            "63": "Merits of the Helpers in Madinah (Ansaar)",
+            "64": "Military Expeditions led by the Prophet (pbuh) (Al-Maghaazi)",
+            "65": "Prophetic Commentary on the Qur'an (Tafseer of the Prophet (pbuh))",
+            "66": "Virtues of the Qur'an",
+            "67": "Wedlock, Marriage (Nikaah)",
+            "68": "Divorce",
+            "69": "Supporting the Family",
+            "70": "Food, Meals",
+            "71": "Sacrifice on Occasion of Birth (`Aqiqa)",
+            "72": "Hunting, Slaughtering",
+            "73": "Al-Adha Festival Sacrifice (Adaahi)",
+            "74": "Drinks",
+            "75": "Patients",
+            "76": "Medicine",
+            "77": "Dress",
+            "78": "Good Manners and Form (Al-Adab)",
+            "79": "Asking Permission",
+            "80": "Invocations",
+            "81": "To make the Heart Tender (Ar-Riqaq)",
+            "82": "Divine Will (Al-Qadar)",
+            "83": "Oaths and Vows",
+            "84": "Expiation for Unfulfilled Oaths",
+            "85": "Laws of Inheritance (Al-Faraa'id)",
+            "86": "Limits and Punishments set by Allah (Hudood)",
+            "87": "Blood Money (Ad-Diyat)",
+            "88": "Apostates",
+            "89": "(Statements made under) Coercion",
+            "90": "Tricks",
+            "91": "Interpretation of Dreams",
+            "92": "Afflictions and the End of the World",
+            "93": "Judgments (Ahkaam)",
+            "94": "Wishes",
+            "95": "Accepting Information Given by a Truthful Person",
+            "96": "Holding Fast to the Qur'an and Sunnah",
+            "97": "Oneness, Uniqueness of Allah (Tawheed)"
+          },
+          "section_details": {
+            "0": {
+              "hadithnumber_first": 0,
+              "hadithnumber_last": 0,
+              "arabicnumber_first": 0,
+              "arabicnumber_last": 0
+            },
+            "1": {
+              "hadithnumber_first": 1,
+              "hadithnumber_last": 7,
+              "arabicnumber_first": 1,
+              "arabicnumber_last": 7
+            },
+            "2": {
+              "hadithnumber_first": 8,
+              "hadithnumber_last": 58,
+              "arabicnumber_first": 8,
+              "arabicnumber_last": 58
+            },
+            "3": {
+              "hadithnumber_first": 59,
+              "hadithnumber_last": 134,
+              "arabicnumber_first": 59,
+              "arabicnumber_last": 134
+            },
+            "4": {
+              "hadithnumber_first": 135,
+              "hadithnumber_last": 247,
+              "arabicnumber_first": 135,
+              "arabicnumber_last": 247
+            },
+            "5": {
+              "hadithnumber_first": 248,
+              "hadithnumber_last": 293,
+              "arabicnumber_first": 248,
+              "arabicnumber_last": 293
+            },
+            "6": {
+              "hadithnumber_first": 294,
+              "hadithnumber_last": 333,
+              "arabicnumber_first": 294,
+              "arabicnumber_last": 333
+            },
+            "7": {
+              "hadithnumber_first": 334,
+              "hadithnumber_last": 348,
+              "arabicnumber_first": 334,
+              "arabicnumber_last": 348
+            },
+            "8": {
+              "hadithnumber_first": 349,
+              "hadithnumber_last": 520,
+              "arabicnumber_first": 349,
+              "arabicnumber_last": 520
+            },
+            "9": {
+              "hadithnumber_first": 522,
+              "hadithnumber_last": 602,
+              "arabicnumber_first": 522,
+              "arabicnumber_last": 602
+            },
+            "10": {
+              "hadithnumber_first": 603,
+              "hadithnumber_last": 875,
+              "arabicnumber_first": 603,
+              "arabicnumber_last": 875
+            },
+            "11": {
+              "hadithnumber_first": 876,
+              "hadithnumber_last": 941,
+              "arabicnumber_first": 876,
+              "arabicnumber_last": 941
+            },
+            "12": {
+              "hadithnumber_first": 942,
+              "hadithnumber_last": 947,
+              "arabicnumber_first": 942,
+              "arabicnumber_last": 947
+            },
+            "13": {
+              "hadithnumber_first": 948,
+              "hadithnumber_last": 989,
+              "arabicnumber_first": 948,
+              "arabicnumber_last": 989
+            },
+            "14": {
+              "hadithnumber_first": 990,
+              "hadithnumber_last": 1004,
+              "arabicnumber_first": 990,
+              "arabicnumber_last": 1004
+            },
+            "15": {
+              "hadithnumber_first": 1005,
+              "hadithnumber_last": 1039,
+              "arabicnumber_first": 1005,
+              "arabicnumber_last": 1039
+            },
+            "16": {
+              "hadithnumber_first": 1040,
+              "hadithnumber_last": 1066,
+              "arabicnumber_first": 1040,
+              "arabicnumber_last": 1066
+            },
+            "17": {
+              "hadithnumber_first": 1067,
+              "hadithnumber_last": 1079,
+              "arabicnumber_first": 1067,
+              "arabicnumber_last": 1079
+            },
+            "18": {
+              "hadithnumber_first": 1080,
+              "hadithnumber_last": 1119,
+              "arabicnumber_first": 1080,
+              "arabicnumber_last": 1119
+            },
+            "19": {
+              "hadithnumber_first": 1120,
+              "hadithnumber_last": 1187,
+              "arabicnumber_first": 1120,
+              "arabicnumber_last": 1187
+            },
+            "20": {
+              "hadithnumber_first": 1188,
+              "hadithnumber_last": 1197,
+              "arabicnumber_first": 1188,
+              "arabicnumber_last": 1197
+            },
+            "21": {
+              "hadithnumber_first": 1198,
+              "hadithnumber_last": 1223,
+              "arabicnumber_first": 1198,
+              "arabicnumber_last": 1223
+            },
+            "22": {
+              "hadithnumber_first": 1224,
+              "hadithnumber_last": 1236,
+              "arabicnumber_first": 1224,
+              "arabicnumber_last": 1236
+            },
+            "23": {
+              "hadithnumber_first": 1237,
+              "hadithnumber_last": 1394,
+              "arabicnumber_first": 1237,
+              "arabicnumber_last": 1394
+            },
+            "24": {
+              "hadithnumber_first": 1395,
+              "hadithnumber_last": 1512,
+              "arabicnumber_first": 1395,
+              "arabicnumber_last": 1512
+            },
+            "25": {
+              "hadithnumber_first": 1513,
+              "hadithnumber_last": 1772,
+              "arabicnumber_first": 1513,
+              "arabicnumber_last": 1772
+            },
+            "26": {
+              "hadithnumber_first": 1773,
+              "hadithnumber_last": 1805,
+              "arabicnumber_first": 1773,
+              "arabicnumber_last": 1805
+            },
+            "27": {
+              "hadithnumber_first": 1806,
+              "hadithnumber_last": 1820,
+              "arabicnumber_first": 1806,
+              "arabicnumber_last": 1820
+            },
+            "28": {
+              "hadithnumber_first": 1821,
+              "hadithnumber_last": 1866,
+              "arabicnumber_first": 1821,
+              "arabicnumber_last": 1866
+            },
+            "29": {
+              "hadithnumber_first": 1867,
+              "hadithnumber_last": 1890,
+              "arabicnumber_first": 1867,
+              "arabicnumber_last": 1890
+            },
+            "30": {
+              "hadithnumber_first": 1891,
+              "hadithnumber_last": 2007,
+              "arabicnumber_first": 1891,
+              "arabicnumber_last": 2007
+            },
+            "31": {
+              "hadithnumber_first": 2008,
+              "hadithnumber_last": 2013,
+              "arabicnumber_first": 2008,
+              "arabicnumber_last": 2013
+            },
+            "32": {
+              "hadithnumber_first": 2014,
+              "hadithnumber_last": 2024,
+              "arabicnumber_first": 2014,
+              "arabicnumber_last": 2024
+            },
+            "33": {
+              "hadithnumber_first": 2025,
+              "hadithnumber_last": 2046,
+              "arabicnumber_first": 2025,
+              "arabicnumber_last": 2046
+            },
+            "34": {
+              "hadithnumber_first": 2047,
+              "hadithnumber_last": 2238,
+              "arabicnumber_first": 2047,
+              "arabicnumber_last": 2238
+            },
+            "35": {
+              "hadithnumber_first": 2239,
+              "hadithnumber_last": 2256,
+              "arabicnumber_first": 2239,
+              "arabicnumber_last": 2256
+            },
+            "36": {
+              "hadithnumber_first": 2257,
+              "hadithnumber_last": 2259,
+              "arabicnumber_first": 2257,
+              "arabicnumber_last": 2259
+            },
+            "37": {
+              "hadithnumber_first": 2260,
+              "hadithnumber_last": 2286,
+              "arabicnumber_first": 2260,
+              "arabicnumber_last": 2286
+            },
+            "38": {
+              "hadithnumber_first": 2287,
+              "hadithnumber_last": 2289,
+              "arabicnumber_first": 2287,
+              "arabicnumber_last": 2289
+            },
+            "39": {
+              "hadithnumber_first": 2290,
+              "hadithnumber_last": 2298,
+              "arabicnumber_first": 2290,
+              "arabicnumber_last": 2298
+            },
+            "40": {
+              "hadithnumber_first": 2299,
+              "hadithnumber_last": 2319,
+              "arabicnumber_first": 2299,
+              "arabicnumber_last": 2319
+            },
+            "41": {
+              "hadithnumber_first": 2320,
+              "hadithnumber_last": 2350,
+              "arabicnumber_first": 2320,
+              "arabicnumber_last": 2350
+            },
+            "42": {
+              "hadithnumber_first": 2351,
+              "hadithnumber_last": 2383,
+              "arabicnumber_first": 2351,
+              "arabicnumber_last": 2383
+            },
+            "43": {
+              "hadithnumber_first": 2385,
+              "hadithnumber_last": 2409,
+              "arabicnumber_first": 2385,
+              "arabicnumber_last": 2409
+            },
+            "44": {
+              "hadithnumber_first": 2410,
+              "hadithnumber_last": 2425,
+              "arabicnumber_first": 2410,
+              "arabicnumber_last": 2425
+            },
+            "45": {
+              "hadithnumber_first": 2426,
+              "hadithnumber_last": 2439,
+              "arabicnumber_first": 2426,
+              "arabicnumber_last": 2439
+            },
+            "46": {
+              "hadithnumber_first": 2440,
+              "hadithnumber_last": 2482,
+              "arabicnumber_first": 2440,
+              "arabicnumber_last": 2482
+            },
+            "47": {
+              "hadithnumber_first": 2483,
+              "hadithnumber_last": 2507,
+              "arabicnumber_first": 2483,
+              "arabicnumber_last": 2507
+            },
+            "48": {
+              "hadithnumber_first": 2508,
+              "hadithnumber_last": 2515,
+              "arabicnumber_first": 2508,
+              "arabicnumber_last": 2515
+            },
+            "49": {
+              "hadithnumber_first": 2517,
+              "hadithnumber_last": 2559,
+              "arabicnumber_first": 2517,
+              "arabicnumber_last": 2559
+            },
+            "50": {
+              "hadithnumber_first": 2560,
+              "hadithnumber_last": 2565,
+              "arabicnumber_first": 2560,
+              "arabicnumber_last": 2565
+            },
+            "51": {
+              "hadithnumber_first": 2566,
+              "hadithnumber_last": 2636,
+              "arabicnumber_first": 2566,
+              "arabicnumber_last": 2636
+            },
+            "52": {
+              "hadithnumber_first": 2637,
+              "hadithnumber_last": 2689,
+              "arabicnumber_first": 2637,
+              "arabicnumber_last": 2689
+            },
+            "53": {
+              "hadithnumber_first": 2690,
+              "hadithnumber_last": 2710,
+              "arabicnumber_first": 2690,
+              "arabicnumber_last": 2710
+            },
+            "54": {
+              "hadithnumber_first": 2712,
+              "hadithnumber_last": 2737,
+              "arabicnumber_first": 2712,
+              "arabicnumber_last": 2737
+            },
+            "55": {
+              "hadithnumber_first": 2738,
+              "hadithnumber_last": 2781,
+              "arabicnumber_first": 2738,
+              "arabicnumber_last": 2781
+            },
+            "56": {
+              "hadithnumber_first": 2782,
+              "hadithnumber_last": 3090,
+              "arabicnumber_first": 2782,
+              "arabicnumber_last": 3090
+            },
+            "57": {
+              "hadithnumber_first": 3091,
+              "hadithnumber_last": 3155,
+              "arabicnumber_first": 3091,
+              "arabicnumber_last": 3155
+            },
+            "58": {
+              "hadithnumber_first": 3157,
+              "hadithnumber_last": 3189,
+              "arabicnumber_first": 3157,
+              "arabicnumber_last": 3189
+            },
+            "59": {
+              "hadithnumber_first": 3190,
+              "hadithnumber_last": 3325,
+              "arabicnumber_first": 3190,
+              "arabicnumber_last": 3325
+            },
+            "60": {
+              "hadithnumber_first": 3326,
+              "hadithnumber_last": 3488,
+              "arabicnumber_first": 3326,
+              "arabicnumber_last": 3488
+            },
+            "61": {
+              "hadithnumber_first": 3489,
+              "hadithnumber_last": 3648,
+              "arabicnumber_first": 3489,
+              "arabicnumber_last": 3648
+            },
+            "62": {
+              "hadithnumber_first": 3649,
+              "hadithnumber_last": 3775,
+              "arabicnumber_first": 3649,
+              "arabicnumber_last": 3775
+            },
+            "63": {
+              "hadithnumber_first": 3776,
+              "hadithnumber_last": 3948,
+              "arabicnumber_first": 3776,
+              "arabicnumber_last": 3948
+            },
+            "64": {
+              "hadithnumber_first": 3949,
+              "hadithnumber_last": 4473,
+              "arabicnumber_first": 3949,
+              "arabicnumber_last": 4473
+            },
+            "65": {
+              "hadithnumber_first": 4474,
+              "hadithnumber_last": 4977,
+              "arabicnumber_first": 4474,
+              "arabicnumber_last": 4977
+            },
+            "66": {
+              "hadithnumber_first": 4979,
+              "hadithnumber_last": 5062,
+              "arabicnumber_first": 4979,
+              "arabicnumber_last": 5062
+            },
+            "67": {
+              "hadithnumber_first": 5063,
+              "hadithnumber_last": 5250,
+              "arabicnumber_first": 5063,
+              "arabicnumber_last": 5250
+            },
+            "68": {
+              "hadithnumber_first": 5251,
+              "hadithnumber_last": 5350,
+              "arabicnumber_first": 5251,
+              "arabicnumber_last": 5350
+            },
+            "69": {
+              "hadithnumber_first": 5351,
+              "hadithnumber_last": 5372,
+              "arabicnumber_first": 5351,
+              "arabicnumber_last": 5372
+            },
+            "70": {
+              "hadithnumber_first": 5373,
+              "hadithnumber_last": 5466,
+              "arabicnumber_first": 5373,
+              "arabicnumber_last": 5466
+            },
+            "71": {
+              "hadithnumber_first": 5467,
+              "hadithnumber_last": 5474,
+              "arabicnumber_first": 5467,
+              "arabicnumber_last": 5474
+            },
+            "72": {
+              "hadithnumber_first": 5475,
+              "hadithnumber_last": 5544,
+              "arabicnumber_first": 5475,
+              "arabicnumber_last": 5544
+            },
+            "73": {
+              "hadithnumber_first": 5545,
+              "hadithnumber_last": 5574,
+              "arabicnumber_first": 5545,
+              "arabicnumber_last": 5574
+            },
+            "74": {
+              "hadithnumber_first": 5575,
+              "hadithnumber_last": 5639,
+              "arabicnumber_first": 5575,
+              "arabicnumber_last": 5639
+            },
+            "75": {
+              "hadithnumber_first": 5640,
+              "hadithnumber_last": 5677,
+              "arabicnumber_first": 5640,
+              "arabicnumber_last": 5677
+            },
+            "76": {
+              "hadithnumber_first": 5678,
+              "hadithnumber_last": 5782,
+              "arabicnumber_first": 5678,
+              "arabicnumber_last": 5782
+            },
+            "77": {
+              "hadithnumber_first": 5783,
+              "hadithnumber_last": 5969,
+              "arabicnumber_first": 5783,
+              "arabicnumber_last": 5969
+            },
+            "78": {
+              "hadithnumber_first": 5970,
+              "hadithnumber_last": 6226,
+              "arabicnumber_first": 5970,
+              "arabicnumber_last": 6226
+            },
+            "79": {
+              "hadithnumber_first": 6227,
+              "hadithnumber_last": 6303,
+              "arabicnumber_first": 6227,
+              "arabicnumber_last": 6303
+            },
+            "80": {
+              "hadithnumber_first": 6304,
+              "hadithnumber_last": 6411,
+              "arabicnumber_first": 6304,
+              "arabicnumber_last": 6411
+            },
+            "81": {
+              "hadithnumber_first": 6412,
+              "hadithnumber_last": 6593,
+              "arabicnumber_first": 6412,
+              "arabicnumber_last": 6593
+            },
+            "82": {
+              "hadithnumber_first": 6594,
+              "hadithnumber_last": 6620,
+              "arabicnumber_first": 6594,
+              "arabicnumber_last": 6620
+            },
+            "83": {
+              "hadithnumber_first": 6621,
+              "hadithnumber_last": 6707,
+              "arabicnumber_first": 6621,
+              "arabicnumber_last": 6707
+            },
+            "84": {
+              "hadithnumber_first": 6708,
+              "hadithnumber_last": 6722,
+              "arabicnumber_first": 6708,
+              "arabicnumber_last": 6722
+            },
+            "85": {
+              "hadithnumber_first": 6723,
+              "hadithnumber_last": 6771,
+              "arabicnumber_first": 6723,
+              "arabicnumber_last": 6771
+            },
+            "86": {
+              "hadithnumber_first": 6772,
+              "hadithnumber_last": 6860,
+              "arabicnumber_first": 6772,
+              "arabicnumber_last": 6860
+            },
+            "87": {
+              "hadithnumber_first": 6861,
+              "hadithnumber_last": 6917,
+              "arabicnumber_first": 6861,
+              "arabicnumber_last": 6917
+            },
+            "88": {
+              "hadithnumber_first": 6918,
+              "hadithnumber_last": 6939,
+              "arabicnumber_first": 6918,
+              "arabicnumber_last": 6939
+            },
+            "89": {
+              "hadithnumber_first": 6940,
+              "hadithnumber_last": 6952,
+              "arabicnumber_first": 6940,
+              "arabicnumber_last": 6952
+            },
+            "90": {
+              "hadithnumber_first": 6953,
+              "hadithnumber_last": 6981,
+              "arabicnumber_first": 6953,
+              "arabicnumber_last": 6981
+            },
+            "91": {
+              "hadithnumber_first": 6982,
+              "hadithnumber_last": 7047,
+              "arabicnumber_first": 6982,
+              "arabicnumber_last": 7047
+            },
+            "92": {
+              "hadithnumber_first": 7048,
+              "hadithnumber_last": 7136,
+              "arabicnumber_first": 7048,
+              "arabicnumber_last": 7136
+            },
+            "93": {
+              "hadithnumber_first": 7137,
+              "hadithnumber_last": 7225,
+              "arabicnumber_first": 7137,
+              "arabicnumber_last": 7225
+            },
+            "94": {
+              "hadithnumber_first": 7226,
+              "hadithnumber_last": 7245,
+              "arabicnumber_first": 7226,
+              "arabicnumber_last": 7245
+            },
+            "95": {
+              "hadithnumber_first": 7246,
+              "hadithnumber_last": 7267,
+              "arabicnumber_first": 7246,
+              "arabicnumber_last": 7267
+            },
+            "96": {
+              "hadithnumber_first": 7268,
+              "hadithnumber_last": 7370,
+              "arabicnumber_first": 7268,
+              "arabicnumber_last": 7370
+            },
+            "97": {
+              "hadithnumber_first": 7371,
+              "hadithnumber_last": 7563,
+              "arabicnumber_first": 7371,
+              "arabicnumber_last": 7563
+            }
+          }
+        }
+      }
+    },
+    "error": null
+  },
+  "QuranHadith - API": {
+    "name": "QuranHadith - API",
+    "url": "https://quranhadith.com/api/hadith",
+    "accessible": false,
+    "response_time": null,
+    "status_code": null,
+    "format": null,
+    "sample_data": null,
+    "error": "Connection Error"
+  },
+  "Random Hadith - API": {
+    "name": "Random Hadith - API",
+    "url": "https://random-hadith-generator.vercel.app/api/hadiths",
+    "accessible": true,
+    "response_time": 0.45,
+    "status_code": 404,
+    "format": null,
+    "sample_data": null,
+    "error": "HTTP 404"
+  },
+  "Sunnah Intranet": {
+    "name": "Sunnah Intranet",
+    "url": "https://hadith.intranet.sunnah.com/api",
+    "accessible": false,
+    "response_time": null,
+    "status_code": null,
+    "format": null,
+    "sample_data": null,
+    "error": "Connection Error"
+  }
+}

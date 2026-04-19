@@ -1,0 +1,438 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2026-04-18",
+    "source": "Universités de la péninsule arabique (Médine, La Mecque, Qassim, Riyad)",
+    "description": "Liste des savants de référence reconnus par l'Université Islamique de Médine et institutions affiliées"
+  },
+  "categories": {
+    "mutaqaddimun": {
+      "label": "Les Anciens (Mutaqaddimūn)",
+      "period": "1er-5ème siècle de l'Hégire",
+      "description": "Savants incontournables des premiers siècles de l'Islam",
+      "authorities": [
+        {
+          "name_ar": "محمد بن إسماعيل البخاري",
+          "name_latin": "al-Bukhārī",
+          "full_name": "Muhammad ibn Isma'il al-Bukhari",
+          "birth_year": 194,
+          "death_year": 256,
+          "specialty": "Hadith, Fiqh",
+          "major_works": ["Sahih al-Bukhari", "al-Adab al-Mufrad"],
+          "tier": 1,
+          "trust_level": "absolute"
+        },
+        {
+          "name_ar": "مسلم بن الحجاج",
+          "name_latin": "Muslim",
+          "full_name": "Muslim ibn al-Hajjaj al-Naysaburi",
+          "birth_year": 206,
+          "death_year": 261,
+          "specialty": "Hadith",
+          "major_works": ["Sahih Muslim"],
+          "tier": 1,
+          "trust_level": "absolute"
+        },
+        {
+          "name_ar": "أحمد بن حنبل",
+          "name_latin": "Ahmad ibn Hanbal",
+          "full_name": "Ahmad ibn Muhammad ibn Hanbal",
+          "birth_year": 164,
+          "death_year": 241,
+          "specialty": "Hadith, Fiqh",
+          "major_works": ["Musnad Ahmad"],
+          "tier": 1,
+          "trust_level": "absolute"
+        },
+        {
+          "name_ar": "أبو داود السجستاني",
+          "name_latin": "Abū Dāwūd",
+          "full_name": "Sulayman ibn al-Ash'ath al-Sijistani",
+          "birth_year": 202,
+          "death_year": 275,
+          "specialty": "Hadith",
+          "major_works": ["Sunan Abi Dawud"],
+          "tier": 1,
+          "trust_level": "absolute"
+        },
+        {
+          "name_ar": "محمد بن عيسى الترمذي",
+          "name_latin": "at-Tirmidhī",
+          "full_name": "Muhammad ibn 'Isa at-Tirmidhi",
+          "birth_year": 209,
+          "death_year": 279,
+          "specialty": "Hadith",
+          "major_works": ["Jami' at-Tirmidhi"],
+          "tier": 1,
+          "trust_level": "absolute"
+        },
+        {
+          "name_ar": "أحمد بن شعيب النسائي",
+          "name_latin": "an-Nasāʾī",
+          "full_name": "Ahmad ibn Shu'ayb an-Nasa'i",
+          "birth_year": 215,
+          "death_year": 303,
+          "specialty": "Hadith",
+          "major_works": ["Sunan an-Nasa'i"],
+          "tier": 1,
+          "trust_level": "absolute"
+        },
+        {
+          "name_ar": "محمد بن يزيد ابن ماجه",
+          "name_latin": "Ibn Mājah",
+          "full_name": "Muhammad ibn Yazid ibn Majah",
+          "birth_year": 209,
+          "death_year": 273,
+          "specialty": "Hadith",
+          "major_works": ["Sunan Ibn Majah"],
+          "tier": 1,
+          "trust_level": "absolute"
+        },
+        {
+          "name_ar": "مالك بن أنس",
+          "name_latin": "Mālik ibn Anas",
+          "full_name": "Malik ibn Anas al-Asbahi",
+          "birth_year": 93,
+          "death_year": 179,
+          "specialty": "Hadith, Fiqh",
+          "major_works": ["Muwatta Malik", "al-Muwatta"],
+          "tier": 1,
+          "trust_level": "absolute"
+        },
+        {
+          "name_ar": "علي بن عمر الدارقطني",
+          "name_latin": "ad-Dāraquṭnī",
+          "full_name": "Ali ibn Umar ad-Daraqutni",
+          "birth_year": 306,
+          "death_year": 385,
+          "specialty": "Hadith, 'Ilal",
+          "major_works": ["Sunan ad-Daraqutni"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "محمد بن حبان البستي",
+          "name_latin": "Ibn Ḥibbān",
+          "full_name": "Muhammad ibn Hibban al-Busti",
+          "birth_year": 270,
+          "death_year": 354,
+          "specialty": "Hadith, Jarh wa Ta'dil",
+          "major_works": ["Sahih Ibn Hibban", "al-Majruhin"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "يحيى بن معين",
+          "name_latin": "Yaḥyā ibn Maʿīn",
+          "full_name": "Yahya ibn Ma'in al-Baghdadi",
+          "birth_year": 158,
+          "death_year": 233,
+          "specialty": "Jarh wa Ta'dil",
+          "major_works": ["Tarikh Ibn Ma'in"],
+          "tier": 1,
+          "trust_level": "absolute"
+        },
+        {
+          "name_ar": "علي بن المديني",
+          "name_latin": "ʿAlī ibn al-Madīnī",
+          "full_name": "Ali ibn Abdullah ibn Ja'far al-Madini",
+          "birth_year": 161,
+          "death_year": 234,
+          "specialty": "Hadith, 'Ilal",
+          "major_works": ["al-'Ilal"],
+          "tier": 1,
+          "trust_level": "absolute"
+        },
+        {
+          "name_ar": "أبو حاتم الرازي",
+          "name_latin": "Abū Ḥātim ar-Rāzī",
+          "full_name": "Muhammad ibn Idris ar-Razi",
+          "birth_year": 195,
+          "death_year": 277,
+          "specialty": "Jarh wa Ta'dil",
+          "major_works": ["al-Jarh wa at-Ta'dil"],
+          "tier": 1,
+          "trust_level": "absolute"
+        },
+        {
+          "name_ar": "أبو زرعة الرازي",
+          "name_latin": "Abū Zurʿah ar-Rāzī",
+          "full_name": "Ubaydullah ibn Abd al-Karim ar-Razi",
+          "birth_year": 200,
+          "death_year": 264,
+          "specialty": "Jarh wa Ta'dil",
+          "major_works": ["Du'afa ar-Razi"],
+          "tier": 1,
+          "trust_level": "absolute"
+        }
+      ]
+    },
+    "mutaakhkhirun": {
+      "label": "Les Médiévaux (Mutaʾakhkhirūn)",
+      "period": "6ème-9ème siècle de l'Hégire",
+      "description": "Piliers de la période médiévale",
+      "authorities": [
+        {
+          "name_ar": "أحمد بن عبد الحليم ابن تيمية",
+          "name_latin": "Ibn Taymiyyah",
+          "full_name": "Ahmad ibn Abd al-Halim ibn Taymiyyah",
+          "birth_year": 661,
+          "death_year": 728,
+          "specialty": "Fiqh, Aqidah, Tafsir",
+          "major_works": ["Majmu' al-Fatawa", "Minhaj as-Sunnah"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "محمد بن أبي بكر ابن قيم الجوزية",
+          "name_latin": "Ibn al-Qayyim",
+          "full_name": "Muhammad ibn Abi Bakr ibn Qayyim al-Jawziyyah",
+          "birth_year": 691,
+          "death_year": 751,
+          "specialty": "Fiqh, Aqidah, Tafsir",
+          "major_works": ["I'lam al-Muwaqqi'in", "Zad al-Ma'ad"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "محمد بن أحمد الذهبي",
+          "name_latin": "adh-Dhahabī",
+          "full_name": "Muhammad ibn Ahmad adh-Dhahabi",
+          "birth_year": 673,
+          "death_year": 748,
+          "specialty": "Hadith, Tarikh, Rijal",
+          "major_works": ["Siyar A'lam an-Nubala", "Mizan al-I'tidal"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "إسماعيل بن عمر ابن كثير",
+          "name_latin": "Ibn Kathīr",
+          "full_name": "Isma'il ibn Umar ibn Kathir",
+          "birth_year": 701,
+          "death_year": 774,
+          "specialty": "Tafsir, Hadith, Tarikh",
+          "major_works": ["Tafsir Ibn Kathir", "al-Bidayah wa an-Nihayah"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "عبد الرحمن بن أحمد ابن رجب الحنبلي",
+          "name_latin": "Ibn Rajab al-Ḥanbalī",
+          "full_name": "Abd ar-Rahman ibn Ahmad ibn Rajab",
+          "birth_year": 736,
+          "death_year": 795,
+          "specialty": "Hadith, Fiqh",
+          "major_works": ["Jami' al-'Ulum wa al-Hikam", "Sharh 'Ilal at-Tirmidhi"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "أحمد بن علي ابن حجر العسقلاني",
+          "name_latin": "Ibn Ḥajar al-ʿAsqalānī",
+          "full_name": "Ahmad ibn Ali ibn Hajar al-'Asqalani",
+          "birth_year": 773,
+          "death_year": 852,
+          "specialty": "Hadith, Rijal",
+          "major_works": ["Fath al-Bari", "Tahdhib at-Tahdhib"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "يحيى بن شرف النووي",
+          "name_latin": "an-Nawawī",
+          "full_name": "Yahya ibn Sharaf an-Nawawi",
+          "birth_year": 631,
+          "death_year": 676,
+          "specialty": "Hadith, Fiqh",
+          "major_works": ["Sharh Sahih Muslim", "Riyad as-Salihin"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "يوسف بن عبد الرحمن المزي",
+          "name_latin": "al-Mizzī",
+          "full_name": "Yusuf ibn Abd ar-Rahman al-Mizzi",
+          "birth_year": 654,
+          "death_year": 742,
+          "specialty": "Hadith, Rijal",
+          "major_works": ["Tahdhib al-Kamal"],
+          "tier": 1,
+          "trust_level": "very_high"
+        }
+      ]
+    },
+    "muaasirun": {
+      "label": "Les Contemporains (Muʿāṣirūn)",
+      "period": "14ème-15ème siècle de l'Hégire",
+      "description": "Savants contemporains reconnus par l'Université de Médine",
+      "authorities": [
+        {
+          "name_ar": "عبد الرحمن بن يحيى المعلمي اليماني",
+          "name_latin": "al-Muʿallimī al-Yamānī",
+          "full_name": "Abd ar-Rahman ibn Yahya al-Mu'allimi al-Yamani",
+          "birth_year": 1313,
+          "death_year": 1386,
+          "specialty": "Hadith, Rijal",
+          "major_works": ["at-Tankil", "al-Anwar al-Kashifah"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "محمد ناصر الدين الألباني",
+          "name_latin": "al-Albānī",
+          "full_name": "Muhammad Nasir ad-Din al-Albani",
+          "birth_year": 1332,
+          "death_year": 1420,
+          "specialty": "Hadith, Tahqiq",
+          "major_works": ["Silsilat al-Ahadith as-Sahihah", "Irwa' al-Ghalil"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "عبد العزيز بن عبد الله بن باز",
+          "name_latin": "Ibn Bāz",
+          "full_name": "Abd al-Aziz ibn Abdullah ibn Baz",
+          "birth_year": 1330,
+          "death_year": 1420,
+          "specialty": "Fiqh, Fatwa, Aqidah",
+          "major_works": ["Majmu' Fatawa Ibn Baz"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "محمد بن صالح العثيمين",
+          "name_latin": "al-ʿUthaymīn",
+          "full_name": "Muhammad ibn Salih al-'Uthaymin",
+          "birth_year": 1347,
+          "death_year": 1421,
+          "specialty": "Fiqh, Tafsir, Aqidah",
+          "major_works": ["Sharh Riyad as-Salihin", "al-Qawl al-Mufid"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "مقبل بن هادي الوادعي",
+          "name_latin": "al-Wādiʿī",
+          "full_name": "Muqbil ibn Hadi al-Wadi'i",
+          "birth_year": 1352,
+          "death_year": 1422,
+          "specialty": "Hadith, Da'wah",
+          "major_works": ["as-Sahih al-Musnad", "al-Muqtarah"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "ربيع بن هادي المدخلي",
+          "name_latin": "al-Madkhalī",
+          "full_name": "Rabi' ibn Hadi al-Madkhali",
+          "birth_year": 1351,
+          "death_year": null,
+          "specialty": "Hadith, Manhaj",
+          "major_works": ["Manhaj al-Anbiya'"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "عبد المحسن بن حمد العباد",
+          "name_latin": "al-ʿAbbād",
+          "full_name": "Abd al-Muhsin ibn Hamad al-'Abbad",
+          "birth_year": 1353,
+          "death_year": null,
+          "specialty": "Hadith, Fiqh",
+          "major_works": ["Sharh Sunan Abi Dawud"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "عبد الرزاق بن عبد المحسن البدر",
+          "name_latin": "al-Badr",
+          "full_name": "Abd ar-Razzaq ibn Abd al-Muhsin al-Badr",
+          "birth_year": 1382,
+          "death_year": null,
+          "specialty": "Hadith, Aqidah",
+          "major_works": ["Fiqh al-Ad'iyah wa al-Adhkar"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "صالح بن فوزان الفوزان",
+          "name_latin": "al-Fawzān",
+          "full_name": "Salih ibn Fawzan al-Fawzan",
+          "birth_year": 1354,
+          "death_year": null,
+          "specialty": "Fiqh, Aqidah",
+          "major_works": ["al-Mulakhkhas al-Fiqhi"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "سليمان بن سليم الله الرحيلي",
+          "name_latin": "ar-Ruḥaylī",
+          "full_name": "Sulayman ibn Salim Allah ar-Ruhayly",
+          "birth_year": 1382,
+          "death_year": null,
+          "specialty": "Hadith, Manhaj",
+          "major_works": ["Sharh Usul as-Sunnah"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "عبد الله بن عبد الرحمن البخاري",
+          "name_latin": "al-Bukhārī",
+          "full_name": "Abdullah ibn Abd ar-Rahman al-Bukhari",
+          "birth_year": 1380,
+          "death_year": null,
+          "specialty": "Hadith",
+          "major_works": ["Sharh Bulugh al-Maram"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "علي بن عبد الرحمن الحذيفي",
+          "name_latin": "al-Ḥudhayfī",
+          "full_name": "Ali ibn Abd ar-Rahman al-Hudhayfi",
+          "birth_year": 1366,
+          "death_year": null,
+          "specialty": "Khutbah, Da'wah",
+          "major_works": ["Khutab al-Jumu'ah"],
+          "tier": 2,
+          "trust_level": "high"
+        },
+        {
+          "name_ar": "أحمد محمد شاكر",
+          "name_latin": "Aḥmad Shākir",
+          "full_name": "Ahmad Muhammad Shakir",
+          "birth_year": 1309,
+          "death_year": 1377,
+          "specialty": "Hadith, Tahqiq",
+          "major_works": ["Tahqiq Musnad Ahmad"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "شعيب الأرناؤوط",
+          "name_latin": "al-Arnaʾūṭ",
+          "full_name": "Shu'ayb al-Arna'ut",
+          "birth_year": 1347,
+          "death_year": 1438,
+          "specialty": "Hadith, Tahqiq",
+          "major_works": ["Tahqiq Musnad Ahmad", "Tahqiq Sahih Ibn Hibban"],
+          "tier": 1,
+          "trust_level": "very_high"
+        },
+        {
+          "name_ar": "حمزة بن عبد الله المليباري",
+          "name_latin": "al-Mulaybārī",
+          "full_name": "Hamzah ibn Abdullah al-Mulaybari",
+          "birth_year": 1385,
+          "death_year": null,
+          "specialty": "Hadith, Da'wah",
+          "major_works": ["Sharh Bulugh al-Maram"],
+          "tier": 2,
+          "trust_level": "high"
+        }
+      ]
+    }
+  }
+}

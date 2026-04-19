@@ -1,0 +1,135 @@
+{
+  "date_audit": "2026-04-18 22:54:18",
+  "statistiques_globales": {
+    "total_hadiths": 122927,
+    "avec_texte_arabe": 102970,
+    "avec_traduction_fr": 600,
+    "avec_grade": 50481,
+    "avec_isnad": 0
+  },
+  "par_collection": {
+    "Sunan an-Nasa'i": {
+      "count": 16658,
+      "pourcentage": 13.55
+    },
+    "bukhari": {
+      "count": 13913,
+      "pourcentage": 11.32
+    },
+    "muslim": {
+      "count": 12220,
+      "pourcentage": 9.94
+    },
+    "nasai": {
+      "count": 11035,
+      "pourcentage": 8.98
+    },
+    "Sunan Abu Dawud": {
+      "count": 10544,
+      "pourcentage": 8.58
+    },
+    "Musnad Ahmad": {
+      "count": 8600,
+      "pourcentage": 7.0
+    },
+    "Sahih Bukhari": {
+      "count": 7580,
+      "pourcentage": 6.17
+    },
+    "Sahih Muslim": {
+      "count": 7360,
+      "pourcentage": 5.99
+    },
+    "abudawud": {
+      "count": 5268,
+      "pourcentage": 4.29
+    },
+    "Muwatta Malik": {
+      "count": 5158,
+      "pourcentage": 4.2
+    },
+    "Sunan Ibn Majah": {
+      "count": 4338,
+      "pourcentage": 3.53
+    },
+    "ibnmajah": {
+      "count": 4338,
+      "pourcentage": 3.53
+    },
+    "tirmidhi": {
+      "count": 3919,
+      "pourcentage": 3.19
+    },
+    "tirmidzi": {
+      "count": 3625,
+      "pourcentage": 2.95
+    },
+    "Jami' at-Tirmidhi": {
+      "count": 3600,
+      "pourcentage": 2.93
+    },
+    "darimi": {
+      "count": 2900,
+      "pourcentage": 2.36
+    },
+    "malik": {
+      "count": 1829,
+      "pourcentage": 1.49
+    },
+    "forty_hadith_nawawi": {
+      "count": 42,
+      "pourcentage": 0.03
+    }
+  },
+  "par_source": {
+    "jsdelivr_cdn": {
+      "count": 44838,
+      "pourcentage": 36.48
+    },
+    "hadith_gading": {
+      "count": 42457,
+      "pourcentage": 34.54
+    },
+    "jsdelivr_fawaz": {
+      "count": 35590,
+      "pourcentage": 28.95
+    },
+    "github:osamayy/40-hadith-nawawi-db": {
+      "count": 42,
+      "pourcentage": 0.03
+    }
+  },
+  "qualite_donnees": {
+    "longueur_moyenne_arabe": 452.0,
+    "hadiths_courts": 19957,
+    "hadiths_longs": 8227
+  },
+  "integrite": {
+    "hash_uniques": 122927,
+    "doublons_potentiels": 0,
+    "sans_hash": 0
+  },
+  "exemples": [
+    {
+      "collection": "Sahih Bukhari",
+      "source": "jsdelivr_cdn",
+      "grade": "",
+      "extrait": "حَدَّثَنَا الْحُمَيْدِيُّ عَبْدُ اللَّهِ بْنُ الزُّبَيْرِ ، قَالَ : حَدَّثَنَا سُفْيَانُ ، قَالَ : حَدَّثَنَا يَحْيَى بْنُ سَعِيدٍ الْأَنْصَارِيُّ ، قَالَ : أَخْبَرَنِي مُحَمَّدُ بْنُ إِبْرَاهِيمَ الت"
+    },
+    {
+      "collection": "Sahih Bukhari",
+      "source": "jsdelivr_cdn",
+      "grade": "",
+      "extrait": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، قَالَ أَخْبَرَنَا مَالِكٌ، عَنْ هِشَامِ بْنِ عُرْوَةَ، عَنْ أَبِيهِ، عَنْ عَائِشَةَ أُمِّ الْمُؤْمِنِينَ ـ رضى الله عنها ـ أَنَّ الْحَارِثَ بْنَ هِشَامٍ ـ رضى ا"
+    },
+    {
+      "collection": "Sahih Bukhari",
+      "source": "jsdelivr_cdn",
+      "grade": "",
+      "extrait": "حَدَّثَنَا يَحْيَى بْنُ بُكَيْرٍ، قَالَ حَدَّثَنَا اللَّيْثُ، عَنْ عُقَيْلٍ، عَنِ ابْنِ شِهَابٍ، عَنْ عُرْوَةَ بْنِ الزُّبَيْرِ، عَنْ عَائِشَةَ أُمِّ الْمُؤْمِنِينَ، أَنَّهَا قَالَتْ أَوَّلُ مَا بُدِئ"
+    }
+  ],
+  "recommandations": [
+    "⚠️  Seulement 0.5% des hadiths ont une traduction française"
+  ]
+}

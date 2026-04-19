@@ -1,0 +1,75 @@
+{
+  "total_hadiths": 59857,
+  "kutub_sittah": {
+    "sahih_bukhari": 0,
+    "sahih_muslim": 0,
+    "sunan_abu_dawud": 0,
+    "sunan_tirmidhi": 0,
+    "sunan_nasai": 0,
+    "sunan_ibn_majah": 0
+  },
+  "autres_recueils": {
+    "musnad_ahmad": 0,
+    "sunan_darimi": 0,
+    "muwatta_malik": 0,
+    "sahih_ibn_hibban": 0,
+    "sahih_ibn_khuzaymah": 0,
+    "sunan_kubra_bayhaqi": 0,
+    "musannaf_ibn_abi_shaybah": 0,
+    "musannaf_abd_razzaq": 0,
+    "sunan_daraqutni": 0,
+    "adab_mufrad": 0,
+    "riyad_salihin": 0,
+    "bulugh_maram": 0,
+    "forty_hadith": 0
+  },
+  "missing_priority": [
+    {
+      "name": "Musnad Ahmad (complet)",
+      "current": 0,
+      "target": 27000,
+      "priority": "HAUTE",
+      "reason": "Collection majeure, on n'a que 16% du total"
+    },
+    {
+      "name": "Sahih Ibn Hibban",
+      "current": 0,
+      "target": 7000,
+      "priority": "HAUTE",
+      "reason": "Recueil authentique important"
+    },
+    {
+      "name": "Sahih Ibn Khuzaymah",
+      "current": 0,
+      "target": 3000,
+      "priority": "MOYENNE",
+      "reason": "Recueil authentique"
+    },
+    {
+      "name": "Sunan al-Kubra (Bayhaqi)",
+      "current": 0,
+      "target": 20000,
+      "priority": "MOYENNE",
+      "reason": "Grande collection de jurisprudence"
+    },
+    {
+      "name": "Riyad al-Salihin",
+      "current": 0,
+      "target": 1900,
+      "priority": "HAUTE",
+      "reason": "Collection très populaire et accessible"
+    },
+    {
+      "name": "40 Hadiths (Nawawi)",
+      "current": 0,
+      "target": 42,
+      "priority": "HAUTE",
+      "reason": "Collection fondamentale, très courte"
+    }
+  ],
+  "statistics": {
+    "with_chain": 0,
+    "with_grade": 37708,
+    "with_reference": 59857
+  }
+}

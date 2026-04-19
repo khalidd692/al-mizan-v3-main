@@ -1,0 +1,90 @@
+
+======================================================================
+RAPPORT DE COUVERTURE MIZAN - 2026-04-19 01:09
+======================================================================
+Total hadiths dans la base : 122,927
+======================================================================
+
+Zone  Nom                                  Hadiths couverts       %
+----------------------------------------------------------------------
+[OK] 1   Takhrij principal                         122,927  100.0%
+[!] 2   Mutabaʿat                                       0    0.0%
+[!] 3   Shawahid                                        0    0.0%
+[!] 4   Riwayat                                         0    0.0%
+[!] 5   Nombre asanid                                   0    0.0%
+[!] 6   Ittisal                                         0    0.0%
+[!] 7   ʿAdalah                                         0    0.0%
+[!] 8   Dabt                                            0    0.0%
+[!] 9   Sighat al-adaʾ                                  0    0.0%
+[!] 10  Liqaʾ/muʿasarah                                 0    0.0%
+[!] 11  Tadlis                                          0    0.0%
+[!] 12  Ikhtilat                                        0    0.0%
+[!] 13  Fiche rawi                                      0    0.0%
+[!] 14  Jarh wa taʿdil                                  0    0.0%
+[!] 15  Maitre-eleve                                    0    0.0%
+[!] 16  Divergences critiques                           0    0.0%
+[OK] 17  Typologie quantitative                    122,927  100.0%
+[OK] 18  Attribution                               122,927  100.0%
+[!] 19  ʿIlal zahirah                                   0    0.0%
+[!] 20  ʿIlal khafiyyah                                 0    0.0%
+[!] 21  Shudhudh                                        0    0.0%
+[!] 22  Nakarah                                         0    0.0%
+[!] 23  Idtirab                                         0    0.0%
+[!] 24  Concordance Qurʾan                              0    0.0%
+[!] 25  Concordance Sunnah                              0    0.0%
+[!] 26  Analyse linguistique                            0    0.0%
+[!] 27  Alterations                                     0    0.0%
+[!] 28  Hukm Mizan                                     10    0.0%
+[!] 29  Verdicts classiques                            10    0.0%
+[!] 30  Verdicts contemporains                         10    0.0%
+[!] 31  Asbab al-wurud                                  0    0.0%
+[!] 32  Fiqh                                            0    0.0%
+[!] 33  Ziyadat al-thiqah                               0    0.0%
+[!] 34  Wasl vs irsal                                   0    0.0%
+[!] 35  Rafʿ vs waqf                                    0    0.0%
+[!] 36  Mubham/muhmal                                   0    0.0%
+[!] 37  Mazid muttasil                                  0    0.0%
+[!] 38  Tafarrud                                        0    0.0%
+[!] 39  ʿAmal al-salaf                                  0    0.0%
+[!] 40  Mukhtalif al-hadith                             0    0.0%
+
+======================================================================
+DETAIL DES VERDICTS (table ahkam)
+======================================================================
+Total verdicts enregistres : 150
+
+Distribution par classe de hukm:
+  unknown                             106
+  sahih                                37
+  hasan                                 5
+  daif                                  1
+  munkar                                1
+
+======================================================================
+VERDICTS PAR IMAM (top 20)
+======================================================================
+  البخاري                                   52
+  مسلم بن الحجاج                            45
+  الدارمي                                   18
+  مالك بن أنس                               14
+  عبدالرحمن بن مهدي                          4
+  شعبة بن الحجاج                             2
+  أحمد بن حنبل                               2
+  الجوزجاني                                  2
+  البزار                                     2
+  أبو داود السجستاني                         1
+  أبو زرعة الرازي                            1
+  أبو حاتم الرازي                            1
+  العجلي                                     1
+  الترمذي                                    1
+  يعقوب الفسوي                               1
+  النسائي                                    1
+  ابن خزيمة                                  1
+  ابن أبي حاتم                               1
+  سفيان الثوري                               0
+  يحيى بن سعيد القطان                        0
+
+======================================================================
+Rapport termine
+======================================================================
+

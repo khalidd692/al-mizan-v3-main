@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أدوات المدينة - Al-Mīzān</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .tool-card h3 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tool-icon {
+            font-size: 1.8em;
+        }
+
+        .tool-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .tool-card .source {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .search-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .search-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1.1em;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .search-btn {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .search-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .search-btn:active {
+            transform: scale(0.95);
+        }
+
+        .results-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .results-section.active {
+            display: block;
+        }
+
+        .result-item {
+            border-bottom: 1px solid #e0e0e0;
+            padding: 20px 0;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-title {
+            color: #667eea;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .result-content {
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .result-meta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .meta-tag {
+            background: #f0f0f0;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .meta-tag.source {
+            background: #667eea;
+            color: white;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #667eea;
+            font-size: 1.2em;
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        .error {
+            background: #fee;
+            border: 2px solid #fcc;
+            border-radius: 10px;
+            padding: 20px;
+            color: #c33;
+            margin-top: 20px;
+        }
+
+        .success {
+            background: #efe;
+            border: 2px solid #cfc;
+            border-radius: 10px;
+            padding: 20px;
+            color: #3c3;
+            margin-top: 20px;
+        }
+
+        .edition-info {
+            background: #f9f9f9;
+            border-right: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .edition-info h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .edition-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .edition-detail {
+            display: flex;
+            gap: 10px;
+        }
+
+        .edition-detail strong {
+            color: #667eea;
+        }
+
+        .variants-section {
+            background: #fff9e6;
+            border-right: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .variants-section h4 {
+            color: #f57c00;
+            margin-bottom: 10px;
+        }
+
+        .variant-item {
+            padding: 10px;
+            background: white;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ffe0b2;
+        }
+
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-form {
+                flex-direction: column;
+            }
+
+            .search-input {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎓 أدوات المدينة النبوية</h1>
+            <p>منهجية طلاب العلم في الجامعة الإسلامية والمسجد النبوي</p>
+        </div>
+
+        <!-- Tools Grid -->
+        <div class="tools-grid">
+            <div class="tool-card" onclick="showSearch('narrator')">
+                <h3><span class="tool-icon">👤</span> تحليل الرواة</h3>
+                <p>تحليل كامل للراوي مع جميع أقوال أئمة الجرح والتعديل بدون تلخيص</p>
+                <span class="source">islamdb.com</span>
+            </div>
+
+            <div class="tool-card" onclick="showSearch('matn')">
+                <h3><span class="tool-icon">📝</span> تحقيق المتن</h3>
+                <p>التحقق من نص الحديث مع كشف الروايات المختلفة وتحديد الطبعة المرجعية</p>
+                <span class="source">dorar.net</span>
+            </div>
+
+            <div class="tool-card" onclick="showSearch('hadith')">
+                <h3><span class="tool-icon">📚</span> استخراج الحديث</h3>
+                <p>الحصول على الحديث مع تفاصيل الطبعة: الناشر، المحقق، السنة الهجرية</p>
+                <span class="source">dorar.net</span>
+            </div>
+
+            <div class="tool-card" onclick="showSearch('sharh')">
+                <h3><span class="tool-icon">💡</span> الشروح الكلاسيكية</h3>
+                <p>الوصول إلى شروح الأحاديث من فتح الباري وشرح مسلم مع المجلد والصفحة</p>
+                <span class="source">islamweb.net</span>
+            </div>
+
+            <div class="tool-card" onclick="showSearch('search-sharh')">
+                <h3><span class="tool-icon">🔍</span> البحث في الشروح</h3>
+                <p>البحث عن كلمة مفتاحية في كتب الشروح الكلاسيكية</p>
+                <span class="source">islamweb.net</span>
+            </div>
+
+            <div class="tool-card" onclick="showSearch('aqidah')">
+                <h3><span class="tool-icon">🕌</span> استخراج العقيدة</h3>
+                <p>استخراج نقاط العقيدة من الحديث مع مواقف السلف من المكتبة الشاملة</p>
+                <span class="source">shamela.ws</span>
+            </div>
+        </div>
+
+        <!-- Search Section -->
+        <div class="search-section" id="searchSection" style="display: none;">
+            <h2 id="searchTitle">البحث</h2>
+            <div class="search-form" id="searchForm">
+                <!-- Dynamic form will be inserted here -->
+            </div>
+            <div id="searchResults" class="results-section"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000/api/v1/medine';
+
+        function showSearch(type) {
+            const section = document.getElementById('searchSection');
+            const form = document.getElementById('searchForm');
+            const title = document.getElementById('searchTitle');
+            const results = document.getElementById('searchResults');
+            
+            section.style.display = 'block';
+            results.classList.remove('active');
+            results.innerHTML = '';
+
+            switch(type) {
+                case 'narrator':
+                    title.textContent = 'تحليل راوي';
+                    form.innerHTML = `
+                        <input type="text" class="search-input" id="narratorName" placeholder="اسم الراوي (مثال: أبو هريرة)" dir="rtl">
+                        <button class="search-btn" onclick="searchNarrator()">بحث</button>
+                    `;
+                    break;
+
+                case 'matn':
+                    title.textContent = 'تحقيق المتن';
+                    form.innerHTML = `
+                        <input type="text" class="search-input" id="hadithText" placeholder="نص الحديث" dir="rtl">
+                        <button class="search-btn" onclick="verifyMatn()">تحقيق</button>
+                    `;
+                    break;
+
+                case 'hadith':
+                    title.textContent = 'استخراج حديث';
+                    form.innerHTML = `
+                        <input type="text" class="search-input" id="bookName" placeholder="اسم الكتاب (bukhari, muslim, ...)" style="flex: 1;">
+                        <input type="number" class="search-input" id="hadithNumber" placeholder="رقم الحديث" style="flex: 1;">
+                        <button class="search-btn" onclick="getHadith()">استخراج</button>
+                    `;
+                    break;
+
+                case 'sharh':
+                    title.textContent = 'الشرح الكلاسيكي';
+                    form.innerHTML = `
+                        <input type="text" class="search-input" id="sharhBook" placeholder="الكتاب (bukhari, muslim, ...)" style="flex: 1;">
+                        <input type="number" class="search-input" id="sharhNumber" placeholder="رقم الحديث" style="flex: 1;">
+                        <button class="search-btn" onclick="getSharh()">عرض الشرح</button>
+                    `;
+                    break;
+
+                case 'search-sharh':
+                    title.textContent = 'البحث في الشروح';
+                    form.innerHTML = `
+                        <input type="text" class="search-input" id="keyword" placeholder="الكلمة المفتاحية" dir="rtl">
+                        <button class="search-btn" onclick="searchInSharh()">بحث</button>
+                    `;
+                    break;
+
+                case 'aqidah':
+                    title.textContent = 'استخراج العقيدة';
+                    form.innerHTML = `
+                        <input type="text" class="search-input" id="aqidahText" placeholder="نص الحديث" dir="rtl">
+                        <button class="search-btn" onclick="extractAqidah()">استخراج</button>
+                    `;
+                    break;
+            }
+
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function searchNarrator() {
+            const name = document.getElementById('narratorName').value;
+            if (!name) return alert('الرجاء إدخال اسم الراوي');
+
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/narrator/${encodeURIComponent(name)}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayNarratorResults(data.data);
+                } else {
+                    showError('لم يتم العثور على الراوي');
+                }
+            } catch (error) {
+                showError('خطأ في الاتصال بالخادم');
+            }
+        }
+
+        async function verifyMatn() {
+            const text = document.getElementById('hadithText').value;
+            if (!text) return alert('الرجاء إدخال نص الحديث');
+
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/verify-matn?hadith_text=${encodeURIComponent(text)}`, {
+                    method: 'POST'
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayMatnResults(data.data);
+                } else {
+                    showError('لم يتم العثور على الحديث');
+                }
+            } catch (error) {
+                showError('خطأ في الاتصال بالخادم');
+            }
+        }
+
+        async function getHadith() {
+            const book = document.getElementById('bookName').value;
+            const number = document.getElementById('hadithNumber').value;
+            if (!book || !number) return alert('الرجاء إدخال اسم الكتاب ورقم الحديث');
+
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/hadith/${book}/${number}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayHadithResults(data.data);
+                } else {
+                    showError('لم يتم العثور على الحديث');
+                }
+            } catch (error) {
+                showError('خطأ في الاتصال بالخادم');
+            }
+        }
+
+        async function getSharh() {
+            const book = document.getElementById('sharhBook').value;
+            const number = document.getElementById('sharhNumber').value;
+            if (!book || !number) return alert('الرجاء إدخال اسم الكتاب ورقم الحديث');
+
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/sharh/${book}/${number}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    displaySharhResults(data.data);
+                } else {
+                    showError('لم يتم العثور على الشرح');
+                }
+            } catch (error) {
+                showError('خطأ في الاتصال بالخادم');
+            }
+        }
+
+        async function searchInSharh() {
+            const keyword = document.getElementById('keyword').value;
+            if (!keyword) return alert('الرجاء إدخال الكلمة المفتاحية');
+
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/sharh/search?keyword=${encodeURIComponent(keyword)}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    displaySearchResults(data.data);
+                } else {
+                    showError('لم يتم العثور على نتائج');
+                }
+            } catch (error) {
+                showError('خطأ في الاتصال بالخادم');
+            }
+        }
+
+        async function extractAqidah() {
+            const text = document.getElementById('aqidahText').value;
+            if (!text) return alert('الرجاء إدخال نص الحديث');
+
+            showLoading();
+            try {
+                const response = await fetch(`${API_BASE}/aqidah/extract?hadith_text=${encodeURIComponent(text)}`, {
+                    method: 'POST'
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayAqidahResults(data.data);
+                } else {
+                    showError('خطأ في استخراج العقيدة');
+                }
+            } catch (error) {
+                showError('خطأ في الاتصال بالخادم');
+            }
+        }
+
+        function showLoading() {
+            const results = document.getElementById('searchResults');
+            results.classList.add('active');
+            results.innerHTML = '<div class="loading">جاري البحث</div>';
+        }
+
+        function showError(message) {
+            const results = document.getElementById('searchResults');
+            results.classList.add('active');
+            results.innerHTML = `<div class="error">${message}</div>`;
+        }
+
+        function displayNarratorResults(data) {
+            const results = document.getElementById('searchResults');
+            results.classList.add('active');
+            
+            let html = `
+                <div class="result-item">
+                    <div class="result-title">${data.full_name || data.narrator}</div>
+                    <div class="result-content">
+                        <strong>درجة الموثوقية:</strong> ${data.reliability_score || 'غير محدد'}
+                    </div>
+                    <div class="result-meta">
+                        <span class="meta-tag source">islamdb.com</span>
+                        <span class="meta-tag">أقوال الجرح والتعديل: ${data.jarh_tadil_opinions?.length || 0}</span>
+                    </div>
+                </div>
+            `;
+
+            if (data.jarh_tadil_opinions && data.jarh_tadil_opinions.length > 0) {
+                html += '<h3 style="margin: 20px 0; color: #667eea;">أقوال أئمة الجرح والتعديل</h3>';
+                data.jarh_tadil_opinions.forEach(opinion => {
+                    html += `
+                        <div class="result-item">
+                            <div class="result-title">${opinion.scholar}</div>
+                            <div class="result-content">${opinion.opinion}</div>
+                        </div>
+                    `;
+                });
+            }
+
+            results.innerHTML = html;
+        }
+
+        function displayMatnResults(data) {
+            const results = document.getElementById('searchResults');
+            results.classList.add('active');
+            
+            let html = `
+                <div class="result-item">
+                    <div class="result-title">النص المحقق</div>
+                    <div class="result-content">${data.normalized_text}</div>
+                    <div class="result-meta">
+                        <span class="meta-tag source">dorar.net</span>
+                        <span class="meta-tag">الثقة: ${(data.confidence * 100).toFixed(0)}%</span>
+                    </div>
+                </div>
+            `;
+
+            if (data.reference_edition) {
+                html += `
+                    <div class="edition-info">
+                        <h4>معلومات الطبعة</h4>
+                        <div class="edition-details">
+                            <div class="edition-detail"><strong>الناشر:</strong> ${data.reference_edition.publisher || 'غير محدد'}</div>
+                            <div class="edition-detail"><strong>المحقق:</strong> ${data.reference_edition.editor || 'غير محدد'}</div>
+                            <div class="edition-detail"><strong>السنة:</strong> ${data.reference_edition.year_hijri || 'غير محدد'}هـ</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (data.variants && data.variants.length > 0) {
+                html += `
+                    <div class="variants-section">
+                        <h4>الروايات المختلفة (${data.variants.length})</h4>
+                `;
+                data.variants.forEach(variant => {
+                    html += `<div class="variant-item">${variant}</div>`;
+                });
+                html += '</div>';
+            }
+
+            results.innerHTML = html;
+        }
+
+        function displayHadithResults(data) {
+            const results = document.getElementById('searchResults');
+            results.classList.add('active');
+            
+            let html = `
+                <div class="result-item">
+                    <div class="result-title">نص الحديث</div>
+                    <div class="result-content">${data.text}</div>
+                    <div class="result-meta">
+                        <span class="meta-tag source">dorar.net</span>
+                        <span class="meta-tag">${data.source}</span>
+                    </div>
+                </div>
+            `;
+
+            if (data.edition) {
+                html += `
+                    <div class="edition-info">
+                        <h4>معلومات الطبعة</h4>
+                        <div class="edition-details">
+                            <div class="edition-detail"><strong>الناشر:</strong> ${data.edition.publisher || 'غير محدد'}</div>
+                            <div class="edition-detail"><strong>المحقق:</strong> ${data.edition.editor || 'غير محدد'}</div>
+                            <div class="edition-detail"><strong>السنة:</strong> ${data.edition.year_hijri || 'غير محدد'}هـ</div>
+                            <div class="edition-detail"><strong>عدد المجلدات:</strong> ${data.edition.volumes || 'غير محدد'}</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            results.innerHTML = html;
+        }
+
+        function displaySharhResults(data) {
+            const results = document.getElementById('searchResults');
+            results.classList.add('active');
+            
+            let html = `
+                <div class="result-item">
+                    <div class="result-title">${data.book}</div>
+                    <div class="result-content">
+                        <strong>المؤلف:</strong> ${data.author}<br>
+                        <strong>المجلد:</strong> ${data.volume} | <strong>الصفحة:</strong> ${data.page}
+                    </div>
+                </div>
+                <div class="result-item">
+                    <div class="result-title">الشرح</div>
+                    <div class="result-content">${data.commentary}</div>
+                    <div class="result-meta">
+                        <span class="meta-tag source">islamweb.net</span>
+                    </div>
+                </div>
+            `;
+
+            if (data.key_points && data.key_points.length > 0) {
+                html += '<h3 style="margin: 20px 0; color: #667eea;">الفوائد المستخرجة</h3>';
+                data.key_points.forEach((point, index) => {
+                    html += `
+                        <div class="result-item">
+                            <div class="result-title">فائدة ${index + 1}</div>
+                            <div class="result-content">${point}</div>
+                        </div>
+                    `;
+                });
+            }
+
+            results.innerHTML = html;
+        }
+
+        function displaySearchResults(data) {
+            const results = document.getElementById('searchResults');
+            results.classList.add('active');
+            
+            if (data.length === 0) {
+                results.innerHTML = '<div class="error">لم يتم العثور على نتائج</div>';
+                return;
+            }
+
+            let html = `<h3 style="margin-bottom: 20px; color: #667eea;">النتائج (${data.length})</h3>`;
+            
+            data.forEach(result => {
+                html += `
+                    <div class="result-item">
+                        <div class="result-title">${result.title}</div>
+                        <div class="result-content">${result.excerpt}</div>
+                        <div class="result-meta">
+                            <span class="meta-tag">المجلد: ${result.volume}</span>
+                            <span class="meta-tag">الصفحة: ${result.page}</span>
+                            <span class="meta-tag source">islamweb.net</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            results.innerHTML = html;
+        }
+
+        function displayAqidahResults(data) {
+            const results = document.getElementById('searchResults');
+            results.classList.add('active');
+            
+            let html = '<h3 style="margin-bottom: 20px; color: #667eea;">نقاط العقيدة المستخرجة</h3>';
+            
+            if (data.aqidah_points && data.aqidah_points.length > 0) {
+                data.aqidah_points.forEach((point, index) => {
+                    html += `
+                        <div class="result-item">
+                            <div class="result-title">نقطة ${index + 1}</div>
+                            <div class="result-content">${point}</div>
+                        </div>
+                    `;
+                });
+            }
+
+            if (data.salaf_positions && data.salaf_positions.length > 0) {
+                html += '<h3 style="margin: 20px 0; color: #667eea;">مواقف السلف</h3>';
+                data.salaf_positions.forEach((position, index) => {
+                    html += `
+                        <div class="result-item">
+                            <div class="result-title">موقف ${index + 1}</div>
+                            <div class="result-content">${position}</div>
+                        </div>
+                    `;
+                });
+            }
+
+            html += '<div class="result-meta"><span class="meta-tag source">shamela.ws</span></div>';
+            results.innerHTML = html;
+        }
+    </script>
+</body>
+</html>
