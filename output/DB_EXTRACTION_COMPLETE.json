@@ -1,0 +1,377 @@
+{
+  "timestamp": "2026-04-19T15:26:00+02:00",
+  "databases": {
+    "mizan": {
+      "schema": [
+        "CREATE TABLE ahkam (\n  id INTEGER PRIMARY KEY,\n  hadith_id INTEGER REFERENCES hadiths(id) ON DELETE CASCADE,\n  source_id INTEGER REFERENCES hukm_sources(id),\n  hukm_class TEXT NOT NULL,\n  hukm_raw_ar TEXT,\n  source_book TEXT,\n  source_volume TEXT,\n  source_page TEXT,\n  scraped_from TEXT,\n  scraped_at DATETIME DEFAULT CURRENT_TIMESTAMP\n)",
+        "CREATE TABLE avis_savants (\n    id              INTEGER PRIMARY KEY AUTOINCREMENT,\n    hadith_sha256   TEXT NOT NULL REFERENCES hadiths(sha256),\n    savant          TEXT NOT NULL,                 -- voir WHITELIST\n    epoque          TEXT NOT NULL,                 -- MUTAQADDIMUN | KHALAF | MUASIR\n    jugement        TEXT NOT NULL,                 -- texte du hukm\n    source_jugement TEXT\n)",
+        "CREATE TABLE errors_log (\n    id          INTEGER PRIMARY KEY AUTOINCREMENT,\n    timestamp   TEXT DEFAULT (datetime('now')),\n    error_type  TEXT NOT NULL,  -- TAAWIL_DETECTED | API_ERROR | INSERT_ERROR\n    sha256      TEXT,\n    details     TEXT,\n    collection  TEXT\n)",
+        "CREATE TABLE fiqh_hadith (\n  hadith_id INTEGER PRIMARY KEY REFERENCES hadiths(id) ON DELETE CASCADE,\n  asbab_wurud_ar TEXT,\n  asbab_wurud_fr TEXT,\n  is_nasikh BOOLEAN DEFAULT 0,\n  is_mansukh BOOLEAN DEFAULT 0,\n  abrogates_hadith_id INTEGER,\n  abrogated_by_hadith_id INTEGER,\n  gharib_alfath TEXT,\n  fiqh_implications_fr TEXT,\n  source_refs TEXT\n)",
+        "CREATE TABLE hadiths (\n    id              INTEGER PRIMARY KEY AUTOINCREMENT,\n    sha256          TEXT NOT NULL UNIQUE,          -- Sanad Numérique (hash du matn_ar)\n    collection      TEXT NOT NULL,                 -- ex: \"Sahih al-Bukhari\"\n    numero_hadith   TEXT,                          -- numéro dans la collection\n    livre           TEXT,\n    chapitre        TEXT,\n    matn_ar         TEXT NOT NULL,                 -- texte arabe brut\n    matn_fr         TEXT,                          -- traduction française\n    isnad_brut      TEXT,                          -- chaîne de transmission brute\n    grade_final     TEXT NOT NULL,                 -- Sahih, Hasan, Da'if, etc.\n    categorie       TEXT NOT NULL,                 -- MAQBUL | DAIF | MAWDUU\n    badge_alerte    INTEGER DEFAULT 0,             -- 1 = Mawdū' (rouge obligatoire)\n    source_url      TEXT,\n    source_api      TEXT,                          -- \"dorar_json\" | \"hadeethenc\"\n    inserted_at     TEXT DEFAULT (datetime('now'))\n, matn_ar_normalized TEXT, isnad_ar TEXT, sahabi_rawi TEXT, type_rafa TEXT, type_tawatur TEXT, grade_synthese TEXT, grade_confidence REAL, verified_at DATETIME)",
+        "CREATE VIRTUAL TABLE hadiths_fts USING fts5(\n  matn_ar_normalized, matn_ar, matn_fr,\n  content='hadiths', content_rowid='id',\n  tokenize='unicode61 remove_diacritics 2'\n)",
+        "CREATE TABLE 'hadiths_fts_config'(k PRIMARY KEY, v) WITHOUT ROWID",
+        "CREATE TABLE 'hadiths_fts_data'(id INTEGER PRIMARY KEY, block BLOB)",
+        "CREATE TABLE 'hadiths_fts_docsize'(id INTEGER PRIMARY KEY, sz BLOB)",
+        "CREATE TABLE 'hadiths_fts_idx'(segid, term, pgno, PRIMARY KEY(segid, term)) WITHOUT ROWID",
+        "CREATE TABLE hukm_classes (\n  code TEXT PRIMARY KEY,\n  name_ar TEXT NOT NULL,\n  name_fr TEXT NOT NULL,\n  category TEXT NOT NULL,        -- maqbul / mardud / typologie / meta\n  sub_category TEXT,             -- accepté_fort / accepté_faible / rejeté_sanad / rejeté_rawi / altération / typologie\n  severity INTEGER,              -- échelle 0-10 (0=mawdūʿ, 10=sahih mutawātir)\n  can_be_acted_upon BOOLEAN,     -- peut-on l'utiliser pour ʿamal\n  acted_upon_scope TEXT,         -- ahkam / fadail / aucun\n  description_ar TEXT,\n  description_fr TEXT\n)",
+        "CREATE TABLE hukm_sources (\n  id INTEGER PRIMARY KEY,\n  name_ar TEXT NOT NULL,\n  name_fr TEXT,\n  era TEXT,\n  manhaj TEXT,\n  reliability_weight REAL DEFAULT 1.0, tabaqah TEXT, death_hijri INTEGER, specialty TEXT,\n  UNIQUE(name_ar)\n)",
+        "CREATE TABLE ilal (\n  id INTEGER PRIMARY KEY,\n  hadith_id INTEGER REFERENCES hadiths(id) ON DELETE CASCADE,\n  ilal_type TEXT NOT NULL,\n  visibility TEXT,\n  detected_by TEXT,\n  description_ar TEXT,\n  description_fr TEXT,\n  source_ref TEXT\n)",
+        "CREATE TABLE lexique_fer (\n    terme_ar TEXT PRIMARY KEY,\n    terme_fr TEXT NOT NULL,\n    interdit TEXT NOT NULL  -- la traduction interdite (ta'wil)\n)",
+        "CREATE TABLE matn_analysis (\n  hadith_id INTEGER PRIMARY KEY REFERENCES hadiths(id) ON DELETE CASCADE,\n  quran_concordance TEXT,\n  sunnah_concordance TEXT,\n  sunnah_opposition TEXT,\n  linguistic_flags TEXT,\n  alteration_flags TEXT,\n  analysis_source TEXT\n)",
+        "CREATE TABLE mazid_muttasil (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  hadith_id INTEGER NOT NULL REFERENCES hadiths(id) ON DELETE CASCADE,\n  chain_id INTEGER REFERENCES sanad_chains(id),\n  added_rawi_id INTEGER REFERENCES rijal(id),\n  added_rawi_name TEXT,\n  position INTEGER,              -- position du maillon ajouté\n  who_added_it TEXT,             -- qui a ajouté ce maillon\n  verdict TEXT CHECK(verdict IN (\n    'sahih_addition',            -- ajout correct\n    'khata_mardud',              -- erreur rejetée\n    'tawaqquf'                   -- suspension du jugement\n  )),\n  detected_by TEXT,              -- imam qui l'a détecté\n  detected_source TEXT,\n  reasoning_ar TEXT,\n  reasoning_fr TEXT,\n  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,\n  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP\n)",
+        "CREATE TABLE mubham_muhmal (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  hadith_id INTEGER NOT NULL REFERENCES hadiths(id) ON DELETE CASCADE,\n  chain_id INTEGER REFERENCES sanad_chains(id),\n  position_in_chain INTEGER,\n  is_mubham BOOLEAN DEFAULT 0,   -- non nommé (ex: \"رجل\")\n  is_muhmal BOOLEAN DEFAULT 0,   -- ambigu (ex: \"محمد\" sans précision)\n  mubham_expression TEXT,        -- ex: \"حدثني رجل\"\n  muhmal_name TEXT,              -- ex: \"محمد\"\n  candidates TEXT,               -- JSON [rawi_id potentiels]\n  candidates_names TEXT,         -- JSON [noms lisibles]\n  resolved_rawi_id INTEGER REFERENCES rijal(id),\n  resolved_rawi_name TEXT,\n  resolution_source TEXT,        -- ex: \"Ibn Ḥajar, Taʿjīl al-Manfaʿah, p.125\"\n  resolution_confidence TEXT CHECK(resolution_confidence IN (\n    'certain',                   -- identification certaine\n    'probable',                  -- probable\n    'possible',                  -- possible\n    'unresolved'                 -- non résolu\n  )),\n  notes_ar TEXT,\n  notes_fr TEXT,\n  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,\n  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP\n)",
+        "CREATE TABLE mukhtalif_hadith (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  hadith_id INTEGER NOT NULL REFERENCES hadiths(id) ON DELETE CASCADE,\n  conflicting_hadith_id INTEGER REFERENCES hadiths(id),\n  conflicting_hadith_text TEXT,\n  conflicting_quran_ref TEXT,    -- sūra:āya si conflit avec Qurʾān\n  conflicting_quran_text TEXT,\n  conflict_type TEXT CHECK(conflict_type IN (\n    'hadith_vs_hadith',\n    'hadith_vs_quran',\n    'hadith_vs_ijmaʿ'\n  )),\n  resolution_method TEXT CHECK(resolution_method IN (\n    'jamʿ',                      -- réconciliation\n    'naskh',                     -- abrogation\n    'tarjīḥ',                    -- préférence\n    'tawaqquf'                   -- suspension\n  )),\n  resolution_ar TEXT,\n  resolution_fr TEXT,\n  source_imam TEXT,              -- qui a proposé cette réconciliation\n  source_reference TEXT,\n  notes_ar TEXT,\n  notes_fr TEXT,\n  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,\n  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP\n)",
+        "CREATE TABLE rijal (\n  id INTEGER PRIMARY KEY,\n  full_name_ar TEXT NOT NULL,\n  kunyah TEXT,\n  nasab TEXT,\n  laqab TEXT,\n  birth_hijri INTEGER,\n  death_hijri INTEGER,\n  tabaqah INTEGER,\n  residence TEXT,\n  taqrib_grade TEXT,\n  summary_ar TEXT,\n  summary_fr TEXT,\n  source_refs TEXT,\n  UNIQUE(full_name_ar, birth_hijri, death_hijri)\n)",
+        "CREATE TABLE rijal_relations (\n  id INTEGER PRIMARY KEY,\n  master_id INTEGER REFERENCES rijal(id),\n  student_id INTEGER REFERENCES rijal(id),\n  liqaa_confirmed BOOLEAN DEFAULT 0,\n  muʿasarah_possible BOOLEAN DEFAULT 0,\n  source TEXT,\n  UNIQUE(master_id, student_id)\n)",
+        "CREATE TABLE rijal_verdicts (\n  id INTEGER PRIMARY KEY,\n  rawi_id INTEGER REFERENCES rijal(id) ON DELETE CASCADE,\n  critic_name TEXT NOT NULL,\n  verdict_ar TEXT,\n  verdict_level INTEGER,\n  source_book TEXT,\n  source_page TEXT\n)",
+        "CREATE TABLE sanad_chains (\n  id INTEGER PRIMARY KEY,\n  hadith_id INTEGER REFERENCES hadiths(id) ON DELETE CASCADE,\n  chain_order INTEGER DEFAULT 1,\n  is_primary BOOLEAN DEFAULT 1\n)",
+        "CREATE TABLE sanad_links (\n  id INTEGER PRIMARY KEY,\n  chain_id INTEGER REFERENCES sanad_chains(id) ON DELETE CASCADE,\n  position INTEGER NOT NULL,\n  rawi_id INTEGER REFERENCES rijal(id),\n  rawi_name_raw TEXT,\n  sigha_ada TEXT,\n  tadlis_flag BOOLEAN DEFAULT 0,\n  inqitaʿ_flag BOOLEAN DEFAULT 0,\n  ikhtilat_flag BOOLEAN DEFAULT 0,\n  notes TEXT\n)",
+        "CREATE TABLE sqlite_sequence(name,seq)",
+        "CREATE TABLE tafarrud (\n  hadith_id INTEGER PRIMARY KEY REFERENCES hadiths(id) ON DELETE CASCADE,\n  is_tafarrud BOOLEAN DEFAULT 0,\n  unique_narrator_id INTEGER REFERENCES rijal(id),\n  unique_narrator_name TEXT,\n  position_of_uniqueness INTEGER,  -- à quel niveau de la chaîne\n  is_ghareeb_mutlaq BOOLEAN DEFAULT 0,  -- unique dès la source\n  is_ghareeb_nisbi BOOLEAN DEFAULT 0,   -- unique par un certain maillon\n  acceptable BOOLEAN,                    -- selon l'école mutaqaddimīn\n  acceptable_reason TEXT,\n  reasoning_source TEXT,\n  mutaqaddimin_verdict TEXT,             -- verdict des anciens\n  mutaakhkhirin_verdict TEXT,            -- verdict des tardifs\n  notes_ar TEXT,\n  notes_fr TEXT,\n  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,\n  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP\n)",
+        "CREATE TABLE takhrij (\n  id INTEGER PRIMARY KEY,\n  hadith_id INTEGER REFERENCES hadiths(id) ON DELETE CASCADE,\n  linked_hadith_id INTEGER REFERENCES hadiths(id) ON DELETE CASCADE,\n  relation_type TEXT NOT NULL,\n  similarity_score REAL,\n  detection_method TEXT,\n  UNIQUE(hadith_id, linked_hadith_id, relation_type)\n)",
+        "CREATE TABLE taʿarud_waqf_rafʿ (\n  hadith_id INTEGER PRIMARY KEY REFERENCES hadiths(id) ON DELETE CASCADE,\n  rafʿ_chains TEXT,              -- JSON [chain_ids marfūʿ]\n  waqf_chains TEXT,              -- JSON [chain_ids mawqūf]\n  rafʿ_narrators TEXT,           -- JSON [noms]\n  waqf_narrators TEXT,           -- JSON [noms]\n  imam_trajih TEXT,\n  imam_trajih_source TEXT,\n  final_verdict TEXT CHECK(final_verdict IN (\n    'al_mahfuz_al_rafʿ',      -- élévation préservée\n    'al_mahfuz_al_waqf',       -- arrêt préservé\n    'lahu_hukm_al_rafʿ',      -- a le statut d'élevé\n    'muʿallal'                 -- défaut caché\n  )),\n  reasoning_ar TEXT,\n  reasoning_fr TEXT,\n  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,\n  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP\n)",
+        "CREATE TABLE taʿarud_wasl_irsal (\n  hadith_id INTEGER PRIMARY KEY REFERENCES hadiths(id) ON DELETE CASCADE,\n  wasl_chains TEXT,              -- JSON [chain_ids connectés]\n  irsal_chains TEXT,             -- JSON [chain_ids mursal]\n  wasl_narrators TEXT,           -- JSON [noms des rāwī qui ont connecté]\n  irsal_narrators TEXT,          -- JSON [noms des rāwī qui ont fait irsāl]\n  imam_trajih TEXT,              -- qui a privilégié quelle version\n  imam_trajih_source TEXT,\n  final_verdict TEXT CHECK(final_verdict IN (\n    'wasl_akbar',              -- connexion plus forte\n    'irsal_akbar',             -- irsāl plus fort\n    'mahfuz_wasl',             -- version connectée préservée\n    'mahfuz_irsal',            -- version mursal préservée\n    'muʿallal'                 -- défaut caché\n  )),\n  reasoning_ar TEXT,\n  reasoning_fr TEXT,\n  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,\n  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP\n)",
+        "CREATE TABLE ziyadat_thiqah (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  hadith_id INTEGER NOT NULL REFERENCES hadiths(id) ON DELETE CASCADE,\n  ziyadah_text_ar TEXT NOT NULL,\n  ziyadah_text_fr TEXT,\n  location TEXT CHECK(location IN ('sanad', 'matn', 'both')),\n  ziyadah_type TEXT CHECK(ziyadah_type IN (\n    'wasl_mursal',           -- connexion d'un mursal\n    'rafʿ_mawquf',          -- élévation d'un mawqūf\n    'ziyādat_lafẓ',         -- ajout de mots dans le matn\n    'ziyādat_rāwī'          -- ajout d'un maillon dans le sanad\n  )),\n  narrator_who_added_id INTEGER REFERENCES rijal(id),\n  narrator_who_added_name TEXT,\n  contradicts_more_reliable BOOLEAN DEFAULT 0,\n  verdict TEXT CHECK(verdict IN ('accepted', 'rejected', 'tawaqquf')),\n  verdict_source TEXT,\n  verdict_source_page TEXT,\n  qara_in TEXT,                -- JSON : indices contextuels\n  notes_ar TEXT,\n  notes_fr TEXT,\n  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,\n  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP\n)",
+        "CREATE TABLE ʿamal_salaf (\n  hadith_id INTEGER PRIMARY KEY REFERENCES hadiths(id) ON DELETE CASCADE,\n  sahabah_who_acted TEXT,        -- JSON [noms des compagnons]\n  tabiʿin_who_acted TEXT,        -- JSON [noms des successeurs]\n  ijmaʿ_sahaba BOOLEAN DEFAULT 0,\n  athar_sources TEXT,            -- JSON [références aux athārs]\n  fuqaha_references TEXT,        -- JSON [mentions dans ouvrages fiqh]\n  practice_description_ar TEXT,\n  practice_description_fr TEXT,\n  strengthens_hadith BOOLEAN DEFAULT 0,  -- renforce le hadith ?\n  notes_ar TEXT,\n  notes_fr TEXT,\n  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,\n  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP\n)"
+      ],
+      "tables": [
+        "ahkam",
+        "avis_savants",
+        "errors_log",
+        "fiqh_hadith",
+        "hadiths",
+        "hadiths_fts",
+        "hadiths_fts_config",
+        "hadiths_fts_data",
+        "hadiths_fts_docsize",
+        "hadiths_fts_idx",
+        "hukm_classes",
+        "hukm_sources",
+        "ilal",
+        "lexique_fer",
+        "matn_analysis",
+        "mazid_muttasil",
+        "mubham_muhmal",
+        "mukhtalif_hadith",
+        "rijal",
+        "rijal_relations",
+        "rijal_verdicts",
+        "sanad_chains",
+        "sanad_links",
+        "sqlite_sequence",
+        "tafarrud",
+        "takhrij",
+        "taʿarud_waqf_rafʿ",
+        "taʿarud_wasl_irsal",
+        "ziyadat_thiqah",
+        "ʿamal_salaf"
+      ],
+      "total_hadiths": 122927,
+      "total_collections": 10,
+      "grades": [
+        "",
+        "daif",
+        "hasan",
+        "mawdu",
+        "non_évalué",
+        "sahih",
+        "unknown"
+      ],
+      "grades_distribution": [
+        [
+          "",
+          72446
+        ],
+        [
+          "sahih",
+          23564
+        ],
+        [
+          "non_évalué",
+          20557
+        ],
+        [
+          "daif",
+          4204
+        ],
+        [
+          "hasan",
+          1692
+        ],
+        [
+          "unknown",
+          411
+        ],
+        [
+          "mawdu",
+          53
+        ]
+      ],
+      "collections": [
+        [
+          "Sunan an-Nasa'i",
+          27693
+        ],
+        [
+          "Sahih al-Bukhari",
+          21493
+        ],
+        [
+          "Sahih Muslim",
+          19580
+        ],
+        [
+          "Sunan Abu Dawud",
+          15812
+        ],
+        [
+          "Jami at-Tirmidhi",
+          11144
+        ],
+        [
+          "Sunan Ibn Majah",
+          8676
+        ],
+        [
+          "Musnad Ahmad",
+          8600
+        ],
+        [
+          "Muwatta Malik",
+          6987
+        ],
+        [
+          "Sunan ad-Darimi",
+          2900
+        ],
+        [
+          "forty_hadith_nawawi",
+          42
+        ]
+      ],
+      "sample_hadiths": [
+        {
+          "id": 1,
+          "collection": "Sahih al-Bukhari",
+          "numero": "1",
+          "matn_ar": "حَدَّثَنَا الْحُمَيْدِيُّ عَبْدُ اللَّهِ بْنُ الزُّبَيْرِ ، قَالَ : حَدَّثَنَا سُفْيَانُ ، قَالَ : ح...",
+          "grade": "",
+          "source_url": null,
+          "source_api": "jsdelivr_cdn",
+          "inserted_at": "2026-04-18 03:22:16"
+        },
+        {
+          "id": 2,
+          "collection": "Sahih al-Bukhari",
+          "numero": "2",
+          "matn_ar": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، قَالَ أَخْبَرَنَا مَالِكٌ، عَنْ هِشَامِ بْنِ عُرْوَةَ، عَنْ ...",
+          "grade": "",
+          "source_url": null,
+          "source_api": "jsdelivr_cdn",
+          "inserted_at": "2026-04-18 03:22:16"
+        },
+        {
+          "id": 3,
+          "collection": "Sahih al-Bukhari",
+          "numero": "3",
+          "matn_ar": "حَدَّثَنَا يَحْيَى بْنُ بُكَيْرٍ، قَالَ حَدَّثَنَا اللَّيْثُ، عَنْ عُقَيْلٍ، عَنِ ابْنِ شِهَابٍ، عَن...",
+          "grade": "",
+          "source_url": null,
+          "source_api": "jsdelivr_cdn",
+          "inserted_at": "2026-04-18 03:22:16"
+        }
+      ]
+    },
+    "almizane": {
+      "schema": [
+        "CREATE TABLE ahkam (\n  id INTEGER PRIMARY KEY,\n  hadith_id INTEGER REFERENCES hadiths(id) ON DELETE CASCADE,\n  source_id INTEGER REFERENCES hukm_sources(id),\n  hukm_class TEXT NOT NULL,\n  hukm_raw_ar TEXT,\n  source_book TEXT,\n  source_volume TEXT,\n  source_page TEXT,\n  scraped_from TEXT,\n  scraped_at DATETIME DEFAULT CURRENT_TIMESTAMP\n)",
+        "CREATE TABLE avis_savants (\n    id              INTEGER PRIMARY KEY AUTOINCREMENT,\n    hadith_sha256   TEXT NOT NULL REFERENCES hadiths(sha256),\n    savant          TEXT NOT NULL,                 -- voir WHITELIST\n    epoque          TEXT NOT NULL,                 -- MUTAQADDIMUN | KHALAF | MUASIR\n    jugement        TEXT NOT NULL,                 -- texte du hukm\n    source_jugement TEXT\n)",
+        "CREATE TABLE errors_log (\n    id          INTEGER PRIMARY KEY AUTOINCREMENT,\n    timestamp   TEXT DEFAULT (datetime('now')),\n    error_type  TEXT NOT NULL,  -- TAAWIL_DETECTED | API_ERROR | INSERT_ERROR\n    sha256      TEXT,\n    details     TEXT,\n    collection  TEXT\n)",
+        "CREATE TABLE fiqh_hadith (\n  hadith_id INTEGER PRIMARY KEY REFERENCES hadiths(id) ON DELETE CASCADE,\n  asbab_wurud_ar TEXT,\n  asbab_wurud_fr TEXT,\n  is_nasikh BOOLEAN DEFAULT 0,\n  is_mansukh BOOLEAN DEFAULT 0,\n  abrogates_hadith_id INTEGER,\n  abrogated_by_hadith_id INTEGER,\n  gharib_alfath TEXT,\n  fiqh_implications_fr TEXT,\n  source_refs TEXT\n)",
+        "CREATE TABLE hadiths (\n    id              INTEGER PRIMARY KEY AUTOINCREMENT,\n    sha256          TEXT NOT NULL UNIQUE,          -- Sanad Numérique (hash du matn_ar)\n    collection      TEXT NOT NULL,                 -- ex: \"Sahih al-Bukhari\"\n    numero_hadith   TEXT,                          -- numéro dans la collection\n    livre           TEXT,\n    chapitre        TEXT,\n    matn_ar         TEXT NOT NULL,                 -- texte arabe brut\n    matn_fr         TEXT,                          -- traduction française\n    isnad_brut      TEXT,                          -- chaîne de transmission brute\n    grade_final     TEXT NOT NULL,                 -- Sahih, Hasan, Da'if, etc.\n    categorie       TEXT NOT NULL,                 -- MAQBUL | DAIF | MAWDUU\n    badge_alerte    INTEGER DEFAULT 0,             -- 1 = Mawdū' (rouge obligatoire)\n    source_url      TEXT,\n    source_api      TEXT,                          -- \"dorar_json\" | \"hadeethenc\"\n    inserted_at     TEXT DEFAULT (datetime('now'))\n, matn_ar_normalized TEXT, isnad_ar TEXT, sahabi_rawi TEXT, type_rafa TEXT, type_tawatur TEXT, grade_synthese TEXT, grade_confidence REAL, verified_at DATETIME)",
+        "CREATE VIRTUAL TABLE hadiths_fts USING fts5(\n  matn_ar_normalized, matn_ar, matn_fr,\n  content='hadiths', content_rowid='id',\n  tokenize='unicode61 remove_diacritics 2'\n)",
+        "CREATE TABLE 'hadiths_fts_config'(k PRIMARY KEY, v) WITHOUT ROWID",
+        "CREATE TABLE 'hadiths_fts_data'(id INTEGER PRIMARY KEY, block BLOB)",
+        "CREATE TABLE 'hadiths_fts_docsize'(id INTEGER PRIMARY KEY, sz BLOB)",
+        "CREATE TABLE 'hadiths_fts_idx'(segid, term, pgno, PRIMARY KEY(segid, term)) WITHOUT ROWID",
+        "CREATE TABLE hukm_sources (\n  id INTEGER PRIMARY KEY,\n  name_ar TEXT NOT NULL,\n  name_fr TEXT,\n  era TEXT,\n  manhaj TEXT,\n  reliability_weight REAL DEFAULT 1.0, tabaqah TEXT, death_hijri INTEGER, specialty TEXT,\n  UNIQUE(name_ar)\n)",
+        "CREATE TABLE ilal (\n  id INTEGER PRIMARY KEY,\n  hadith_id INTEGER REFERENCES hadiths(id) ON DELETE CASCADE,\n  ilal_type TEXT NOT NULL,\n  visibility TEXT,\n  detected_by TEXT,\n  description_ar TEXT,\n  description_fr TEXT,\n  source_ref TEXT\n)",
+        "CREATE TABLE lexique_fer (\n    terme_ar TEXT PRIMARY KEY,\n    terme_fr TEXT NOT NULL,\n    interdit TEXT NOT NULL  -- la traduction interdite (ta'wil)\n)",
+        "CREATE TABLE matn_analysis (\n  hadith_id INTEGER PRIMARY KEY REFERENCES hadiths(id) ON DELETE CASCADE,\n  quran_concordance TEXT,\n  sunnah_concordance TEXT,\n  sunnah_opposition TEXT,\n  linguistic_flags TEXT,\n  alteration_flags TEXT,\n  analysis_source TEXT\n)",
+        "CREATE TABLE mazid_muttasil (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  hadith_id INTEGER NOT NULL REFERENCES hadiths(id) ON DELETE CASCADE,\n  chain_id INTEGER REFERENCES sanad_chains(id),\n  added_rawi_id INTEGER REFERENCES rijal(id),\n  added_rawi_name TEXT,\n  position INTEGER,              -- position du maillon ajouté\n  who_added_it TEXT,             -- qui a ajouté ce maillon\n  verdict TEXT CHECK(verdict IN (\n    'sahih_addition',            -- ajout correct\n    'khata_mardud',              -- erreur rejetée\n    'tawaqquf'                   -- suspension du jugement\n  )),\n  detected_by TEXT,              -- imam qui l'a détecté\n  detected_source TEXT,\n  reasoning_ar TEXT,\n  reasoning_fr TEXT,\n  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,\n  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP\n)",
+        "CREATE TABLE mubham_muhmal (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  hadith_id INTEGER NOT NULL REFERENCES hadiths(id) ON DELETE CASCADE,\n  chain_id INTEGER REFERENCES sanad_chains(id),\n  position_in_chain INTEGER,\n  is_mubham BOOLEAN DEFAULT 0,   -- non nommé (ex: \"رجل\")\n  is_muhmal BOOLEAN DEFAULT 0,   -- ambigu (ex: \"محمد\" sans précision)\n  mubham_expression TEXT,        -- ex: \"حدثني رجل\"\n  muhmal_name TEXT,              -- ex: \"محمد\"\n  candidates TEXT,               -- JSON [rawi_id potentiels]\n  candidates_names TEXT,         -- JSON [noms lisibles]\n  resolved_rawi_id INTEGER REFERENCES rijal(id),\n  resolved_rawi_name TEXT,\n  resolution_source TEXT,        -- ex: \"Ibn Ḥajar, Taʿjīl al-Manfaʿah, p.125\"\n  resolution_confidence TEXT CHECK(resolution_confidence IN (\n    'certain',                   -- identification certaine\n    'probable',                  -- probable\n    'possible',                  -- possible\n    'unresolved'                 -- non résolu\n  )),\n  notes_ar TEXT,\n  notes_fr TEXT,\n  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,\n  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP\n)",
+        "CREATE TABLE mukhtalif_hadith (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  hadith_id INTEGER NOT NULL REFERENCES hadiths(id) ON DELETE CASCADE,\n  conflicting_hadith_id INTEGER REFERENCES hadiths(id),\n  conflicting_hadith_text TEXT,\n  conflicting_quran_ref TEXT,    -- sūra:āya si conflit avec Qurʾān\n  conflicting_quran_text TEXT,\n  conflict_type TEXT CHECK(conflict_type IN (\n    'hadith_vs_hadith',\n    'hadith_vs_quran',\n    'hadith_vs_ijmaʿ'\n  )),\n  resolution_method TEXT CHECK(resolution_method IN (\n    'jamʿ',                      -- réconciliation\n    'naskh',                     -- abrogation\n    'tarjīḥ',                    -- préférence\n    'tawaqquf'                   -- suspension\n  )),\n  resolution_ar TEXT,\n  resolution_fr TEXT,\n  source_imam TEXT,              -- qui a proposé cette réconciliation\n  source_reference TEXT,\n  notes_ar TEXT,\n  notes_fr TEXT,\n  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,\n  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP\n)",
+        "CREATE TABLE rijal (\n  id INTEGER PRIMARY KEY,\n  full_name_ar TEXT NOT NULL,\n  kunyah TEXT,\n  nasab TEXT,\n  laqab TEXT,\n  birth_hijri INTEGER,\n  death_hijri INTEGER,\n  tabaqah INTEGER,\n  residence TEXT,\n  taqrib_grade TEXT,\n  summary_ar TEXT,\n  summary_fr TEXT,\n  source_refs TEXT,\n  UNIQUE(full_name_ar, birth_hijri, death_hijri)\n)",
+        "CREATE TABLE rijal_relations (\n  id INTEGER PRIMARY KEY,\n  master_id INTEGER REFERENCES rijal(id),\n  student_id INTEGER REFERENCES rijal(id),\n  liqaa_confirmed BOOLEAN DEFAULT 0,\n  muʿasarah_possible BOOLEAN DEFAULT 0,\n  source TEXT,\n  UNIQUE(master_id, student_id)\n)",
+        "CREATE TABLE rijal_verdicts (\n  id INTEGER PRIMARY KEY,\n  rawi_id INTEGER REFERENCES rijal(id) ON DELETE CASCADE,\n  critic_name TEXT NOT NULL,\n  verdict_ar TEXT,\n  verdict_level INTEGER,\n  source_book TEXT,\n  source_page TEXT\n)",
+        "CREATE TABLE sanad_chains (\n  id INTEGER PRIMARY KEY,\n  hadith_id INTEGER REFERENCES hadiths(id) ON DELETE CASCADE,\n  chain_order INTEGER DEFAULT 1,\n  is_primary BOOLEAN DEFAULT 1\n)",
+        "CREATE TABLE sanad_links (\n  id INTEGER PRIMARY KEY,\n  chain_id INTEGER REFERENCES sanad_chains(id) ON DELETE CASCADE,\n  position INTEGER NOT NULL,\n  rawi_id INTEGER REFERENCES rijal(id),\n  rawi_name_raw TEXT,\n  sigha_ada TEXT,\n  tadlis_flag BOOLEAN DEFAULT 0,\n  inqitaʿ_flag BOOLEAN DEFAULT 0,\n  ikhtilat_flag BOOLEAN DEFAULT 0,\n  notes TEXT\n)",
+        "CREATE TABLE sqlite_sequence(name,seq)",
+        "CREATE TABLE tafarrud (\n  hadith_id INTEGER PRIMARY KEY REFERENCES hadiths(id) ON DELETE CASCADE,\n  is_tafarrud BOOLEAN DEFAULT 0,\n  unique_narrator_id INTEGER REFERENCES rijal(id),\n  unique_narrator_name TEXT,\n  position_of_uniqueness INTEGER,  -- à quel niveau de la chaîne\n  is_ghareeb_mutlaq BOOLEAN DEFAULT 0,  -- unique dès la source\n  is_ghareeb_nisbi BOOLEAN DEFAULT 0,   -- unique par un certain maillon\n  acceptable BOOLEAN,                    -- selon l'école mutaqaddimīn\n  acceptable_reason TEXT,\n  reasoning_source TEXT,\n  mutaqaddimin_verdict TEXT,             -- verdict des anciens\n  mutaakhkhirin_verdict TEXT,            -- verdict des tardifs\n  notes_ar TEXT,\n  notes_fr TEXT,\n  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,\n  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP\n)",
+        "CREATE TABLE takhrij (\n  id INTEGER PRIMARY KEY,\n  hadith_id INTEGER REFERENCES hadiths(id) ON DELETE CASCADE,\n  linked_hadith_id INTEGER REFERENCES hadiths(id) ON DELETE CASCADE,\n  relation_type TEXT NOT NULL,\n  similarity_score REAL,\n  detection_method TEXT,\n  UNIQUE(hadith_id, linked_hadith_id, relation_type)\n)",
+        "CREATE TABLE taʿarud_waqf_rafʿ (\n  hadith_id INTEGER PRIMARY KEY REFERENCES hadiths(id) ON DELETE CASCADE,\n  rafʿ_chains TEXT,              -- JSON [chain_ids marfūʿ]\n  waqf_chains TEXT,              -- JSON [chain_ids mawqūf]\n  rafʿ_narrators TEXT,           -- JSON [noms]\n  waqf_narrators TEXT,           -- JSON [noms]\n  imam_trajih TEXT,\n  imam_trajih_source TEXT,\n  final_verdict TEXT CHECK(final_verdict IN (\n    'al_mahfuz_al_rafʿ',      -- élévation préservée\n    'al_mahfuz_al_waqf',       -- arrêt préservé\n    'lahu_hukm_al_rafʿ',      -- a le statut d'élevé\n    'muʿallal'                 -- défaut caché\n  )),\n  reasoning_ar TEXT,\n  reasoning_fr TEXT,\n  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,\n  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP\n)",
+        "CREATE TABLE taʿarud_wasl_irsal (\n  hadith_id INTEGER PRIMARY KEY REFERENCES hadiths(id) ON DELETE CASCADE,\n  wasl_chains TEXT,              -- JSON [chain_ids connectés]\n  irsal_chains TEXT,             -- JSON [chain_ids mursal]\n  wasl_narrators TEXT,           -- JSON [noms des rāwī qui ont connecté]\n  irsal_narrators TEXT,          -- JSON [noms des rāwī qui ont fait irsāl]\n  imam_trajih TEXT,              -- qui a privilégié quelle version\n  imam_trajih_source TEXT,\n  final_verdict TEXT CHECK(final_verdict IN (\n    'wasl_akbar',              -- connexion plus forte\n    'irsal_akbar',             -- irsāl plus fort\n    'mahfuz_wasl',             -- version connectée préservée\n    'mahfuz_irsal',            -- version mursal préservée\n    'muʿallal'                 -- défaut caché\n  )),\n  reasoning_ar TEXT,\n  reasoning_fr TEXT,\n  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,\n  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP\n)",
+        "CREATE TABLE ziyadat_thiqah (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  hadith_id INTEGER NOT NULL REFERENCES hadiths(id) ON DELETE CASCADE,\n  ziyadah_text_ar TEXT NOT NULL,\n  ziyadah_text_fr TEXT,\n  location TEXT CHECK(location IN ('sanad', 'matn', 'both')),\n  ziyadah_type TEXT CHECK(ziyadah_type IN (\n    'wasl_mursal',           -- connexion d'un mursal\n    'rafʿ_mawquf',          -- élévation d'un mawqūf\n    'ziyādat_lafẓ',         -- ajout de mots dans le matn\n    'ziyādat_rāwī'          -- ajout d'un maillon dans le sanad\n  )),\n  narrator_who_added_id INTEGER REFERENCES rijal(id),\n  narrator_who_added_name TEXT,\n  contradicts_more_reliable BOOLEAN DEFAULT 0,\n  verdict TEXT CHECK(verdict IN ('accepted', 'rejected', 'tawaqquf')),\n  verdict_source TEXT,\n  verdict_source_page TEXT,\n  qara_in TEXT,                -- JSON : indices contextuels\n  notes_ar TEXT,\n  notes_fr TEXT,\n  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,\n  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP\n)",
+        "CREATE TABLE ʿamal_salaf (\n  hadith_id INTEGER PRIMARY KEY REFERENCES hadiths(id) ON DELETE CASCADE,\n  sahabah_who_acted TEXT,        -- JSON [noms des compagnons]\n  tabiʿin_who_acted TEXT,        -- JSON [noms des successeurs]\n  ijmaʿ_sahaba BOOLEAN DEFAULT 0,\n  athar_sources TEXT,            -- JSON [références aux athārs]\n  fuqaha_references TEXT,        -- JSON [mentions dans ouvrages fiqh]\n  practice_description_ar TEXT,\n  practice_description_fr TEXT,\n  strengthens_hadith BOOLEAN DEFAULT 0,  -- renforce le hadith ?\n  notes_ar TEXT,\n  notes_fr TEXT,\n  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,\n  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP\n)"
+      ],
+      "tables": [
+        "ahkam",
+        "avis_savants",
+        "errors_log",
+        "fiqh_hadith",
+        "hadiths",
+        "hadiths_fts",
+        "hadiths_fts_config",
+        "hadiths_fts_data",
+        "hadiths_fts_docsize",
+        "hadiths_fts_idx",
+        "hukm_sources",
+        "ilal",
+        "lexique_fer",
+        "matn_analysis",
+        "mazid_muttasil",
+        "mubham_muhmal",
+        "mukhtalif_hadith",
+        "rijal",
+        "rijal_relations",
+        "rijal_verdicts",
+        "sanad_chains",
+        "sanad_links",
+        "sqlite_sequence",
+        "tafarrud",
+        "takhrij",
+        "taʿarud_waqf_rafʿ",
+        "taʿarud_wasl_irsal",
+        "ziyadat_thiqah",
+        "ʿamal_salaf"
+      ],
+      "total_hadiths": 122927,
+      "total_collections": 13,
+      "grades": [
+        "",
+        "daif",
+        "hasan",
+        "mawdu",
+        "non_évalué",
+        "sahih",
+        "unknown"
+      ],
+      "grades_distribution": [
+        [
+          "",
+          72446
+        ],
+        [
+          "sahih",
+          23564
+        ],
+        [
+          "non_évalué",
+          20557
+        ],
+        [
+          "daif",
+          4204
+        ],
+        [
+          "hasan",
+          1692
+        ],
+        [
+          "unknown",
+          411
+        ],
+        [
+          "mawdu",
+          53
+        ]
+      ],
+      "collections": [
+        [
+          "Sunan an-Nasa'i",
+          27693
+        ],
+        [
+          "Sahih al-Bukhari",
+          21493
+        ],
+        [
+          "Sahih Muslim",
+          19580
+        ],
+        [
+          "Sunan Abu Dawud",
+          10544
+        ],
+        [
+          "Musnad Ahmad",
+          8600
+        ],
+        [
+          "Jami at-Tirmidhi",
+          7519
+        ],
+        [
+          "Muwatta Malik",
+          6987
+        ],
+        [
+          "abudawud",
+          5268
+        ],
+        [
+          "Sunan Ibn Majah",
+          4338
+        ],
+        [
+          "ibnmajah",
+          4338
+        ],
+        [
+          "tirmidzi",
+          3625
+        ],
+        [
+          "Sunan ad-Darimi",
+          2900
+        ],
+        [
+          "40 Hadith Nawawi",
+          42
+        ]
+      ],
+      "sample_hadiths": [
+        {
+          "id": 1,
+          "collection": "Sahih al-Bukhari",
+          "numero": "1",
+          "matn_ar": "حَدَّثَنَا الْحُمَيْدِيُّ عَبْدُ اللَّهِ بْنُ الزُّبَيْرِ ، قَالَ : حَدَّثَنَا سُفْيَانُ ، قَالَ : ح...",
+          "grade": "",
+          "source_url": null,
+          "source_api": "jsdelivr_cdn",
+          "inserted_at": "2026-04-18 03:22:16"
+        },
+        {
+          "id": 2,
+          "collection": "Sahih al-Bukhari",
+          "numero": "2",
+          "matn_ar": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، قَالَ أَخْبَرَنَا مَالِكٌ، عَنْ هِشَامِ بْنِ عُرْوَةَ، عَنْ ...",
+          "grade": "",
+          "source_url": null,
+          "source_api": "jsdelivr_cdn",
+          "inserted_at": "2026-04-18 03:22:16"
+        },
+        {
+          "id": 3,
+          "collection": "Sahih al-Bukhari",
+          "numero": "3",
+          "matn_ar": "حَدَّثَنَا يَحْيَى بْنُ بُكَيْرٍ، قَالَ حَدَّثَنَا اللَّيْثُ، عَنْ عُقَيْلٍ، عَنِ ابْنِ شِهَابٍ، عَن...",
+          "grade": "",
+          "source_url": null,
+          "source_api": "jsdelivr_cdn",
+          "inserted_at": "2026-04-18 03:22:16"
+        }
+      ]
+    }
+  }
+}

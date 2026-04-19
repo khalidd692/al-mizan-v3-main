@@ -1,0 +1,35 @@
+{
+  "name": "Al Mizân - Naqil Chain",
+  "description": "Cascade Naqil stricte pour Al Mizân : 1. groq/llama-3.3-70b-versatile 2. kiro/claude-haiku-4.5 3. kiro/claude-sonnet-4.5 4. gemini/gemini-2.0-flash. Skip immédiat sur 402/429, retry 1 max par modèle.",
+  "chain": [
+    {
+      "provider": "groq",
+      "model": "llama-3.3-70b-versatile",
+      "max_retries": 1,
+      "skip_on": [402, 429]
+    },
+    {
+      "provider": "kiro",
+      "model": "claude-haiku-4.5",
+      "max_retries": 1,
+      "skip_on": [402, 429]
+    },
+    {
+      "provider": "kiro",
+      "model": "claude-sonnet-4.5",
+      "max_retries": 1,
+      "skip_on": [402, 429]
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-2.0-flash",
+      "max_retries": 1,
+      "skip_on": [402, 429]
+    }
+  ],
+  "rules": {
+    "cache_enabled": true,
+    "cache_ttl_days": 30,
+    "audit_log": "logs/mizan_audit.jsonl"
+  }
+}

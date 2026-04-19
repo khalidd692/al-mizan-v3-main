@@ -1,0 +1,162 @@
+
+================================================================================
+DIAGNOSTIC COMPLET DE LA CHAÎNE NAQIL
+================================================================================
+================================================================================
+ÉCHANTILLON DE 20 HADITHS SANS GRADE
+================================================================================
+
+ID: 1
+  Collection: Sahih al-Bukhari
+  Numéro: 1
+  Source API: jsdelivr_cdn
+  Matn: [texte arabe]
+
+ID: 2
+  Collection: Sahih al-Bukhari
+  Numéro: 2
+  Source API: jsdelivr_cdn
+  Matn: [texte arabe]
+
+ID: 3
+  Collection: Sahih al-Bukhari
+  Numéro: 3
+  Source API: jsdelivr_cdn
+  Matn: [texte arabe]
+
+ID: 4
+  Collection: Sahih al-Bukhari
+  Numéro: 4
+  Source API: jsdelivr_cdn
+  Matn: [texte arabe]
+
+ID: 5
+  Collection: Sahih al-Bukhari
+  Numéro: 5
+  Source API: jsdelivr_cdn
+  Matn: [texte arabe]
+
+ID: 6
+  Collection: Sahih al-Bukhari
+  Numéro: 6
+  Source API: jsdelivr_cdn
+  Matn: [texte arabe]
+
+ID: 7
+  Collection: Sahih al-Bukhari
+  Numéro: 7
+  Source API: jsdelivr_cdn
+  Matn: [texte arabe]
+
+ID: 8
+  Collection: Sahih al-Bukhari
+  Numéro: 8
+  Source API: jsdelivr_cdn
+  Matn: [texte arabe]
+
+ID: 9
+  Collection: Sahih al-Bukhari
+  Numéro: 9
+  Source API: jsdelivr_cdn
+  Matn: [texte arabe]
+
+ID: 10
+  Collection: Sahih al-Bukhari
+  Numéro: 10
+  Source API: jsdelivr_cdn
+  Matn: [texte arabe]
+
+ID: 11
+  Collection: Sahih al-Bukhari
+  Numéro: 11
+  Source API: jsdelivr_cdn
+  Matn: [texte arabe]
+
+ID: 12
+  Collection: Sahih al-Bukhari
+  Numéro: 12
+  Source API: jsdelivr_cdn
+  Matn: [texte arabe]
+
+ID: 13
+  Collection: Sahih al-Bukhari
+  Numéro: 13
+  Source API: jsdelivr_cdn
+  Matn: [texte arabe]
+
+ID: 14
+  Collection: Sahih al-Bukhari
+  Numéro: 14
+  Source API: jsdelivr_cdn
+  Matn: [texte arabe]
+
+ID: 15
+  Collection: Sahih al-Bukhari
+  Numéro: 15
+  Source API: jsdelivr_cdn
+  Matn: [texte arabe]
+
+ID: 16
+  Collection: Sahih al-Bukhari
+  Numéro: 16
+  Source API: jsdelivr_cdn
+  Matn: [texte arabe]
+
+ID: 17
+  Collection: Sahih al-Bukhari
+  Numéro: 17
+  Source API: jsdelivr_cdn
+  Matn: [texte arabe]
+
+ID: 18
+  Collection: Sahih al-Bukhari
+  Numéro: 18
+  Source API: jsdelivr_cdn
+  Matn: [texte arabe]
+
+ID: 19
+  Collection: Sahih al-Bukhari
+  Numéro: 19
+  Source API: jsdelivr_cdn
+  Matn: [texte arabe]
+
+ID: 20
+  Collection: Sahih al-Bukhari
+  Numéro: 20
+  Source API: jsdelivr_cdn
+  Matn: [texte arabe]
+
+================================================================================
+RÉPARTITION PAR SOURCE_API
+================================================================================
+jsdelivr_cdn: 20 hadiths
+
+================================================================================
+RÉPARTITION PAR COLLECTION
+================================================================================
+Sahih al-Bukhari: 20 hadiths
+
+================================================================================
+VÉRIFICATION TABLE MUHADDITHIN
+================================================================================
+❌ La table 'muhaddithin' N'EXISTE PAS dans la base
+
+================================================================================
+CONNEXION salafi_authorities.json ↔ muhaddithin
+================================================================================
+
+Nombre d'autorités dans le JSON: 37
+
+❌ ÉCHEC: La table 'muhaddithin' n'existe pas
+   → Les 29 autorités du JSON ne peuvent pas être liées
+
+================================================================================
+VÉRIFICATION TABLE VERDICTS
+================================================================================
+❌ La table 'verdicts' N'EXISTE PAS
+
+================================================================================
+CONCLUSION
+================================================================================
+
+🔴 CHAÎNE NAQIL CASSÉE: Table 'muhaddithin' manquante
