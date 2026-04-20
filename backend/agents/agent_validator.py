@@ -2,7 +2,8 @@
 
 import json
 from typing import Dict, Any, Optional
-from anthropic import Anthropic
+from backend.llm_router import call_fast, call_translation, call_json
+# from anthropic import Anthropic
 
 from backend.utils.logging import get_logger
 
@@ -43,35 +44,89 @@ class AgentValidator:
         if self.mock_mode:
             return self._mock_validation(hadith_raw)
         
-        # Étape 1: Normalisation du grade avec Haiku
-        grade_result = await self._normalize_grade_haiku(hadith_raw)
-        
-        # Étape 2: Traduction avec Haiku
-        translation_result = await self._translate_haiku(hadith_raw)
-        
-        # Étape 3: Validation savant avec Haiku
-        scholar_result = await self._validate_scholar_haiku(hadith_raw, grade_result)
-        
+        # Étape 1: Normalisation du grade via call_json
+        prompt_grade = (
+            f"Tu es un expert en sciences du Hadith. Normalise le grade suivant.\n"
+            f"Hadith:\n- Source: {hadith_raw.get('source', 'Inconnue')}\n"
+            f"- Grade brut: {hadith_raw.get('grade_raw', 'Non spécifié')}\n"
+            f"Règles STRICTES:\n"
+            f"1. Grades autorisés UNIQUEMENT: صحيح (sahih), حسن (hasan), ضعيف (daif), موضوع (mawdu)\n"
+            f"2. Si grade inconnu ou ambigu: ضعيف par défaut\n"
+            f"3. JAMAIS inventer un grade\n"
+            f"Réponds en JSON: {{\"grade\": \"صحيح\", \"confidence\": 95, \"reasoning\": \"Explication courte\"}}"
+        )
+        grade_result = call_json(prompt_grade)
+        if grade_result.get("status") != "ok":
+            raise Exception("Erreur LLM (grade): " + str(grade_result))
+
+        grade_json = json.loads(grade_result["content"])
+
+        # Étape 2: Traduction via call_translation
+        prompt_trad = (
+            f"Traduis ce hadith en français avec le Lexique de Fer (termes techniques non traduits).\n"
+            f"Matn arabe:\n{hadith_raw['matn_ar']}\n"
+            f"Règles:\n"
+            f"1. Termes techniques en arabe (ex: Ṣaḥābah, Isnād, Jarḥ wa Taʿdīl)\n"
+            f"2. Traduction littérale, pas d'interprétation\n"
+            f"3. Maximum 2 phrases\n"
+            f"Réponds en JSON: {{\"translation\": \"Traduction française ici\"}}"
+        )
+        translation_result = call_translation(prompt_trad)
+        if translation_result.get("status") != "ok":
+            raise Exception("Erreur LLM (traduction): " + str(translation_result))
+        translation_json = json.loads(translation_result["content"])
+
+        # Étape 3: Validation savant via call_json
+        prompt_scholar = (
+            f"Tu es un expert en Jarḥ wa Taʿdīl. Identifie le savant qui a authentifié ce hadith.\n"
+            f"Hadith:\n- Source: {hadith_raw.get('source', 'Inconnue')}\n- Grade: {grade_json['grade']}\n"
+            f"Hiérarchie STRICTE (priorité décroissante):\n"
+            f"1. Médine (ex: al-Bukhārī, Muslim, Mālik, Aḥmad)\n"
+            f"2. Arabie Saoudite (ex: Ibn Bāz, al-Albānī, Ibn ʿUthaymīn)\n"
+            f"3. TAWAQQUF (si savant inconnu, déviant, ou non Salaf as-Salih)\n"
+            f"Règles ABSOLUES:\n"
+            f"- JAMAIS utiliser le terme \"Salafi\" → \"Salaf as-Salih\" uniquement\n"
+            f"- Si savant inconnu ou douteux: TAWAQQUF\n"
+            f"- Pas d'innovation, pas de Bidʿah\n"
+            f"Réponds en JSON: {{\"scholar_name\": \"Nom du savant\", \"location\": \"Médine\", \"confidence\": 90, \"reasoning\": \"Explication courte\"}}"
+        )
+        scholar_result = call_json(prompt_scholar)
+        if scholar_result.get("status") != "ok":
+            raise Exception("Erreur LLM (scholar): " + str(scholar_result))
+        scholar_json = json.loads(scholar_result["content"])
+
         # Calculer confiance globale
-        confidence = self._calculate_confidence(grade_result, scholar_result)
-        
-        # Étape 4: Si confiance < 80, vérification avec Sonnet
+        confidence = self._calculate_confidence(grade_json, scholar_json)
+
+        # Étape 4: Si confiance < 80, vérification avec call_fast/call_json
         if confidence < 80:
-            log.info(f"[VALIDATOR] Confiance {confidence:.1f}% < 80, escalade vers Sonnet")
-            sonnet_result = await self._verify_with_sonnet(
-                hadith_raw, grade_result, scholar_result, translation_result
+            log.info(f"[VALIDATOR] Confiance {confidence:.1f}% < 80, escalade LLM (fast/json)")
+            prompt_sonnet = (
+                f"Tu es un muḥaddith expert. Vérifie ce verdict de hadith.\n"
+                f"Hadith:\n- Matn: {hadith_raw['matn_ar']}\n- Source: {hadith_raw.get('source')}\n"
+                f"- Grade proposé: {grade_json['grade']}\n"
+                f"- Savant proposé: {scholar_json['scholar_name']} ({scholar_json['location']})\n"
+                f"- Traduction: {translation_json['translation']}\n"
+                f"Vérifie:\n"
+                f"1. Grade correct selon les Mutaqaddimūn ?\n"
+                f"2. Savant valide selon hiérarchie Médine > Arabie Saoudite > TAWAQQUF ?\n"
+                f"3. Pas de Bidʿah, pas de déviation ?\n"
+                f"Réponds en JSON: {{\"grade\": {{\"grade\": \"صحيح\", \"confidence\": 95}}, \"scholar\": {{\"scholar_name\": \"al-Bukhārī\", \"location\": \"Médine\", \"confidence\": 95, \"reasoning\": \"...\"}}, \"confidence_score\": 95, \"corrections\": \"Corrections si nécessaire\"}}"
             )
-            confidence = sonnet_result["confidence_score"]
-            scholar_result = sonnet_result["scholar"]
-            grade_result = sonnet_result["grade"]
-        
+            sonnet_result = call_json(prompt_sonnet)
+            if sonnet_result.get("status") == "ok":
+                sonnet_json = json.loads(sonnet_result["content"])
+                confidence = sonnet_json.get("confidence_score", confidence)
+                scholar_json = sonnet_json.get("scholar", scholar_json)
+                grade_json = sonnet_json.get("grade", grade_json)
+
         return {
-            "grade_normalized": grade_result["grade"],
-            "translation_fr": translation_result["translation"],
-            "scholar_verdict": scholar_result["scholar_name"],
-            "scholar_location": scholar_result["location"],
+            "grade_normalized": grade_json["grade"],
+            "translation_fr": translation_json["translation"],
+            "scholar_verdict": scholar_json["scholar_name"],
+            "scholar_location": scholar_json["location"],
             "confidence_score": confidence,
-            "reasoning": scholar_result["reasoning"]
+            "reasoning": scholar_json["reasoning"]
         }
     
     async def _normalize_grade_haiku(self, hadith: Dict[str, Any]) -> Dict[str, Any]:

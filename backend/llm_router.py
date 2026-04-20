@@ -109,6 +109,28 @@ def call_naqil(prompt: str, task_type: str = "default", system: str = None) -> d
     return result
 
 
+def call_fast(prompt, system=None) -> dict:
+    """
+    Appelle le combo 'almizann-fast' pour une réponse rapide.
+    Retour : {"status": "ok"|"unavailable", "content": str, "model": str}
+    """
+    return call_naqil(prompt, task_type="almizann-fast", system=system)
+
+def call_translation(prompt, system=None) -> dict:
+    """
+    Appelle le combo 'almizann-traduction' pour la traduction.
+    Cache mémoire 30 jours sur hash(prompt).
+    Retour : {"status": "ok"|"unavailable", "content": str, "model": str}
+    """
+    return call_naqil(prompt, task_type="almizann-traduction", system=system)
+
+def call_json(prompt, system=None) -> dict:
+    """
+    Appelle le combo 'almizann-json' pour parsing JSON.
+    Retour : {"status": "ok"|"unavailable", "content": str, "model": str}
+    """
+    return call_naqil(prompt, task_type="almizann-json", system=system)
+
 if __name__ == "__main__":
     # Auto-test minimal
     print("Test default:", call_naqil("Dis bonjour en français.", "default"))

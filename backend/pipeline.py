@@ -88,6 +88,15 @@ class ValidationPipeline:
         # Récupérer hadiths non traités
         unprocessed = await self.db.get_unprocessed_hadiths(limit=count)
         total_to_process = len(unprocessed)
+
+        # Règle Naqil sur les résultats FTS5
+        if not unprocessed or (hasattr(unprocessed, "__getitem__") and unprocessed and unprocessed[0].get("score", 1) < 0.6):
+            yield emit("naql_not_found", {
+                "status": "not_found",
+                "classification": "non-jugé",
+                "message": "Hadith non trouvé dans la base ou score insuffisant."
+            })
+            return
         
         yield emit("validation_start", {
             "total_to_process": total_to_process
