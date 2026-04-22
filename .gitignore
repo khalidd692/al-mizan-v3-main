@@ -25,3 +25,4 @@ Thumbs.db
 backend/mizan.db
 backend/almizane.db
 backups/
+"*.db"  
