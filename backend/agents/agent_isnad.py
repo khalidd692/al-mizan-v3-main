@@ -4,7 +4,7 @@ from backend.agents.base import BaseAgent
 
 class AgentIsnad(BaseAgent):
     AGENT_NAME = "ISNAD"
-    ZONES_PRODUCED = [2, 3, 5]
+    ZONES_PRODUCED = [2, 3, 30]
 
     async def _mock_output(self, hadith_data: dict) -> dict:
         return {
@@ -27,8 +27,8 @@ class AgentIsnad(BaseAgent):
                 "mock": True,
                 "note": "Les vraies citations du corpus arriveront phase 2",
             },
-            "zone_5": {
-                "zone": 5,
+            "zone_30": {
+                "zone": 30,
                 "type": "isnad_5_conditions",
                 "tawaqquf": True,
                 "reason": "En attente du corpus Al-Mīzān v5.0",

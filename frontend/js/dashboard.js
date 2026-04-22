@@ -26,6 +26,7 @@
   cache.cleanup();
 
   // Mapping zones → tabs selon Constitution v4 (v5.0)
+  // Correction du mapping zone_16/17 inversé (bug corrigé)
   const ZONE_TO_TAB = {
     zone_2: "isnad",
     zone_3: "isnad",
@@ -42,8 +43,8 @@
     zone_13: "athar",
     zone_14: "athar",
     zone_15: "ijma",
-    zone_16: "ijma",
-    zone_17: "mukhtalif",
+    zone_16: "mukhtalif", // Correction : zone_16 = mukhtalif (et non ijma)
+    zone_17: "ijma", // Correction : zone_17 = ijma (et non mukhtalif)
     zone_18: "naskh",
     zone_19: "naskh",
     zone_20: "fawaid",

@@ -14,6 +14,7 @@ class BaseAgent(ABC):
 
     def __init__(self, api_key: str):
         self.api_key = api_key
+        self.MOCK_MODE = True
 
     @abstractmethod
     async def _mock_output(self, hadith_data: dict) -> dict:

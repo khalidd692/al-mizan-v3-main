@@ -77,5 +77,5 @@ class AgentAdvanced(BaseAgent):
     async def run(self, hadith_data: dict, queue: asyncio.Queue):
         output = await self._mock_output(hadith_data)
         for zone_key, data in output.items():
-            await queue.put({"event": zone_key, "data": data})
+            await queue.put(emit(zone_key, data))
             await asyncio.sleep(0.05)

@@ -48,6 +48,9 @@ class Orchestrator:
             AgentTakhrij(api_key),
             AgentAdvanced(api_key),
         ]
+        # Activer le mode mock pour tous les agents
+        for agent in self.agents:
+            agent.MOCK_MODE = True
         self.demo_responses = self._load_demo_responses()
     
     def _load_demo_responses(self) -> dict:

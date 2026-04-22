@@ -21,6 +21,9 @@ class AgentTakhrij(BaseAgent):
             "zone_4": {
                 "zone": 4,
                 "type": "mutabaat",
+                "title": "المتابعات",
+                "title_fr": "Mutābaʿāt (parallèles de chaînes)",
+                "note": "Recherche de parallèles complets et partiels dans les corpus de hadiths",
                 "tawaqquf": True,
                 "reason": "Corpus takhrij en cours d'intégration",
                 "count": 0,
@@ -34,6 +37,9 @@ class AgentTakhrij(BaseAgent):
             "zone_5": {
                 "zone": 5,
                 "type": "shawahid",
+                "title": "الشواهد",
+                "title_fr": "Shawāhid (témoins thématiques)",
+                "note": "Recherche de témoignages corroborants par thème",
                 "tawaqquf": True,
                 "reason": "Corpus takhrij en cours d'intégration",
                 "count": 0,
