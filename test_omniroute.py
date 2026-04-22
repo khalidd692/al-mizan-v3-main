@@ -4,7 +4,7 @@ import json
 # Test le combo almizann
 url = "http://localhost:20128/v1/chat/completions"
 payload = {
-    "combo": "almizann",
+    "model": "almizann",
     "messages": [
         {
             "role": "user",

@@ -11,6 +11,9 @@ COMBOS = {
     "default": "almizann",
     "translation_ar_fr": "almizann-traduction",
     "json_parsing": "almizann-json",
+    "almizann-fast": "almizann-fast",
+    "almizann-traduction": "almizann-traduction",
+    "almizann-json": "almizann-json",
 }
 
 CACHE_TTL = {
