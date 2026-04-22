@@ -1,0 +1,30 @@
+{
+  "name": "al-mizan-v3-main",
+  "version": "1.0.0",
+  "description": "**Phase 1 : Architecture SSE + 4 agents mockés**",
+  "main": "app.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "mcp:playwright": "npx @playwright/mcp@latest",
+    "mcp:puppeteer": "npx @modelcontextprotocol/server-puppeteer"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khalidd692/al-mizan-v3-main.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/khalidd692/al-mizan-v3-main/issues"
+  },
+  "homepage": "https://github.com/khalidd692/al-mizan-v3-main#readme",
+  "devDependencies": {
+    "@playwright/mcp": "latest",
+    "@modelcontextprotocol/server-puppeteer": "latest",
+    "playwright": "^1.40.0"
+  }
+}

@@ -8,13 +8,19 @@
   "_default": {
     "delay_ms": 180,
     "chunks": [
-      { "event": "zone_1",  "data": { "zone": 1, "step": "INITIALISATION", "message": "Ouverture des registres (démo)" } },
-      { "event": "meta_pipeline_traduction", "data": { "step": "TRADUCTION", "message": "Requête de démonstration" } },
-      { "event": "meta_pipeline_dorar",      "data": { "step": "DORAR_REQUETE" } },
       {
-        "event": "zone_4",
+        "event": "zone_1",
+        "data": { "zone": 1, "step": "INITIALISATION", "message": "Ouverture des registres (démo)" }
+      },
+      {
+        "event": "meta_pipeline_traduction",
+        "data": { "step": "TRADUCTION", "message": "Requête de démonstration" }
+      },
+      { "event": "meta_pipeline_dorar", "data": { "step": "DORAR_REQUETE" } },
+      {
+        "event": "zone_3",
         "data": {
-          "zone": 4,
+          "zone": 3,
           "type": "hadith_core",
           "data": {
             "matn": "إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى",
@@ -25,9 +31,9 @@
           }
         }
       },
-      { "event": "zone_30", "data": { "zone": 30, "step": "SYNTHESE" } },
-      { "event": "zone_31", "data": { "zone": 31, "step": "VERIFICATION" } },
-      { "event": "zone_32", "data": { "zone": 32, "type": "done", "demo": true } }
+      { "event": "zone_38", "data": { "zone": 38, "step": "SYNTHESE" } },
+      { "event": "zone_39", "data": { "zone": 39, "step": "VERIFICATION" } },
+      { "event": "zone_40", "data": { "zone": 40, "type": "done", "demo": true } }
     ]
   },
   "samples": {

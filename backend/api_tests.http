@@ -1,0 +1,21 @@
+@baseUrl = http://localhost:8000
+
+### Test de l'endpoint /hadiths
+GET {{baseUrl}}/hadiths
+Accept: application/json
+
+### Test de l'endpoint /hadiths/{id}
+GET {{baseUrl}}/hadiths/1
+Accept: application/json
+
+### Test de l'endpoint /search (recherche par mot-clé)
+GET {{baseUrl}}/search?query=صلاة
+Accept: application/json
+
+### Test de l'endpoint /collections
+GET {{baseUrl}}/collections
+Accept: application/json
+
+### Test de l'endpoint /grades
+GET {{baseUrl}}/grades
+Accept: application/json
