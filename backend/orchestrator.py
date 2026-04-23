@@ -30,8 +30,8 @@ log = get_logger("mizan.orchestrator")
 GLOBAL_TIMEOUT_S = 55.0
 KEEPALIVE_INTERVAL_S = 10.0
 
-# Mode démo activé par défaut (MOCK_MODE=True)
-MOCK_MODE = os.getenv("MOCK_MODE", "true").lower() == "true"
+# Mode démo : false par défaut, activable via MOCK_MODE=true dans .env
+MOCK_MODE = os.getenv("MOCK_MODE", "false").lower() == "true"
 
 class Orchestrator:
     def __init__(self, api_key: str):
@@ -44,6 +44,8 @@ class Orchestrator:
             AgentFawaid(api_key),
             AgentAqidah(api_key),
         ]
+        for agent in self.agents:
+            agent.MOCK_MODE = MOCK_MODE
         self.demo_responses = self._load_demo_responses()
     
     def _load_demo_responses(self) -> dict:
@@ -58,12 +60,10 @@ class Orchestrator:
 
     async def process(self, query: str, demo_mode: bool = None) -> AsyncGenerator[str, None]:
         """Pipeline complet avec timeout global de sécurité."""
-        # Utiliser le mode démo global si non spécifié
         if demo_mode is None:
             demo_mode = MOCK_MODE
         
         try:
-            # Vérification de sécurité théologique
             force_sonnet, reason = should_force_sonnet(query)
             if force_sonnet:
                 log.info(f"[SECURITY] Sonnet forcé: {reason}")
@@ -79,7 +79,6 @@ class Orchestrator:
             yield emit("zone_32", {"type": "done", "error": True})
 
     async def _process_inner(self, query: str, demo_mode: bool) -> AsyncGenerator[str, None]:
-        # Deadline global pour éviter les blocages indéfinis
         deadline = time.monotonic() + GLOBAL_TIMEOUT_S
         
         # ── Zone 1 : INITIALISATION ───────────────────────────
@@ -87,7 +86,7 @@ class Orchestrator:
             "zone": 1, "step": "INITIALISATION",
             "message": "Ouverture des registres"
         })
-        await asyncio.sleep(0.3)  # Animation visuelle
+        await asyncio.sleep(0.3)
 
         # ── Zone 2 : TRADUCTION ──────────────────────────────
         yield emit("meta_pipeline_traduction", {
@@ -103,7 +102,10 @@ class Orchestrator:
             return
         
         # ── MODE RÉEL : Pipeline complet ─────────────────────
+<<<<<<< HEAD
         # ── Zones 3-4 : DORAR ────────────────────────────────
+=======
+>>>>>>> db4d52f (fix(orchestrator): désactiver le forçage MOCK_MODE et ajouter .env.example)
         yield emit("meta_pipeline_dorar", {"step": "DORAR_REQUETE"})
         await asyncio.sleep(0.2)
         
@@ -127,19 +129,17 @@ class Orchestrator:
         async def run_all_agents():
             tasks = [agent.run(hadith_data, queue) for agent in self.agents]
             await asyncio.gather(*tasks, return_exceptions=True)
-            await queue.put(None)  # Sentinelle
+            await queue.put(None)
 
         agent_task = asyncio.create_task(run_all_agents())
         
         while True:
-            # Vérifier le deadline global
             remaining = deadline - time.monotonic()
             if remaining <= 0:
                 log.warning("[TIMEOUT] Deadline globale atteinte")
                 agent_task.cancel()
                 raise asyncio.TimeoutError()
             
-            # Timeout dynamique : min entre keepalive et temps restant
             timeout = min(KEEPALIVE_INTERVAL_S, remaining)
             
             try:
@@ -148,7 +148,6 @@ class Orchestrator:
                     break
                 yield chunk
             except asyncio.TimeoutError:
-                # Simple keepalive si on n'a pas atteint le deadline
                 if time.monotonic() < deadline:
                     yield keepalive()
                 else:
@@ -157,7 +156,10 @@ class Orchestrator:
 
         await agent_task
 
+<<<<<<< HEAD
         # ── Zones 30-32 : CLÔTURE ──────────────────────────────
+=======
+>>>>>>> db4d52f (fix(orchestrator): désactiver le forçage MOCK_MODE et ajouter .env.example)
         if time.monotonic() < deadline:
             yield emit("zone_30", {"zone": 30, "step": "SYNTHESE"})
             yield emit("zone_31", {"zone": 31, "step": "VERIFICATION"})
@@ -166,12 +168,15 @@ class Orchestrator:
             yield emit("zone_32", {"zone": 32, "type": "done", "partial": True, "reason": "deadline_exceeded"})
     
     async def _process_demo(self, query: str, deadline: float) -> AsyncGenerator[str, None]:
+<<<<<<< HEAD
         """Mode démo avec fixtures - Simulation du streaming"""
         # Recherche dans les fixtures
+=======
+        """Mode démo avec fixtures + pipeline 40 zones complet."""
+>>>>>>> db4d52f (fix(orchestrator): désactiver le forçage MOCK_MODE et ajouter .env.example)
         query_lower = query.lower()
         demo_data = None
         
-        # Correspondance intelligente
         if "niyya" in query_lower or "intention" in query_lower:
             demo_data = self.demo_responses.get("niyya")
         elif "science" in query_lower or "ilm" in query_lower or "علم" in query_lower:
@@ -184,7 +189,10 @@ class Orchestrator:
             yield emit("zone_32", {"zone": 32, "type": "done", "error": True})
             return
         
+<<<<<<< HEAD
         # ── Zone 3-4 : Affichage du hadith ───────────────────
+=======
+>>>>>>> db4d52f (fix(orchestrator): désactiver le forçage MOCK_MODE et ajouter .env.example)
         yield emit("meta_pipeline_dorar", {"step": "DORAR_REQUETE"})
         await asyncio.sleep(0.3)
         
@@ -194,6 +202,7 @@ class Orchestrator:
             "data": demo_data["hadith"]
         })
         await asyncio.sleep(0.4)
+<<<<<<< HEAD
         
         # ── Zones 5-29 : Analyse progressive ─────────────────
         analysis = demo_data["analysis"]
@@ -214,11 +223,16 @@ class Orchestrator:
         
         # Validation de sécurité
         is_safe, error_msg = validate_response_safety({"analysis": analysis})
+=======
+
+        is_safe, error_msg = validate_response_safety({"analysis": demo_data.get("analysis", {})})
+>>>>>>> db4d52f (fix(orchestrator): désactiver le forçage MOCK_MODE et ajouter .env.example)
         if not is_safe:
             log.error(f"[SECURITY] Réponse bloquée: {error_msg}")
             yield emit("error", SECURITY_MESSAGE)
             yield emit("zone_32", {"zone": 32, "type": "done", "error": True})
             return
+<<<<<<< HEAD
         
         yield emit("zone_20", {"zone": 20, "type": "aqidah_result", "data": analysis["aqidah"]})
         
@@ -234,6 +248,41 @@ class Orchestrator:
         
         # ── Zones 30-32 : CLÔTURE ────────────────────────────
         yield emit("zone_30", {"zone": 30, "step": "SYNTHESE"})
+=======
+
+        queue: asyncio.Queue = asyncio.Queue()
+
+        async def run_all_agents():
+            tasks = [agent.run(hadith_data, queue) for agent in self.agents]
+            await asyncio.gather(*tasks, return_exceptions=True)
+            await queue.put(None)
+
+        agent_task = asyncio.create_task(run_all_agents())
+
+        while True:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                log.warning("[TIMEOUT-DEMO] Deadline globale atteinte")
+                agent_task.cancel()
+                raise asyncio.TimeoutError()
+
+            timeout = min(KEEPALIVE_INTERVAL_S, remaining)
+            try:
+                chunk = await asyncio.wait_for(queue.get(), timeout=timeout)
+                if chunk is None:
+                    break
+                yield chunk
+            except asyncio.TimeoutError:
+                if time.monotonic() < deadline:
+                    yield keepalive()
+                else:
+                    agent_task.cancel()
+                    raise
+
+        await agent_task
+
+        yield emit("zone_38", {"zone": 38, "step": "SYNTHESE"})
+>>>>>>> db4d52f (fix(orchestrator): désactiver le forçage MOCK_MODE et ajouter .env.example)
         await asyncio.sleep(0.2)
         yield emit("zone_31", {"zone": 31, "step": "VERIFICATION"})
         await asyncio.sleep(0.2)
