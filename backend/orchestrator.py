@@ -20,12 +20,13 @@ from backend.agents.agent_aqidah import AgentAqidah
 from backend.agents.agent_takhrij import AgentTakhrij
 from backend.agents.agent_advanced import AgentAdvanced
 from backend.agents.protected_terms import (
-    should_force_sonnet, 
+    should_force_sonnet,
     validate_response_safety,
-    SECURITY_MESSAGE
+    SECURITY_MESSAGE,
 )
 from backend.utils.sse import emit, keepalive
 from backend.utils.logging import get_logger
+from backend.utils.local_db import search_hadith, row_to_hadith_core
 
 log = get_logger("mizan.orchestrator")
 
@@ -34,6 +35,7 @@ KEEPALIVE_INTERVAL_S = 10.0
 
 # Mode démo : false par défaut, activable via MOCK_MODE=true dans .env
 MOCK_MODE = os.getenv("MOCK_MODE", "false").lower() == "true"
+
 
 class Orchestrator:
     def __init__(self, api_key: str):
@@ -51,12 +53,11 @@ class Orchestrator:
         for agent in self.agents:
             agent.MOCK_MODE = MOCK_MODE
         self.demo_responses = self._load_demo_responses()
-    
+
     def _load_demo_responses(self) -> dict:
-        """Charge les réponses de démo depuis fixtures"""
         fixtures_path = Path(__file__).parent / "fixtures" / "demo_responses.json"
         try:
-            with open(fixtures_path, 'r', encoding='utf-8') as f:
+            with open(fixtures_path, "r", encoding="utf-8") as f:
                 return json.load(f)
         except Exception as e:
             log.warning(f"Impossible de charger les fixtures: {e}")
@@ -66,64 +67,76 @@ class Orchestrator:
         """Pipeline complet avec timeout global de sécurité."""
         if demo_mode is None:
             demo_mode = MOCK_MODE
-        
+
         try:
             force_sonnet, reason = should_force_sonnet(query)
             if force_sonnet:
                 log.info(f"[SECURITY] Sonnet forcé: {reason}")
-            
+
             async for chunk in self._process_inner(query, demo_mode):
                 yield chunk
         except asyncio.TimeoutError:
             log.warning(f"[TIMEOUT] Query dépassée: {query}")
             yield emit("zone_40", {"type": "done", "partial": True, "reason": "global_timeout"})
         except Exception as e:
-            log.exception(f"[ORCHESTRATOR] Erreur critique")
+            log.exception("[ORCHESTRATOR] Erreur critique")
             yield emit("error", {"message": str(e)})
             yield emit("zone_40", {"zone": 40, "type": "done", "error": True})
 
     async def _process_inner(self, query: str, demo_mode: bool) -> AsyncGenerator[str, None]:
         deadline = time.monotonic() + GLOBAL_TIMEOUT_S
-        
+
         # ── Zone 1 : INITIALISATION ───────────────────────────
         yield emit("zone_1", {
             "zone": 1, "step": "INITIALISATION",
-            "message": "Ouverture des registres"
+            "message": "Ouverture des registres",
         })
         await asyncio.sleep(0.3)
 
         # ── Zone 2 : TRADUCTION ──────────────────────────────
         yield emit("meta_pipeline_traduction", {
             "step": "TRADUCTION",
-            "message": f"Requête: {query}"
+            "message": f"Requête: {query}",
         })
         await asyncio.sleep(0.2)
 
-        # ── MODE DÉMO : Utiliser les fixtures ────────────────
+        # ── MODE DÉMO : Utiliser les fixtures ──────────────────
         if demo_mode:
             async for chunk in self._process_demo(query, deadline):
                 yield chunk
             return
-        
-        # ── MODE RÉEL : Pipeline complet ─────────────────────
-        yield emit("meta_pipeline_dorar", {"step": "DORAR_REQUETE"})
+
+        # ── MODE RÉEL : Recherche dans la base locale ──────────
+        yield emit("meta_pipeline_dorar", {"step": "LOCAL_DB_SEARCH"})
         await asyncio.sleep(0.2)
-        
-        hadith_data = {
-            "matn": "إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى",
-            "translation_fr": "Les actions ne valent que par les intentions, et chaque homme n'aura que ce qu'il a eu l'intention d'obtenir.",
-            "source": "Ṣaḥīḥ al-Bukhārī n°1",
-            "grade_raw": "صحيح",
-            "mock": True,
-        }
-        
+
+        db_results = search_hadith(query)
+
+        if not db_results:
+            log.warning(f"[ORCHESTRATOR] Aucun hadith trouvé pour : {query!r}")
+            yield emit("meta_pipeline_dorar", {"step": "NO_RESULT"})
+            yield emit("zone_3", {
+                "zone": 3, "type": "no_result",
+                "query": query, "tawaqquf": True,
+                "message": "Aucun hadith correspondant dans la base locale",
+            })
+            yield emit("zone_40", {"zone": 40, "type": "done", "error": True, "reason": "no_hadith_found"})
+            return
+
+        hadith_data = row_to_hadith_core(db_results[0])
+        log.info(f"[LOCAL_DB] Hadith trouvé : {hadith_data['source']}")
+        yield emit("meta_pipeline_dorar", {
+            "step": "LOCAL_DB_HIT",
+            "count": len(db_results),
+            "source": hadith_data["source"],
+        })
         yield emit("zone_3", {
             "zone": 3,
             "type": "hadith_core",
-            "data": hadith_data
+            "data": hadith_data,
         })
 
-        # ── Zones 4-40 : 8 agents en parallèle ─────────────────
+        # ── Zones 4-40 : 8 agents en parallèle ──────────────────
         queue: asyncio.Queue = asyncio.Queue()
 
         async def run_all_agents():
@@ -132,16 +145,15 @@ class Orchestrator:
             await queue.put(None)
 
         agent_task = asyncio.create_task(run_all_agents())
-        
+
         while True:
             remaining = deadline - time.monotonic()
             if remaining <= 0:
                 log.warning("[TIMEOUT] Deadline globale atteinte")
                 agent_task.cancel()
                 raise asyncio.TimeoutError()
-            
+
             timeout = min(KEEPALIVE_INTERVAL_S, remaining)
-            
             try:
                 chunk = await asyncio.wait_for(queue.get(), timeout=timeout)
                 if chunk is None:
@@ -162,33 +174,28 @@ class Orchestrator:
             yield emit("zone_40", {"zone": 40, "type": "done"})
         else:
             yield emit("zone_40", {"zone": 40, "type": "done", "partial": True, "reason": "deadline_exceeded"})
-    
+
     async def _process_demo(self, query: str, deadline: float) -> AsyncGenerator[str, None]:
         """Mode démo avec fixtures + pipeline 40 zones complet."""
         query_lower = query.lower()
-        demo_data = None
-        
+
         if "niyya" in query_lower or "intention" in query_lower:
             demo_data = self.demo_responses.get("niyya")
         elif "science" in query_lower or "ilm" in query_lower or "علم" in query_lower:
             demo_data = self.demo_responses.get("science")
         else:
             demo_data = self.demo_responses.get("default")
-        
+
         if not demo_data:
             yield emit("error", {"message": "Aucun résultat trouvé", "code": "NO_RESULT"})
             yield emit("zone_40", {"zone": 40, "type": "done", "error": True})
             return
-        
+
         yield emit("meta_pipeline_dorar", {"step": "DORAR_REQUETE"})
         await asyncio.sleep(0.3)
-        
+
         hadith_data = demo_data["hadith"]
-        yield emit("zone_3", {
-            "zone": 3,
-            "type": "hadith_core",
-            "data": hadith_data
-        })
+        yield emit("zone_3", {"zone": 3, "type": "hadith_core", "data": hadith_data})
         await asyncio.sleep(0.4)
 
         is_safe, error_msg = validate_response_safety({"analysis": demo_data.get("analysis", {})})

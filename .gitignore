@@ -26,3 +26,7 @@ backend/mizan.db
 backend/almizane.db
 backups/
 "*.db"  
+
+# ── Secrets (clés API, tokens) ──
+.env.local
+.env.*.local
