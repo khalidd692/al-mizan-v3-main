@@ -19,7 +19,7 @@ _TASHKEEL = re.compile(
 
 
 def _get_db_path() -> Path:
-    db_url = os.getenv("DATABASE_URL", "sqlite:///backend/mizan.db")
+    db_url = os.getenv("DATABASE_URL", "sqlite:///backend/database/almizan_v7.db")
     return Path(db_url.replace("sqlite:///", ""))
 
 
