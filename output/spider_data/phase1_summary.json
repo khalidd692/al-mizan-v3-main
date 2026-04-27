@@ -1,0 +1,29 @@
+{
+  "phase": 1,
+  "generated_at": "2026-04-27T08:58:27.539249",
+  "sites_crawled": 1,
+  "total_extracted": 0,
+  "total_accepted": 0,
+  "total_rejected": 0,
+  "overall_acceptance_rate": "N/A",
+  "total_db_inserted": 0,
+  "total_db_updated": 0,
+  "total_errors": 0,
+  "per_site": [
+    {
+      "spider": "hadithdujour",
+      "url": "https://www.hadithdujour.com",
+      "pages_crawled": 0,
+      "extracted": 0,
+      "accepted": 0,
+      "rejected": 0,
+      "acceptance_rate": "N/A",
+      "db_inserted": 0,
+      "db_updated": 0,
+      "errors": 0,
+      "started_at": "2026-04-27T08:58:27.121737",
+      "finished_at": "2026-04-27T08:58:27.539133",
+      "data_file": "/home/user/al-mizan-v3-main/output/spider_data/hadithdujour_data.json"
+    }
+  ]
+}
