@@ -1,0 +1,17 @@
+{
+  "stats": {
+    "spider": "hadithdujour",
+    "start_url": "https://www.hadithdujour.com",
+    "started_at": "2026-04-27T08:58:27.121737",
+    "finished_at": null,
+    "pages_crawled": 0,
+    "extracted": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "db_inserted": 0,
+    "db_updated": 0,
+    "errors": 0
+  },
+  "entries": [],
+  "saved_at": "2026-04-27T08:58:27.538879"
+}
