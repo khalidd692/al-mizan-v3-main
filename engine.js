@@ -1105,6 +1105,26 @@ function _orchGradeLevel(g) {
   return '';
 }
 
+/* Traduit les grades anglais (DB) en arabe pour _getTechnicalGrade.
+   _getTechnicalGrade utilise exclusivement des regex arabes :
+   sans cette traduction, "Sahih" ne matche rien → fallback DAIF. */
+var _GRADE_EN_TO_AR = {
+  'sahih'  : 'صحيح',
+  'hasan'  : 'حسن',
+  "da'if"  : 'ضعيف',
+  'daif'   : 'ضعيف',
+  "mawdu'" : 'موضوع',
+  'mawdu'  : 'موضوع',
+  'munkar' : 'منكر',
+  'shadh'  : 'شاذ',
+  'unknown': '',
+};
+function _orchGradeToAr(g) {
+  if (!g) return '';
+  var mapped = _GRADE_EN_TO_AR[(g + '').toLowerCase()];
+  return (mapped !== undefined) ? mapped : g;
+}
+
 function _orchAuthorityScore(source) {
   var s = (source || '').toLowerCase();
   if (/bukhari|muslim/.test(s))                              return 100;
@@ -1115,13 +1135,14 @@ function _orchAuthorityScore(source) {
 }
 
 function _mapOrchToDorar(d) {
+  var gradeAr = _orchGradeToAr(d.grade_raw);
   return {
     arabic_text : d.matn      || '',
     ar          : d.matn      || '',
     savant      : d.grade_by  || '',
     source      : d.source    || '',
-    grade_ar    : d.grade_raw || '',
-    grade       : d.grade_raw || '',
+    grade_ar    : gradeAr,
+    grade       : gradeAr,
     grade_level : _orchGradeLevel(d.grade_raw),
   };
 }
@@ -1130,7 +1151,7 @@ function _mapOrchToEnrich(d) {
   return {
     french          : d.translation_fr    || '',
     grade_explique  : d.grade_explanation || '',
-    grade           : d.grade_raw         || '',
+    grade           : _orchGradeToAr(d.grade_raw),
     isnad_chain     : d.full_isnad        || '',
     authority_score : _orchAuthorityScore(d.source || ''),
   };
