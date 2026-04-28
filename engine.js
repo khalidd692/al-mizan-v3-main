@@ -1209,6 +1209,33 @@ function _finishLoading() {
   });
 }
 
+/* ── _mzZoneAccAppend : injecte un accordéon dans un conteneur ──
+   Utilisé par les handlers zone_2-16 pour afficher les analyses
+   progressives avant que _enrichCardSSE ne remplace le contenu.
+   Anti-doublon via data-mz-zone sur le conteneur.              */
+function _mzZoneAccAppend(containerId, title, content, color) {
+  var cont = document.getElementById(containerId);
+  if (!cont) return;
+  var c = color || '#d4af37';
+  var bodyHtml = content
+    ? ('<div style="padding:12px 14px;border:1px solid ' + c + '22;border-top:none;'
+        + 'border-radius:0 0 8px 8px;font-family:\'Cormorant Garamond\',serif;'
+        + 'font-size:14px;line-height:1.85;color:rgba(228,208,160,.92);">'
+        + _mzMd(String(content)) + '</div>')
+    : ('<div style="padding:12px 14px;border:1px solid ' + c + '22;border-top:none;'
+        + 'border-radius:0 0 8px 8px;font-family:\'Cormorant Garamond\',serif;'
+        + 'font-size:13px;color:rgba(201,168,76,.4);font-style:italic;">'
+        + 'Analyse en cours…</div>');
+  cont.insertAdjacentHTML('beforeend',
+    '<details class="mz-details" style="margin:8px 18px;">'
+    + '<summary class="mz-details-sum" style="color:' + c
+    + ';cursor:pointer;font-family:Cinzel,serif;font-size:9px;letter-spacing:.18em;'
+    + 'list-style:none;padding:10px 14px;border:1px solid ' + c + '33;'
+    + 'border-radius:8px;background:' + c + '08;">&#9656; ' + title + '</summary>'
+    + bodyHtml + '</details>'
+  );
+}
+
 /* ════════════════════════════════════════════════════════════════
    _renderDorarCards — Structure "OIGNON" 3 zones
    ● Zone 1 : Verdict Flash   (badge immédiat + traduction)
@@ -1529,6 +1556,25 @@ async function _searchDorarTopic(query) {
               evtName = ''; continue;
             }
 
+            /* zone_2 : isnad_chain (AgentIsnad) ─────────────────────── */
+            if (evtName === 'zone_2') {
+              if (msg.type === 'isnad_chain') {
+                var iz2 = document.getElementById('isnad-zone-0');
+                if (iz2 && !iz2.querySelector('.mzBb')) {
+                  if (msg.chain && msg.chain.length > 0) {
+                    var pipeLines = msg.chain.map(function(n, k) {
+                      return 'Maillon ' + (k + 1) + '|' + (n.name_ar || '') + '|' + (n.name_fr || '') + '|' + (n.verdict || '') + '|' + (n.death_h ? String(n.death_h) : '');
+                    });
+                    var treeHtml = _mzIsnadFromPipe(pipeLines.join('\n'), 'SAHIH');
+                    if (treeHtml) { iz2.innerHTML = treeHtml; iz2.style.animation = 'vIn .5s ease'; }
+                  } else {
+                    iz2.innerHTML = '<div style="padding:14px 20px;font-family:\'Cormorant Garamond\',serif;font-size:13px;color:rgba(212,175,55,.45);font-style:italic;">Analyse en cours…</div>';
+                  }
+                }
+              }
+              evtName = ''; continue;
+            }
+
             /* meta_pipeline_dorar / meta_pipeline_traduction : avancement étapes */
             if (evtName === 'meta_pipeline_dorar' || evtName === 'meta_pipeline_traduction') {
               var pStep = (msg.step || '').toUpperCase();
@@ -1538,7 +1584,7 @@ async function _searchDorarTopic(query) {
               evtName = ''; continue;
             }
 
-            /* zone_3 : cœur du résultat — hadith_core ou no_result */
+            /* zone_3 : hadith_core | no_result | jarh_tadil (AgentIsnad) */
             if (evtName === 'zone_3') {
               if (msg.type === 'hadith_core' && msg.data) {
                 var orchCard   = _mapOrchToDorar(msg.data);
@@ -1555,11 +1601,98 @@ async function _searchDorarTopic(query) {
                 if (box) {
                   box.innerHTML = '<p style="color:rgba(201,168,76,.6);padding:2rem;text-align:center;'
                     + 'font-family:\'Cormorant Garamond\',serif;font-size:15px;font-style:italic;">'
-                    + '&#9998; Aucun hadith trouvé dans la base pour cette recherche.<br>'
+                    + '&#9998; Aucun hadith trouvé en base locale.<br>'
                     + '<span style="font-size:12px;opacity:.6;">Essayez en arabe ou avec d\'autres mots-clés.</span></p>';
                   box.classList.add('active');
                 }
+              } else if (msg.type === 'jarh_tadil') {
+                /* AgentIsnad — verdicts des imams sur les rawis */
+                _mzZoneAccAppend('sanad-acc-0',
+                  'AQWAL AL-AʼIMMAH — Verdicts des Imams sur les Rawis',
+                  null, '#5dade2');
               }
+              evtName = ''; continue;
+            }
+
+            /* zone_4 : takhrij (AgentTakhrij) ──────────────────────── */
+            if (evtName === 'zone_4') {
+              var src4 = (msg.schema && msg.schema.source_principale) ? 'Source principale : ' + msg.schema.source_principale : null;
+              _mzZoneAccAppend('sanad-acc-0', 'AL-TAKHRĪJ — Attribution des sources', src4, '#9b59b6');
+              _advanceStep('TAKHRIJ');
+              evtName = ''; continue;
+            }
+
+            /* zone_5 : isnad_5_conditions (AgentIsnad) ─────────────── */
+            if (evtName === 'zone_5') {
+              _mzZoneAccAppend('sanad-acc-0', 'SHURUT AS-SIHHAH — 5 Conditions d\'authenticité', null, '#5dade2');
+              evtName = ''; continue;
+            }
+
+            /* zone_6 : ilal (AgentIlal) ─────────────────────────────── */
+            if (evtName === 'zone_6') {
+              var ilalTxt = msg.conclusion || null;
+              _mzZoneAccAppend('sanad-acc-0', 'AL-ʿILAL — Défauts cachés de la chaîne', ilalTxt, '#ef4444');
+              evtName = ''; continue;
+            }
+
+            /* zone_7 : tafarrud (AgentIlal) ─────────────────────────── */
+            if (evtName === 'zone_7') {
+              _mzZoneAccAppend('sanad-acc-0', 'AT-TAFARRUD — Narration isolée', null, '#f39c12');
+              evtName = ''; continue;
+            }
+
+            /* zone_8 : munkar (AgentIlal) ───────────────────────────── */
+            if (evtName === 'zone_8') {
+              _mzZoneAccAppend('sanad-acc-0', 'AL-MUNKAR — Narration réprouvable', null, '#e74c3c');
+              evtName = ''; continue;
+            }
+
+            /* zone_9 : gharib (AgentMatn) ───────────────────────────── */
+            if (evtName === 'zone_9') {
+              _mzZoneAccAppend('sec-acc-0', '📖 VOCABULAIRE — GHARĪB AL-HADĪTH', null, '#5dade2');
+              evtName = ''; continue;
+            }
+
+            /* zone_10 : sabab_wurud (AgentMatn) ─────────────────────── */
+            if (evtName === 'zone_10') {
+              var circ10 = msg.circonstance || null;
+              _mzZoneAccAppend('sec-acc-0', '🏛️ CONTEXTE — SABAB AL-WURūD', circ10, '#9b59b6');
+              evtName = ''; continue;
+            }
+
+            /* zone_11 : shuruh (AgentMatn) ──────────────────────────── */
+            if (evtName === 'zone_11') {
+              _mzZoneAccAppend('sec-acc-0', '📚 COMMENTAIRES — SHURUH AL-ʿULAMĀʼ', null, '#2ecc71');
+              evtName = ''; continue;
+            }
+
+            /* zone_12 : athar_sahabah (AgentMatn) ───────────────────── */
+            if (evtName === 'zone_12') {
+              _mzZoneAccAppend('sec-acc-0', '★ ĀTHĀR AS-SAHĀBAH — Propos des Compagnons', null, '#d4af37');
+              evtName = ''; continue;
+            }
+
+            /* zone_13 : athar_tabiin (AgentMatn) ────────────────────── */
+            if (evtName === 'zone_13') {
+              _mzZoneAccAppend('sec-acc-0', '★ ĀTHĀR AT-TĀBIʿIĪN — Propos des Successeurs', null, '#c9a84c');
+              evtName = ''; continue;
+            }
+
+            /* zone_14 : positions_imams (AgentMatn) ─────────────────── */
+            if (evtName === 'zone_14') {
+              _mzZoneAccAppend('sec-acc-0', '🏛️ POSITIONS DES IMĀMS — Fiqh al-Hadīth', null, '#f39c12');
+              evtName = ''; continue;
+            }
+
+            /* zone_15 : ijma (AgentTarjih) ──────────────────────────── */
+            if (evtName === 'zone_15') {
+              _mzZoneAccAppend('sec-acc-0', 'AL-IJMĀʼ — Consensus des Savants', null, '#22c55e');
+              evtName = ''; continue;
+            }
+
+            /* zone_16 : khilaf (AgentTarjih) ────────────────────────── */
+            if (evtName === 'zone_16') {
+              _mzZoneAccAppend('sec-acc-0', 'AL-KHILĀF — Divergences des Savants', null, '#6366f1');
               evtName = ''; continue;
             }
 
@@ -1573,7 +1706,7 @@ async function _searchDorarTopic(query) {
               if (!dorarOK && box) {
                 box.innerHTML = '<p style="color:rgba(201,168,76,.6);padding:2rem;text-align:center;'
                   + 'font-family:\'Cormorant Garamond\',serif;font-size:15px;font-style:italic;">'
-                  + '&#9998; Aucun hadith trouvé dans la base pour cette recherche.</p>';
+                  + '&#9998; Aucun hadith trouvé en base locale.</p>';
                 box.classList.add('active');
               }
               evtName = ''; continue;
