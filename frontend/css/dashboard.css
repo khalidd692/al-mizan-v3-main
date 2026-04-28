@@ -16,7 +16,7 @@
 }
 
 .mz-col-title {
-  font-family: 'Scheherazade New', serif;
+  font-family: "Scheherazade New", serif;
   font-size: 1.5rem;
   text-align: center;
   padding-bottom: 12px;
@@ -24,13 +24,15 @@
   margin-bottom: 16px;
 }
 
-.mz-matn-block { margin-bottom: 24px; }
+.mz-matn-block {
+  margin-bottom: 24px;
+}
 
 .mz-verdict-banner {
   padding: 8px 16px;
   border-radius: 8px;
   text-align: center;
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   font-size: 12px;
   letter-spacing: 0.15em;
   margin-bottom: 16px;
@@ -46,8 +48,44 @@
   color: var(--mz-green);
 }
 
+.mz-verdict-banner.hasan {
+  background: rgba(132, 204, 22, 0.1);
+  border: 1px solid rgba(132, 204, 22, 0.3);
+  color: #84cc16;
+}
+
+.mz-verdict-banner.daif {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #f59e0b;
+}
+
+.mz-verdict-banner.mawdu {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}
+
+.mz-verdict-banner.munkar {
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  color: #dc2626;
+}
+
+.mz-verdict-banner.shadh {
+  background: rgba(248, 113, 113, 0.1);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  color: #f87171;
+}
+
+.mz-verdict-banner.unknown {
+  background: rgba(107, 114, 128, 0.1);
+  border: 1px solid rgba(107, 114, 128, 0.3);
+  color: #6b7280;
+}
+
 .mz-matn-ar {
-  font-family: 'Scheherazade New', serif;
+  font-family: "Scheherazade New", serif;
   font-size: 1.8rem;
   line-height: 2.2;
   color: var(--mz-text);
@@ -59,7 +97,7 @@
 }
 
 .mz-matn-fr {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: "Cormorant Garamond", serif;
   font-size: 1.1rem;
   font-style: italic;
   color: var(--mz-text-dim);
@@ -70,7 +108,7 @@
 }
 
 .mz-sources {
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   font-size: 11px;
   letter-spacing: 0.1em;
   color: var(--mz-gold);
@@ -95,7 +133,7 @@
   border: 1px solid var(--mz-border);
   border-radius: 6px;
   color: var(--mz-text-dim);
-  font-family: 'Scheherazade New', serif;
+  font-family: "Scheherazade New", serif;
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s;
@@ -112,12 +150,26 @@
   border-color: var(--mz-gold);
 }
 
-.mz-tabs-content { padding: 16px 0; min-height: 200px; }
+.mz-tabs-content {
+  padding: 16px 0;
+  min-height: 200px;
+}
 
-.mz-tab-panel { display: none; animation: fadeIn 0.3s; }
-.mz-tab-panel.active { display: block; }
+.mz-tab-panel {
+  display: none;
+  animation: fadeIn 0.3s;
+}
+.mz-tab-panel.active {
+  display: block;
+}
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
