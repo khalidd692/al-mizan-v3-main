@@ -6,13 +6,15 @@ from backend.database.db import DB_PATH
 
 class AgentIlal(BaseAgent):
     AGENT_NAME = "ILAL"
-    ZONES_PRODUCED = [6]
+    ZONES_PRODUCED = [6, 7, 8]
 
     async def _mock_output(self, hadith_data: dict) -> dict:
         return {
             "zone_6": {
                 "zone": 6,
-                "type": "ilal",
+                "type": "ilal_ahkam",
+                "title": "أحكام العلل",
+                "title_fr": "Règles des 'ilal",
                 "tawaqquf": True,
                 "reason": "En attente de l'implémentation complète de 'Ilal",
                 "schema": {
@@ -20,6 +22,32 @@ class AgentIlal(BaseAgent):
                         {"type": "inqita", "description": "Interruption dans la chaîne", "details": "Mock details"},
                         {"type": "tadlis", "description": "Dissimulation", "details": "Mock details"},
                     ]
+                },
+                "mock": True,
+            },
+            "zone_7": {
+                "zone": 7,
+                "type": "ilal_mawduu",
+                "title": "علل الموضوع",
+                "title_fr": "Défauts du hadith mawdū'",
+                "tawaqquf": True,
+                "reason": "En attente de l'implémentation complète de 'Ilal",
+                "schema": {
+                    "indices_mawduu": [],
+                    "historique_fabrication": []
+                },
+                "mock": True,
+            },
+            "zone_8": {
+                "zone": 8,
+                "type": "ilal_takhrij",
+                "title": "التخريج والعلل",
+                "title_fr": "Takhrij et 'ilal combinés",
+                "tawaqquf": True,
+                "reason": "En attente de l'implémentation complète de 'Ilal",
+                "schema": {
+                    "sources_critiques": [],
+                    "references_jarh": []
                 },
                 "mock": True,
             },
@@ -61,9 +89,23 @@ class AgentIlal(BaseAgent):
             return {
                 "zone_6": {
                     "zone": 6,
-                    "type": "ilal",
+                    "type": "ilal_ahkam",
                     "tawaqquf": True,
                     "reason": f"Erreur de base de données lors de la récupération des défauts: {e}",
+                    "schema": {},
+                },
+                "zone_7": {
+                    "zone": 7,
+                    "type": "ilal_mawduu",
+                    "tawaqquf": True,
+                    "reason": f"Erreur de base de données: {e}",
+                    "schema": {},
+                },
+                "zone_8": {
+                    "zone": 8,
+                    "type": "ilal_takhrij",
+                    "tawaqquf": True,
+                    "reason": f"Erreur de base de données: {e}",
                     "schema": {},
                 },
             }
@@ -71,11 +113,39 @@ class AgentIlal(BaseAgent):
         return {
             "zone_6": {
                 "zone": 6,
-                "type": "ilal",
+                "type": "ilal_ahkam",
+                "title": "أحكام العلل",
+                "title_fr": "Règles des 'ilal",
                 "tawaqquf": False,
                 "reason": None,
                 "schema": {
                     "defauts_chaines": defauts_chaines
+                },
+                "mock": False,
+            },
+            "zone_7": {
+                "zone": 7,
+                "type": "ilal_mawduu",
+                "title": "علل الموضوع",
+                "title_fr": "Défauts du hadith mawdū'",
+                "tawaqquf": True,
+                "reason": "Analyse LLM requise pour les indices de fabrication",
+                "schema": {
+                    "indices_mawduu": [],
+                    "historique_fabrication": []
+                },
+                "mock": False,
+            },
+            "zone_8": {
+                "zone": 8,
+                "type": "ilal_takhrij",
+                "title": "التخريج والعلل",
+                "title_fr": "Takhrij et 'ilal combinés",
+                "tawaqquf": True,
+                "reason": "Analyse croisée requise",
+                "schema": {
+                    "sources_critiques": [],
+                    "references_jarh": []
                 },
                 "mock": False,
             },

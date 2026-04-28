@@ -1,75 +1,94 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>الميزان — Al-Mīzān</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/base.css">
-  <link rel="stylesheet" href="/css/dashboard.css">
-  <link rel="stylesheet" href="/css/isnad-tree.css">
-</head>
-<body>
-  <header class="mz-header">
-    <h1 class="mz-logo">الميزان</h1>
-    <form id="mz-search-form" dir="rtl">
-      <input type="text" id="mz-query" placeholder="ابحث عن حديث..." autocomplete="off">
-      <button type="submit">بحث</button>
-      <button type="button" id="clear-cache-btn" title="Vider le cache" style="margin-right: 8px; padding: 8px 12px; background: #f0f0f0; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; font-size: 12px;">🗑️ Cache</button>
-    </form>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>الميزان — Al-Mīzān</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link rel="stylesheet" href="/css/isnad-tree.css" />
+  </head>
+  <body>
+    <header class="mz-header">
+      <h1 class="mz-logo">الميزان</h1>
+      <form id="mz-search-form" dir="rtl">
+        <input type="text" id="mz-query" placeholder="ابحث عن حديث..." autocomplete="off" />
+        <button type="submit">بحث</button>
+        <button
+          type="button"
+          id="clear-cache-btn"
+          title="Vider le cache"
+          style="
+            margin-right: 8px;
+            padding: 8px 12px;
+            background: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+          "
+        >
+          🗑️ Cache
+        </button>
+      </form>
+    </header>
 
-  <main class="mz-dashboard" id="mz-dashboard">
-    <aside class="mz-col mz-col-left" data-col="isnad">
-      <h2 class="mz-col-title">سلسلة الإسناد</h2>
-      <div id="isnad-tree" class="isnad-tree-container">
-        <p class="mz-empty">En attente de données...</p>
-      </div>
-    </aside>
+    <main class="mz-dashboard" id="mz-dashboard">
+      <aside class="mz-col mz-col-left" data-col="isnad">
+        <h2 class="mz-col-title">سلسلة الإسناد</h2>
+        <div id="isnad-tree" class="isnad-tree-container">
+          <p class="mz-empty">En attente de données...</p>
+        </div>
+      </aside>
 
-    <section class="mz-col mz-col-center" data-col="matn">
-      <div class="mz-matn-block">
-        <div id="matn-verdict" class="mz-verdict-banner"></div>
-        <div id="matn-arabic" class="mz-matn-ar"></div>
-        <div id="matn-french" class="mz-matn-fr"></div>
-        <div id="matn-sources" class="mz-sources"></div>
-      </div>
+      <section class="mz-col mz-col-center" data-col="matn">
+        <div class="mz-matn-block">
+          <div id="matn-verdict" class="mz-verdict-banner"></div>
+          <div id="matn-arabic" class="mz-matn-ar"></div>
+          <div id="matn-french" class="mz-matn-fr"></div>
+          <div id="matn-sources" class="mz-sources"></div>
+        </div>
 
-      <nav class="mz-tabs" id="mz-tabs">
-        <button class="mz-tab" data-tab="isnad">الإسناد</button>
-        <button class="mz-tab" data-tab="ilal">العلل</button>
-        <button class="mz-tab" data-tab="gharib">الغريب</button>
-        <button class="mz-tab" data-tab="sabab">سبب الورود</button>
-        <button class="mz-tab" data-tab="shuruh">الشروح</button>
-        <button class="mz-tab" data-tab="athar">الآثار</button>
-        <button class="mz-tab" data-tab="ijma">الإجماع</button>
-        <button class="mz-tab" data-tab="mukhtalif">المختلف</button>
-        <button class="mz-tab" data-tab="naskh">النسخ</button>
-        <button class="mz-tab" data-tab="fawaid">الفوائد</button>
-        <button class="mz-tab" data-tab="aqidah">العقيدة</button>
-        <button class="mz-tab" data-tab="tarjih">الترجيح</button>
-      </nav>
-      <div id="tabs-content" class="mz-tabs-content"></div>
-    </section>
+        <nav class="mz-tabs" id="mz-tabs">
+          <button class="mz-tab" data-tab="isnad">الإسناد</button>
+          <button class="mz-tab" data-tab="ilal">العلل</button>
+          <button class="mz-tab" data-tab="takhrij">التخريج</button>
+          <button class="mz-tab" data-tab="gharib">الغريب</button>
+          <button class="mz-tab" data-tab="sabab">سبب الورود</button>
+          <button class="mz-tab" data-tab="shuruh">الشروح</button>
+          <button class="mz-tab" data-tab="athar">الآثار</button>
+          <button class="mz-tab" data-tab="ijma">الإجماع</button>
+          <button class="mz-tab" data-tab="mukhtalif">المختلف</button>
+          <button class="mz-tab" data-tab="naskh">النسخ</button>
+          <button class="mz-tab" data-tab="fawaid">الفوائد</button>
+          <button class="mz-tab" data-tab="aqidah">العقيدة</button>
+          <button class="mz-tab" data-tab="tarjih">الترجيح</button>
+        </nav>
+        <div id="tabs-content" class="mz-tabs-content"></div>
+      </section>
 
-    <aside class="mz-col mz-col-right" data-col="evidence">
-      <h2 class="mz-col-title">سجل الأدلة</h2>
-      <div id="evidence-log" class="evidence-log-container">
-        <p class="mz-empty">Les preuves apparaîtront ici...</p>
-      </div>
-    </aside>
-  </main>
+      <aside class="mz-col mz-col-right" data-col="evidence">
+        <h2 class="mz-col-title">سجل الأدلة</h2>
+        <div id="evidence-log" class="evidence-log-container">
+          <p class="mz-empty">Les preuves apparaîtront ici...</p>
+        </div>
+      </aside>
+    </main>
 
-  <footer class="mz-status-bar">
-    <div id="progress-bar" class="mz-progress"></div>
-    <div id="status-text" class="mz-status-text">Prêt</div>
-  </footer>
+    <footer class="mz-status-bar">
+      <div id="progress-bar" class="mz-progress"></div>
+      <div id="status-text" class="mz-status-text">Prêt</div>
+    </footer>
 
-  <script src="/js/cache-manager.js"></script>
-  <script src="/js/sse-client.js"></script>
-  <script src="/js/isnad-tree.js"></script>
-  <script src="/js/dashboard.js"></script>
-</body>
+    <script src="/js/cache-manager.js"></script>
+    <script src="/js/sse-client.js"></script>
+    <script src="/js/isnad-tree.js"></script>
+    <script src="/js/dashboard.js"></script>
+  </body>
 </html>
