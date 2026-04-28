@@ -1,44 +1,86 @@
-"""Agent 1 — Chaîne d'Isnād et Jarḥ wa Taʿdīl."""
+"""Agent Isnād — Analyse de la chaîne de transmission."""
 
+import sqlite3
 from backend.agents.base import BaseAgent
+from backend.database.db import DB_PATH
 
 class AgentIsnad(BaseAgent):
     AGENT_NAME = "ISNAD"
-    ZONES_PRODUCED = [2, 3, 5]
+    ZONES_PRODUCED = [2]
 
     async def _mock_output(self, hadith_data: dict) -> dict:
+        # Sortie simulée pour la zone 2
         return {
             "zone_2": {
-                "type": "isnad_chain",
-                "chain": [
-                    {"name_ar": "محمد بن إسماعيل البخاري", "name_fr": "Al-Bukhārī", "verdict": "imam", "tabaqa": 11, "death_h": 256},
-                    {"name_ar": "عبد الله بن يوسف", "name_fr": "ʿAbd Allāh b. Yūsuf", "verdict": "thiqah", "tabaqa": 10, "death_h": 218},
-                    {"name_ar": "مالك بن أنس", "name_fr": "Mālik b. Anas", "verdict": "imam", "tabaqa": 7, "death_h": 179},
-                    {"name_ar": "يحيى بن سعيد الأنصاري", "name_fr": "Yaḥyā b. Saʿīd al-Anṣārī", "verdict": "thiqah", "tabaqa": 5, "death_h": 143},
-                    {"name_ar": "محمد بن إبراهيم التيمي", "name_fr": "Muḥammad b. Ibrāhīm al-Taymī", "verdict": "thiqah", "tabaqa": 4, "death_h": 120},
-                    {"name_ar": "علقمة بن وقاص الليثي", "name_fr": "ʿAlqamah b. Waqqāṣ al-Laythī", "verdict": "thiqah", "tabaqa": 2, "death_h": 80},
-                    {"name_ar": "عمر بن الخطاب", "name_fr": "ʿUmar b. al-Khaṭṭāb", "verdict": "sahabi", "tabaqa": 1, "death_h": 23},
-                ],
-                "ittisal": True,
-                "mock": True,
-            },
-            "zone_3": {
-                "type": "jarh_tadil",
-                "mock": True,
-                "note": "Les vraies citations du corpus arriveront phase 2",
-            },
-            "zone_5": {
-                "zone": 5,
-                "type": "isnad_5_conditions",
+                "zone": 2,
+                "type": "isnad",
                 "tawaqquf": True,
-                "reason": "En attente du corpus Al-Mīzān v5.0",
+                "reason": "En attente de l'implémentation complète de l'isnād",
                 "schema": {
-                    "ittisal": None,
-                    "adala": None,
-                    "dabt": None,
-                    "adam_shudhudh": None,
-                    "adam_illah": None
+                    "rapporteurs": [
+                        {"ordre": 1, "nom_arabe": "الراوي الأول", "nom_francais": "Rapporteur 1"},
+                        {"ordre": 2, "nom_arabe": "الراوي الثاني", "nom_francais": "Rapporteur 2"},
+                    ]
                 },
-                "mock": True
+                "mock": True,
+            },
+        }
+
+    async def _real_output(self, hadith_data: dict) -> dict:
+        hadith_id = hadith_data.get("hadith_id")
+        if not hadith_id:
+            return await self._mock_output(hadith_data)
+
+        rapporteurs_data = []
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            cursor = conn.cursor()
+
+            # Récupérer l'isnad_id du hadith
+            cursor.execute("SELECT isnad_id FROM hadiths WHERE id = ?", (hadith_id,))
+            isnad_id = cursor.fetchone()
+            if isnad_id:
+                isnad_id = isnad_id[0]
+
+                # Récupérer les rapporteurs pour cet isnad_id
+                cursor.execute(
+                    """
+                    SELECT r.order_in_chain, a.arabic_name, a.french_name
+                    FROM isnad_rawis r
+                    JOIN authorities a ON r.authority_id = a.id
+                    WHERE r.isnad_id = ?
+                    ORDER BY r.order_in_chain ASC
+                    """,
+                    (isnad_id,)
+                )
+                for row in cursor.fetchall():
+                    rapporteurs_data.append({
+                        "ordre": row[0],
+                        "nom_arabe": row[1],
+                        "nom_francais": row[2],
+                    })
+            conn.close()
+        except sqlite3.Error as e:
+            print(f"Erreur SQLite: {e}")
+            return {
+                "zone_2": {
+                    "zone": 2,
+                    "type": "isnad",
+                    "tawaqquf": True,
+                    "reason": f"Erreur de base de données lors de la récupération de l'isnād: {e}",
+                    "schema": {},
+                },
             }
+
+        return {
+            "zone_2": {
+                "zone": 2,
+                "type": "isnad",
+                "tawaqquf": False,
+                "reason": None,
+                "schema": {
+                    "rapporteurs": rapporteurs_data
+                },
+                "mock": False,
+            },
         }
