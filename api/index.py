@@ -33,6 +33,12 @@ import httpx
 from lxml import html as lxml_html
 from pydantic import BaseModel
 
+# Import local DB fallback
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from backend.utils.local_db import search_hadith, row_to_hadith_core
+
 # ─────────────────────────────────────────────────────────────────────────────
 #  MODÈLE PYDANTIC — VALIDATION NŒUD SILSILA
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3523,12 +3529,36 @@ async def _stream_takhrij(query: str) -> AsyncGenerator[str, None]:
             return
 
         raw_html = dorar_data.get("ahadith", {}).get("result", "")
+        
+        # ── FALLBACK : Base locale si Dorar vide ───────────────────────────
         if not raw_html:
+            log.info("[FALLBACK] Dorar vide → recherche base locale")
+            db_results = search_hadith(query_original, limit=3)
+            if db_results:
+                for row in db_results:
+                    hadith_data = row_to_hadith_core(row)
+                    yield _sse("zone_3", {
+                        "zone": 3,
+                        "type": "hadith_core",
+                        "data": hadith_data,
+                    })
             yield _sse("done", [])
             return
 
         hadiths_bruts = _parse_dorar_html(raw_html)
+        
+        # ── FALLBACK : Base locale si parsing échoue ─────────────────────
         if not hadiths_bruts:
+            log.info("[FALLBACK] Dorar parsing échoue → recherche base locale")
+            db_results = search_hadith(query_original, limit=3)
+            if db_results:
+                for row in db_results:
+                    hadith_data = row_to_hadith_core(row)
+                    yield _sse("zone_3", {
+                        "zone": 3,
+                        "type": "hadith_core",
+                        "data": hadith_data,
+                    })
             yield _sse("done", [])
             return
 
