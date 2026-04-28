@@ -1091,6 +1091,51 @@ function _enrichCardSSE(idx, h) {
 /* ── Buffer chunks par index hadith ─────────────────────────── */
 var _chunkBuffers = {};
 
+/* ── Adaptateurs orchestrateur local → format Dorar ─────────────
+   L'orchestrateur émet des events zone_* avec des champs différents
+   de ceux attendus par _renderDorarCards/_enrichCardSSE.
+   Ces fonctions font le pont sans toucher au backend.             */
+function _orchGradeLevel(g) {
+  if (!g) return '';
+  var gl = (g + '').toLowerCase();
+  if (gl === 'sahih')                              return 'sahih';
+  if (gl === 'hasan')                              return 'hasan';
+  if (gl.indexOf("da'if") !== -1 || gl === 'daif') return 'daif';
+  if (gl.indexOf('mawdu') !== -1)                  return 'mawdu';
+  return '';
+}
+
+function _orchAuthorityScore(source) {
+  var s = (source || '').toLowerCase();
+  if (/bukhari|muslim/.test(s))                              return 100;
+  if (/muwatta|malik/.test(s))                               return 90;
+  if (/abu.?dawud|tirmidh|nasai|ibn.?majah|ahmad/.test(s))   return 80;
+  if (/albani/.test(s))                                      return 70;
+  return 0;
+}
+
+function _mapOrchToDorar(d) {
+  return {
+    arabic_text : d.matn      || '',
+    ar          : d.matn      || '',
+    savant      : d.grade_by  || '',
+    source      : d.source    || '',
+    grade_ar    : d.grade_raw || '',
+    grade       : d.grade_raw || '',
+    grade_level : _orchGradeLevel(d.grade_raw),
+  };
+}
+
+function _mapOrchToEnrich(d) {
+  return {
+    french          : d.translation_fr    || '',
+    grade_explique  : d.grade_explanation || '',
+    grade           : d.grade_raw         || '',
+    isnad_chain     : d.full_isnad        || '',
+    authority_score : _orchAuthorityScore(d.source || ''),
+  };
+}
+
 /* ── Map des 6 IDs status backend → index étape locale ─────── */
 var _STEP_MAP = {
   INITIALISATION: 0,
@@ -1453,6 +1498,64 @@ async function _searchDorarTopic(query) {
               }
               evtName = '';
               continue;
+            }
+
+            /* ── EVENTS orchestrateur local (zone_* / meta_pipeline_*) ── */
+
+            /* zone_1 : signal d'initialisation */
+            if (evtName === 'zone_1') {
+              _advanceStep('INITIALISATION');
+              evtName = ''; continue;
+            }
+
+            /* meta_pipeline_dorar / meta_pipeline_traduction : avancement étapes */
+            if (evtName === 'meta_pipeline_dorar' || evtName === 'meta_pipeline_traduction') {
+              var pStep = (msg.step || '').toUpperCase();
+              if (pStep === 'LOCAL_DB_SEARCH' || pStep === 'DORAR_REQUETE') _advanceStep('DORAR');
+              else if (pStep === 'LOCAL_DB_HIT')  _advanceStep('TAKHRIJ');
+              else if (pStep === 'NO_RESULT')      _finishLoading();
+              evtName = ''; continue;
+            }
+
+            /* zone_3 : cœur du résultat — hadith_core ou no_result */
+            if (evtName === 'zone_3') {
+              if (msg.type === 'hadith_core' && msg.data) {
+                var orchCard   = _mapOrchToDorar(msg.data);
+                var orchEnrich = _mapOrchToEnrich(msg.data);
+                if (!dorarOK) {
+                  _renderDorarCards([orchCard], query);
+                  dorarOK = true;
+                  _advanceStep('TAKHRIJ');
+                }
+                _enrichCardSSE(0, orchEnrich);
+                _advanceStep('RIJAL');
+              } else if (msg.type === 'no_result') {
+                _finishLoading();
+                if (box) {
+                  box.innerHTML = '<p style="color:rgba(201,168,76,.6);padding:2rem;text-align:center;'
+                    + 'font-family:\'Cormorant Garamond\',serif;font-size:15px;font-style:italic;">'
+                    + '&#9998; Aucun hadith trouvé dans la base pour cette recherche.<br>'
+                    + '<span style="font-size:12px;opacity:.6;">Essayez en arabe ou avec d\'autres mots-clés.</span></p>';
+                  box.classList.add('active');
+                }
+              }
+              evtName = ''; continue;
+            }
+
+            /* zone_38 / zone_39 : synthèse et vérification */
+            if (evtName === 'zone_38') { _advanceStep('JARH'); evtName = ''; continue; }
+            if (evtName === 'zone_39') { _advanceStep('HUKM'); evtName = ''; continue; }
+
+            /* zone_40 : fin du pipeline orchestrateur */
+            if (evtName === 'zone_40') {
+              _finishLoading();
+              if (!dorarOK && box) {
+                box.innerHTML = '<p style="color:rgba(201,168,76,.6);padding:2rem;text-align:center;'
+                  + 'font-family:\'Cormorant Garamond\',serif;font-size:15px;font-style:italic;">'
+                  + '&#9998; Aucun hadith trouvé dans la base pour cette recherche.</p>';
+                box.classList.add('active');
+              }
+              evtName = ''; continue;
             }
 
             /* ── Fallback sans event name ────────────────────── */
