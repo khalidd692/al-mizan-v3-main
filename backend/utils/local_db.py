@@ -85,29 +85,43 @@ def search_hadith(query: str, limit: int = 5) -> list[dict]:
         conn.close()
         results = [dict(r) for r in rows]
 
-        # ── Score de pertinence : rejeter les faux positifs ──────────────
-        # Un résultat est conservé si au moins 30 % des tokens de la requête
-        # apparaissent dans fr_text ou ar_text_clean (substring insensible à
-        # la casse pour le français, sensible pour l'arabe déjà normalisé).
-        def _score(row: dict) -> float:
+        # ── Score de pertinence : trier par nombre de tokens matchés ──────
+        # BUGFIX: Le résultat doit correspondre au hadith le PLUS proche de la
+        # requête, pas le premier SQL. On trie par nombre de tokens matchés
+        # décroissant. Pas de filtre 30% - tous les résultats sont retournés.
+        def _score(row: dict) -> tuple[int, float]:
+            """Retourne (tokens_matchés, ratio) pour tri et filtrage."""
             fr = (row.get("fr_text") or "").lower()
             ar = row.get("ar_text_clean") or row.get("ar_text") or ""
             matched = sum(
                 1 for t in tokens
                 if t.lower() in fr or t in ar
             )
-            return matched / len(tokens)
+            return matched, matched / len(tokens)
 
-        MIN_SCORE = 0.30
-        relevant = [r for r in results if _score(r) >= MIN_SCORE]
-        if not relevant:
-            log.warning(
-                f"[LOCAL_DB] Score pertinence insuffisant pour {query!r} "
-                f"({len(results)} résultat(s) brut(s) rejeté(s))"
+        # Calculer le score pour chaque résultat
+        scored_results = []
+        for r in results:
+            matched_count, ratio = _score(r)
+            r["_match_score"] = matched_count
+            r["_match_ratio"] = ratio
+            scored_results.append((matched_count, r))
+
+        # Trier par nombre de tokens matchés décroissant (pertinence réelle)
+        scored_results.sort(key=lambda x: x[0], reverse=True)
+
+        # Retourner tous les résultats triés (pas de filtre 30%)
+        sorted_results = [r for count, r in scored_results]
+
+        # Logger le grade brut récupéré pour le premier résultat (le plus pertinent)
+        if sorted_results:
+            first = sorted_results[0]
+            log.info(
+                f"[LOCAL_DB] {len(sorted_results)} résultat(s) pour {query!r} "
+                f"| Meilleur match: grade_primary={first.get('grade_primary', 'NULL')} "
+                f"(tokens_matchés={first.get('_match_score')}/{len(tokens)})"
             )
-            return []
-        log.info(f"[LOCAL_DB] {len(relevant)} résultat(s) pertinent(s) pour {query!r}")
-        return relevant
+        return sorted_results
     except sqlite3.Error as exc:
         log.error(f"[LOCAL_DB] Erreur SQLite : {exc}")
         return []
