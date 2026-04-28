@@ -30,3 +30,14 @@ backups/
 # ── Secrets (clés API, tokens) ──
 .env.local
 .env.*.local
+
+# ── Fichiers générés ou temporaires ──
+audit_*.py
+audit_*.json
+audit_*.md
+RAPPORT_*.md
+check_*.py
+clean_*.py
+*.log
+backend/corpus/
+backend_server.log
