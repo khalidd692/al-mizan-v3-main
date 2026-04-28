@@ -2,6 +2,8 @@
 
 **Phase 1 : Architecture SSE + 4 agents mockés**
 
+**Déploiement en production :** https://al-mizan-v3.onrender.com (Render)
+
 ## Vue d'ensemble
 
 Al-Mīzān v5.0 est un moteur de takhrīj (authentification de hadiths) basé sur une architecture multi-agents orchestrée. Cette phase 1 établit l'infrastructure complète avec des données mockées.
