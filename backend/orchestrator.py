@@ -27,6 +27,7 @@ from backend.agents.protected_terms import (
 from backend.utils.sse import emit, keepalive
 from backend.utils.logging import get_logger
 from backend.utils.local_db import search_hadith, row_to_hadith_core
+from backend.utils.fr_ar_lexicon import get_token_groups
 
 log = get_logger("mizan.orchestrator")
 
@@ -93,10 +94,17 @@ class Orchestrator:
         })
         await asyncio.sleep(0.3)
 
-        # ── Zone 2 : TRADUCTION ──────────────────────────────
+        # ── Zone 2 : TRADUCTION FR→AR ─────────────────────────
+        # Tokenisation + équivalents arabes via le lexique. Les tokens AR
+        # seront utilisés par search_hadith() pour matcher le corpus arabe.
+        fr_tokens = [t for t in query.split() if len(t) > 2][:6]
+        groups = get_token_groups(fr_tokens)
+        ar_tokens = [t for g in groups for t in g[1:]]
         yield emit("meta_pipeline_traduction", {
             "step": "TRADUCTION",
             "message": f"Requête: {query}",
+            "fr_tokens": fr_tokens,
+            "ar_tokens": ar_tokens,
         })
         await asyncio.sleep(0.2)
 
