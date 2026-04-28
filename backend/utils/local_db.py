@@ -34,6 +34,8 @@ def search_hadith(query: str, limit: int = 5) -> list[dict]:
       1. Nettoyer la requête (tashkeel, tokenisation)
       2. Chercher dans ar_text_clean, ar_text, fr_text, book_name_ar
       3. Trier par grade (Sahih > Hasan > Da'if) puis zone_id
+      4. Score de correspondance : compte les mots de la requête dans fr_text
+         Si score < 30% → retourne [] avec flag "non_trouve"
 
     Retourne [] si la base est introuvable ou si aucun résultat.
     """
@@ -84,6 +86,36 @@ def search_hadith(query: str, limit: int = 5) -> list[dict]:
         rows = conn.execute(sql, params).fetchall()
         conn.close()
         results = [dict(r) for r in rows]
+
+        # ── Score de correspondance ─────────────────────────
+        if results and tokens:
+            scored_results = []
+            query_words_lower = [t.lower() for t in tokens]
+
+            for row in results:
+                fr_text = (row.get("fr_text") or "").lower()
+                if not fr_text:
+                    continue
+
+                # Compte combien de mots de la requête apparaissent dans fr_text
+                matched_words = sum(1 for word in query_words_lower if word in fr_text)
+                score_pct = (matched_words / len(query_words_lower)) * 100
+
+                row["_match_score"] = round(score_pct, 1)
+                row["_matched_words"] = matched_words
+                row["_total_words"] = len(query_words_lower)
+                scored_results.append(row)
+
+            # Filtre : score minimum 30%
+            filtered_results = [r for r in scored_results if r["_match_score"] >= 30]
+
+            if not filtered_results:
+                log.warning(f"[LOCAL_DB] Score < 30% pour {query!r} — non_trouve")
+                return [{"_non_trouve": True, "_match_score": scored_results[0]["_match_score"] if scored_results else 0}]
+
+            log.info(f"[LOCAL_DB] {len(filtered_results)} résultat(s) pour {query!r} (score ≥ 30%)")
+            return filtered_results
+
         log.info(f"[LOCAL_DB] {len(results)} résultat(s) pour {query!r}")
         return results
     except sqlite3.Error as exc:
