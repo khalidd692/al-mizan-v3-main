@@ -17,7 +17,6 @@ from collections import defaultdict
 import time
 
 from backend.orchestrator import Orchestrator
-from backend.pipeline import ValidationPipeline
 from backend.utils.logging import get_logger
 
 log = get_logger("mizan.main")
@@ -100,32 +99,9 @@ async def search(request):
         }
     )
 
-async def harvest_and_process(request):
-    """Endpoint SSE pour harvesting + validation + insertion automatique."""
-    start_id = int(request.query_params.get("start_id", "1"))
-    count = int(request.query_params.get("count", "1000"))
-    rate_limit = float(request.query_params.get("rate_limit", "2.0"))
-    
-    log.info(f"[HARVEST] Démarrage: start_id={start_id}, count={count}, rate_limit={rate_limit}")
-    
-    api_key = os.environ.get("ANTHROPIC_API_KEY", "")
-    pipeline = ValidationPipeline(api_key)
-    
-    return StreamingResponse(
-        pipeline.process_stream(start_id, count, rate_limit),
-        media_type="text/event-stream",
-        headers={
-            "Cache-Control": "no-cache, no-transform",
-            "X-Accel-Buffering": "no",
-            "Connection": "keep-alive",
-            "X-Mizan-Version": VERSION,
-        }
-    )
-
 routes = [
     Route("/api/health", health),
     Route("/api/search", search),
-    Route("/api/harvest-and-process", harvest_and_process),
     Mount("/", app=StaticFiles(
         directory=str(_REPO_ROOT),
         html=True
