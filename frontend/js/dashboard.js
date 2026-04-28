@@ -127,7 +127,7 @@
 
     if (event === "zone_1") {
       setStatus("Initialisation");
-    } else if (event === "zone_4") {
+    } else if (event === "zone_3") {
       renderHadithCore(data.data);
     } else if (event === "zone_2") {
       renderIsnad(data);
