@@ -32,10 +32,10 @@ def search_hadith(query: str, limit: int = 5) -> list[dict]:
 
     Stratégie :
       1. Nettoyer la requête (tashkeel, tokenisation)
-      2. Chercher dans ar_text_clean, ar_text, fr_text, book_name_ar
-      3. Trier par grade (Sahih > Hasan > Da'if) puis zone_id
-
-    Retourne [] si la base est introuvable ou si aucun résultat.
+      2. Chercher dans ar_text_clean, ar_text, fr_text, book_name_ar (tous tokens, OR)
+      3. Fallback si 0 résultat : réessayer avec le premier token seul,
+         puis chaque token suivant un par un jusqu'au premier succès
+      4. Ne retourner [] que si la base est vide ou inaccessible
     """
     db_path = _get_db_path()
     if not db_path.exists():
@@ -48,76 +48,62 @@ def search_hadith(query: str, limit: int = 5) -> list[dict]:
         log.warning(f"[LOCAL_DB] Requête trop courte après nettoyage : {query!r}")
         return []
 
-    clauses, params = [], []
-    for token in tokens:
-        like = f"%{token}%"
-        clauses.append(
-            "(ar_text_clean LIKE ? OR ar_text LIKE ? OR fr_text LIKE ? OR book_name_ar LIKE ?)"
-        )
-        params.extend([like, like, like, like])
-
-    sql = f"""
-        SELECT
-            id, ar_text, ar_text_clean, ar_narrator, ar_full_isnad,
-            fr_text, fr_summary,
-            grade_primary, grade_by_mohdith, grade_explanation,
-            grade_albani, grade_ibn_baz, grade_ibn_uthaymin,
-            book_name_ar, book_name_fr, hadith_number, hadith_id_dorar,
-            source_api, source_url, takhrij, zone_id
-        FROM entries
-        WHERE {" OR ".join(clauses)}
-        ORDER BY
-            CASE grade_primary
-                WHEN 'Sahih' THEN 1
-                WHEN 'Hasan' THEN 2
-                WHEN 'Da''if' THEN 3
-                ELSE 4
-            END,
-            zone_id ASC
-        LIMIT ?
-    """
-    params.append(limit)
-
-    try:
+    def _run_query(search_tokens: list[str]) -> list[dict]:
+        clauses, params = [], []
+        for token in search_tokens:
+            like = f"%{token}%"
+            clauses.append(
+                "(ar_text_clean LIKE ? OR ar_text LIKE ? OR fr_text LIKE ? OR book_name_ar LIKE ?)"
+            )
+            params.extend([like, like, like, like])
+        sql = f"""
+            SELECT
+                id, ar_text, ar_text_clean, ar_narrator, ar_full_isnad,
+                fr_text, fr_summary,
+                grade_primary, grade_by_mohdith, grade_explanation,
+                grade_albani, grade_ibn_baz, grade_ibn_uthaymin,
+                book_name_ar, book_name_fr, hadith_number, hadith_id_dorar,
+                source_api, source_url, takhrij, zone_id
+            FROM entries
+            WHERE {" OR ".join(clauses)}
+            ORDER BY
+                CASE grade_primary
+                    WHEN 'Sahih' THEN 1
+                    WHEN 'Hasan' THEN 2
+                    WHEN 'Da''if' THEN 3
+                    ELSE 4
+                END,
+                zone_id ASC
+            LIMIT ?
+        """
+        params.append(limit)
         conn = sqlite3.connect(str(db_path), timeout=10)
         conn.row_factory = sqlite3.Row
         rows = conn.execute(sql, params).fetchall()
         conn.close()
-        results = [dict(r) for r in rows]
+        return [dict(r) for r in rows]
 
-        # ── Score de pertinence : rejeter les faux positifs ──────────────
-        # Un résultat est conservé si au moins 30 % des tokens de la requête
-        # apparaissent dans fr_text ou ar_text_clean (substring insensible à
-        # la casse pour le français, sensible pour l'arabe déjà normalisé).
-        def _score(row: dict) -> float:
-            fr = (row.get("fr_text") or "").lower()
-            ar = row.get("ar_text_clean") or row.get("ar_text") or ""
-            matched = sum(
-                1 for t in tokens
-                if t.lower() in fr or t in ar
-            )
-            return matched / len(tokens)
+    try:
+        # ── Requête principale (tous les tokens) ──────────────────────
+        results = _run_query(tokens)
+        if results:
+            log.info(f"[LOCAL_DB] {len(results)} résultat(s) pour {query!r}")
+            return results
 
-        MIN_SCORE = 0.15
-        relevant = []
-        for r in results:
-            s = _score(r)
-            if s >= MIN_SCORE:
-                relevant.append(r)
-            else:
-                log.debug(
-                    f"[LOCAL_DB] Écarté (score={s:.2f} < {MIN_SCORE}) "
-                    f"id={r.get('id')} source={r.get('book_name_ar','?')!r} "
-                    f"fr_text={str(r.get('fr_text') or '')[:60]!r}"
+        # ── Fallback token par token ───────────────────────────────────
+        log.info(f"[LOCAL_DB] 0 résultat pour {query!r} — fallback token par token")
+        for i, token in enumerate(tokens):
+            results = _run_query([token])
+            if results:
+                log.info(
+                    f"[LOCAL_DB] Fallback réussi avec token[{i}]={token!r} "
+                    f"→ {len(results)} résultat(s)"
                 )
-        if not relevant:
-            log.warning(
-                f"[LOCAL_DB] Score pertinence insuffisant pour {query!r} "
-                f"({len(results)} résultat(s) brut(s) rejeté(s))"
-            )
-            return []
-        log.info(f"[LOCAL_DB] {len(relevant)} résultat(s) pertinent(s) pour {query!r}")
-        return relevant
+                return results
+            log.debug(f"[LOCAL_DB] Fallback token[{i}]={token!r} → 0 résultat")
+
+        log.warning(f"[LOCAL_DB] Aucun résultat même en fallback pour {query!r}")
+        return []
     except sqlite3.Error as exc:
         log.error(f"[LOCAL_DB] Erreur SQLite : {exc}")
         return []
