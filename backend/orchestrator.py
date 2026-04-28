@@ -112,6 +112,21 @@ class Orchestrator:
 
         db_results = search_hadith(query)
 
+        # Détection du flag "non_trouve" (score de correspondance < 30%)
+        if db_results and db_results[0].get("_non_trouve"):
+            score = db_results[0].get("_match_score", 0)
+            log.warning(f"[ORCHESTRATOR] Score trop faible ({score}%) pour : {query!r}")
+            yield emit("meta_pipeline_dorar", {"step": "NO_RESULT", "reason": "low_relevance_score", "score": score})
+            yield emit("zone_3", {
+                "zone": 3, "type": "no_result",
+                "query": query, "tawaqquf": True,
+                "message": "Aucun hadith trouvé en base locale",
+                "reason": "low_relevance",
+                "score": score,
+            })
+            yield emit("zone_40", {"zone": 40, "type": "done", "error": True, "reason": "no_hadith_found", "score": score})
+            return
+
         if not db_results:
             log.warning(f"[ORCHESTRATOR] Aucun hadith trouvé pour : {query!r}")
             yield emit("meta_pipeline_dorar", {"step": "NO_RESULT"})
