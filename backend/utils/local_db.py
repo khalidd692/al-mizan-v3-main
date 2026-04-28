@@ -133,20 +133,37 @@ def row_to_hadith_core(row: dict) -> dict:
     num = row.get("hadith_number", "")
     source_label = f"{book} n°{num}" if num else book
     return {
-        "matn": row.get("ar_text", ""),
-        "matn_clean": row.get("ar_text_clean", ""),
-        "narrator": row.get("ar_narrator", ""),
-        "full_isnad": row.get("ar_full_isnad", ""),
-        "translation_fr": row.get("fr_text") or row.get("fr_summary", ""),
+        # Texte arabe
+        "matn": row.get("ar_text", "") or "",
+        "matn_clean": row.get("ar_text_clean", "") or "",
+        "text_ar": row.get("ar_text", "") or "",
+        # Narrateur et isnād
+        "narrator": row.get("ar_narrator", "") or "",
+        "full_isnad": row.get("ar_full_isnad", "") or "",
+        # Traduction
+        "translation_fr": row.get("fr_text") or row.get("fr_summary") or "",
+        # Source
         "source": source_label,
-        "grade_raw": row.get("grade_primary", "unknown"),
-        "grade_by": row.get("grade_by_mohdith", ""),
-        "grade_explanation": row.get("grade_explanation", ""),
-        "grade_albani": row.get("grade_albani", ""),
+        "book_name_fr": row.get("book_name_fr", "") or "",
+        "book_name_ar": row.get("book_name_ar", "") or "",
+        # Grade principal — clé "grade_raw" attendue par dashboard.js
+        "grade_raw": row.get("grade_primary", "") or "Non classé",
+        "grade_primary": row.get("grade_primary", "") or "",
+        "grade_by": row.get("grade_by_mohdith", "") or "",
+        "grade_explanation": row.get("grade_explanation", "") or "",
+        # Grades par savant
+        "grade_albani": row.get("grade_albani", "") or "",
+        "grade_ibn_baz": row.get("grade_ibn_baz", "") or "",
+        "grade_ibn_uthaymin": row.get("grade_ibn_uthaymin", "") or "",
+        "grade_muqbil": row.get("grade_muqbil", "") or "",
+        # Identifiants
         "hadith_id": row.get("id", ""),
-        "hadith_id_dorar": row.get("hadith_id_dorar", ""),
-        "source_url": row.get("source_url", ""),
-        "takhrij": row.get("takhrij", ""),
+        "hadith_id_dorar": row.get("hadith_id_dorar", "") or "",
+        "source_url": row.get("source_url", "") or "",
+        # Analyse
+        "takhrij": row.get("takhrij", "") or "",
+        # Méta
         "zone_id": row.get("zone_id", 0),
+        "bm25_rank": row.get("bm25_rank") or row.get("_match_score"),
         "from_local_db": True,
     }
