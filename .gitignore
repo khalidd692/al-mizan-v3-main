@@ -17,3 +17,16 @@ Thumbs.db
 .idea/
 *.swp
 *~
+
+# ── Databases (GitHub 100 MB limit) ──
+*.db
+*.sqlite
+*.sqlite3
+backend/mizan.db
+backend/almizane.db
+backups/
+"*.db"
+
+# ── Secrets (clés API, tokens) ──
+.env.local
+.env.*.local
