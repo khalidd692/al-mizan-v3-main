@@ -10,8 +10,17 @@ from pathlib import Path
 from typing import Optional
 
 from backend.utils.logging import get_logger
+from backend.utils.fr_ar_lexicon import (
+    FR_TO_AR,
+    get_token_groups,
+    check_mawdu_whitelist,
+)
 
 log = get_logger("mizan.local_db")
+
+# Pertinence minimale exigée pour considérer un résultat comme « trouvé ».
+# En dessous, l'orchestrator déclenche un tawaqquf (« non trouvé »).
+MIN_RELEVANCE_RATIO = 0.5
 
 _TASHKEEL = re.compile(
     r"[ً-ٟؐ-ؚۖ-ۜ۟-۪ۤۧۨ-ٰۭ]"
@@ -37,24 +46,50 @@ def search_hadith(query: str, limit: int = 5) -> list[dict]:
 
     Retourne [] si la base est introuvable ou si aucun résultat.
     """
+    # ── 0) Whitelist des mawdū‘ classiques : court-circuite la base ──
+    whitelist_hit = check_mawdu_whitelist(query)
+    if whitelist_hit is not None:
+        whitelist_hit["_match_score"] = 100
+        whitelist_hit["_match_ratio"] = 1.0
+        whitelist_hit["_match_count"] = 0
+        whitelist_hit["_from_whitelist"] = True
+        log.info(
+            f"[LOCAL_DB] Hit whitelist mawdū‘ « {whitelist_hit.get('id')} » "
+            f"pour {query!r}"
+        )
+        return [whitelist_hit]
+
     db_path = _get_db_path()
     if not db_path.exists():
         log.warning(f"[LOCAL_DB] Base introuvable : {db_path}")
         return []
 
     clean = _strip_tashkeel(query)
-    tokens = [t for t in re.split(r"\s+", clean) if len(t) > 2][:6]
-    if not tokens:
+    fr_tokens = [t for t in re.split(r"\s+", clean) if len(t) > 2][:6]
+    if not fr_tokens:
         log.warning(f"[LOCAL_DB] Requête trop courte après nettoyage : {query!r}")
         return []
 
+    # ── Traduction FR→AR : chaque token FR devient un groupe ──
+    # [token_fr, *équivalents_arabes]. Le SQL fait un OR sur tous
+    # les tokens du groupe ; le score compte les groupes matchés
+    # (et non les tokens), pour ne pas fausser le ratio.
+    groups = get_token_groups(fr_tokens)
+    ar_tokens = [t for g in groups for t in g[1:]]
+    log.info(
+        f"[LOCAL_DB] Tokens FR={fr_tokens} | AR enrichis={ar_tokens}"
+    )
+
     clauses, params = [], []
-    for token in tokens:
-        like = f"%{token}%"
-        clauses.append(
-            "(ar_text_clean LIKE ? OR ar_text LIKE ? OR fr_text LIKE ? OR book_name_ar LIKE ?)"
-        )
-        params.extend([like, like, like, like])
+    for group in groups:
+        inner = []
+        for token in group:
+            like = f"%{token}%"
+            inner.append(
+                "ar_text_clean LIKE ? OR ar_text LIKE ? OR fr_text LIKE ? OR book_name_ar LIKE ?"
+            )
+            params.extend([like, like, like, like])
+        clauses.append("(" + " OR ".join(inner) + ")")
 
     sql = f"""
         SELECT
@@ -85,42 +120,47 @@ def search_hadith(query: str, limit: int = 5) -> list[dict]:
         conn.close()
         results = [dict(r) for r in rows]
 
-        # ── Score de pertinence : trier par nombre de tokens matchés ──────
-        # BUGFIX: Le résultat doit correspondre au hadith le PLUS proche de la
-        # requête, pas le premier SQL. On trie par nombre de tokens matchés
-        # décroissant. Pas de filtre 30% - tous les résultats sont retournés.
+        # ── Score de pertinence : compter les GROUPES de concepts matchés ──
+        # 1 groupe = 1 token FR + ses équivalents AR. Matcher n'importe lequel
+        # de ses tokens (FR ou AR) compte pour 1 concept retrouvé.
         def _score(row: dict) -> tuple[int, float]:
-            """Retourne (tokens_matchés, ratio) pour tri et filtrage."""
             fr = (row.get("fr_text") or "").lower()
+            fr += " " + (row.get("fr_summary") or "").lower()
             ar = row.get("ar_text_clean") or row.get("ar_text") or ""
-            matched = sum(
-                1 for t in tokens
-                if t.lower() in fr or t in ar
-            )
-            return matched, matched / len(tokens)
+            matched = 0
+            for group in groups:
+                if any(t.lower() in fr or t in ar for t in group):
+                    matched += 1
+            return matched, matched / len(groups)
 
-        # Calculer le score pour chaque résultat
         scored_results = []
         for r in results:
             matched_count, ratio = _score(r)
-            r["_match_score"] = matched_count
+            r["_match_score"] = round(ratio * 100)
             r["_match_ratio"] = ratio
+            r["_match_count"] = matched_count
             scored_results.append((matched_count, r))
 
-        # Trier par nombre de tokens matchés décroissant (pertinence réelle)
         scored_results.sort(key=lambda x: x[0], reverse=True)
+        sorted_results = [r for _, r in scored_results]
 
-        # Retourner tous les résultats triés (pas de filtre 30%)
-        sorted_results = [r for count, r in scored_results]
-
-        # Logger le grade brut récupéré pour le premier résultat (le plus pertinent)
+        # ── Filtre de pertinence stricte (≥ 50 % des concepts) ──────────
+        # En deçà, on signale au orchestrator de renvoyer un tawaqquf.
         if sorted_results:
-            first = sorted_results[0]
+            best = sorted_results[0]
             log.info(
                 f"[LOCAL_DB] {len(sorted_results)} résultat(s) pour {query!r} "
-                f"| Meilleur match: grade_primary={first.get('grade_primary', 'NULL')} "
-                f"(tokens_matchés={first.get('_match_score')}/{len(tokens)})"
+                f"| Meilleur match: grade_primary={best.get('grade_primary', 'NULL')} "
+                f"(concepts={best.get('_match_count')}/{len(groups)} "
+                f"= {best.get('_match_score')}%)"
             )
+            if best["_match_ratio"] < MIN_RELEVANCE_RATIO:
+                log.warning(
+                    f"[LOCAL_DB] Pertinence {best['_match_score']}% < seuil "
+                    f"{int(MIN_RELEVANCE_RATIO * 100)}% pour {query!r} → tawaqquf"
+                )
+                best["_non_trouve"] = True
+                return [best]
         return sorted_results
     except sqlite3.Error as exc:
         log.error(f"[LOCAL_DB] Erreur SQLite : {exc}")
