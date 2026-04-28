@@ -17,7 +17,7 @@
 
   const tree = new IsnadTree(isnadContainer);
   const cache = new MizanCacheManager();
-  const sse = new MizanSSEClient(onZone, { cache: cache, demoMode: true });
+  const sse = new MizanSSEClient(onZone, { cache: cache, demoMode: false });
 
   let zonesReceived = 0;
   const TOTAL_ZONES = 32;
