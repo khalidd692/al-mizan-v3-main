@@ -54,6 +54,9 @@
     zone_27: "aqidah",
     zone_28: "tarjih",
     zone_29: "tarjih",
+    zone_30: "takhrij",
+    zone_31: "takhrij",
+    zone_32: "takhrij",
   };
 
   tabs.forEach((tab) => {
@@ -253,6 +256,11 @@
       shuruh: "الشروح",
       naskh: "النسخ والمنسوخ",
       takhrij_mawsuu: "التخريج الموسع",
+      takhrij_ahkam: "أحكام التخريج",
+      takhrij_tarjama: "تراجم الرجال في التخريج",
+      ilal_ahkam: "أحكام العلل",
+      ilal_mawduu: "علل الموضوع",
+      ilal_takhrij: "التخريج والعلل",
       fawaid_fiqhiyyah: "الفوائد الفقهية",
       fawaid_aqadiyyah: "الفوائد العقدية",
       fawaid_tarbiyyah: "الفوائد التربوية",
