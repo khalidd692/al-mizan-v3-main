@@ -98,8 +98,18 @@ def search_hadith(query: str, limit: int = 5) -> list[dict]:
             )
             return matched / len(tokens)
 
-        MIN_SCORE = 0.30
-        relevant = [r for r in results if _score(r) >= MIN_SCORE]
+        MIN_SCORE = 0.15
+        relevant = []
+        for r in results:
+            s = _score(r)
+            if s >= MIN_SCORE:
+                relevant.append(r)
+            else:
+                log.debug(
+                    f"[LOCAL_DB] Écarté (score={s:.2f} < {MIN_SCORE}) "
+                    f"id={r.get('id')} source={r.get('book_name_ar','?')!r} "
+                    f"fr_text={str(r.get('fr_text') or '')[:60]!r}"
+                )
         if not relevant:
             log.warning(
                 f"[LOCAL_DB] Score pertinence insuffisant pour {query!r} "
