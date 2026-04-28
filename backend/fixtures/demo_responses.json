@@ -1,0 +1,43 @@
+{
+  "_meta": {
+    "description": "Réponses figées servies lorsque MIZAN_DEMO_MODE=1. Format : clé = query normalisée (minuscules, espaces simples), valeur = liste ordonnée de chunks SSE.",
+    "version": 1,
+    "sse_format": "event: <name>\\ndata: <json>\\n\\n",
+    "note_streaming": "Chaque chunk est diffusé avec un délai `delay_ms` pour préserver l'effet de streaming progressif côté client."
+  },
+  "_default": {
+    "delay_ms": 180,
+    "chunks": [
+      { "event": "zone_1",  "data": { "zone": 1, "step": "INITIALISATION", "message": "Ouverture des registres (démo)" } },
+      { "event": "meta_pipeline_traduction", "data": { "step": "TRADUCTION", "message": "Requête de démonstration" } },
+      { "event": "meta_pipeline_dorar",      "data": { "step": "DORAR_REQUETE" } },
+      {
+        "event": "zone_4",
+        "data": {
+          "zone": 4,
+          "type": "hadith_core",
+          "data": {
+            "matn": "إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى",
+            "translation_fr": "Les actions ne valent que par les intentions, et chaque homme n'aura que ce qu'il a eu l'intention d'obtenir.",
+            "source": "Ṣaḥīḥ al-Bukhārī n°1",
+            "grade_raw": "صحيح",
+            "demo": true
+          }
+        }
+      },
+      { "event": "zone_30", "data": { "zone": 30, "step": "SYNTHESE" } },
+      { "event": "zone_31", "data": { "zone": 31, "step": "VERIFICATION" } },
+      { "event": "zone_32", "data": { "zone": 32, "type": "done", "demo": true } }
+    ]
+  },
+  "samples": {
+    "innama al-a'mal bin-niyyat": {
+      "_ref": "Bukhārī n°1",
+      "chunks_override": []
+    },
+    "man kadhaba alayya": {
+      "_ref": "Bukhārī n°110",
+      "chunks_override": []
+    }
+  }
+}

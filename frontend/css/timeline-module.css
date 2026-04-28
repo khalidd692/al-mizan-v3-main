@@ -1,0 +1,375 @@
+/**
+ * Styles pour le Module de Confrontation - Timeline de la Science
+ */
+
+.timeline-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* En-tête */
+.timeline-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.timeline-header h2 {
+    margin: 0 0 1rem 0;
+    font-size: 2rem;
+}
+
+.hadith-preview {
+    background: rgba(255,255,255,0.1);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.hadith-preview .arabic {
+    font-size: 1.5rem;
+    line-height: 2;
+    text-align: right;
+    direction: rtl;
+    margin-bottom: 1rem;
+}
+
+.hadith-preview .translation {
+    font-size: 1rem;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.consensus-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.consensus-badge.consensus {
+    background: #10b981;
+}
+
+.consensus-badge.divergence {
+    background: #f59e0b;
+}
+
+/* Époques */
+.timeline-epochs {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.epoch-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-left: 4px solid #667eea;
+}
+
+.epoch-section.empty {
+    opacity: 0.6;
+    border-left-color: #ccc;
+}
+
+.epoch-section h3 {
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+    color: #1f2937;
+}
+
+.epoch-description {
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.no-data {
+    color: #9ca3af;
+    text-align: center;
+    padding: 2rem;
+}
+
+/* Liste des savants */
+.scholars-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.scholar-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.scholar-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.scholar-card.expanded .reasoning {
+    max-height: 500px;
+}
+
+.scholar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.scholar-header h4 {
+    margin: 0;
+    color: #1f2937;
+    font-size: 1.1rem;
+}
+
+.scholar-years {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.scholar-info {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.scholar-info span {
+    background: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    border: 1px solid #e5e7eb;
+}
+
+.school {
+    color: #3b82f6;
+    border-color: #3b82f6 !important;
+}
+
+.specialization {
+    color: #8b5cf6;
+    border-color: #8b5cf6 !important;
+}
+
+.reliability {
+    color: #f59e0b;
+    border-color: #f59e0b !important;
+}
+
+/* Avis (ruling) */
+.ruling {
+    background: white;
+    padding: 1rem;
+    border-radius: 6px;
+    border-left: 3px solid;
+    margin-bottom: 1rem;
+}
+
+.ruling.grade-sahih {
+    border-left-color: #10b981;
+}
+
+.ruling.grade-hasan {
+    border-left-color: #3b82f6;
+}
+
+.ruling.grade-daif {
+    border-left-color: #f59e0b;
+}
+
+.ruling.grade-mawdu {
+    border-left-color: #ef4444;
+}
+
+.grade-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.grade-sahih .grade-badge {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.grade-hasan .grade-badge {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.grade-daif .grade-badge {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.grade-mawdu .grade-badge {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.reasoning {
+    color: #4b5563;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    max-height: 100px;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.btn-scholar-profile {
+    width: 100%;
+    padding: 0.5rem;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.btn-scholar-profile:hover {
+    background: #5568d3;
+}
+
+/* Divergences */
+.divergences-section {
+    background: #fef3c7;
+    border: 2px solid #f59e0b;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+.divergences-section h3 {
+    color: #92400e;
+    margin-top: 0;
+}
+
+.divergences-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.divergence-item {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.divergence-item h4 {
+    color: #92400e;
+    margin-top: 0;
+}
+
+.divergence-item ul {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+}
+
+/* Footer */
+.timeline-footer {
+    text-align: center;
+    color: #6b7280;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* Modale profil savant */
+.scholar-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-content .close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #6b7280;
+}
+
+.modal-content .close:hover {
+    color: #1f2937;
+}
+
+.profile-details {
+    margin-top: 1rem;
+}
+
+.profile-details p {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+}
+
+/* Erreur */
+.timeline-error {
+    text-align: center;
+    padding: 3rem;
+    color: #ef4444;
+}
+
+.timeline-error button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .scholars-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .timeline-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .hadith-preview .arabic {
+        font-size: 1.2rem;
+    }
+}
