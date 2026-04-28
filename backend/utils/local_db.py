@@ -84,8 +84,30 @@ def search_hadith(query: str, limit: int = 5) -> list[dict]:
         rows = conn.execute(sql, params).fetchall()
         conn.close()
         results = [dict(r) for r in rows]
-        log.info(f"[LOCAL_DB] {len(results)} résultat(s) pour {query!r}")
-        return results
+
+        # ── Score de pertinence : rejeter les faux positifs ──────────────
+        # Un résultat est conservé si au moins 30 % des tokens de la requête
+        # apparaissent dans fr_text ou ar_text_clean (substring insensible à
+        # la casse pour le français, sensible pour l'arabe déjà normalisé).
+        def _score(row: dict) -> float:
+            fr = (row.get("fr_text") or "").lower()
+            ar = row.get("ar_text_clean") or row.get("ar_text") or ""
+            matched = sum(
+                1 for t in tokens
+                if t.lower() in fr or t in ar
+            )
+            return matched / len(tokens)
+
+        MIN_SCORE = 0.30
+        relevant = [r for r in results if _score(r) >= MIN_SCORE]
+        if not relevant:
+            log.warning(
+                f"[LOCAL_DB] Score pertinence insuffisant pour {query!r} "
+                f"({len(results)} résultat(s) brut(s) rejeté(s))"
+            )
+            return []
+        log.info(f"[LOCAL_DB] {len(relevant)} résultat(s) pertinent(s) pour {query!r}")
+        return relevant
     except sqlite3.Error as exc:
         log.error(f"[LOCAL_DB] Erreur SQLite : {exc}")
         return []
