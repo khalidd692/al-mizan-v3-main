@@ -1,0 +1,59 @@
+{
+  "zone": 2,
+  "nom": "ISNĀD",
+  "description": "Chaîne de transmission, isnād, rapporteurs - terminologie de hadith",
+  "entrees": [
+    {
+      "contenu_fr": "Isnād (الإسناد) : Chaîne de transmission - la succession de narrateurs par laquelle un hadith est transmis depuis le Prophète (ﷺ).",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Nukhbat al-Fikar - Sharḥ al-ʿUthaymīn",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Thiqa (ثقة) : Fiable - narrateur de transmission sûre, au niveau de fiabilité élevé.",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Al-Rafʿ wa al-Takmīl fī al-Jarḥ wa al-Taʿdīl",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Ṣadūq (صدوق) : Véridique - narrateur véridique mais peut avoir des erreurs dans la mémorisation.",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Al-Rafʿ wa al-Takmīl fī al-Jarḥ wa al-Taʿdīl",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Mursal (مرسل) : Hadith mursal - un Tābiʿī rapporte directement du Prophète (ﷺ) en omettant son maître (le Ṣaḥābī).",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Nukhbat al-Fikar",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Munqaṭiʿ (منقطع) : Hadith munqaṭiʿ - rupture dans la chaîne de transmission entre deux narrateurs non consécutifs.",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Nukhbat al-Fikar",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Muʿallaq (معلق) : Hadith muʿallaq - hadith dont le début de l'isnād est omis (commence par un Tābiʿī ou après).",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Nukhbat al-Fikar",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Mudallas (مدلس) : Hadith mudallas - dissimulation d'un défaut dans l'isnād (tadlīs).",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Nukhbat al-Fikar",
+      "url": null,
+      "statut": "VALIDÉ"
+    }
+  ],
+  "statut_global": "REMPLI",
+  "sources_utilisees": ["lexique_de_fer"],
+  "count_entrees": 7
+}

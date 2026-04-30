@@ -1,0 +1,25 @@
+{
+  "zone": 16,
+  "nom": "KHILĀF",
+  "description": "Divergence entre savants - Ikhtilāf",
+  "entrees": [
+    {
+      "contenu_fr": "Khilāf / Ikhtilāf (خلاف / اختلاف) : Divergence - désaccord entre savants sur l'interprétation, l'authenticité ou l'application d'un hadith. Le khilāf est une miséricorde (raḥmah) selon la majorité des savants, à condition de rester dans les limites de la science.",
+      "source": "islamhouse",
+      "titre_ouvrage": "Adab al-Ikhtilāf",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Types de divergence : 1) Ikhtilāf tanāwuʿ (divergence de variété - acceptée), 2) Ikhtilāf taḍādd (divergence de contradiction - requérant tarjīḥ).",
+      "source": "islamweb",
+      "titre_ouvrage": "Types de khilāf",
+      "url": "https://islamweb.net/fr",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources islamhouse/islamweb nécessitent spidering"
+}

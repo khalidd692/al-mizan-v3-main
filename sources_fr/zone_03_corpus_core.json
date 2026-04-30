@@ -1,0 +1,17 @@
+{
+  "zone": 3,
+  "nom": "CORPUS_CORE",
+  "description": "Données internes DB uniquement (matn arabe + références)",
+  "entrees": [
+    {
+      "contenu_fr": "Corpus hadithique interne - Matn arabe avec références aux collections canoniques (Ṣaḥīḥ al-Bukhārī, Ṣaḥīḥ Muslim, Sunan Abī Dāwūd, Sunan at-Tirmidhī, Sunan an-Nasāʾī, Sunan Ibn Mājah).",
+      "source": "interne",
+      "titre_ouvrage": "Al-Mīzān Hadith Corpus",
+      "url": null,
+      "statut": "VALIDÉ"
+    }
+  ],
+  "statut_global": "REMPLI",
+  "sources_utilisees": ["interne"],
+  "count_entrees": 1
+}

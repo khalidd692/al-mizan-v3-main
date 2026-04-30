@@ -1,0 +1,24 @@
+{
+  "zone": 5,
+  "nom": "MUDTARIB",
+  "description": "المضطرب - Narrations contradictoires de force égale",
+  "entrees": [
+    {
+      "contenu_fr": "Muḍṭarib (مضطرب) : Hadith muḍṭarib - hadith avec des narrations contradictoires de force égale, sans possibilité de préférer une version à l'autre. L'origine de la contradiction peut être dans le matn, l'isnād, ou les deux.",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Nukhbat al-Fikar - Ibn Ḥajar",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Types de muḍṭarab : 1) Contradiction dans l'isnād seulement (différentes chaînes avec égalité de fiabilité), 2) Contradiction dans le matn seulement (versions textuelles divergentes), 3) Contradiction dans les deux.",
+      "source": "bibliotheque-islamique",
+      "titre_ouvrage": "Lexique de terminologie de hadith",
+      "url": "https://bibliotheque-islamique.fr/hadith/lexique-de-terminologie-de-hadith/",
+      "statut": "DRAFT_A_VÉRIFIER"
+    }
+  ],
+  "statut_global": "PARTIEL",
+  "sources_utilisees": ["lexique_de_fer", "bibliotheque-islamique"],
+  "count_entrees": 2
+}

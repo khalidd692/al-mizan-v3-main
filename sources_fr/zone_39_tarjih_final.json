@@ -1,0 +1,24 @@
+{
+  "zone": 39,
+  "nom": "TARJĪḤ FINAL",
+  "description": "Synthèse interne - produit par AgentTarjih",
+  "entrees": [
+    {
+      "contenu_fr": "Tarjīḥ (ترجيح) : Préférence - décision finale sur le statut d'un hadith après analyse de toutes les zones. Produit par AgentTarjih uniquement, basé sur les données collectées dans les zones 1-38.",
+      "source": "interne",
+      "titre_ouvrage": "Al-Mīzān AgentTarjih",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Méthodologie de tarjīḥ : 1) Pondération des preuves, 2) Analyse des contradictions apparentes, 3) Application des principes usūliyyah, 4) Décision finale (ṣaḥīḥ, ḥasan, ḍaʿīf, mawḍūʿ).",
+      "source": "interne",
+      "titre_ouvrage": "Al-Mīzān Système",
+      "url": null,
+      "statut": "VALIDÉ"
+    }
+  ],
+  "statut_global": "REMPLI",
+  "sources_utilisees": ["interne"],
+  "count_entrees": 2
+}

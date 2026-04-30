@@ -1,0 +1,32 @@
+{
+  "zone": 11,
+  "nom": "SHURŪḤ",
+  "description": "Explications/commentaires de hadith - Sharḥ",
+  "entrees": [
+    {
+      "contenu_fr": "Sharḥ (شرح) : Explication détaillée - commentaire approfondi d'un hadith couvrant le matn (texte), le sens linguistique, les implications juridiques (fiqhiyyah), et les bénéfices (fawāʾid).",
+      "source": "islamhouse",
+      "titre_ouvrage": "Sharḥ Ṣaḥīḥ al-Bukhārī",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Fatḥ al-Bārī : Le célèbre sharḥ d'Ibn Ḥajar al-ʿAsqalānī sur Ṣaḥīḥ al-Bukhārī. Référence majeure en explication des hadiths.",
+      "source": "bibliotheque-islamique",
+      "titre_ouvrage": "Fatḥ al-Bārī",
+      "url": "https://bibliotheque-islamique.fr",
+      "statut": "DRAFT_A_VÉRIFIER"
+    },
+    {
+      "contenu_fr": "Délimitation : Les sharḥ doivent se limiter à l'explication du matn hadithique, sans inclure les positions madhhab (école juridique) sauf si elles découlent directement du texte.",
+      "source": "islamweb",
+      "titre_ouvrage": "Méthodologie du sharḥ",
+      "url": "https://islamweb.net/fr",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources islamhouse/islamweb nécessitent spidering"
+}

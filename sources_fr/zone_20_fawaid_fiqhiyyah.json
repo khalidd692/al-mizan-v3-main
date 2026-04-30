@@ -1,0 +1,25 @@
+{
+  "zone": 20,
+  "nom": "FAWĀʾID FIQHIYYAH",
+  "description": "Leçons juridiques tirées du hadith",
+  "entrees": [
+    {
+      "contenu_fr": "Fawāʾid fiqhiyyah (فوائد فقهية) : Bénéfices juridiques - règles de fiqh déduites d'un hadith. Chaque hadith authentique contient au moins une leçon juridique applicable.",
+      "source": "islamweb",
+      "titre_ouvrage": "Fiqh al-Ḥadīth",
+      "url": "https://islamweb.net/fr",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Méthode d'extraction : 1) Analyse du texte (matn), 2) Déduction de la règle (ḍābiṭ), 3) Application aux cas analogues, 4) Vérification de la non-contradiction avec d'autres preuves.",
+      "source": "islamhouse",
+      "titre_ouvrage": "Méthodologie du fiqh",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources islamweb/islamhouse nécessitent spidering"
+}

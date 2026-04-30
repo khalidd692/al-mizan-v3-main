@@ -1,0 +1,25 @@
+{
+  "zone": 10,
+  "nom": "SABAB AL-WURŪD",
+  "description": "Circonstances de révélation du hadith - Asbāb al-Wurūd",
+  "entrees": [
+    {
+      "contenu_fr": "Sabab al-wurūd (سبب الورود) : Cause de l'énonciation - les circonstances historiques qui ont provoqué l'énonciation d'un hadith par le Prophète (ﷺ). Comprendre le sabab aide à comprendre le sens exact et la portée du hadith.",
+      "source": "islamhouse",
+      "titre_ouvrage": "Asbāb al-Wurūd - Causes de révélation",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Importance du sabab : La connaissance du contexte d'énonciation permet d'éviter les erreurs d'interprétation et de comprendre la sagesse législative (ḥikmah) du hadith.",
+      "source": "islamweb",
+      "titre_ouvrage": "Sciences du hadith",
+      "url": "https://islamweb.net/fr",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources islamhouse/islamweb nécessitent spidering"
+}

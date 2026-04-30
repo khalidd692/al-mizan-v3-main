@@ -1,0 +1,25 @@
+{
+  "zone": 27,
+  "nom": "KHULAFĀʾ RĀSHIDŪN",
+  "description": "Pratiques des 4 Califes bien-guidés",
+  "entrees": [
+    {
+      "contenu_fr": "Khulafāʾ Rāshidūn (الخلفاء الراشدون) : Les Califes bien-guidés - Abū Bakr, ʿUmar, ʿUthmān, ʿAlī (qu'Allah les agrée). Leur pratique (sunnah) est une preuve (ḥujjah) selon Ahl al-Sunnah.",
+      "source": "islamhouse",
+      "titre_ouvrage": "Sunnah des Khulafāʾ Rāshidūn",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Valeur probante : Le consensus des 4 Califes est une preuve irréfutable. Leur divergence indique la permissibilité.",
+      "source": "islamweb",
+      "titre_ouvrage": "Sources de la législation",
+      "url": "https://islamweb.net/fr",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources islamhouse/islamweb nécessitent spidering"
+}

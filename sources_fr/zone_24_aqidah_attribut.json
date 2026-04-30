@@ -1,0 +1,88 @@
+{
+  "zone": 24,
+  "nom": "ʿAQĪDAH ATTRIBUT",
+  "description": "Attributs divins - Asmāʾ wa Ṣifāt",
+  "entrees": [
+    {
+      "contenu_fr": "Istawā (استوى) : S'est établi. Traduction verrouillée selon Al-Qawāʿid al-Muthlā. Interdits : 'S'est élevé', 'S'est installé', 'A dominé (figuré)', 'A pris possession'.",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Al-Qawāʿid al-Muthlā fī Ṣifāt Allāh - Ibn al-ʿUthaymīn",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Istawā ʿalā al-ʿArsh (استوى على العرش) : S'est établi sur le Trône. Traduction verrouillée. Interdits : 'A pris possession du Trône', 'A dominé le Trône (figuré)'.",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Al-Qawāʿid al-Muthlā fī Ṣifāt Allāh - Ibn al-ʿUthaymīn",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Nazala / YanZilu (نزل / ينزل) : descend. Traduction verrouillée pour la descente d'Allah au ciel le plus bas. Interdits : 'se manifeste', 'Descente de Sa miséricorde', 'Métaphorique'.",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Al-Qawāʿid al-Muthlā fī Ṣifāt Allāh - Ibn al-ʿUthaymīn",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Yad Allāh (يد الله) : la Main d'Allah. Traduction verrouillée. Interdits : 'la puissance d'Allah', 'la grâce d'Allah', 'L'essence'.",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Al-Qawāʿid al-Muthlā fī Ṣifāt Allāh - Ibn al-ʿUthaymīn",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Wajh Allāh (وجه الله) : le Visage d'Allah. Traduction verrouillée. Interdits : 'l'essence d'Allah', 'la face symbolique', 'Lui-même'.",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Al-Qawāʿid al-Muthlā fī Ṣifāt Allāh - Ibn al-ʿUthaymīn",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "ʿAyn Allāh (عين الله) : l'Œil d'Allah. Traduction verrouillée. Interdits : 'la surveillance', 'la protection symbolique', 'Sa connaissance'.",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Al-Qawāʿid al-Muthlā fī Ṣifāt Allāh - Ibn al-ʿUthaymīn",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Fawq / ʿUluw (فوق / العلو) : au-dessus / l'élévation réelle. Traductions verrouillées. Interdits : 'au-delà', 'Supériorité en rang', 'Métaphore'.",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Al-Qawāʿid al-Muthlā fī Ṣifāt Allāh - Ibn al-ʿUthaymīn",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Al-Ghaḍab (الغضب) : la Colère réelle d'Allah. Traduction verrouillée. Interdits : 'État émotionnel métaphorique', 'Le fait d'être mécontent'.",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Al-Qawāʿid al-Muthlā fī Ṣifāt Allāh - Ibn al-ʿUthaymīn",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Al-Maḥabbah (المحبة) : l'Amour réel d'Allah. Traduction verrouillée. Interdits : 'La volonté de récompenser', 'Métaphore'.",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Al-Qawāʿid al-Muthlā fī Ṣifāt Allāh - Ibn al-ʿUthaymīn",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Kalām Allāh (كلام الله) : la Parole d'Allah. Traduction verrouillée. Interdits : 'l'ordre d'Allah', 'la création d'Allah'.",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Al-Qawāʿid al-Muthlā fī Ṣifāt Allāh - Ibn al-ʿUthaymīn",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Yatakalam / Takallama (يتكلم / تكلم) : parle / a parlé. Traduction verrouillée pour l'attribut de la Parole divine. Interdits : 'crée', 'ordonne'.",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Al-Qawāʿid al-Muthlā fī Ṣifāt Allāh - Ibn al-ʿUthaymīn",
+      "url": null,
+      "statut": "VALIDÉ"
+    }
+  ],
+  "statut_global": "REMPLI",
+  "sources_utilisees": ["lexique_de_fer"],
+  "count_entrees": 11,
+  "note": "LEXIQUE DE FER OBLIGATOIRE - Aucune traduction libre"
+}

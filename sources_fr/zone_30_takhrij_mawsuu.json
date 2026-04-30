@@ -1,0 +1,25 @@
+{
+  "zone": 30,
+  "nom": "TAKHRĪJ MAWSŪʿ",
+  "description": "Takhrij - Sources primaires de référencement",
+  "entrees": [
+    {
+      "contenu_fr": "Takhrij mawsūʿ (تخريج موسوع) : Takhrij encyclopédique - référencement complet d'un hadith dans toutes les collections disponibles. Inclut les Kutub al-Sittah et les sources secondaires.",
+      "source": "dorar",
+      "titre_ouvrage": "Dorar.net - Encyclopédie du hadith",
+      "url": "https://dorar.net",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Méthode : 1) Identifier le matn, 2) Rechercher dans les index numériques, 3) Collecter toutes les voies (ṭuruq), 4) Vérifier les grades des savants.",
+      "source": "islamhouse",
+      "titre_ouvrage": "Méthodologie du takhrij",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources dorar/islamhouse nécessitent spidering"
+}

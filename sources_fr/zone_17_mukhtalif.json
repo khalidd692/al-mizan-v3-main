@@ -1,0 +1,25 @@
+{
+  "zone": 17,
+  "nom": "MUKHTALIF",
+  "description": "Contradictions apparentes - Mukhtalif al-Ḥadīth",
+  "entrees": [
+    {
+      "contenu_fr": "Mukhtalif al-Ḥadīth (مختلف الحديث) : Hadiths contradictoires - deux ou plusieurs hadiths qui semblent contradictoires dans leur sens apparent. Nécessite une conciliation (jamʿ) ou une abrogation (naskh).",
+      "source": "islamhouse",
+      "titre_ouvrage": "Mukhtalif al-Ḥadīth wa al-Ḥadith",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Méthodes de conciliation : 1) Jamʿ (réconciliation par interprétation), 2) Naskh (abrogation), 3) Takhṣīṣ (spécification), 4) Waqf (suspension du jugement).",
+      "source": "islamweb",
+      "titre_ouvrage": "Méthodologie de conciliation",
+      "url": "https://islamweb.net/fr",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources islamhouse/islamweb nécessitent spidering"
+}

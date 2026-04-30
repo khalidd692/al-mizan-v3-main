@@ -1,0 +1,25 @@
+{
+  "zone": 38,
+  "nom": "TAKHRĪJ WA TAḤQĪQ",
+  "description": "Authentication approfondie - Tahqīq",
+  "entrees": [
+    {
+      "contenu_fr": "Taḥqīq (تحقيق) : Vérification approfondie - processus d'authentification rigoureux incluant : takhrij (référencement), jarḥ wa taʿdīl (évaluation des narrateurs), ʿilal (recherche de défauts cachés).",
+      "source": "dorar",
+      "titre_ouvrage": "Méthodologie du tahqīq",
+      "url": "https://dorar.net",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Étapes du taḥqīq : 1) Rassemblement des ṭuruq, 2) Analyse de chaque isnād, 3) Évaluation des narrateurs, 4) Vérification du matn, 5) Décision finale sur l'authenticité.",
+      "source": "islamhouse",
+      "titre_ouvrage": "Tahqīq al-Ḥadīth",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources dorar/islamhouse nécessitent spidering"
+}

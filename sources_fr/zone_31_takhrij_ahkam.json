@@ -1,0 +1,24 @@
+{
+  "zone": 31,
+  "nom": "TAKHRĪJ AḤKĀM",
+  "description": "Règles de classification et méthodologie du takhrij",
+  "entrees": [
+    {
+      "contenu_fr": "Aḥkām al-takhrij (أحكام التخريج) : Règles du takhrij - méthodologie pour classer et référencer les hadiths. Inclut la hiérarchie des collections, les grades, et les conditions d'acceptation.",
+      "source": "bibliotheque-islamique",
+      "titre_ouvrage": "Lexique de terminologie de hadith",
+      "url": "https://bibliotheque-islamique.fr/hadith/lexique-de-terminologie-de-hadith/",
+      "statut": "DRAFT_A_VÉRIFIER"
+    },
+    {
+      "contenu_fr": "Classification des hadiths : 1) Ṣaḥīḥ (authentique), 2) Ḥasan (bon), 3) Ḍaʿīf (faible), 4) Mawḍūʿ (inventé). Chaque catégorie a des critères précis.",
+      "source": "islamhouse",
+      "titre_ouvrage": "Classification des hadiths",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "PARTIEL",
+  "sources_utilisees": ["bibliotheque-islamique"],
+  "count_entrees": 1
+}

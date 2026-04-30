@@ -1,0 +1,25 @@
+{
+  "zone": 22,
+  "nom": "FAWĀʾID TARBAWIYYAH",
+  "description": "Leçons éducatives et morales du hadith",
+  "entrees": [
+    {
+      "contenu_fr": "Fawāʾid tarbawiyyah (فوائد تربوية) : Bénéfices éducatifs - leçons de moralité, éthique et spiritualité tirées du hadith. Le hadith est un guide pour la purification de l'âme (tazkiyyah).",
+      "source": "islamhouse",
+      "titre_ouvrage": "Tarbiyah et hadith",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Dimensions : 1) Akhlāq (éthique), 2) Ādāb (comportement), 3) Qalb (cœur/purification), 4) Muʿāmalāt (relations sociales).",
+      "source": "hadeethenc",
+      "titre_ouvrage": "Hadith et spiritualité",
+      "url": "https://hadeethenc.com/fr",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources islamhouse/hadeethenc nécessitent spidering"
+}

@@ -1,0 +1,25 @@
+{
+  "zone": 12,
+  "nom": "ĀTHĀR ṢAḤĀBAH",
+  "description": "Paroles et pratiques des Compagnons (Ṣaḥābah)",
+  "entrees": [
+    {
+      "contenu_fr": "Āthār al-Ṣaḥābah (آثار الصحابة) : Paroles, actions et approbations (taqrīr) des Compagnons du Prophète (ﷺ). Les āthār des Ṣaḥābah ont une valeur probante élevée car ils ont été les témoins directs de la Révélation.",
+      "source": "islamhouse",
+      "titre_ouvrage": "Jāmiʿ al-Āthār",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Valeur juridique : L'ijmāʿ (consensus) des Ṣaḥābah est une preuve irréfutable (qāṭiʿah). Leur divergence indique la permissibilité (ibāḥah) dans la matière.",
+      "source": "islamweb",
+      "titre_ouvrage": "Principes de jurisprudence",
+      "url": "https://islamweb.net/fr",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources islamhouse/islamweb nécessitent spidering"
+}

@@ -1,0 +1,25 @@
+{
+  "zone": 14,
+  "nom": "POSITIONS IMĀMS",
+  "description": "Positions des 4 Imams sur les hadiths",
+  "entrees": [
+    {
+      "contenu_fr": "Position des 4 Imams : Chaque Imam des 4 écoles (Ḥanafī, Mālikī, Shāfiʿī, Ḥanbalī) peut avoir une position différente sur l'authenticité ou l'interprétation d'un hadith, basée sur leur méthodologie usūliyyah.",
+      "source": "islamweb",
+      "titre_ouvrage": "Madhāhib et hadith",
+      "url": "https://islamweb.net/fr",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Délimitation : Seules les positions madhhab strictes sont incluses, sans le sharḥ complet. On se limite à la réponse sur l'authenticité et l'application pratique.",
+      "source": "islamhouse",
+      "titre_ouvrage": "Principes des madhāhib",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources islamweb/islamhouse nécessitent spidering"
+}

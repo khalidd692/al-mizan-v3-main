@@ -1,0 +1,25 @@
+{
+  "zone": 34,
+  "nom": "TAʿĀRUḌ WA TAWFĪQ",
+  "description": "Contradictions apparentes et conciliation",
+  "entrees": [
+    {
+      "contenu_fr": "Taʿāruḍ (تعارض) : Contradiction apparente - deux hadiths semblent se contredire. Méthode : rechercher une interprétation permettant l'accord (tawfīq) ou établir l'abrogation (naskh).",
+      "source": "islamhouse",
+      "titre_ouvrage": "Mukhtalif al-Ḥadīth",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Tawfīq (توفيق) : Conciliation - trouver une interprétation qui accorde deux textes apparemment contradictoires. C'est la méthode préférée avant le recours au naskh.",
+      "source": "islamweb",
+      "titre_ouvrage": "Méthodologie de conciliation",
+      "url": "https://islamweb.net/fr",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources islamhouse/islamweb nécessitent spidering"
+}

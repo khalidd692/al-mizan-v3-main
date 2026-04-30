@@ -1,0 +1,32 @@
+{
+  "zone": 40,
+  "nom": "AḤKĀM TARBAWIYYAH WA AKHLĀQIYYAH",
+  "description": "Implications spirituelles, éthiques et morales",
+  "entrees": [
+    {
+      "contenu_fr": "Aḥkām tarbawiyyah (أحكام تربوية) : Implications éducatives - leçons de comportement, de moralité et de spiritualité tirées du hadith. Domaine de la tazkiyyah (purification de l'âme).",
+      "source": "islamhouse",
+      "titre_ouvrage": "Tarbiyah et hadith",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Akhlāq (أخلاق) : Éthique - vertus morales enseignées par le hadith. Inclut : patience, gratitude, sincérité, humilité, générosité, pardon.",
+      "source": "hadeethenc",
+      "titre_ouvrage": "Hadith et moralité",
+      "url": "https://hadeethenc.com/fr",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Sagesse hadithique : Chaque hadith authentique contient une sagesse (ḥikmah) applicable dans la vie quotidienne, que ce soit dans les relations, le commerce, la famille ou la spiritualité.",
+      "source": "islamweb",
+      "titre_ouvrage": "Sagesse des hadiths",
+      "url": "https://islamweb.net/fr",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources islamhouse/hadeethenc/islamweb nécessitent spidering"
+}

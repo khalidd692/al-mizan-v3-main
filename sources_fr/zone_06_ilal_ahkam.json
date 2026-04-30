@@ -1,0 +1,24 @@
+{
+  "zone": 6,
+  "nom": "ʿILAL AḤKĀM",
+  "description": "Défauts cachés - ʿIllah : causes cachées affectant le hadith",
+  "entrees": [
+    {
+      "contenu_fr": "Muʿallal (معلل) : Hadith muʿallal - hadith avec une cause cachée (ʿillah) qui affecte son authenticité sans être apparente dans l'isnād. Le défaut est caché et nécessite une analyse approfondie (naẓar).",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Nukhbat al-Fikar - Ibn Ḥajar",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "ʿIllah (علة) : Cause cachée - un défaut caché dans le hadith qui n'est pas apparent à première vue. Elle peut concerner la chaîne de transmission (rupture cachée) ou le texte (ajout d'un narrateur faible).",
+      "source": "bibliotheque-islamique",
+      "titre_ouvrage": "Lexique de terminologie de hadith",
+      "url": "https://bibliotheque-islamique.fr/hadith/lexique-de-terminologie-de-hadith/",
+      "statut": "DRAFT_A_VÉRIFIER"
+    }
+  ],
+  "statut_global": "PARTIEL",
+  "sources_utilisees": ["lexique_de_fer", "bibliotheque-islamique"],
+  "count_entrees": 2
+}

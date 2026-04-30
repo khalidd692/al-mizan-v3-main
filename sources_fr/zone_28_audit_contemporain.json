@@ -1,0 +1,32 @@
+{
+  "zone": 28,
+  "nom": "AUDIT CONTEMPORAIN",
+  "description": "Vérification contemporaine - grades par savants modernes",
+  "entrees": [
+    {
+      "contenu_fr": "Al-Albānī (الألباني) : Cheikh Muhammad Nāṣir al-Dīn al-Albānī - le grand muḥaddith contemporain. Ses grades dans Ṣaḥīḥ al-Jāmiʿ et autres sont des références majeures.",
+      "source": "dorar",
+      "titre_ouvrage": "Grades al-Albānī",
+      "url": "https://dorar.net",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Ibn Bāz (ابن باز) : Cheikh ʿAbd al-ʿAzīz ibn Bāz - savant majeur du hadith et du fiqh. Ses fatāwā sur les hadiths sont autorisées.",
+      "source": "islamhouse",
+      "titre_ouvrage": "Fatāwā Ibn Bāz",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Ibn ʿUthaymīn (ابن عثيمين) : Cheikh Muhammad ibn Ṣāliḥ al-ʿUthaymīn - savant en ʿaqīdah, fiqh et hadith. Ses explications de Ṣaḥīḥ al-Bukhārī sont une référence.",
+      "source": "islamweb",
+      "titre_ouvrage": "Sharḥ Ṣaḥīḥ al-Bukhārī",
+      "url": "https://islamweb.net/fr",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources dorar/islamhouse/islamweb nécessitent spidering"
+}

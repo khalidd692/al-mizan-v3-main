@@ -1,0 +1,25 @@
+{
+  "zone": 29,
+  "nom": "FIQH MOUSTANBAṬ",
+  "description": "Règles fiqh déduites - Fiqh mustanbaṭ",
+  "entrees": [
+    {
+      "contenu_fr": "Fiqh mustanbaṭ (فقه مستنبط) : Fiqh déduit - règles juridiques extraites par déduction (istinbāṭ) d'un hadith. Méthode des fuqahāʾ pour dériver les aḥkām.",
+      "source": "islamweb",
+      "titre_ouvrage": "Usūl al-Fiqh",
+      "url": "https://islamweb.net/fr",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Istinbāṭ (استنباط) : Déduction - extraction de la règle juridique du texte. Nécessite maîtrise de la langue arabe, des principes usūliyyah et des preuves.",
+      "source": "islamhouse",
+      "titre_ouvrage": "Méthodologie du fiqh",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources islamweb/islamhouse nécessitent spidering"
+}
