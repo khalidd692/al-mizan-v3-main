@@ -1,0 +1,30 @@
+{
+  "search_date": "2026-04-30T15:13:31.099311",
+  "query_books": [
+    "Nukhbat Al-Fikar",
+    "Taysir Mustalah Al-Hadith",
+    "Al-Muqiza",
+    "Ikhtisar Ulum Al-Hadith",
+    "Al-Baïqouniyya"
+  ],
+  "sources_searched": [
+    "islamhouse",
+    "archive_org",
+    "github"
+  ],
+  "books_found": [
+    {
+      "title": "Les 40 hadiths de l’imam An-Nawawi",
+      "author": "",
+      "translator": "Ce contenu est traduit en (51)",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-40-hadiths.pdf",
+      "source": "IslamHouse.com/fr",
+      "source_url": "https://islamhouse.com/fr/books/2831636/",
+      "price": "Gratuit",
+      "reliability": "Haute - Source officielle",
+      "format": "PDF",
+      "language": "Français"
+    }
+  ],
+  "total_found": 1
+}
