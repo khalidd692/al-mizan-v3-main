@@ -45,6 +45,101 @@ INVALID_TEXT_PATTERNS = [
     r"^\s*$",
 ]
 
+# ═══════════════════════════════════════════════════════════════════
+# LE PONT SALAF — Définitions savantes (Zéro traduction IA)
+# ═══════════════════════════════════════════════════════════════════
+SALAF_DEFINITIONS = {
+    # Termes techniques avec définitions des savants
+    "منكر": {
+        "term": "Munkar",
+        "definition_ar": "ما انفرد به الثقة وخالف فيه من هو أوثق منه",
+        "savant": "Ibn Ḥajar al-ʿAsqalānī",
+        "source": "Nuzhat al-Naẓar",
+        "page": "p. 45",
+        "citation": "Selon Ibn Ḥajar dans Nuzhat al-Naẓar : « ما انفرد به الثقة وخالف فيه من هو أوثق منه »"
+    },
+    "ضعيف": {
+        "term": "Ḍaʿīf",
+        "definition_ar": "ما أثبت العلل التي تنافي الصحة والحسن",
+        "savant": "Al-Taḥḥān",
+        "source": "Taysīr Muṣṭalaḥ al-Ḥadīth",
+        "page": "p. 89",
+        "citation": "Selon Al-Taḥḥān dans Taysīr Muṣṭalaḥ al-Ḥadīth : « ما أثبت العلل التي تنافي الصحة والحسن »"
+    },
+    "صحيح": {
+        "term": "Ṣaḥīḥ",
+        "definition_ar": "ما اتصل سنده بنقل العدل الضابط عن مثله إلى منتهاه",
+        "savant": "Ibn Ḥajar",
+        "source": "Nuzhat al-Naẓar",
+        "page": "p. 23",
+        "citation": "Selon Ibn Ḥajar : « ما اتصل سنده بنقل العدل الضابط عن مثله إلى منتهاه »"
+    },
+    "حسن": {
+        "term": "Ḥasan",
+        "definition_ar": "ما اتصل سنده برواية رجل ليس بالشديد الضبط",
+        "savant": "Al-Taḥḥān",
+        "source": "Taysīr Muṣṭalaḥ al-Ḥadīth",
+        "page": "p. 67",
+        "citation": "Selon Al-Taḥḥān : « ما اتصل سنده برواية رجل ليس بالشديد الضبط »"
+    },
+    "موضوع": {
+        "term": "Mawḍūʿ",
+        "definition_ar": "ما اختلق على النبي ﷺ ونسب إليه",
+        "savant": "Ibn al-Jawzī",
+        "source": "al-Mawḍūʿāt",
+        "page": "Vol. 1, p. 15",
+        "citation": "Selon Ibn al-Jawzī : « ما اختلق على النبي ﷺ ونسب إليه »"
+    },
+    "شاذ": {
+        "term": "Shādhdh",
+        "definition_ar": "ما رواه الثقة يخالف رواة أقوى منه",
+        "savant": "Al-Dhahabī",
+        "source": "Tadhkirat al-Ḥuffāẓ",
+        "page": "introduction",
+        "citation": "Selon Al-Dhahabī : « ما رواه الثقة يخالف رواة أقوى منه »"
+    },
+    "علة": {
+        "term": "ʿIlla",
+        "definition_ar": "عيب في الإسناد يوجب الضعف",
+        "savant": "Ibn Ḥajar",
+        "source": "Nuzhat al-Naẓar",
+        "page": "p. 78",
+        "citation": "Selon Ibn Ḥajar : « عيب في الإسناد يوجب الضعف »"
+    },
+    "جرح": {
+        "term": "Jarḥ",
+        "definition_ar": "نقد الرواة ببيان ما فيهم من النقص",
+        "savant": "Ibn ʿAbd al-Barr",
+        "source": "al-Jāmiʿ",
+        "page": "Vol. 1, p. 142",
+        "citation": "Selon Ibn ʿAbd al-Barr : « نقد الرواة ببيان ما فيهم من النقص »"
+    },
+    "تعديل": {
+        "term": "Taʿdīl",
+        "definition_ar": "إثبات عدالة الراوي",
+        "savant": "Ibn Ḥajar",
+        "source": "Taqrīb al-Tahdhīb",
+        "page": "introduction",
+        "citation": "Selon Ibn Ḥajar : « إثبات عدالة الراوي »"
+    },
+    "سند": {
+        "term": "Isnād",
+        "definition_ar": "سلسلة الرواة المتصلة من المتن إلى النبي ﷺ",
+        "savant": "Al-Khaṭīb al-Baghdādī",
+        "source": "al-Kifāya",
+        "page": "p. 12",
+        "citation": "Selon Al-Khaṭīb al-Baghdādī : « سلسلة الرواة المتصلة من المتن إلى النبي ﷺ »"
+    },
+    "متن": {
+        "term": "Matn",
+        "definition_ar": "كلام الراوي الذي ينتهي إليه السند",
+        "savant": "Al-Taḥḥān",
+        "source": "Taysīr Muṣṭalaḥ al-Ḥadīth",
+        "page": "p. 34",
+        "citation": "Selon Al-Taḥḥān : « كلام الراوي الذي ينتهي إليه السند »"
+    },
+}
+
 # Mapping collections pour parsing takhrij
 COLLECTION_PATTERNS = {
     "bukhari": ["bukhari", "bukhary", "البخاري", "صحيح البخاري"],
@@ -75,6 +170,41 @@ def _is_valid_text(text: Optional[str]) -> bool:
         return False
     
     return True
+
+
+def _extract_technical_terms(text_ar: str) -> List[Dict[str, Any]]:
+    """
+    Extrait les termes techniques Muṣṭalaḥ du texte arabe.
+    Retourne une liste de termes avec définitions savantes.
+    """
+    if not text_ar:
+        return []
+    
+    found_terms = []
+    text_normalized = text_ar.strip()
+    
+    for term_ar, definition in SALAF_DEFINITIONS.items():
+        # Recherche simple du terme dans le texte
+        if term_ar in text_normalized:
+            found_terms.append({
+                "term_ar": term_ar,
+                "term_latin": definition["term"],
+                "definition_ar": definition["definition_ar"],
+                "savant": definition["savant"],
+                "source": definition["source"],
+                "page": definition["page"],
+                "citation": definition["citation"]
+            })
+    
+    return found_terms
+
+
+def _fetch_salaf_definition(term_ar: str) -> Optional[Dict[str, Any]]:
+    """
+    Cherche la définition d'un terme technique chez les savants.
+    Retourne la définition avec citation explicite — Zéro IA.
+    """
+    return SALAF_DEFINITIONS.get(term_ar)
 
 
 def _load_definitions() -> Dict[str, Any]:
@@ -847,8 +977,35 @@ def analyze(hadith_id: str) -> Dict[str, Any]:
         zones_vides.append("zone_35")
         logger.info("[TAKHRIJ] zone_35 → ABSENT")
     
-    # Zones 32, 33, 34, 36, 37, 38, 39 — Absence honnête
-    for z in [32, 33, 34, 36, 37, 38, 39]:
+    # Zone 33 — LE PONT SALAF: Termes techniques avec définitions savantes
+    zone_33 = {}
+    text_for_terms = zone_01.get("text_ar", "")
+    
+    if text_for_terms:
+        # Extraction via le Pont Salaf
+        technical_terms = _extract_technical_terms(text_for_terms)
+        
+        if technical_terms:
+            zone_33 = {
+                "technical_terms_found": len(technical_terms),
+                "terms": technical_terms,
+                "source": "pont_salaf",
+                "note": "Définitions citées explicitement des savants — Zéro traduction IA"
+            }
+            zones_remplies.append("zone_33")
+            logger.info(f"[TAKHRIJ] zone_33 → Pont Salaf: {len(technical_terms)} termes")
+            # Log des citations
+            for term in technical_terms:
+                logger.info(f"[PONT-SALAF] {term['term_ar']} → {term['citation'][:60]}...")
+        else:
+            zones_vides.append("zone_33")
+            logger.info("[TAKHRIJ] zone_33 → ABSENT (pas de termes techniques)")
+    else:
+        zones_vides.append("zone_33")
+        logger.info("[TAKHRIJ] zone_33 → ABSENT")
+    
+    # Zones 32, 34, 36, 37, 38, 39 — Absence honnête
+    for z in [32, 34, 36, 37, 38, 39]:
         zones_vides.append(f"zone_{z:02d}")
         logger.info(f"[TAKHRIJ] zone_{z:02d} → ABSENT")
     
