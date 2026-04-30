@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-04-30T18:19:12.238034",
+  "model": "small",
+  "device": "cpu",
+  "total_files": 1,
+  "successful": 0,
+  "failed": 1,
+  "chapters": [
+    {
+      "id": "00_lecture_du_poeme",
+      "title": null,
+      "status": "error",
+      "zones": [],
+      "error": "[WinError 2] Le fichier spécifié est introuvable"
+    }
+  ]
+}
