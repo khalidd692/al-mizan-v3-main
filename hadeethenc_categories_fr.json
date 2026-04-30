@@ -1,0 +1,44 @@
+[
+  {
+    "id": "1",
+    "title": "Le Noble Coran et ses sciences",
+    "hadeeths_count": "55",
+    "parent_id": null
+  },
+  {
+    "id": "2",
+    "title": "Le hadith et ses sciences",
+    "hadeeths_count": "6",
+    "parent_id": null
+  },
+  {
+    "id": "3",
+    "title": "Le dogme",
+    "hadeeths_count": "350",
+    "parent_id": null
+  },
+  {
+    "id": "4",
+    "title": "La jurisprudence et son fondement",
+    "hadeeths_count": "895",
+    "parent_id": null
+  },
+  {
+    "id": "5",
+    "title": "Les vertus et les convenances",
+    "hadeeths_count": "514",
+    "parent_id": null
+  },
+  {
+    "id": "6",
+    "title": "La prédication et la police religieuse",
+    "hadeeths_count": "76",
+    "parent_id": null
+  },
+  {
+    "id": "7",
+    "title": "La biographie et l'histoire",
+    "hadeeths_count": "179",
+    "parent_id": null
+  }
+]

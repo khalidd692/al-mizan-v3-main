@@ -1,0 +1,44 @@
+[
+  {
+    "id": "1",
+    "title": "The Noble Qur'an and Qur'anic Sciences",
+    "hadeeths_count": "81",
+    "parent_id": null
+  },
+  {
+    "id": "2",
+    "title": "The Hadith and Hadith Sciences",
+    "hadeeths_count": "9",
+    "parent_id": null
+  },
+  {
+    "id": "3",
+    "title": "The Creed",
+    "hadeeths_count": "457",
+    "parent_id": null
+  },
+  {
+    "id": "4",
+    "title": "Jurisprudence and Juristic Principles",
+    "hadeeths_count": "1141",
+    "parent_id": null
+  },
+  {
+    "id": "5",
+    "title": "Virtues and Manners",
+    "hadeeths_count": "738",
+    "parent_id": null
+  },
+  {
+    "id": "6",
+    "title": "Da‘wah and Hisbah",
+    "hadeeths_count": "97",
+    "parent_id": null
+  },
+  {
+    "id": "7",
+    "title": "Seerah and History",
+    "hadeeths_count": "213",
+    "parent_id": null
+  }
+]

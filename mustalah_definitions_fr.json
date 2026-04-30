@@ -1,0 +1,505 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "name": "Muṣṭalaḥ al-Ḥadīth — Définitions techniques francophones sourcées",
+    "description": "Définitions de terminologie hadithique selon le manhaj salafi, sourcées depuis 3ilmchar3i.net, salafislam.fr, et Sharḥ al-Bayqūniyya d'Ibn al-ʿUthaymīn",
+    "date_creation": "2026-04-30",
+    "sources_primaires": [
+      "3ilmchar3i.net — Lexique de terminologie du hadith",
+      "salafislam.fr — Taysīr Muṣṭalaḥ al-Ḥadīth (Ṭaḥḥān)",
+      "Sharḥ al-Bayqūniyya — Ibn al-ʿUthaymīn (Éditions Al-Ḥadīth)",
+      "Précis des Sciences du Hadith — Aṭ-Ṭaḥḥān (Éditions Al-Qalam)"
+    ],
+    "validating_scholars": [
+      "Muḥammad Nāṣir ad-Dīn al-Albānī",
+      "Muḥammad ibn Ṣāliḥ al-ʿUthaymīn",
+      "ʿAbd al-ʿAzīz Ibn Bāz",
+      "Ṣāliḥ al-Fawzān",
+      "Muqbil ibn Hādī al-Wādiʿī",
+      "Mahmoud Aṭ-Ṭaḥḥān"
+    ],
+    "zones_concernees": ["04", "05", "06", "07", "08", "36"]
+  },
+
+  "definitions": {
+    "al_mutawatir": {
+      "term_ar": "المتواتر",
+      "term_fr": "Al-Mutawātir",
+      "transliteration": "al-mutawātir",
+      "category": "nombre",
+      "definition_fr": "Hadith dont le nombre de rapporteurs dans chaque génération est globalement supérieur à la dizaine ; ou hadith rapporté par un si grand nombre de personnes (à chaque génération) qu'il est impossible qu'elles se soient concertées pour convenir d'un mensonge. Sous-catégories : Mutawātir lafẓī (textuel) et Mutawātir maʿnawī (par le sens).",
+      "source_reference": "Lexique de terminologie du hadith — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-lexique-de-terminologie-du-hadith-121402502.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["04"]
+    },
+
+    "al_ahad": {
+      "term_ar": "الآحاد",
+      "term_fr": "Al-Āḥād",
+      "transliteration": "al-āḥād",
+      "category": "nombre",
+      "definition_fr": "Hadith dont le nombre de rapporteurs dans au moins une des générations est globalement inférieur à la dizaine ; tout hadith ne remplissant pas les conditions du mutawātir. Subdivisé en Mashhūr / ʿAzīz / Gharīb.",
+      "source_reference": "Lexique de terminologie du hadith — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-lexique-de-terminologie-du-hadith-121402502.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["04"]
+    },
+
+    "mashhur": {
+      "term_ar": "المشهور",
+      "term_fr": "Mashhūr",
+      "transliteration": "mashhūr",
+      "category": "nombre",
+      "definition_fr": "Le hadith a été rapporté par trois rapporteurs ou plus à chaque niveau, sans atteindre le seuil du mutawātir.",
+      "source_reference": "Composants et classifications du hadith — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-26923206.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["04"]
+    },
+
+    "aziz": {
+      "term_ar": "العزيز",
+      "term_fr": "ʿAzīz",
+      "transliteration": "ʿazīz",
+      "category": "nombre",
+      "definition_fr": "À chaque étape de la chaîne, deux rapporteurs au minimum relatent le hadith.",
+      "source_reference": "Composants et classifications du hadith — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-26923206.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["04"]
+    },
+
+    "gharib": {
+      "term_ar": "الغريب",
+      "term_fr": "Gharīb / Fard",
+      "transliteration": "gharīb",
+      "category": "nombre",
+      "definition_fr": "Caractère du hadith qui n'est rapporté que par un seul transmetteur, soit de manière absolue (à toutes les étapes), soit à un seul niveau.",
+      "source_reference": "Composants et classifications du hadith — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-26923206.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["09"]
+    },
+
+    "sahih": {
+      "term_ar": "الصحيح",
+      "term_fr": "Ṣaḥīḥ",
+      "transliteration": "ṣaḥīḥ",
+      "category": "degré",
+      "definition_fr": "Caractère de ce qui est rapporté par une chaîne ininterrompue, par un transmetteur de confiance (ʿadl) dont la mémoire est fiable (ḍābiṭ tām), et qui est exempt de défaut (ʿilla) et de contradiction (shudhūdh) avec un groupe de rapporteurs de confiance.",
+      "source_reference": "Lexique de terminologie du hadith — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-lexique-de-terminologie-du-hadith-121402502.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["04"]
+    },
+
+    "sahih_li_ghayrihi": {
+      "term_ar": "صحيح لغيره",
+      "term_fr": "Ṣaḥīḥ li-ghayrihi",
+      "transliteration": "ṣaḥīḥ li-ghayrihi",
+      "category": "degré",
+      "definition_fr": "Hadith Ḥasan élevé au rang de Ṣaḥīḥ par d'autres voies de force égale ou supérieure.",
+      "source_reference": "Les classifications du hadîth — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-36549355.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["04"]
+    },
+
+    "hasan": {
+      "term_ar": "الحسن",
+      "term_fr": "Ḥasan",
+      "transliteration": "ḥasan",
+      "category": "degré",
+      "definition_fr": "Caractère de ce qui est rapporté par une chaîne ininterrompue, par un transmetteur de confiance dont la mémoire est légèrement déficiente, et qui est exempt de défaut et de contradiction.",
+      "source_reference": "Lexique de terminologie du hadith — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-lexique-de-terminologie-du-hadith-121402502.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["04"]
+    },
+
+    "hasan_li_ghayrihi": {
+      "term_ar": "حسن لغيره",
+      "term_fr": "Ḥasan li-ghayrihi",
+      "transliteration": "ḥasan li-ghayrihi",
+      "category": "degré",
+      "definition_fr": "Hadith Ḍaʿīf renforcé par d'autres voies jusqu'à atteindre le rang de Ḥasan.",
+      "source_reference": "Les classifications du hadîth — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-36549355.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["04"]
+    },
+
+    "daif": {
+      "term_ar": "الضعيف",
+      "term_fr": "Ḍaʿīf",
+      "transliteration": "ḍaʿīf",
+      "category": "degré",
+      "definition_fr": "Caractère de ce qui ne remplit ni les conditions Ṣaḥīḥ, ni celles du Ḥasan. Faiblesse due soit à une rupture de chaîne, soit à un défaut chez le rapporteur.",
+      "source_reference": "Lexique de terminologie du hadith — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-lexique-de-terminologie-du-hadith-121402502.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["04", "08"]
+    },
+
+    "marfu": {
+      "term_ar": "المرفوع",
+      "term_fr": "Marfūʿ",
+      "transliteration": "marfūʿ",
+      "category": "chaîne",
+      "definition_fr": "Caractère du hadith dont la chaîne de rapporteur remonte jusqu'au Prophète ﷺ.",
+      "source_reference": "Lexique de terminologie du hadith — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-lexique-de-terminologie-du-hadith-121402502.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["02"]
+    },
+
+    "mawquf": {
+      "term_ar": "الموقوف",
+      "term_fr": "Mawqūf",
+      "transliteration": "mawqūf",
+      "category": "chaîne",
+      "definition_fr": "Caractère du hadith dont la chaîne s'arrête au Compagnon. Tradition 'fixée' ; certaines formes ont valeur de marfūʿ implicite (ex. : 'il nous a été ordonné de…').",
+      "source_reference": "Lexique de terminologie du hadith — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-lexique-de-terminologie-du-hadith-121402502.html",
+      "validating_scholar": "Cheikh Ibn al-ʿUthaymīn — Fatwā via salafislam.fr",
+      "related_zones": ["02", "12"]
+    },
+
+    "maqtu": {
+      "term_ar": "المقطوع",
+      "term_fr": "Maqṭūʿ",
+      "transliteration": "maqṭūʿ",
+      "category": "chaîne",
+      "definition_fr": "Caractère du hadith dont la chaîne s'arrête avant le Compagnon, ou ce qui est attribué à un Successeur (Tābiʿī) ou un rapporteur après lui.",
+      "source_reference": "Lexique de terminologie du hadith — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-lexique-de-terminologie-du-hadith-121402502.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["02", "13"]
+    },
+
+    "musnad": {
+      "term_ar": "المسند",
+      "term_fr": "Musnad",
+      "transliteration": "musnad",
+      "category": "chaîne",
+      "definition_fr": "Hadith dont la chaîne ininterrompue remonte jusqu'au Prophète ﷺ, rapporté par un Compagnon.",
+      "source_reference": "Sharḥ al-Bayqūniyya — Ibn al-ʿUthaymīn",
+      "source_url": "https://www.librairie-sana.com/fr/le-hadith-livre/7239-le-commentaire-de-la-bayquniyya-dans-la-terminologie-du-hadith-cheikh-al-uthaymin-9782875450845.html",
+      "validating_scholar": "ʿAllāma Muḥammad ibn Ṣāliḥ al-ʿUthaymīn",
+      "related_zones": ["02"]
+    },
+
+    "muttasil": {
+      "term_ar": "المتصل",
+      "term_fr": "Muttaṣil",
+      "transliteration": "muttaṣil",
+      "category": "chaîne",
+      "definition_fr": "Chaîne ininterrompue (chaque rapporteur a entendu directement de son cheikh), qu'elle aboutisse au Prophète ou à un Compagnon.",
+      "source_reference": "Sharḥ al-Bayqūniyya — Ibn al-ʿUthaymīn",
+      "source_url": "https://www.librairie-sana.com/fr/le-hadith-livre/7239-le-commentaire-de-la-bayquniyya-dans-la-terminologie-du-hadith-cheikh-al-uthaymin-9782875450845.html",
+      "validating_scholar": "ʿAllāma Muḥammad ibn Ṣāliḥ al-ʿUthaymīn",
+      "related_zones": ["02"]
+    },
+
+    "muallaq": {
+      "term_ar": "المعلق",
+      "term_fr": "Al-Muʿallaq",
+      "transliteration": "al-muʿallaq",
+      "category": "rupture",
+      "definition_fr": "Caractère du hadith dont il manque le premier rapporteur dans la chaîne (le rapporteur immédiat de l'auteur du recueil).",
+      "source_reference": "Lexique de terminologie du hadith — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-lexique-de-terminologie-du-hadith-121402502.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["08"]
+    },
+
+    "mursal": {
+      "term_ar": "المرسل",
+      "term_fr": "Al-Mursal",
+      "transliteration": "al-mursal",
+      "category": "rupture",
+      "definition_fr": "Un Tābiʿī attribue directement le hadith au Prophète ﷺ sans citer le Compagnon. Définition de la majorité des spécialistes du hadith. Avis divergents sur sa recevabilité : Shāfiʿī l'accepte sous conditions (ex. marāsīl de Saʿīd b. al-Musayyab) ; Abū Ḥanīfa, Mālik, Aḥmad (avis retenu) le considèrent acceptable si le Tābiʿī est sûr et habituellement précis.",
+      "source_reference": "Les classifications du hadîth — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-36549355.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["08"]
+    },
+
+    "munqati": {
+      "term_ar": "المنقطع",
+      "term_fr": "Al-Munqaṭiʿ",
+      "transliteration": "al-munqaṭiʿ",
+      "category": "rupture",
+      "definition_fr": "Hadith dont le lien à n'importe quel endroit de la chaîne avant le Successeur est manquant (un seul maillon manquant, autre que le Compagnon).",
+      "source_reference": "Lexique de terminologie du hadith — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-lexique-de-terminologie-du-hadith-121402502.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["08"]
+    },
+
+    "mudal": {
+      "term_ar": "المعضل",
+      "term_fr": "Al-Muʿḍal",
+      "transliteration": "al-muʿḍal",
+      "category": "rupture",
+      "definition_fr": "Hadith où deux rapporteurs consécutifs ou plus sont manquants dans la chaîne.",
+      "source_reference": "Lexique de terminologie du hadith — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-lexique-de-terminologie-du-hadith-121402502.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["08"]
+    },
+
+    "mudallas": {
+      "term_ar": "المدلس",
+      "term_fr": "Al-Mudallas",
+      "transliteration": "al-mudallas",
+      "category": "rupture",
+      "definition_fr": "Hadith où le rapporteur dissimule un défaut dans la chaîne, soit en omettant un cheikh faible (tadlīs al-isnād), soit en présentant un cheikh sous un nom inhabituel (tadlīs ash-shuyūkh). Le ʿanʿanah ('ʿan fulān ʿan fulān') n'est accepté que si le rapporteur n'est pas connu comme mudallis.",
+      "source_reference": "Lexique de terminologie du hadith — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-lexique-de-terminologie-du-hadith-121402502.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["08", "06"]
+    },
+
+    "munkar": {
+      "term_ar": "المنكر",
+      "term_fr": "Al-Munkar",
+      "transliteration": "al-munkar",
+      "category": "défaut",
+      "definition_fr": "Hadith rapporté par un rapporteur faible contredisant un rapporteur fiable. Sous-catégorie de ḍaʿīf.",
+      "source_reference": "Lexique de terminologie du hadith — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-lexique-de-terminologie-du-hadith-121402502.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["04", "08"]
+    },
+
+    "shadh": {
+      "term_ar": "الشاذ",
+      "term_fr": "Al-Shādhdh",
+      "transliteration": "al-shādhdh",
+      "category": "défaut",
+      "definition_fr": "Hadith dont un rapporteur fiable contredit un rapporteur — ou un groupe — plus fiable que lui ou ayant une meilleure mémoire.",
+      "source_reference": "Lexique de terminologie du hadith — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-lexique-de-terminologie-du-hadith-121402502.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["04"]
+    },
+
+    "maqlob": {
+      "term_ar": "المقلوب",
+      "term_fr": "Al-Maqlūb",
+      "transliteration": "al-maqlob",
+      "category": "défaut",
+      "definition_fr": "Hadith dont la chaîne ou le texte a été inversé / permuté (par exemple un nom remplacé par un autre, ou une partie du matn déplacée).",
+      "source_reference": "Sharḥ al-Bayqūniyya — Ibn al-ʿUthaymīn (vers 21-25)",
+      "source_url": "https://archive.org/details/charh_al_bayquniyya",
+      "validating_scholar": "Abū Yūsuf ʿAbd Allāh Al-ʿĀjī (explication audio), école de Dammāj (Cheikh Muqbil)",
+      "related_zones": ["05"]
+    },
+
+    "mudraj": {
+      "term_ar": "المدرج",
+      "term_fr": "Al-Mudraj",
+      "transliteration": "al-mudraj",
+      "category": "défaut",
+      "definition_fr": "Ce que le rapporteur a ajouté dans le hadith comme explication ou autre, qui sont ses propres paroles et qui ne sont pas du Prophète ﷺ.",
+      "source_reference": "Lexique de terminologie du hadith — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-lexique-de-terminologie-du-hadith-121402502.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["05"]
+    },
+
+    "mudtarib": {
+      "term_ar": "المضطرب",
+      "term_fr": "Al-Muḍṭarib",
+      "transliteration": "al-muḍṭarib",
+      "category": "défaut",
+      "definition_fr": "Hadith rapporté de plusieurs façons contradictoires, sans qu'on puisse trancher en faveur d'une version.",
+      "source_reference": "Sharḥ al-Bayqūniyya — Ibn al-ʿUthaymīn (vers 26 à fin)",
+      "source_url": "https://archive.org/details/charh_al_bayquniyya",
+      "validating_scholar": "Abū Yūsuf ʿAbd Allāh Al-ʿĀjī (explication audio), école de Dammāj (Cheikh Muqbil)",
+      "related_zones": ["05"]
+    },
+
+    "mualal": {
+      "term_ar": "المعلل",
+      "term_fr": "Al-Muʿallal",
+      "transliteration": "al-muʿallal",
+      "category": "défaut",
+      "definition_fr": "Hadith présentant un défaut caché (ʿillah khafiyya) qui en altère la fiabilité, identifié par les imams experts en ʿilal.",
+      "source_reference": "Sharḥ al-Bayqūniyya — Ibn al-ʿUthaymīn (vers 26 à fin)",
+      "source_url": "https://archive.org/details/charh_al_bayquniyya",
+      "validating_scholar": "Abū Yūsuf ʿAbd Allāh Al-ʿĀjī (explication audio), école de Dammāj (Cheikh Muqbil)",
+      "related_zones": ["06", "07"]
+    },
+
+    "matruk": {
+      "term_ar": "المتروك",
+      "term_fr": "Al-Matrūk",
+      "transliteration": "al-matrūk",
+      "category": "défaut",
+      "definition_fr": "Caractère du hadith dont le rapporteur n'est pas fiable, à l'unanimité des savants du hadith, ou celui qui est accusé de mensonge (selon Ibn Ḥajar).",
+      "source_reference": "Lexique de terminologie du hadith — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-lexique-de-terminologie-du-hadith-121402502.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["08"]
+    },
+
+    "mawdu": {
+      "term_ar": "الموضوع",
+      "term_fr": "Al-Mawḍūʿ",
+      "transliteration": "al-mawḍūʿ",
+      "category": "défaut",
+      "definition_fr": "Caractère du hadith mensonger au sujet du Prophète ﷺ, c'est-à-dire inventé puis attribué au Messager d'Allāh ﷺ. Le pire degré du ḍaʿīf.",
+      "source_reference": "Lexique de terminologie du hadith — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-lexique-de-terminologie-du-hadith-121402502.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["23", "07"]
+    },
+
+    "hadith_qudsi": {
+      "term_ar": "الحديث القدسي",
+      "term_fr": "Hadith Qudsī",
+      "transliteration": "ḥadīth qudsī",
+      "category": "forme",
+      "definition_fr": "Hadith où la construction (mabnā) est celle du Prophète ﷺ mais où le sens (maʿnā) provient d'Allāh, le Prophète disant 'Allāh a dit'. Distinct du Coran (qui est parole d'Allāh dans son texte et son sens) et du hadith ordinaire (où le Prophète parle directement sans rapporter Allāh).",
+      "source_reference": "Les classifications du hadîth — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-36549355.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["04"]
+    },
+
+    "ananah": {
+      "term_ar": "العنعنة",
+      "term_fr": "ʿAnʿanah / Muʿanʿan",
+      "transliteration": "ʿanʿanah",
+      "category": "forme",
+      "definition_fr": "Forme de transmission par l'expression 'ʿan' (de la part de). Lorsqu'un rapporteur dit 'ʿan fulān ʿan fulān', cela indique une transmission non directe. Acceptée seulement si le rapporteur n'est pas connu comme mudallis.",
+      "source_reference": "Lexique de terminologie du hadith — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-lexique-de-terminologie-du-hadith-121402502.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["02"]
+    },
+
+    "musalsal": {
+      "term_ar": "المسلسل",
+      "term_fr": "Musalsal",
+      "transliteration": "musalsal",
+      "category": "forme",
+      "definition_fr": "Hadith dont les rapporteurs se transmettent le hadith en répétant tous une même action ou parole (ex: 'je l'ai entendu en souriant', 'je l'ai entendu en jeûnant').",
+      "source_reference": "Sharḥ al-Bayqūniyya — Ibn al-ʿUthaymīn",
+      "source_url": "https://www.librairie-sana.com/fr/le-hadith-livre/7239-le-commentaire-de-la-bayquniyya-dans-la-terminologie-du-hadith-cheikh-al-uthaymin-9782875450845.html",
+      "validating_scholar": "ʿAllāma Muḥammad ibn Ṣāliḥ al-ʿUthaymīn",
+      "related_zones": ["02"]
+    },
+
+    "iltiqa": {
+      "term_ar": "التقاء السقاطين",
+      "term_fr": "Iltiqāʾ as-Saqāṭayn / Al-ʿĀlī",
+      "transliteration": "iltiqāʾ as-saqāṭayn",
+      "category": "forme",
+      "definition_fr": "Rencontre de deux faibles dans l'isnād — hadith rapporté par deux narrateurs faibles se rencontrant à un même maillon, ce qui renforce la faiblesse.",
+      "source_reference": "Sharḥ al-Bayqūniyya — Ibn al-ʿUthaymīn",
+      "source_url": "https://www.librairie-sana.com/fr/le-hadith-livre/7239-le-commentaire-de-la-bayquniyya-dans-la-terminologie-du-hadith-cheikh-al-uthaymin-9782875450845.html",
+      "validating_scholar": "ʿAllāma Muḥammad ibn Ṣāliḥ al-ʿUthaymīn",
+      "related_zones": ["08"]
+    },
+
+    "sahih_lidhatihi": {
+      "term_ar": "صحيح لذاته",
+      "term_fr": "Ṣaḥīḥ li-dhātihi",
+      "transliteration": "ṣaḥīḥ li-dhātihi",
+      "category": "degré",
+      "definition_fr": "Hadith authentique par lui-même, remplissant toutes les conditions de l'authenticité dans sa propre chaîne de transmission, sans besoin de renforcement externe.",
+      "source_reference": "Les classifications du hadîth — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-36549355.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["04"]
+    },
+
+    "hasan_lidhatihi": {
+      "term_ar": "حسن لذاته",
+      "term_fr": "Ḥasan li-dhātihi",
+      "transliteration": "ḥasan li-dhātihi",
+      "category": "degré",
+      "definition_fr": "Hadith bon par lui-même, remplissant les conditions du ḥasan dans sa propre chaîne sans renforcement externe.",
+      "source_reference": "Les classifications du hadîth — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-36549355.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["04"]
+    },
+
+    "sahih_ghayrihi": {
+      "term_ar": "صحيح لغيره",
+      "term_fr": "Ṣaḥīḥ li-ghayrihi",
+      "transliteration": "ṣaḥīḥ li-ghayrihi",
+      "category": "degré",
+      "definition_fr": "Hadith qui devient authentique grâce à d'autres chaînes de transmission qui le renforcent et l'élèvent au rang de ṣaḥīḥ.",
+      "source_reference": "Les classifications du hadîth — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-36549355.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["04"]
+    },
+
+    "hasan_ghayrihi": {
+      "term_ar": "حسن لغيره",
+      "term_fr": "Ḥasan li-ghayrihi",
+      "transliteration": "ḥasan li-ghayrihi",
+      "category": "degré",
+      "definition_fr": "Hadith qui devient bon (ḥasan) grâce à d'autres chaînes de transmission qui le renforcent, bien qu'il soit faible à l'origine.",
+      "source_reference": "Les classifications du hadîth — 3ilmchar3i.net",
+      "source_url": "https://www.3ilmchar3i.net/article-36549355.html",
+      "validating_scholar": "Traduction sourcée auprès des savants du manhaj (Albānī, Ibn Bāz, Ibn al-ʿUthaymīn, Fawzān, Muqbil)",
+      "related_zones": ["04"]
+    }
+  },
+
+  "categories_index": {
+    "nombre": ["al_mutawatir", "al_ahad", "mashhur", "aziz", "gharib"],
+    "degré": ["sahih", "sahih_lidhatihi", "sahih_li_ghayrihi", "sahih_ghayrihi", "hasan", "hasan_lidhatihi", "hasan_li_ghayrihi", "hasan_ghayrihi", "daif"],
+    "chaîne": ["marfu", "mawquf", "maqtu", "musnad", "muttasil"],
+    "rupture": ["muallaq", "mursal", "munqati", "mudal", "mudallas"],
+    "défaut": ["munkar", "shadh", "maqlob", "mudraj", "mudtarib", "mualal", "matruk", "mawdu"],
+    "forme": ["hadith_qudsi", "ananah", "musalsal", "iltiqa"]
+  },
+
+  "zones_mapping": {
+    "02": {
+      "zone_name": "ISNĀD — Structure de transmission",
+      "terms": ["marfu", "mawquf", "maqtu", "musnad", "muttasil", "ananah"]
+    },
+    "04": {
+      "zone_name": "SHUDHŪDH — Authenticité et degrés",
+      "terms": ["sahih", "hasan", "daif", "sahih_lidhatihi", "hasan_lidhatihi", "sahih_li_ghayrihi", "sahih_ghayrihi", "hasan_li_ghayrihi", "hasan_ghayrihi", "al_mutawatir", "al_ahad", "mashhur", "aziz", "gharib", "shadh", "munkar", "hadith_qudsi"]
+    },
+    "05": {
+      "zone_name": "MUḌṬARIB — Contradictions et perturbations",
+      "terms": ["mudtarib", "maqlob", "mudraj"]
+    },
+    "06": {
+      "zone_name": "ʿILAL AḤKĀM — Défauts cachés",
+      "terms": ["mualal", "mudallas"]
+    },
+    "07": {
+      "zone_name": "ʿILAL MAWḌŪʿ — Fabrications",
+      "terms": ["mawdu", "mualal"]
+    },
+    "08": {
+      "zone_name": "TAKHRĪJ ʿILAL — Ruptures de chaîne",
+      "terms": ["muallaq", "mursal", "munqati", "mudal", "mudallas", "matruk", "daif", "iltiqa"]
+    },
+    "09": {
+      "zone_name": "GHARĪB — Narrations isolées",
+      "terms": ["gharib"]
+    },
+    "23": {
+      "zone_name": "MAWḌŪʿ ALERTE — Alertes de fabrication",
+      "terms": ["mawdu"]
+    },
+    "36": {
+      "zone_name": "TAFARRUD — Unicité de transmission",
+      "terms": ["gharib", "aziz"]
+    }
+  }
+}

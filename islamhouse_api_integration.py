@@ -9,9 +9,12 @@ import json
 import os
 from datetime import datetime
 
-# Configuration
-API_KEY = "ISLAMHOUSE_API_KEY_REDACTED"
+# Configuration — clé API depuis variables d'environnement (jamais codée en dur)
+API_KEY = os.environ.get("ISLAMHOUSE_API_KEY", "")
 BASE_URL = "https://api3.islamhouse.com/v3"
+
+if not API_KEY:
+    print("⚠️  ISLAMHOUSE_API_KEY non définie — certaines fonctionnalités seront limitées")
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
     "Accept": "application/json"
