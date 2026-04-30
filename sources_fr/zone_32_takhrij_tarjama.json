@@ -1,0 +1,31 @@
+{
+  "zone": 32,
+  "nom": "TAKHRĪJ TARJAMA",
+  "description": "Biographies des rapporteurs - Tarjama al-Rāwī",
+  "entrees": [
+    {
+      "contenu_fr": "Tarjama al-rāwī (ترجمة الراوي) : Biographie du rapporteur - notice contenant le nom, la date de décès, le niveau de fiabilité (taʿdīl/jarḥ), et les évaluations des savants.",
+      "source": "dorar",
+      "titre_ouvrage": "Dorar.net - Encyclopédie des narrateurs",
+      "url": "https://dorar.net",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Éléments de la tarjama : 1) Nom complet et kunya, 2) Date de naissance/décès, 3) Niveau (thiqah, ṣadūq, etc.), 4) Professeurs et élèves, 5) Évaluations des ʿulamāʾ.",
+      "source": "islamhouse",
+      "titre_ouvrage": "Méthodologie jarḥ wa taʿdīl",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Niveaux de jarḥ (du plus grave au plus léger) : Waḍḍāʿ (faussaire), Kadhdhāb (menteur), Mastūr (dissimulé), Majhūl (inconnu), Matrūk (abandonné), Munkar (rejeté).",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Al-Rafʿ wa al-Takmīl fī al-Jarḥ wa al-Taʿdīl",
+      "url": null,
+      "statut": "VALIDÉ"
+    }
+  ],
+  "statut_global": "PARTIEL",
+  "sources_utilisees": ["lexique_de_fer"],
+  "count_entrees": 1
+}

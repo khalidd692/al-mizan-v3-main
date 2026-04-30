@@ -1,0 +1,25 @@
+{
+  "zone": 18,
+  "nom": "NASKH",
+  "description": "Abrogation - Nāsikh et Mansūkh",
+  "entrees": [
+    {
+      "contenu_fr": "Naskh (نسخ) : Abrogation - levée d'une législation (ḥukm) par une preuve ultérieure. Le naskh peut concerner le Qurʾān, la Sunnah, ou entre les deux.",
+      "source": "islamhouse",
+      "titre_ouvrage": "Usūl al-Fiqh - Naskh",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Nāsikh (ناسخ) : Abrogeant - le texte qui abroge. Mansūkh (منسوخ) : Abrogé - le texte abrogé. Conditions : 1) Chronologie établie, 2) Impossibilité de jamʿ.",
+      "source": "islamweb",
+      "titre_ouvrage": "Naskh dans le hadith",
+      "url": "https://islamweb.net/fr",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources islamhouse/islamweb nécessitent spidering"
+}

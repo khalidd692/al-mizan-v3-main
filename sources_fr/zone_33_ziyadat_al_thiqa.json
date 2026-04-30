@@ -1,0 +1,25 @@
+{
+  "zone": 33,
+  "nom": "ZIYĀDĀT AL-THIQĀH",
+  "description": "Additions des rapporteurs fiables - Ziyādāt",
+  "entrees": [
+    {
+      "contenu_fr": "Ziyādāt al-thiqāh (زيادات الثقات) : Additions des rapporteurs fiables - ajouts textuels apportés par des narrateurs thiqāt (fiables). Ces additions sont acceptées car elles proviennent de sources fiables.",
+      "source": "islamhouse",
+      "titre_ouvrage": "ʿIlal al-Ḥadīth",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Condition d'acceptation : L'ajout (ziyādah) est accepté si : 1) Le narrateur est thiqah, 2) L'addition ne contredit pas la version originale, 3) Elle peut être expliquée par mémorisation ou audition.",
+      "source": "voie-des-salafs",
+      "titre_ouvrage": "Ziyādāt et narrateurs",
+      "url": "https://voie-des-salafs.forumarabia.com",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources islamhouse/voie-des-salafs nécessitent spidering"
+}

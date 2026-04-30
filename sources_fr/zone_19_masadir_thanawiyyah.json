@@ -1,0 +1,25 @@
+{
+  "zone": 19,
+  "nom": "MASĀDIR THĀNAWIYYAH",
+  "description": "Sources secondaires de hadith",
+  "entrees": [
+    {
+      "contenu_fr": "Maṣādir thānawiyyah (مصادر ثانوية) : Sources secondaires - collections de hadith en dehors des Kutub al-Sittah (Six Livres). Incluent les Juzʾ, Musnad, Sunan supplémentaires.",
+      "source": "dorar",
+      "titre_ouvrage": "Dorar.net - Index des collections",
+      "url": "https://dorar.net",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Collections secondaires : Musnad al-Dārimī, Musnad Abī Yaʿlā, Musnad al-Ṭayālisī, Sunan al-Dāraquṭnī, etc. Ces sources enrichissent le corpus primaire.",
+      "source": "islamhouse",
+      "titre_ouvrage": "Collections secondaires",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources dorar/islamhouse nécessitent spidering"
+}

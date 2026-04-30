@@ -1,0 +1,24 @@
+{
+  "zone": 4,
+  "nom": "SHUDHŪDH",
+  "description": "الشذوذ - Shādh : contradiction par rapporteur fiable",
+  "entrees": [
+    {
+      "contenu_fr": "Shādh (شاذ) : Hadith shādh - hadith rapporté par un narrateur thiqāh (fiable) mais contredisant la masse des narrateurs thiqāt (fiables). Le hadith est rejeté car la masse prime sur l'individu.",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Nukhbat al-Fikar - Ibn Ḥajar",
+      "url": "https://bibliotheque-islamique.fr/hadith/lexique-de-terminologie-de-hadith/",
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Condition du shudhūd : 1) Le narrateur doit être thiqāh (fiable) isolément, 2) Il doit contredire des narrateurs plus fiables ou plus nombreux, 3) La contradiction doit être dans le matn (texte), pas seulement dans l'isnād.",
+      "source": "bibliotheque-islamique",
+      "titre_ouvrage": "Lexique de terminologie de hadith",
+      "url": "https://bibliotheque-islamique.fr/hadith/lexique-de-terminologie-de-hadith/",
+      "statut": "DRAFT_A_VÉRIFIER"
+    }
+  ],
+  "statut_global": "PARTIEL",
+  "sources_utilisees": ["lexique_de_fer", "bibliotheque-islamique"],
+  "count_entrees": 2
+}

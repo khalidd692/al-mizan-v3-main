@@ -1,0 +1,31 @@
+{
+  "zone": 25,
+  "nom": "ẒĀHIR MUQṬADĀ",
+  "description": "Sens littéral apparent - Interprétation Salafi",
+  "entrees": [
+    {
+      "contenu_fr": "Ẓāhir (ظاهر) : Sens apparent/littéral - le sens direct et premier d'un texte, sans interprétation figurée. La méthode Salafi consiste à prendre les textes selon leur ẓāhir, sans taʾwīl (interprétation allégorique).",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Al-Qawāʿid al-Muthlā - Ibn al-ʿUthaymīn",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Principe : Les attributs divins sont pris selon leur sens littéral (ḥaqīqī) sans dénaturer le sens ni interpréter métaphoriquement (taʾwīl).",
+      "source": "islamhouse",
+      "titre_ouvrage": "Méthodologie Ahl al-Sunnah",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Taʾwīl (تأويل) : Interprétation allégorique - donner un sens figuré à un attribut divin. Rejeté par Ahl al-Sunnah pour les attributs établis.",
+      "source": "islamweb",
+      "titre_ouvrage": "Principes de la ʿaqīdah",
+      "url": "https://islamweb.net/fr",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "PARTIEL",
+  "sources_utilisees": ["lexique_de_fer"],
+  "count_entrees": 1
+}

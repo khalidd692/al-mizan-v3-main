@@ -1,0 +1,25 @@
+{
+  "zone": 37,
+  "nom": "QIRĀʾĀT WA ṬURUQ",
+  "description": "Variantes textuelles et voies de transmission",
+  "entrees": [
+    {
+      "contenu_fr": "Ṭuruq (طرق) : Voies de transmission - différentes chaînes isnād par lesquelles un même hadith est transmis. Plus il y a de ṭuruq, plus le hadith est fort.",
+      "source": "islamhouse",
+      "titre_ouvrage": "Ṭuruq et transmission",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Qirāʾāt (قراءات) : Lectures/versions - variantes textuelles d'un même hadith. Les variantes peuvent être complémentaires ou nécessiter une harmonisation.",
+      "source": "islamweb",
+      "titre_ouvrage": "Variantes des hadiths",
+      "url": "https://islamweb.net/fr",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources islamhouse/islamweb nécessitent spidering"
+}

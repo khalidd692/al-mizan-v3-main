@@ -1,0 +1,25 @@
+{
+  "zone": 21,
+  "nom": "FAWĀʾID ʿAQADIYYAH",
+  "description": "Leçons de croyance tirées du hadith",
+  "entrees": [
+    {
+      "contenu_fr": "Fawāʾid ʿaqadiyyah (فوائد عقدية) : Bénéfices doctrinaux - leçons de ʿaqīdah (croyance) tirées du hadith. Les hadiths sont la deuxième source de la ʿaqīdah après le Qurʾān.",
+      "source": "islamhouse",
+      "titre_ouvrage": "ʿAqīdah et hadith",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Principes : 1) Les hadiths authentiques sont des preuves en ʿaqīdah, 2) Ils précisent les attributs divins, 3) Ils établissent les croyances relatives à l'au-delà.",
+      "source": "islamweb",
+      "titre_ouvrage": "Sources de la ʿaqīdah",
+      "url": "https://islamweb.net/fr",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources islamhouse/islamweb nécessitent spidering"
+}

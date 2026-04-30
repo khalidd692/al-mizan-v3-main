@@ -1,0 +1,24 @@
+{
+  "zone": 9,
+  "nom": "GHARĪB",
+  "description": "Gharīb hadith - mots rares, vocabulaire hadith",
+  "entrees": [
+    {
+      "contenu_fr": "Gharīb (غريب) : Hadith gharīb - hadith avec un mot rare ou unique, rapporté par un seul narrateur à un certain niveau de la chaîne (tafarrud). Peut aussi désigner un hadith avec un vocabulaire inhabituel.",
+      "source": "bibliotheque-islamique",
+      "titre_ouvrage": "Lexique de terminologie de hadith",
+      "url": "https://bibliotheque-islamique.fr/hadith/lexique-de-terminologie-de-hadith/",
+      "statut": "DRAFT_A_VÉRIFIER"
+    },
+    {
+      "contenu_fr": "Types de gharīb : 1) Gharīb fī l-isnād (unicité de transmission), 2) Gharīb fī l-matn (mot rare dans le texte). Le gharīb peut être ṣaḥīḥ, ḥasan ou ḍaʿīf selon le narrateur unique.",
+      "source": "hadeethenc",
+      "titre_ouvrage": "Encyclopédie du hadith",
+      "url": "https://hadeethenc.com/fr",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "PARTIEL",
+  "sources_utilisees": ["bibliotheque-islamique"],
+  "count_entrees": 2
+}

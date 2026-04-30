@@ -1,0 +1,24 @@
+{
+  "zone": 8,
+  "nom": "TAKHRĪJ + ʿILAL",
+  "description": "Takhrij combiné avec analyse des ʿilal",
+  "entrees": [
+    {
+      "contenu_fr": "Takhrij (تخريج) : Traçage - recherche et identification des sources primaires d'un hadith dans les collections canoniques (Ṣaḥīḥayn, Sunan, Masānīd, etc.).",
+      "source": "bibliotheque-islamique",
+      "titre_ouvrage": "Lexique de terminologie de hadith",
+      "url": "https://bibliotheque-islamique.fr/hadith/lexique-de-terminologie-de-hadith/",
+      "statut": "DRAFT_A_VÉRIFIER"
+    },
+    {
+      "contenu_fr": "Méthode de takhrij : 1) Identifier le matn arabe, 2) Rechercher dans les index de hadith ( Dorar.net, HadeethEnc, etc.), 3) Vérifier les voies de transmission (ṭuruq), 4) Analyser les grades donnés par les savants.",
+      "source": "islamhouse",
+      "titre_ouvrage": "Méthodologie du Takhrij",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "PARTIEL",
+  "sources_utilisees": ["bibliotheque-islamique"],
+  "count_entrees": 2
+}

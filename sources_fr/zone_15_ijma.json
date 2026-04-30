@@ -1,0 +1,25 @@
+{
+  "zone": 15,
+  "nom": "IJMĀʿ",
+  "description": "Consensus des savants - Ijmāʿ",
+  "entrees": [
+    {
+      "contenu_fr": "Ijmāʿ (إجماع) : Consensus - accord unanime des savants musulmans compétents d'une époque sur une question religieuse. L'ijmāʿ est une preuve indiscutable (ḥujjah qaṭʿiyyah) selon Ahl al-Sunnah.",
+      "source": "islamhouse",
+      "titre_ouvrage": "Usūl al-Fiqh",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Ijmāʿ al-Ṣaḥābah : Le consensus des Compagnons a une valeur probante supérieure car ils étaient les plus proches de la Révélation.",
+      "source": "islamweb",
+      "titre_ouvrage": "Consensus salaf",
+      "url": "https://islamweb.net/fr",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources islamhouse/islamweb nécessitent spidering"
+}

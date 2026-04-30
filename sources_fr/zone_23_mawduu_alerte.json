@@ -1,0 +1,31 @@
+{
+  "zone": 23,
+  "nom": "MAWḌŪʿ ALERTE",
+  "description": "Liste complète des hadiths inventés/faux",
+  "entrees": [
+    {
+      "contenu_fr": "Mawḍūʿ (موضوع) : Hadith inventé - hadith totalement fabriqué et faussement attribué au Prophète (ﷺ). ALERTE ROUGE : Ce hadith ne doit jamais être transmis ni utilisé pour le fiqh ou la prédication.",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Nukhbat al-Fikar / Al-Rafʿ wa al-Takmīl",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Waḍḍāʿ (وضاع) : Fabricateur - narrateur qui invente des hadiths. Accusation grave dans la science du hadith.",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Al-Rafʿ wa al-Takmīl fī al-Jarḥ wa al-Taʿdīl",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Hadiths mawḍūʿ célèbres : 'L'islam est la religion de la facilité' (inventé), 'Le mérite du dhikr en groupe' (inventé), etc. Vérifier toujours avant de transmettre.",
+      "source": "bibliotheque-islamique",
+      "titre_ouvrage": "Liste des hadiths mawḍūʿa",
+      "url": "https://bibliotheque-islamique.fr",
+      "statut": "DRAFT_A_VÉRIFIER"
+    }
+  ],
+  "statut_global": "PARTIEL",
+  "sources_utilisees": ["lexique_de_fer", "bibliotheque-islamique"],
+  "count_entrees": 3
+}

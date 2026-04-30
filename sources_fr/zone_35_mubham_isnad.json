@@ -1,0 +1,24 @@
+{
+  "zone": 35,
+  "nom": "MUBHAM FĪ AL-ISNĀD",
+  "description": "Ambiguïté dans la chaîne de transmission",
+  "entrees": [
+    {
+      "contenu_fr": "Mubham (مبهم) : Ambiguïté - hadith dont un ou plusieurs narrateurs sont anonymes (non identifiés). Exemple : 'Un homme du peuple' sans nom précis.",
+      "source": "bibliotheque-islamique",
+      "titre_ouvrage": "Lexique de terminologie de hadith",
+      "url": "https://bibliotheque-islamique.fr/hadith/lexique-de-terminologie-de-hadith/",
+      "statut": "DRAFT_A_VÉRIFIER"
+    },
+    {
+      "contenu_fr": "Types de mubham : 1) Mubham fī l-isnād (ambiguïté dans la chaîne), 2) Mubham fī l-matn (ambiguïté dans le texte). Le mubham affaiblit le hadith.",
+      "source": "voie-des-salafs",
+      "titre_ouvrage": "Défauts des hadiths",
+      "url": "https://voie-des-salafs.forumarabia.com",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "PARTIEL",
+  "sources_utilisees": ["bibliotheque-islamique"],
+  "count_entrees": 1
+}

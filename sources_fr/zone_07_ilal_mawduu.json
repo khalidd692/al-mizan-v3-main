@@ -1,0 +1,31 @@
+{
+  "zone": 7,
+  "nom": "ʿILAL MAWḌŪʿ",
+  "description": "Hadiths inventés/fabriqués - Mawḍūʿ",
+  "entrees": [
+    {
+      "contenu_fr": "Mawḍūʿ (موضوع) : Fabrication - hadith totalement inventé, fabriqué de toutes pièces et faussement attribué au Prophète (ﷺ). C'est le plus grave des défauts. Le narrateur est généralement accusé de mensonge (kadhb) ou de fabrication (waḍʿ).",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Nukhbat al-Fikar - Ibn Ḥajar",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Waḍḍāʿ (وضاع) : Faussaire de hadiths - narrateur qui invente des hadiths et les attribue au Prophète (ﷺ). C'est le pire des crimes dans la transmission du hadith.",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Al-Rafʿ wa al-Takmīl fī al-Jarḥ wa al-Taʿdīl",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Kadhdhāb (كذاب) : Menteur - narrateur accusé de mensonge dans le hadith. Son témoignage est rejeté.",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Al-Rafʿ wa al-Takmīl fī al-Jarḥ wa al-Taʿdīl",
+      "url": null,
+      "statut": "VALIDÉ"
+    }
+  ],
+  "statut_global": "REMPLI",
+  "sources_utilisees": ["lexique_de_fer"],
+  "count_entrees": 3
+}

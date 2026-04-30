@@ -1,0 +1,25 @@
+{
+  "zone": 26,
+  "nom": "CORROBORATION CORANIQUE",
+  "description": "Concordance Coran-Sunnah",
+  "entrees": [
+    {
+      "contenu_fr": "Corroboration coranique : Le hadith authentique ne peut contredire le Qurʾān. Tout hadith apparemment contradictoire doit être réconcilié ou rejeté si la contradiction est avérée.",
+      "source": "islamhouse",
+      "titre_ouvrage": "Harmonie Qurʾān-Sunnah",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Méthode de conciliation : 1) Vérifier l'authenticité du hadith, 2) Rechercher l'interprétation possible, 3) Considérer les spécifications contextuelles, 4) Rejeter si contradiction irréconciliable.",
+      "source": "islamweb",
+      "titre_ouvrage": "Principes de conciliation",
+      "url": "https://islamweb.net/fr",
+      "statut": "PENDING_FR"
+    }
+  ],
+  "statut_global": "VIDE",
+  "sources_utilisees": [],
+  "count_entrees": 0,
+  "note": "Zone en PENDING_FR - sources islamhouse/islamweb nécessitent spidering"
+}

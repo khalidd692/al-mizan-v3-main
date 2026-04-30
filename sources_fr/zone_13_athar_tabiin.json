@@ -1,0 +1,24 @@
+{
+  "zone": 13,
+  "nom": "ĀTHĀR TĀBIʿĪN",
+  "description": "Paroles et pratiques des Successeurs (Tābiʿīn)",
+  "entrees": [
+    {
+      "contenu_fr": "Āthār al-Tābiʿīn (آثار التابعين) : Paroles et pratiques des générations suivant les Compagnons. Les Tābiʿīn sont la source principale du fiqh et de la transmission du hadith.",
+      "source": "islamhouse",
+      "titre_ouvrage": "Musannaf Ibn Abī Shaybah",
+      "url": "https://islamhouse.com",
+      "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Tābiʿī (تابعي) : Successeur - celui qui a rencontré des Compagnons du Prophète (ﷺ) et a transmis d'eux. La génération des Tābiʿīn est la deuxième génération de l'Islam.",
+      "source": "bibliotheque-islamique",
+      "titre_ouvrage": "Lexique de terminologie de hadith",
+      "url": "https://bibliotheque-islamique.fr/hadith/lexique-de-terminologie-de-hadith/",
+      "statut": "DRAFT_A_VÉRIFIER"
+    }
+  ],
+  "statut_global": "PARTIEL",
+  "sources_utilisees": ["bibliotheque-islamique"],
+  "count_entrees": 1
+}

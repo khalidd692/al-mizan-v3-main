@@ -1,0 +1,17 @@
+{
+  "zone": 1,
+  "nom": "INITIALISATION",
+  "description": "Données internes uniquement - pas de contenu externe requis",
+  "entrees": [
+    {
+      "contenu_fr": "Structure de données interne pour l'initialisation du système Al-Mīzān. Pas de source externe requise.",
+      "source": "interne",
+      "titre_ouvrage": "Al-Mīzān System Core",
+      "url": null,
+      "statut": "VALIDÉ"
+    }
+  ],
+  "statut_global": "REMPLI",
+  "sources_utilisees": ["interne"],
+  "count_entrees": 1
+}

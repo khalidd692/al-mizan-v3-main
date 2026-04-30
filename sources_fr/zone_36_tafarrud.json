@@ -1,0 +1,24 @@
+{
+  "zone": 36,
+  "nom": "TAFARRUD",
+  "description": "Unicité de transmission - Tafarrud",
+  "entrees": [
+    {
+      "contenu_fr": "Tafarrud (تفرد) / Mutafarrid (متفرد) : Unicité de transmission - hadith rapporté par un seul narrateur à un niveau de la chaîne. Peut être acceptable si le narrateur est thiqāh thabt (fiable et solide).",
+      "source": "lexique_de_fer",
+      "titre_ouvrage": "Nukhbat al-Fikar - Ibn Ḥajar",
+      "url": null,
+      "statut": "VALIDÉ"
+    },
+    {
+      "contenu_fr": "Types de tafarrud : 1) Tafarrud muṭlaq (absolu - unique de bout en bout), 2) Tafarrud nisbi (relatif - unique à un niveau). Le tafarrud n'implique pas nécessairement la faiblesse.",
+      "source": "bibliotheque-islamique",
+      "titre_ouvrage": "Lexique de terminologie de hadith",
+      "url": "https://bibliotheque-islamique.fr/hadith/lexique-de-terminologie-de-hadith/",
+      "statut": "DRAFT_A_VÉRIFIER"
+    }
+  ],
+  "statut_global": "PARTIEL",
+  "sources_utilisees": ["lexique_de_fer", "bibliotheque-islamique"],
+  "count_entrees": 2
+}
