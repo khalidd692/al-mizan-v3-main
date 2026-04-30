@@ -3477,208 +3477,31 @@ async def _stream_takhrij(query: str) -> AsyncGenerator[str, None]:
         return
     # ─────────────────────────────────────────────────────────────────────────
 
-    yield _sse("status", {"step": "INITIALISATION", "message": "Ouverture des registres"})
+    yield _sse("status", {"step": "INITIALISATION", "message": "Recherche locale FTS5"})
     await asyncio.sleep(0)
 
-    api_key        = os.environ.get("ANTHROPIC_API_KEY", "")
     query_original = query.strip()
-    query_ar       = query_original
 
-    async with httpx.AsyncClient(
-        timeout=httpx.Timeout(30.0, connect=6.0),
-        headers={"User-Agent": "Mozilla/5.0 (AlMizan/24.0)"},
-        follow_redirects=True,
-        trust_env=False,
-    ) as client:
+    # ── RECHERCHE LOCALE FTS5 UNIQUEMENT ─────────────────────────────
+    db_results = search_hadith(query_original, limit=10)
 
-        # TRADUCTION ───────────────────────────────────────────────────────
-        if not _is_arabic(query_ar):
-            yield _sse("status", {
-                "step":    "TRADUCTION",
-                "message": f"Traduction de «{query_ar}» en arabe classique",
-            })
-            query_ar = await _translate_query_fr_to_ar(client, query_ar, api_key)
+    if not db_results:
+        yield _sse("error", {"message": "Aucun hadith trouvé pour cette recherche."})
+        yield _sse("done", {"total": 0})
+        return
 
-        # DORAR ────────────────────────────────────────────────────────────
-        yield _sse("status", {
-            "step":    "DORAR",
-            "message": f"Recherche Dorar.net : {query_ar}",
+    log.info(f"[LOCAL_FTS5] {len(db_results)} résultats (best_rank={db_results[0].get('bm25_rank', 'N/A')})")
+
+    for row in db_results:
+        hadith_data = row_to_hadith_core(row)
+        yield _sse("zone_3", {
+            "zone": 3,
+            "type": "hadith_core",
+            "data": hadith_data,
+            "source": "local_db",
         })
 
-        try:
-            resp = await client.get(
-                DORAR_API_URL,
-                params={"skey": query_ar, "type": "1"},
-                timeout=TIMEOUT_DORAR,
-            )
-        except Exception as exc:
-            yield _sse("error", {"message": f"Erreur Dorar : {exc}"})
-            yield _sse("done", [])
-            return
-
-        if resp.status_code != 200:
-            yield _sse("error", {"message": f"Dorar HTTP {resp.status_code}"})
-            yield _sse("done", [])
-            return
-
-        try:
-            dorar_data = resp.json()
-        except Exception:
-            yield _sse("error", {"message": "Réponse Dorar non-JSON"})
-            yield _sse("done", [])
-            return
-
-        raw_html = dorar_data.get("ahadith", {}).get("result", "")
-        
-        # ── FALLBACK : Base locale si Dorar vide ───────────────────────────
-        if not raw_html:
-            log.info("[FALLBACK] Dorar vide → recherche base locale")
-            db_results = search_hadith(query_original, limit=3)
-            if db_results:
-                for row in db_results:
-                    hadith_data = row_to_hadith_core(row)
-                    yield _sse("zone_3", {
-                        "zone": 3,
-                        "type": "hadith_core",
-                        "data": hadith_data,
-                    })
-            yield _sse("done", [])
-            return
-
-        hadiths_bruts = _parse_dorar_html(raw_html)
-        
-        # ── FALLBACK : Base locale si parsing échoue ─────────────────────
-        if not hadiths_bruts:
-            log.info("[FALLBACK] Dorar parsing échoue → recherche base locale")
-            db_results = search_hadith(query_original, limit=3)
-            if db_results:
-                for row in db_results:
-                    hadith_data = row_to_hadith_core(row)
-                    yield _sse("zone_3", {
-                        "zone": 3,
-                        "type": "hadith_core",
-                        "data": hadith_data,
-                    })
-            yield _sse("done", [])
-            return
-
-        # ── DÉDUPLICATION PAR AUTORITÉ (anti-dégradation Sahîhayn) ───────
-        hadiths_bruts = _dedupe_hadiths_by_authority(hadiths_bruts)
-
-        # ── TRI : Sahîh en tête de liste (index 0) ──────────────────────
-        hadiths_bruts = _sort_sahih_first(hadiths_bruts)
-
-        # Envoi immédiat des données brutes pour affichage instantané
-        yield _sse("dorar", [
-            {
-                "arabic_text": h.get("ar_text", ""),
-                "savant":      h.get("mohaddith", ""),
-                "source":      h.get("source", ""),
-                "grade":       h.get("hukm_raw", ""),
-                "rawi":        h.get("rawi", ""),
-            }
-            for h in hadiths_bruts[:MAX_RESULTS]
-        ])
-
-        # SANAD + HUKM + ENRICHISSEMENT ────────────────────────────────────
-        for idx, hadith in enumerate(hadiths_bruts[:MAX_RESULTS]):
-
-            yield _sse("status", {
-                "step":    "SANAD",
-                "message": (
-                    f"Extraction silsila hadith {idx + 1}/"
-                    f"{min(len(hadiths_bruts), MAX_RESULTS)}"
-                ),
-            })
-
-            detail_chain: list[dict[str, Any]] = []
-            if hadith.get("detail_url"):
-                detail_chain = await _fetch_silsila_from_detail(
-                    client, hadith["detail_url"]
-                )
-
-            silsila = _build_silsila(hadith, detail_chain or None)
-
-            yield _sse("status", {
-                "step":    "HUKM",
-                "message": f"Application du dictionnaire Hukm — hadith {idx + 1}",
-            })
-
-            hukm    = hadith.get("hukm") or _apply_hukm(hadith.get("hukm_raw", ""))
-            # RÈGLE DE FER : score 100 (Bukhârî/Muslim) → Sahîh forcé
-            hukm    = _apply_authority_override(hadith, hukm)
-            grouped = _group_verdicts_by_mohaddith(hadith.get("all_verdicts", []))
-            takhrij = _build_takhrij(hadith)
-
-            # ── Zones déterministes (zéro IA, lecture seule Dorar) ──
-            grille_albani_txt = _extract_albani_from_verdicts(
-                hadith.get("all_verdicts", [])
-            )
-            shurut_sihhah_txt = _derive_shurut_sihhah_from_silsila(
-                silsila,
-                grouped,
-                hukm.get("level", "unknown"),
-                hadith.get("hukm_raw", ""),
-            )
-
-            # ── Traduction matn + enrichissement Claude EN PARALLÈLE ──
-            #    Option Silencieuse : toute erreur → chaînes vides, pas de
-            #    propagation au frontend, pas de badge UI.
-            matn_fr, enrich = await asyncio.gather(
-                _translate_matn_ar_to_fr(
-                    client,
-                    hadith.get("ar_text", ""),
-                    api_key,
-                    hukm.get("fr", ""),
-                ),
-                _enrich_via_claude(
-                    client,
-                    hadith.get("ar_text", ""),
-                    hukm.get("fr", ""),
-                    hadith.get("mohaddith", ""),
-                    hadith.get("source", ""),
-                    api_key,
-                ),
-            )
-
-            yield _sse("hadith", {
-                "index": idx,
-                "data": {
-                    # ── Zone 1 : Matn ───────────────────────────────────
-                    "arabic_text":    hadith.get("ar_text", "") or MISSING,
-                    "french_text":    matn_fr,
-                    # ── Zone 2 : Métadonnées sources ────────────────────
-                    "savant":         hadith.get("mohaddith", "") or MISSING,
-                    "source":         hadith.get("source", "") or MISSING,
-                    "rawi":           hadith.get("rawi", "") or MISSING,
-                    # ── Zone 3 : Hukm / Verdict ─────────────────────────
-                    "grade_ar":       hukm.get("ar", MISSING),
-                    "grade_fr":       hukm.get("fr", MISSING),
-                    "grade_level":    hukm.get("level", "unknown"),
-                    "grade_color":    hukm.get("color", "#6b7280"),
-                    "grade_def":      hukm.get("definition", MISSING),
-                    "grade_by_mohadd": grouped,
-                    # ── Zone 4 : Silsila / Isnad ─────────────────────────
-                    "silsila":        silsila,
-                    "silsila_nodes":  len(silsila),
-                    "silsila_valid":  _silsila_is_valid(silsila),
-                    # ── Zone 5 : Takhrîj ─────────────────────────────────
-                    "takhrij":        takhrij,
-                    # ── Zone 6 : Score d'autorité (Barème de Fer) ────────
-                    "_authority_score": hadith.get("_authority_score", 0),
-                    # ── Zones 7-12 : Enrichissement (Amâna — "" si absent) ─
-                    "grille_albani":    grille_albani_txt    or "",
-                    "sanad_conditions": shurut_sihhah_txt    or "",
-                    "gharib":           enrich.get("gharib",      ""),
-                    "sabab_wurud":      enrich.get("sabab_wurud", ""),
-                    "fawaid":           enrich.get("fawaid",      ""),
-                },
-            })
-
-        yield _sse("status", {
-            "step": "HUKM", "message": "Pipeline terminé — résultats prêts"
-        })
-        yield _sse("done", {"total": min(len(hadiths_bruts), MAX_RESULTS)})
+    yield _sse("done", {"total": len(db_results), "source": "local_db"})
 
 
 # ─────────────────────────────────────────────────────────────────────────────

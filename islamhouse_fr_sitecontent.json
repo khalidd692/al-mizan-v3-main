@@ -1,0 +1,68 @@
+[
+  {
+    "block_name": "showall",
+    "type": "section",
+    "items_count": 2048,
+    "api_url": "https://api3.islamhouse.com/v3/ISLAMHOUSE_API_KEY_REDACTED/main/showall/fr/fr/1/25/json"
+  },
+  {
+    "block_name": "videos",
+    "type": "section",
+    "items_count": 485,
+    "api_url": "https://api3.islamhouse.com/v3/ISLAMHOUSE_API_KEY_REDACTED/main/videos/fr/fr/1/25/json"
+  },
+  {
+    "block_name": "books",
+    "type": "section",
+    "items_count": 361,
+    "api_url": "https://api3.islamhouse.com/v3/ISLAMHOUSE_API_KEY_REDACTED/main/books/fr/fr/1/25/json"
+  },
+  {
+    "block_name": "articles",
+    "type": "section",
+    "items_count": 228,
+    "api_url": "https://api3.islamhouse.com/v3/ISLAMHOUSE_API_KEY_REDACTED/main/articles/fr/fr/1/25/json"
+  },
+  {
+    "block_name": "audios",
+    "type": "section",
+    "items_count": 621,
+    "api_url": "https://api3.islamhouse.com/v3/ISLAMHOUSE_API_KEY_REDACTED/main/audios/fr/fr/1/25/json"
+  },
+  {
+    "block_name": "fatwa",
+    "type": "section",
+    "items_count": 290,
+    "api_url": "https://api3.islamhouse.com/v3/ISLAMHOUSE_API_KEY_REDACTED/main/fatwa/fr/fr/1/25/json"
+  },
+  {
+    "block_name": "favorites",
+    "type": "section",
+    "items_count": 15,
+    "api_url": "https://api3.islamhouse.com/v3/ISLAMHOUSE_API_KEY_REDACTED/main/favorites/fr/fr/1/25/json"
+  },
+  {
+    "block_name": "programsv",
+    "type": "section",
+    "items_count": 5,
+    "api_url": "https://api3.islamhouse.com/v3/ISLAMHOUSE_API_KEY_REDACTED/main/programsv/fr/fr/1/25/json"
+  },
+  {
+    "block_name": "poster",
+    "type": "section",
+    "items_count": 18,
+    "api_url": "https://api3.islamhouse.com/v3/ISLAMHOUSE_API_KEY_REDACTED/main/poster/fr/fr/1/25/json"
+  },
+  {
+    "block_name": "apps",
+    "type": "section",
+    "items_count": 3,
+    "api_url": "https://api3.islamhouse.com/v3/ISLAMHOUSE_API_KEY_REDACTED/main/apps/fr/fr/1/25/json"
+  },
+  {
+    "block_name": "khotab",
+    "type": "section",
+    "items_count": 22,
+    "api_url": "https://api3.islamhouse.com/v3/ISLAMHOUSE_API_KEY_REDACTED/main/khotab/fr/fr/1/25/json"
+  }
+]

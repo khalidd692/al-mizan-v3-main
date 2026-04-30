@@ -16,10 +16,21 @@
       "titre_ouvrage": "Collections secondaires",
       "url": "https://islamhouse.com",
       "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "j’écris quelques mots pour avertir celui qui a une clairvoyance acérée sur ce crime contre la législation d’Allah qu’est le livre « la Sunna prophétique entre les gens de la jurisprudence et les gens ",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Caractéristiques de la science d’Al-Ghazali dans son livre « La sunna prophétique »",
+      "url": "https://islamhouse.com/fr/books/272831",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-Islamhouse-Ghazali.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 272831
     }
   ],
-  "statut_global": "VIDE",
-  "sources_utilisees": [],
-  "count_entrees": 0,
+  "statut_global": "REMPLI",
+  "sources_utilisees": [
+    "islamhouse_api"
+  ],
+  "count_entrees": 3,
   "note": "Zone en PENDING_FR - sources dorar/islamhouse nécessitent spidering"
 }

@@ -34,6 +34,7 @@ def _get_orch():
     return _orch
 
 _REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent
+_FRONTEND_DIR = _REPO_ROOT / "frontend"
 
 VERSION = "5.0.0-dev"
 
@@ -103,7 +104,7 @@ routes = [
     Route("/api/health", health),
     Route("/api/search", search),
     Mount("/", app=StaticFiles(
-        directory=str(_REPO_ROOT),
+        directory=str(_FRONTEND_DIR),
         html=True
     )),
 ]

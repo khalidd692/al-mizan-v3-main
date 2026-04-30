@@ -1,0 +1,926 @@
+RAPPORT D'ARBORESCENCE COMPLET — AL-MIZAN
+========================================================================
+Racine: C:\Users\sabri\Desktop\al-mizan-v3-main
+Total fichiers: 41148
+Total dossiers: 3894
+Taille totale (approximative): 3092.25 Mo
+
+REGLES APPLIQUEES
+------------------------------------------------------------------------
+- Mode Demo / Mock / Fixtures: toujours VISIBLE
+- Documentation (.md, .clauderules, .cursorrules): toujours VISIBLE
+- Caches / environnements / logs / dependances locales: candidats .cursorignore
+
+INVENTAIRE RACINE + VERDICT
+------------------------------------------------------------------------
+* .clauderules [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.04 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Fichier de règles/documentation protégé explicitement.
+  - Plus gros fichiers (top):
+    - .clauderules (0.02 Mo)
+    - .clauderules (0.02 Mo)
+
+* .env.example [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - .env.example (0.00 Mo)
+    - .env.example (0.00 Mo)
+
+* .git [DOSSIER]
+  - Contenu: 846 fichiers, 278 dossiers, 296.66 Mo
+  - Verdict: [À CACHER DANS .cursorignore]
+  - Justification: Dossier système/cache/dépendances locales non nécessaire à l'analyse.
+  - Plus gros fichiers (top):
+    - .git\objects\d8\e8f9cd09bc001bc42e9c47412d4741c948652d (110.71 Mo)
+    - .git\objects\5a\1c7c10e7ab6a61bc82bd90e30e9cbf1585eb6c (110.56 Mo)
+    - .git\objects\23\eb0a922f1b0260111467f4729824b78259d8fe (45.88 Mo)
+
+* .gitignore [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - .gitignore (0.00 Mo)
+    - .gitignore (0.00 Mo)
+
+* .pytest_cache [DOSSIER]
+  - Contenu: 6 fichiers, 4 dossiers, 0.00 Mo
+  - Verdict: [À CACHER DANS .cursorignore]
+  - Justification: Dossier système/cache/dépendances locales non nécessaire à l'analyse.
+  - Plus gros fichiers (top):
+    - .pytest_cache\v\cache\nodeids (0.00 Mo)
+    - .pytest_cache\README.md (0.00 Mo)
+    - .pytest_cache\CACHEDIR.TAG (0.00 Mo)
+
+* .venv [DOSSIER]
+  - Contenu: 38942 fichiers, 3459 dossiers, 1314.23 Mo
+  - Verdict: [À CACHER DANS .cursorignore]
+  - Justification: Dossier système/cache/dépendances locales non nécessaire à l'analyse.
+  - Plus gros fichiers (top):
+    - .venv\Lib\site-packages\torch\lib\torch_cpu.dll (253.51 Mo)
+    - .venv\Lib\site-packages\cv2\cv2.pyd (71.24 Mo)
+    - .venv\Lib\site-packages\torch\lib\torch_cpu.lib (28.29 Mo)
+
+* .vercelignore [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - .vercelignore (0.00 Mo)
+    - .vercelignore (0.00 Mo)
+
+* .vscode [DOSSIER]
+  - Contenu: 2 fichiers, 2 dossiers, 0.00 Mo
+  - Verdict: [À CACHER DANS .cursorignore]
+  - Justification: Dossier système/cache/dépendances locales non nécessaire à l'analyse.
+  - Plus gros fichiers (top):
+    - .vscode\settings.json (0.00 Mo)
+    - .vscode\extensions.json (0.00 Mo)
+
+* add_content_hash_column.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - add_content_hash_column.py (0.00 Mo)
+    - add_content_hash_column.py (0.00 Mo)
+
+* analyse_harvesting_actuel.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - analyse_harvesting_actuel.py (0.01 Mo)
+    - analyse_harvesting_actuel.py (0.01 Mo)
+
+* analyse_naqil_complet.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.02 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - analyse_naqil_complet.py (0.01 Mo)
+    - analyse_naqil_complet.py (0.01 Mo)
+
+* api [DOSSIER]
+  - Contenu: 2 fichiers, 2 dossiers, 0.17 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - api\index.py (0.16 Mo)
+    - api\demo_responses.json (0.01 Mo)
+
+* app.js [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.08 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - app.js (0.04 Mo)
+    - app.js (0.04 Mo)
+
+* apply_migration_004.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - apply_migration_004.py (0.00 Mo)
+    - apply_migration_004.py (0.00 Mo)
+
+* apply_migration_almizane.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - apply_migration_almizane.py (0.00 Mo)
+    - apply_migration_almizane.py (0.00 Mo)
+
+* apply_migrations.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - apply_migrations.py (0.00 Mo)
+    - apply_migrations.py (0.00 Mo)
+
+* apply_migrations_v2.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - apply_migrations_v2.py (0.00 Mo)
+    - apply_migrations_v2.py (0.00 Mo)
+
+* audit_complet_122k.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.02 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - audit_complet_122k.py (0.01 Mo)
+    - audit_complet_122k.py (0.01 Mo)
+
+* AUDIT_PROJET.md [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.02 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Documentation demandée visible.
+  - Plus gros fichiers (top):
+    - AUDIT_PROJET.md (0.01 Mo)
+    - AUDIT_PROJET.md (0.01 Mo)
+
+* backend [DOSSIER]
+  - Contenu: 1005 fichiers, 124 dossiers, 1281.81 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - backend\mizan.db (335.13 Mo)
+    - backend\almizane.db (334.82 Mo)
+    - backend\corpus\Open-Hadith-Data\.git\objects\pack\pack-cd8a65f3941b112694f2fca9175d522768379748.pack (48.28 Mo)
+
+* backup_almizane.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - backup_almizane.py (0.00 Mo)
+    - backup_almizane.py (0.00 Mo)
+
+* backups [DOSSIER]
+  - Contenu: 1 fichiers, 2 dossiers, 184.66 Mo
+  - Verdict: [À CACHER DANS .cursorignore]
+  - Justification: Dossier système/cache/dépendances locales non nécessaire à l'analyse.
+  - Plus gros fichiers (top):
+    - backups\almizane_20260419_002140.db (184.66 Mo)
+
+* calculer_taux_autorisation.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - calculer_taux_autorisation.py (0.00 Mo)
+    - calculer_taux_autorisation.py (0.00 Mo)
+
+* check_almizane_schema.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - check_almizane_schema.py (0.00 Mo)
+    - check_almizane_schema.py (0.00 Mo)
+
+* check_bukhari.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - check_bukhari.py (0.00 Mo)
+    - check_bukhari.py (0.00 Mo)
+
+* check_db.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - check_db.py (0.00 Mo)
+    - check_db.py (0.00 Mo)
+
+* check_db_stats.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - check_db_stats.py (0.00 Mo)
+    - check_db_stats.py (0.00 Mo)
+
+* check_db_status.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - check_db_status.py (0.00 Mo)
+    - check_db_status.py (0.00 Mo)
+
+* check_db_structure.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - check_db_structure.py (0.00 Mo)
+    - check_db_structure.py (0.00 Mo)
+
+* check_dorar_verdicts.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - check_dorar_verdicts.py (0.00 Mo)
+    - check_dorar_verdicts.py (0.00 Mo)
+
+* check_entries.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - check_entries.py (0.00 Mo)
+    - check_entries.py (0.00 Mo)
+
+* check_final_status.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - check_final_status.py (0.00 Mo)
+    - check_final_status.py (0.00 Mo)
+
+* check_grades_status.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - check_grades_status.py (0.00 Mo)
+    - check_grades_status.py (0.00 Mo)
+
+* check_harvesting_progress.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - check_harvesting_progress.py (0.00 Mo)
+    - check_harvesting_progress.py (0.00 Mo)
+
+* check_import.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - check_import.py (0.00 Mo)
+    - check_import.py (0.00 Mo)
+
+* check_import_status.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - check_import_status.py (0.00 Mo)
+    - check_import_status.py (0.00 Mo)
+
+* check_recueils_status.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.02 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - check_recueils_status.py (0.01 Mo)
+    - check_recueils_status.py (0.01 Mo)
+
+* check_schema.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - check_schema.py (0.00 Mo)
+    - check_schema.py (0.00 Mo)
+
+* cloudflare-worker [DOSSIER]
+  - Contenu: 1 fichiers, 2 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - cloudflare-worker\routes_v7.js (0.01 Mo)
+
+* configure_omniroute.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.02 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - configure_omniroute.py (0.01 Mo)
+    - configure_omniroute.py (0.01 Mo)
+
+* Constitution_v4.md [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.22 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Documentation demandée visible.
+  - Plus gros fichiers (top):
+    - Constitution_v4.md (0.11 Mo)
+    - Constitution_v4.md (0.11 Mo)
+
+* corpus [DOSSIER]
+  - Contenu: 1 fichiers, 5 dossiers, 0.02 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - corpus\__pycache__\Smart_Harvester.cpython-312.pyc (0.02 Mo)
+
+* data.js [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.03 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - data.js (0.01 Mo)
+    - data.js (0.01 Mo)
+
+* db.js [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.16 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - db.js (0.08 Mo)
+    - db.js (0.08 Mo)
+
+* debug_dorar_parser.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - debug_dorar_parser.py (0.00 Mo)
+    - debug_dorar_parser.py (0.00 Mo)
+
+* debug_import.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - debug_import.py (0.00 Mo)
+    - debug_import.py (0.00 Mo)
+
+* detecter_doublons.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - detecter_doublons.py (0.00 Mo)
+    - detecter_doublons.py (0.00 Mo)
+
+* dorar_test_1.json [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.03 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - dorar_test_1.json (0.01 Mo)
+    - dorar_test_1.json (0.01 Mo)
+
+* dorar_test_2.json [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.03 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - dorar_test_2.json (0.01 Mo)
+    - dorar_test_2.json (0.01 Mo)
+
+* dorar_test_3.json [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.03 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - dorar_test_3.json (0.01 Mo)
+    - dorar_test_3.json (0.01 Mo)
+
+* engine.js [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.49 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - engine.js (0.25 Mo)
+    - engine.js (0.25 Mo)
+
+* extract_db_info.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - extract_db_info.py (0.01 Mo)
+    - extract_db_info.py (0.01 Mo)
+
+* extract_db_info_simple.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - extract_db_info_simple.py (0.01 Mo)
+    - extract_db_info_simple.py (0.01 Mo)
+
+* faq.js [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.04 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - faq.js (0.02 Mo)
+    - faq.js (0.02 Mo)
+
+* frontend [DOSSIER]
+  - Contenu: 14 fichiers, 4 dossiers, 0.10 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - frontend\medine-tools-ui.html (0.03 Mo)
+    - frontend\js\v7-ui.js (0.01 Mo)
+    - frontend\js\timeline-module.js (0.01 Mo)
+
+* glossaire.js [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.04 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - glossaire.js (0.02 Mo)
+    - glossaire.js (0.02 Mo)
+
+* hadith_grade_engine_v3.js [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.04 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - hadith_grade_engine_v3.js (0.02 Mo)
+    - hadith_grade_engine_v3.js (0.02 Mo)
+
+* IMPORT_GRATUIT_README.md [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Documentation demandée visible.
+  - Plus gros fichiers (top):
+    - IMPORT_GRATUIT_README.md (0.00 Mo)
+    - IMPORT_GRATUIT_README.md (0.00 Mo)
+
+* import_riyad_salihin.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - import_riyad_salihin.py (0.01 Mo)
+    - import_riyad_salihin.py (0.01 Mo)
+
+* index.html [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.35 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - index.html (0.18 Mo)
+    - index.html (0.18 Mo)
+
+* init_mizan_db.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - init_mizan_db.py (0.00 Mo)
+    - init_mizan_db.py (0.00 Mo)
+
+* KIRO_INSTALLATION_COMPLETE.md [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Documentation demandée visible.
+  - Plus gros fichiers (top):
+    - KIRO_INSTALLATION_COMPLETE.md (0.01 Mo)
+    - KIRO_INSTALLATION_COMPLETE.md (0.01 Mo)
+
+* KIRO_SETUP_COMPLETE.md [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.03 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Documentation demandée visible.
+  - Plus gros fichiers (top):
+    - KIRO_SETUP_COMPLETE.md (0.01 Mo)
+    - KIRO_SETUP_COMPLETE.md (0.01 Mo)
+
+* legacy [DOSSIER]
+  - Contenu: 14 fichiers, 4 dossiers, 1.55 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - legacy\preachers.js (0.49 Mo)
+    - legacy\engine.js (0.24 Mo)
+    - legacy\index.html (0.17 Mo)
+
+* lire_hadiths.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - lire_hadiths.py (0.00 Mo)
+    - lire_hadiths.py (0.00 Mo)
+
+* lister_collections_distinctes.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - lister_collections_distinctes.py (0.00 Mo)
+    - lister_collections_distinctes.py (0.00 Mo)
+
+* logs [DOSSIER]
+  - Contenu: 1 fichiers, 2 dossiers, 0.00 Mo
+  - Verdict: [À CACHER DANS .cursorignore]
+  - Justification: Dossier système/cache/dépendances locales non nécessaire à l'analyse.
+  - Plus gros fichiers (top):
+    - logs\mizan_audit.jsonl (0.00 Mo)
+
+* MCP_EXTENSIONS_GUIDE.md [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Documentation demandée visible.
+  - Plus gros fichiers (top):
+    - MCP_EXTENSIONS_GUIDE.md (0.00 Mo)
+    - MCP_EXTENSIONS_GUIDE.md (0.00 Mo)
+
+* migrate_almizane_to_mizan.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.02 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - migrate_almizane_to_mizan.py (0.01 Mo)
+    - migrate_almizane_to_mizan.py (0.01 Mo)
+
+* mizan-tree-engine.js [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.05 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - mizan-tree-engine.js (0.03 Mo)
+    - mizan-tree-engine.js (0.03 Mo)
+
+* mizan_scanner.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - mizan_scanner.py (0.01 Mo)
+    - mizan_scanner.py (0.01 Mo)
+
+* monitor_100k.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - monitor_100k.py (0.00 Mo)
+    - monitor_100k.py (0.00 Mo)
+
+* monitor_110k.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - monitor_110k.py (0.00 Mo)
+    - monitor_110k.py (0.00 Mo)
+
+* monitor_autonomous_200k.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - monitor_autonomous_200k.py (0.00 Mo)
+    - monitor_autonomous_200k.py (0.00 Mo)
+
+* monitor_import.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - monitor_import.py (0.01 Mo)
+    - monitor_import.py (0.01 Mo)
+
+* monitor_kutub_sittah.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - monitor_kutub_sittah.py (0.00 Mo)
+    - monitor_kutub_sittah.py (0.00 Mo)
+
+* monitor_ultimate_harvest.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - monitor_ultimate_harvest.py (0.01 Mo)
+    - monitor_ultimate_harvest.py (0.01 Mo)
+
+* monitor_ultimate_salafi.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - monitor_ultimate_salafi.py (0.00 Mo)
+    - monitor_ultimate_salafi.py (0.00 Mo)
+
+* nettoyer_doublons_collections.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - nettoyer_doublons_collections.py (0.00 Mo)
+    - nettoyer_doublons_collections.py (0.00 Mo)
+
+* normaliser_toutes_collections.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - normaliser_toutes_collections.py (0.00 Mo)
+    - normaliser_toutes_collections.py (0.00 Mo)
+
+* output [DOSSIER]
+  - Contenu: 110 fichiers, 2 dossiers, 9.48 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - output\migration_almizane_mizan.log (8.76 Mo)
+    - output\DB_EXTRACTION_COMPLETE.json (0.03 Mo)
+    - output\api_tier3_test_results.json (0.03 Mo)
+
+* PHASE1_COMPLETE.md [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Documentation demandée visible.
+  - Plus gros fichiers (top):
+    - PHASE1_COMPLETE.md (0.01 Mo)
+    - PHASE1_COMPLETE.md (0.01 Mo)
+
+* PHASE2_IMPLEMENTATION.md [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.02 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Documentation demandée visible.
+  - Plus gros fichiers (top):
+    - PHASE2_IMPLEMENTATION.md (0.01 Mo)
+    - PHASE2_IMPLEMENTATION.md (0.01 Mo)
+
+* preachers.js [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.98 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - preachers.js (0.49 Mo)
+    - preachers.js (0.49 Mo)
+
+* preuves_hadiths.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - preuves_hadiths.py (0.00 Mo)
+    - preuves_hadiths.py (0.00 Mo)
+
+* rapport_complet_db.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - rapport_complet_db.py (0.00 Mo)
+    - rapport_complet_db.py (0.00 Mo)
+
+* rapport_db_final.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - rapport_db_final.py (0.00 Mo)
+    - rapport_db_final.py (0.00 Mo)
+
+* RAPPORT_ETAT_PROJET.md [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.04 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Documentation demandée visible.
+  - Plus gros fichiers (top):
+    - RAPPORT_ETAT_PROJET.md (0.02 Mo)
+    - RAPPORT_ETAT_PROJET.md (0.02 Mo)
+
+* RAPPORT_FINAL_PHASE1.md [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.04 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Documentation demandée visible.
+  - Plus gros fichiers (top):
+    - RAPPORT_FINAL_PHASE1.md (0.02 Mo)
+    - RAPPORT_FINAL_PHASE1.md (0.02 Mo)
+
+* rawi-modal.js [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.02 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - rawi-modal.js (0.01 Mo)
+    - rawi-modal.js (0.01 Mo)
+
+* README.md [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Documentation demandée visible.
+  - Plus gros fichiers (top):
+    - README.md (0.00 Mo)
+    - README.md (0.00 Mo)
+
+* render.yaml [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - render.yaml (0.00 Mo)
+    - render.yaml (0.00 Mo)
+
+* requirements.txt [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - requirements.txt (0.00 Mo)
+    - requirements.txt (0.00 Mo)
+
+* stats_simples.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - stats_simples.py (0.00 Mo)
+    - stats_simples.py (0.00 Mo)
+
+* style.css [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.25 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - style.css (0.12 Mo)
+    - style.css (0.12 Mo)
+
+* test_api_hadith_gading.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - test_api_hadith_gading.py (0.00 Mo)
+    - test_api_hadith_gading.py (0.00 Mo)
+
+* test_api_response.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - test_api_response.py (0.00 Mo)
+    - test_api_response.py (0.00 Mo)
+
+* test_dorar_grader.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - test_dorar_grader.py (0.00 Mo)
+    - test_dorar_grader.py (0.00 Mo)
+
+* test_import_rapide.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - test_import_rapide.py (0.01 Mo)
+    - test_import_rapide.py (0.01 Mo)
+
+* test_llm_router.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - test_llm_router.py (0.00 Mo)
+    - test_llm_router.py (0.00 Mo)
+
+* test_matching.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - test_matching.py (0.00 Mo)
+    - test_matching.py (0.00 Mo)
+
+* test_medine_api.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.03 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - test_medine_api.py (0.02 Mo)
+    - test_medine_api.py (0.02 Mo)
+
+* test_omniroute.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - test_omniroute.py (0.00 Mo)
+    - test_omniroute.py (0.00 Mo)
+
+* test_sources_riyad_salihin.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - test_sources_riyad_salihin.py (0.00 Mo)
+    - test_sources_riyad_salihin.py (0.00 Mo)
+
+* test_together.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - test_together.py (0.00 Mo)
+    - test_together.py (0.00 Mo)
+
+* tests [DOSSIER]
+  - Contenu: 7 fichiers, 4 dossiers, 0.02 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - tests\__pycache__\test_db.cpython-312-pytest-8.3.4.pyc (0.01 Mo)
+    - tests\__pycache__\test_boot.cpython-312-pytest-8.3.4.pyc (0.00 Mo)
+    - tests\test_db.py (0.00 Mo)
+
+* ultimate_salafi_harvest.log [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.04 Mo
+  - Verdict: [À CACHER DANS .cursorignore]
+  - Justification: Fichier artefact/cache/log inutile pour le raisonnement.
+  - Plus gros fichiers (top):
+    - ultimate_salafi_harvest.log (0.02 Mo)
+    - ultimate_salafi_harvest.log (0.02 Mo)
+
+* vercel.json [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - vercel.json (0.00 Mo)
+    - vercel.json (0.00 Mo)
+
+* verifier_schema_db.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.00 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - verifier_schema_db.py (0.00 Mo)
+    - verifier_schema_db.py (0.00 Mo)
+
+* verify_configuration.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - verify_configuration.py (0.01 Mo)
+    - verify_configuration.py (0.01 Mo)
+
+* verify_mizan_v2.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - verify_mizan_v2.py (0.00 Mo)
+    - verify_mizan_v2.py (0.00 Mo)
+
+* verify_v2_migrations.py [FICHIER]
+  - Contenu: 2 fichiers, 0 dossiers, 0.01 Mo
+  - Verdict: [À GARDER VISIBLE POUR L'IA]
+  - Justification: Code, scripts, configuration ou données potentiellement utiles.
+  - Plus gros fichiers (top):
+    - verify_v2_migrations.py (0.00 Mo)
+    - verify_v2_migrations.py (0.00 Mo)
+
+RECOMMANDATION .CURSORIGNORE (PROPOSITION AUTO)
+------------------------------------------------------------------------
+.git/
+.pytest_cache/
+.venv/
+.vscode/
+backups/
+logs/
+*.log
+
+NOTE: Ce rapport n'a modifie ni supprime aucun fichier.

@@ -36,15 +36,45 @@ def _strip_tashkeel(text: str) -> str:
     return _TASHKEEL.sub("", text)
 
 
+def sanitize_fts_query(query: str) -> str:
+    """
+    Nettoie la requête utilisateur pour FTS5.
+    
+    - Retire les caractères spéciaux qui cassent la syntaxe FTS5
+    - Gère les termes arabes et français
+    - FTS5 fait du AND implicite entre les tokens (comportement souhaité)
+    
+    Args:
+        query: Requête brute de l'utilisateur
+        
+    Returns:
+        Requête nettoyée sûre pour FTS5 MATCH
+    """
+    if not query or not query.strip():
+        return '""'
+    
+    # Retirer tout sauf lettres (latin + arabe), chiffres, espaces
+    # Garde aussi les guillemets pour les phrases exactes
+    clean = re.sub(r'[^\w\s"\-\u0600-\u06FF]', ' ', query, flags=re.UNICODE)
+    
+    # Supprimer les espaces multiples
+    clean = re.sub(r'\s+', ' ', clean).strip()
+    
+    if not clean:
+        return '""'
+    
+    return clean
+
+
 def search_hadith(query: str, limit: int = 5) -> list[dict]:
-    """Recherche des hadiths dans la table `entries` par mots-clés.
-
-    Stratégie :
-      1. Nettoyer la requête (tashkeel, tokenisation)
-      2. Chercher dans ar_text_clean, ar_text, fr_text, book_name_ar
-      3. Trier par grade (Sahih > Hasan > Da'if) puis zone_id
-
-    Retourne [] si la base est introuvable ou si aucun résultat.
+    """
+    Recherche locale via FTS5 avec ranking BM25.
+    
+    Retourne une liste de dicts avec un champ 'rank' BM25 
+    (plus négatif = plus pertinent).
+    
+    Retourne [] si la requête est vide, FTS5 non disponible, 
+    ou si aucun résultat pertinent.
     """
     # ── 0) Whitelist des mawdū‘ classiques : court-circuite la base ──
     whitelist_hit = check_mawdu_whitelist(query)
@@ -112,12 +142,35 @@ def search_hadith(query: str, limit: int = 5) -> list[dict]:
         LIMIT ?
     """
     params.append(limit)
-
     try:
         conn = sqlite3.connect(str(db_path), timeout=10)
         conn.row_factory = sqlite3.Row
-        rows = conn.execute(sql, params).fetchall()
+
+        # Vérifier si la table FTS5 existe
+        cur = conn.execute("""
+            SELECT name FROM sqlite_master 
+            WHERE type='table' AND name='entries_fts'
+        """)
+        if not cur.fetchone():
+            log.warning("[FTS5] Table entries_fts non trouvée")
+            conn.close()
+            return []
+
+        # Recherche FTS5 avec BM25 ranking
+        # rank est négatif: plus c'est négatif, plus c'est pertinent
+        rows = conn.execute("""
+            SELECT 
+                e.*, 
+                fts.rank as bm25_rank
+            FROM entries_fts fts
+            JOIN entries e ON e.id = fts.entries_id
+            WHERE entries_fts MATCH ?
+            ORDER BY fts.rank
+            LIMIT ?
+        """, (clean_query, limit)).fetchall()
+
         conn.close()
+
         results = [dict(r) for r in rows]
 
         # ── Score de pertinence : compter les GROUPES de concepts matchés ──

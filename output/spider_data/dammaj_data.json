@@ -1,0 +1,37 @@
+{
+  "stats": {
+    "spider": "dammaj",
+    "start_url": "https://dammaj-fr.com/omdatu-al-ahkam-le-livre-de-la-salat-complet/",
+    "started_at": "2026-04-27T10:17:19.084224",
+    "finished_at": null,
+    "pages_crawled": 2,
+    "extracted": 1,
+    "accepted": 1,
+    "rejected": 0,
+    "db_inserted": 0,
+    "db_updated": 1,
+    "errors": 0
+  },
+  "entries": [
+    {
+      "matn_ar": "Commentaire résumé et traduction des hadiths du livre de la salât de ‘Omdatu al ahkâm selon l’explication de Cheikh Ibn al ‘Outheimine رحمه الله",
+      "matn_fr": "Lien vers la page contenant tous les audios à écouter ou télécharger",
+      "collection": "Omdatu al-Ahkam",
+      "numero_hadith": "1",
+      "livre": "Salat",
+      "chapitre": null,
+      "grade_final": null,
+      "categorie": "UNKNOWN",
+      "source_url": "https://dammaj-fr.com/omdatu-al-ahkam-le-livre-de-la-salat-complet/",
+      "translator": "dammaj-fr.com",
+      "extraction_date": "2026-04-27T10:17:19.446263",
+      "sha256": "e02209d9b56eb1c222d2c1c84a8f1f50f8628f18e6a7a334ea7ba8fc4f186f67",
+      "manhaj_score": 100.0,
+      "manhaj_accepted": true,
+      "manhaj_reason": "Accepté",
+      "manhaj_flags": [],
+      "manhaj_category": "UNKNOWN"
+    }
+  ],
+  "saved_at": "2026-04-27T10:17:23.480407"
+}

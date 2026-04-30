@@ -1,4 +1,10 @@
-"""Centralise le chemin de la base de données SQLite Al-Mīzān."""
+"""
+Configuration base de données - Point central pour DB_PATH
+"""
+import os
 from pathlib import Path
 
-DB_PATH = str(Path(__file__).parent / "almizan_v7.db")
+# Détection auto du chemin DB
+DB_PATH = Path(os.environ.get(
+    "DATABASE_URL", "sqlite:///backend/database/almizan_v7.db"
+).replace("sqlite:///", "").replace("sqlite://", ""))

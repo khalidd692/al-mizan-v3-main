@@ -1,0 +1,465 @@
+{
+  "_WARNING": {
+    "status": "⚠️ DRAFT_NON_VALIDÉ ⚠️",
+    "message": "CE FICHIER NE DOIT PAS ÊTRE UTILISÉ TEL QUEL DANS LES AGENTS",
+    "action_requise": "Chaque terme doit être comparé avec sa source déclarée avant validation",
+    "validation_status": "EN_ATTENTE",
+    "date_draft": "2025-04-30",
+    "checklist_validation": [
+      "[ ] Vérifier chaque terme Source 1 contre Al-Qawāʿid al-Muthlā (Ibn al-ʿUthaymīn)",
+      "[ ] Vérifier chaque terme Source 2 contre Nukhbat al-Fikar (Ibn Ḥajar / Sharḥ al-ʿUthaymīn)",
+      "[ ] Vérifier chaque terme Source 3 contre Al-Rafʿ wa al-Takmīl (al-Laknawī / Abū Ghuddah)",
+      "[ ] Ajouter références exactes (volume + page) pour chaque terme",
+      "[ ] Valider par un expert en sciences du hadith avant production"
+    ]
+  },
+
+  "_meta": {
+    "version": "5.0-DRAFT",
+    "name": "Lexique de Fer — Al-Mīzān [DRAFT NON VALIDÉ]",
+    "description": "Source de vérité unique pour toute traduction de terme technique. Aucune IA ne traduit librement un terme couvert par ce lexique. ⚠️ CE FICHIER EST UN BROUILLON NON VALIDÉ — NE PAS INJECTER DANS LES AGENTS",
+    "status": "DRAFT_NON_VALIDÉ",
+    "rules": [
+      "Aucun terme ne peut être ajouté sans référence à l'un des ouvrages (ouvrage + volume + page)",
+      "Aucune IA ne traduit librement un terme du Lexique de Fer — elle insère uniquement la valeur fixe du JSON",
+      "Toute modification du JSON requiert validation sur source issue de ces ouvrages uniquement",
+      "Une zone reste VIDE plutôt que remplie avec un terme non couvert par ces sources"
+    ],
+    "conflict_resolution": {
+      "attributs_divins": "Al-Qawāʿid al-Muthlā fī Ṣifāt Allāhi wa Asmāʾihil-Ḥusnā (Ibn al-ʿUthaymīn)",
+      "mustalah": "Nukhbat al-Fikar (Ibn Ḥajar) + Sharḥ al-ʿUthaymīn ou Ṭāriq ʿIwaḍullāh",
+      "jarah_wa_tadil": "Al-Rafʿ wa al-Takmīl fī al-Jarḥ wa al-Taʿdīl (al-Laknawī / Abū Ghuddah)"
+    }
+  },
+
+  "source_1_attributs_divins": {
+    "_reference": "Al-Qawāʿid al-Muthlā fī Ṣifāt Allāhi wa Asmāʾihil-Ḥusnā — Cheikh Muḥammad Ibn Ṣāliḥ al-ʿUthaymīn",
+    "_zones_concernees": ["24", "25", "26"],
+    "attributs_action": {
+      "استوى": {
+        "traduction": "S'est établi",
+        "status": "VERROUILLÉ",
+        "interdits": ["S'est élevé", "S'est installé", "A dominé (figuré)", "A pris possession"]
+      },
+      "استوى على العرش": {
+        "traduction": "S'est établi sur le Trône",
+        "status": "VERROUILLÉ",
+        "interdits": ["A pris possession du Trône", "A dominé le Trône (figuré)"]
+      },
+      "نزل": {
+        "traduction": "descend",
+        "status": "VERROUILLÉ",
+        "interdits": ["se manifeste", "Descente de Sa miséricorde", "Métaphorique"]
+      },
+      "ينزل": {
+        "traduction": "descend",
+        "status": "VERROUILLÉ",
+        "interdits": ["se manifeste", "Descente de Sa miséricorde"]
+      },
+      "نزول": {
+        "traduction": "Descente réelle — comme il convient à Sa Majesté",
+        "status": "VERROUILLÉ",
+        "interdits": ["Descente de Sa miséricorde", "Métaphorique"]
+      },
+      "يأتي": {
+        "traduction": "vient",
+        "status": "VERROUILLÉ",
+        "interdits": []
+      },
+      "أتى": {
+        "traduction": "est venu",
+        "status": "VERROUILLÉ",
+        "interdits": []
+      },
+      "جاء": {
+        "traduction": "est venu",
+        "status": "VERROUILLÉ",
+        "interdits": []
+      },
+      "يجيء": {
+        "traduction": "vient",
+        "status": "VERROUILLÉ",
+        "interdits": []
+      }
+    },
+    "attributs_essentiels": {
+      "يد الله": {
+        "traduction": "la Main d'Allah",
+        "status": "VERROUILLÉ",
+        "interdits": ["la puissance d'Allah", "la grâce d'Allah", "L'essence"]
+      },
+      "يده": {
+        "traduction": "Sa Main",
+        "status": "VERROUILLÉ",
+        "interdits": ["Sa puissance", "Sa grâce"]
+      },
+      "يدي الله": {
+        "traduction": "les deux Mains d'Allah",
+        "status": "VERROUILLÉ",
+        "interdits": ["la puissance d'Allah", "la grâce"]
+      },
+      "يديه": {
+        "traduction": "Ses deux Mains",
+        "status": "VERROUILLÉ",
+        "interdits": ["Sa puissance", "Ses grâces"]
+      },
+      "وجه الله": {
+        "traduction": "le Visage d'Allah",
+        "status": "VERROUILLÉ",
+        "interdits": ["l'essence d'Allah", "la face symbolique", "Lui-même"]
+      },
+      "وجهه": {
+        "traduction": "Son Visage",
+        "status": "VERROUILLÉ",
+        "interdits": ["Son essence", "Sa face symbolique"]
+      },
+      "وجوه": {
+        "traduction": "les visages",
+        "status": "VERROUILLÉ",
+        "contexte": "Se référant à Allah ou aux croyants"
+      },
+      "عين الله": {
+        "traduction": "l'Œil d'Allah",
+        "status": "VERROUILLÉ",
+        "interdits": ["la surveillance", "la protection symbolique", "Sa connaissance"]
+      },
+      "عينه": {
+        "traduction": "Son Œil",
+        "status": "VERROUILLÉ",
+        "interdits": ["Sa surveillance", "Sa protection"]
+      },
+      "أعين الله": {
+        "traduction": "les Yeux d'Allah",
+        "status": "VERROUILLÉ",
+        "interdits": ["la surveillance", "la protection symbolique"]
+      }
+    },
+    "position_et_elevation": {
+      "فوق": {
+        "traduction": "au-dessus",
+        "status": "VERROUILLÉ",
+        "interdits": ["au-delà", "Supériorité en rang", "Métaphore"]
+      },
+      "العلو": {
+        "traduction": "l'élévation réelle",
+        "status": "VERROUILLÉ",
+        "interdits": ["Supériorité en rang", "Métaphore"]
+      },
+      "الفوقية": {
+        "traduction": "le fait d'être au-dessus",
+        "status": "VERROUILLÉ",
+        "interdits": ["la suprématie", "la domination"]
+      },
+      "في السماء": {
+        "traduction": "dans le ciel",
+        "status": "VERROUILLÉ",
+        "interdits": []
+      },
+      "على العرش": {
+        "traduction": "sur le Trône",
+        "status": "VERROUILLÉ",
+        "interdits": []
+      }
+    },
+    "attributs_sentiment": {
+      "الرحمة": {
+        "traduction_attribut": "la Miséricorde",
+        "traduction_generale": "la miséricorde",
+        "status": "VERROUILLÉ",
+        "condition": "Si attribut d'Allah → 'la Miséricorde' (capitalisé), sinon 'la miséricorde'"
+      },
+      "رحمته": {
+        "traduction": "Sa Miséricorde",
+        "status": "VERROUILLÉ"
+      },
+      "الغضب": {
+        "traduction": "la Colère réelle d'Allah",
+        "status": "VERROUILLÉ",
+        "interdits": ["État émotionnel métaphorique", "Le fait d'être mécontent"]
+      },
+      "غضبه": {
+        "traduction": "Sa Colère",
+        "status": "VERROUILLÉ",
+        "interdits": ["Son mécontentement métaphorique"]
+      },
+      "المحبة": {
+        "traduction": "l'Amour réel d'Allah",
+        "status": "VERROUILLÉ",
+        "interdits": ["La volonté de récompenser", "Métaphore"]
+      },
+      "محبته": {
+        "traduction": "Son Amour",
+        "status": "VERROUILLÉ",
+        "interdits": ["Sa volonté de récompenser"]
+      },
+      "الحب": {
+        "traduction_attribut": "l'Amour",
+        "traduction_generale": "l'amour",
+        "status": "VERROUILLÉ"
+      },
+      "حبه": {
+        "traduction": "Son Amour",
+        "status": "VERROUILLÉ"
+      },
+      "الرضا": {
+        "traduction": "l'Agrément",
+        "status": "VERROUILLÉ"
+      },
+      "رضاه": {
+        "traduction": "Son Agrément",
+        "status": "VERROUILLÉ"
+      },
+      "السخط": {
+        "traduction": "le Courroux",
+        "status": "VERROUILLÉ"
+      },
+      "سخطه": {
+        "traduction": "Son Courroux",
+        "status": "VERROUILLÉ"
+      }
+    },
+    "parole_divine": {
+      "كلام الله": {
+        "traduction": "la Parole d'Allah",
+        "status": "VERROUILLÉ",
+        "interdits": ["l'ordre d'Allah", "la création d'Allah"]
+      },
+      "كلامه": {
+        "traduction": "Sa Parole",
+        "status": "VERROUILLÉ"
+      },
+      "يتكلم": {
+        "traduction": "parle",
+        "status": "VERROUILLÉ",
+        "interdits": ["crée", "ordonne"]
+      },
+      "تكلم": {
+        "traduction": "a parlé",
+        "status": "VERROUILLÉ"
+      }
+    }
+  },
+
+  "source_2_mustalah_hadith": {
+    "_reference": "Nukhbat al-Fikar (Ibn Ḥajar) + Taysīr Muṣṭalaḥ al-Ḥadīth (Ṭaḥḥān)",
+    "_zones_concernees": ["04", "05", "06", "07", "08", "36"],
+    "terminologie_authentification": {
+      "صحيح": {
+        "traduction": "Authentique (Ṣaḥīḥ)",
+        "status": "VERROUILLÉ",
+        "conditions": "Conditions des 6 (ittisāl, ʿadālah, ḍabṭ, etc.)"
+      },
+      "حسن": {
+        "traduction": "Bon (Ḥasan)",
+        "status": "VERROUILLÉ",
+        "definition": "Hadith avec isnād solide mais moindre que ṣaḥīḥ"
+      },
+      "ضعيف": {
+        "traduction": "Faible (Ḍaʿīf)",
+        "status": "VERROUILLÉ",
+        "niveau": "Non utilisable pour les aḥkām sauf exception"
+      },
+      "ضعيف جدا": {
+        "traduction": "Très faible (Ḍaʿīf Jiddan)",
+        "status": "VERROUILLÉ",
+        "interdiction": "Ni Fiqh ni Faḍāʾil"
+      },
+      "موضوع": {
+        "traduction": "Fabrication (Mawḍūʿ)",
+        "status": "VERROUILLÉ",
+        "alerte": "🔴 ALERTE MAWḌŪʿ — Hadith inventé"
+      },
+      "منكر": {
+        "traduction": "Munkar",
+        "status": "VERROUILLÉ",
+        "definition": "Hadith non reconnu, rapporté par un narrateur faible contredisant les thiqāt"
+      },
+      "شاذ": {
+        "traduction": "Shādhdh",
+        "status": "VERROUILLÉ",
+        "definition": "Thiqah contredisant la masse des thiqāt"
+      },
+      "مضطرب": {
+        "traduction": "Muḍṭarib",
+        "status": "VERROUILLÉ",
+        "definition": "Narrations contradictoires de force égale"
+      },
+      "متروك": {
+        "traduction": "Matrūk (Abandonné)",
+        "status": "VERROUILLÉ"
+      },
+      "معلل": {
+        "traduction": "Muʿallal",
+        "status": "VERROUILLÉ",
+        "definition": "Hadith avec une cause cachée (ʿillah)"
+      },
+      "متفرد": {
+        "traduction": "Mutafarrid / Tafarrud",
+        "status": "VERROUILLÉ",
+        "definition": "Unicité de transmission par un seul narrateur"
+      }
+    },
+    "ruptures_isnad": {
+      "مرسل": {
+        "traduction": "Mursal",
+        "status": "VERROUILLÉ",
+        "definition": "Tābiʿī omet son maître (Ṣaḥābī)"
+      },
+      "منقطع": {
+        "traduction": "Munqaṭiʿ",
+        "status": "VERROUILLÉ",
+        "definition": "Rupture entre deux narrateurs non consécutifs"
+      },
+      "معضل": {
+        "traduction": "Muʿḍal",
+        "status": "VERROUILLÉ",
+        "definition": "Omission de deux narrateurs consécutifs ou plus"
+      },
+      "معلق": {
+        "traduction": "Muʿallaq",
+        "status": "VERROUILLÉ",
+        "definition": "Hadith dont le début de l'isnād est omis"
+      },
+      "مدلس": {
+        "traduction": "Mudallas",
+        "status": "VERROUILLÉ",
+        "definition": "Tadlīs — dissimulation d'un défaut dans l'isnād"
+      }
+    }
+  },
+
+  "source_3_jarh_wa_tadil": {
+    "_reference": "Al-Rafʿ wa al-Takmīl fī al-Jarḥ wa al-Taʿdīl (al-Laknawī / Abū Ghuddah)",
+    "_zones_concernees": ["02", "23", "32"],
+    "niveaux_tadil_du_plus_haut_au_plus_bas": {
+      "ثقة ثبت": {
+        "rang": 1,
+        "traduction": "Thiqa Thabt (Fiable et Solide)",
+        "status": "VERROUILLÉ",
+        "description": "Narrateur de plus haut niveau de fiabilité"
+      },
+      "ثقة": {
+        "rang": 2,
+        "traduction": "Thiqa (Fiable)",
+        "status": "VERROUILLÉ",
+        "description": "Narrateur fiable de transmission sûre"
+      },
+      "صدوق": {
+        "rang": 3,
+        "traduction": "Ṣadūq (Véridique)",
+        "status": "VERROUILLÉ",
+        "description": "Véridique, mais peut avoir des erreurs"
+      },
+      "لا بأس به": {
+        "rang": 4,
+        "traduction": "Lā Baʾsa Bihi (Sans Objection)",
+        "status": "VERROUILLÉ",
+        "description": "Acceptable, sans reproche majeur"
+      },
+      "صالح الحديث": {
+        "rang": 5,
+        "traduction": "Ṣāliḥ al-Ḥadīth (Acceptable)",
+        "status": "VERROUILLÉ",
+        "description": "Hadith acceptable dans sa transmission"
+      },
+      "يعتبر به": {
+        "rang": 6,
+        "traduction": "Yuʿtabar Bihi (Pris en considération)",
+        "status": "VERROUILLÉ",
+        "description": "Niveau minimal de fiabilité"
+      }
+    },
+    "niveaux_jarh_du_plus_leger_au_plus_grave": {
+      "لين الحديث": {
+        "rang": 1,
+        "traduction": "Layyīn al-Ḥadīth (Mou dans le hadith)",
+        "status": "VERROUILLÉ",
+        "description": "Faiblesse légère dans la mémorisation"
+      },
+      "ضعيف": {
+        "rang": 2,
+        "traduction": "Ḍaʿīf (Faible)",
+        "status": "VERROUILLÉ",
+        "description": "Narrateur avec défauts affectant l'authenticité"
+      },
+      "ضعيف جدا": {
+        "rang": 3,
+        "traduction": "Ḍaʿīf Jiddan (Très faible)",
+        "status": "VERROUILLÉ",
+        "alerte": "🟠 ALERTE ḌAʿĪF JIDDAN"
+      },
+      "منكر الحديث": {
+        "rang": 4,
+        "traduction": "Munkar al-Ḥadīth (Munkar)",
+        "status": "VERROUILLÉ",
+        "description": "Hadith rejeté, non reconnu"
+      },
+      "متروك": {
+        "rang": 5,
+        "traduction": "Matrūk (Abandonné)",
+        "status": "VERROUILLÉ",
+        "description": "Hadith abandonné par les savants"
+      },
+      "مجهول": {
+        "rang": 6,
+        "traduction": "Majhūl (Inconnu)",
+        "status": "VERROUILLÉ",
+        "description": "Narrateur dont l'état est inconnu"
+      },
+      "مستور": {
+        "rang": 7,
+        "traduction": "Mastūr (Identité dissimulée)",
+        "status": "VERROUILLÉ",
+        "description": "Narrateur d'identité cachée ou peu connue"
+      },
+      "كذاب": {
+        "rang": 8,
+        "traduction": "Kadhdhāb (Menteur)",
+        "status": "VERROUILLÉ",
+        "description": "Accusé de mensonge"
+      },
+      "وضاع": {
+        "rang": 9,
+        "traduction": "Waḍḍāʿ (Faussaire de hadiths)",
+        "status": "VERROUILLÉ",
+        "alerte": "🔴 Fabricateur identifié"
+      }
+    }
+  },
+
+  "termes_interdits_global": {
+    "_description": "Ces termes sont strictement interdits comme traductions des attributs correspondants",
+    "puissance": {
+      "interdit_pour": ["يد", "يده", "يدي الله", "يديه"],
+      "raison": "Taʾwīl — attributs corporels d'Allah doivent être traduits littéralement"
+    },
+    "essence": {
+      "interdit_pour": ["وجه", "وجهه", "وجه الله"],
+      "raison": "Taʾwīl — 'Visage' est l'attribut réel, pas 'essence'"
+    },
+    "grâce": {
+      "interdit_pour": ["يد", "رحمة"],
+      "raison": "Taʾwīl — 'Main' est l'attribut réel, pas 'grâce'"
+    },
+    "se_manifeste": {
+      "interdit_pour": ["نزل", "ينزل"],
+      "raison": "Taʾwīl — 'descend' est littéral"
+    },
+    "au-delà": {
+      "interdit_pour": ["فوق"],
+      "raison": "Taʾwīl — 'au-dessus' est la traduction correcte"
+    },
+    "s_élève": {
+      "interdit_pour": ["استوى"],
+      "raison": "'S'est établi' est la traduction unique"
+    },
+    "s_installe": {
+      "interdit_pour": ["استوى"],
+      "raison": "'S'est établi' est la traduction unique"
+    },
+    "au-dessus_métaphore": {
+      "interdit_pour": ["فوق", "العلو"],
+      "raison": "Les attributs d'élévation sont réels, pas métaphoriques"
+    }
+  }
+}

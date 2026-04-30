@@ -16,10 +16,57 @@
       "titre_ouvrage": "Tahqīq al-Ḥadīth",
       "url": "https://islamhouse.com",
       "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Les hadiths sur le pèlerinage rapportés dans les deux recueils authentiques",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Les hadiths sur le pèlerinage rapportés dans les deux recueils authentiques",
+      "url": "https://islamhouse.com/fr/books/2840968",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-ahadeethalhaj-pp.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 2840968
+    },
+    {
+      "contenu_fr": "Les hadiths sur le jeûne rapportés dans les deux recueils authentiques",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Les hadiths sur le jeûne rapportés dans les deux recueils authentiques",
+      "url": "https://islamhouse.com/fr/books/2840915",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-ahadeeth-alsyam-pp.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 2840915
+    },
+    {
+      "contenu_fr": "La conduite exemplaire issue de la biographie du Prophète élu (sur lui la paix et le salut) tirée des deux recueils authentiques. [Le recueil de hadiths [récits de la tradition prophétique] authentiqu",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "La conduite exemplaire issue de la biographie du Prophète élu (sur lui la paix et le salut) tirée des deux recueils authentiques",
+      "url": "https://islamhouse.com/fr/books/2830401",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-la-conduite-exemplaire-issue-de-la-biographie-du-prophete.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 2830401
+    },
+    {
+      "contenu_fr": "Invocations et formules d’éloge destinées à Allah -Le Très-Haut- authentiquement transmises :\r\n\r\n-Introduction\r\n-Bienséances de l’invocation\r\n- Formules d’éloge\r\n- Invocations coraniques\r\n- Invocation",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Invocations et formules d’éloge destinées à Allah -Le Très-Haut- authentiquement transmises",
+      "url": "https://islamhouse.com/fr/books/2829702",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-invocations-et-formules-deloge-destinees-a-allah.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 2829702
+    },
+    {
+      "contenu_fr": "Cet écrit démontre combien il est important de connaitre l’authenticité du hadith prophètique avant de le mettre en pratique.",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "De la nécéssité de suivre les hadiths authentiques",
+      "url": "https://islamhouse.com/fr/books/1507",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr_Should_follow_the_proper_conversations.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 1507
     }
   ],
-  "statut_global": "VIDE",
-  "sources_utilisees": [],
-  "count_entrees": 0,
+  "statut_global": "REMPLI",
+  "sources_utilisees": [
+    "islamhouse_api"
+  ],
+  "count_entrees": 7,
   "note": "Zone en PENDING_FR - sources dorar/islamhouse nécessitent spidering"
 }

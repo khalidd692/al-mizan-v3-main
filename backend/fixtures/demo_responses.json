@@ -1,43 +1,47 @@
 {
-  "_meta": {
-    "description": "Réponses figées servies lorsque MIZAN_DEMO_MODE=1. Format : clé = query normalisée (minuscules, espaces simples), valeur = liste ordonnée de chunks SSE.",
-    "version": 1,
-    "sse_format": "event: <name>\\ndata: <json>\\n\\n",
-    "note_streaming": "Chaque chunk est diffusé avec un délai `delay_ms` pour préserver l'effet de streaming progressif côté client."
-  },
-  "_default": {
-    "delay_ms": 180,
-    "chunks": [
-      { "event": "zone_1",  "data": { "zone": 1, "step": "INITIALISATION", "message": "Ouverture des registres (démo)" } },
-      { "event": "meta_pipeline_traduction", "data": { "step": "TRADUCTION", "message": "Requête de démonstration" } },
-      { "event": "meta_pipeline_dorar",      "data": { "step": "DORAR_REQUETE" } },
-      {
-        "event": "zone_4",
-        "data": {
-          "zone": 4,
-          "type": "hadith_core",
-          "data": {
-            "matn": "إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى",
-            "translation_fr": "Les actions ne valent que par les intentions, et chaque homme n'aura que ce qu'il a eu l'intention d'obtenir.",
-            "source": "Ṣaḥīḥ al-Bukhārī n°1",
-            "grade_raw": "صحيح",
-            "demo": true
-          }
-        }
-      },
-      { "event": "zone_30", "data": { "zone": 30, "step": "SYNTHESE" } },
-      { "event": "zone_31", "data": { "zone": 31, "step": "VERIFICATION" } },
-      { "event": "zone_32", "data": { "zone": 32, "type": "done", "demo": true } }
-    ]
-  },
-  "samples": {
-    "innama al-a'mal bin-niyyat": {
-      "_ref": "Bukhārī n°1",
-      "chunks_override": []
+  "niyya": {
+    "hadith": {
+      "hadith_id": "demo_niyya_001",
+      "matn": "إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى",
+      "translation_fr": "Les actions ne valent que par les intentions, et chaque homme n'aura que ce qu'il a eu l'intention d'obtenir.",
+      "source": "Ṣaḥīḥ al-Bukhārī n°1",
+      "grade_raw": "صحيح",
+      "from_local_db": false
     },
-    "man kadhaba alayya": {
-      "_ref": "Bukhārī n°110",
-      "chunks_override": []
+    "analysis": {
+      "isnad_analysis": "Chaîne authentique (muttasil) remontant à 'Umar ibn al-Khaṭṭāb",
+      "matn_analysis": "Hadith fondateur de l'islām, posant le principe d'intention",
+      "grade_explanation": "Ṣaḥīḥ par consensus - narré par plus de 700 rapporteurs"
+    }
+  },
+  "science": {
+    "hadith": {
+      "hadith_id": "demo_science_001",
+      "matn": "اطلبوا العلم ولو في الصين",
+      "translation_fr": "Cherchez le savoir, et même en Chine",
+      "source": "Hadīth mawḍū' (fabricated)",
+      "grade_raw": "موضوع",
+      "from_local_db": false
+    },
+    "analysis": {
+      "isnad_analysis": "Isnād coupé (munqaṭi'), source inconnue",
+      "matn_analysis": "Expression populaire attribuée faussement au Prophète",
+      "grade_explanation": "Mawḍū' - fabrication connue, mentionnée par Ibn al-Jawzī et al-Albānī"
+    }
+  },
+  "default": {
+    "hadith": {
+      "hadith_id": "demo_default_001",
+      "matn": "من عمل صالحا من ذكر أو أنثى وهو مؤمن فلنحينه حياة طيبة",
+      "translation_fr": "Quiconque accomplit une bonne œuvre, qu'il soit homme ou femme, tout en étant croyant, nous lui accorderons une vie agréable",
+      "source": "Ṣaḥīḥ Muslim n°2630",
+      "grade_raw": "صحيح",
+      "from_local_db": false
+    },
+    "analysis": {
+      "isnad_analysis": "Chaîne authentique remontant à Ibn 'Abbās",
+      "matn_analysis": "Promesse divine pour les bonnes actions accompagnées de foi",
+      "grade_explanation": "Ṣaḥīḥ Muslim - authentique par les conditions de Muslim"
     }
   }
 }

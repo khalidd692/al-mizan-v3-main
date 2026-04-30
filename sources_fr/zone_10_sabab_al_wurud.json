@@ -16,10 +16,327 @@
       "titre_ouvrage": "Sciences du hadith",
       "url": "https://islamweb.net/fr",
       "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Ce livre essentiel traite des bases de la croyance des gens de la sunna et du consensus (Ahlous-sunna wal-jama’a). Les raisons du choix de ce livre se résument comme suit :\r\n- Ce livre est très comple",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "La croyance de l’unicité",
+      "url": "https://islamhouse.com/fr/books/380068",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Croyance_de_lunicite_Fawzan.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 380068
+    },
+    {
+      "contenu_fr": "La question du Takfir en général est une grande et ancienne Fitnah...\r\nUne Fitnah non seulement pour les dirigeants, mais pour le peuple également. Une d’entre les anciennes sectes musulmanes à prendr",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "La fitnah du takfir (les troubles liés à rendre mécréant autrui)",
+      "url": "https://islamhouse.com/fr/books/379343",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse_La_Fitnah_du_Takfir.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 379343
+    },
+    {
+      "contenu_fr": "Son Excellence, le cheikh `Abd-Al-`Azîz ibn `Abd-Allah ibn Bâz, a accepté que l’on rassemble ses fatwas, ses correspondances et ses conférences dans un livre unique en plusieurs volumes, afin de répon",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Compilation des Fatwas de Cheikh Ibn Baz - Volume 5",
+      "url": "https://islamhouse.com/fr/books/376768",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Fatawa_ibnBaz_Volume_5.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 376768
+    },
+    {
+      "contenu_fr": "Chers parents, accompagnez votre (ou vos) enfant(s) à la découverte de cette magnifique adoration la prière qui est le second pilier de l’Islam. Ainsi il a toute son importance et nous avons la devoir",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Les ablutions et la prière expliquées aux enfants",
+      "url": "https://islamhouse.com/fr/books/376764",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse_Ablution_priere_Enfant.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 376764
+    },
+    {
+      "contenu_fr": "Chers parents, accompagnez votre (ou vos) enfant(s) à la découverte de cette magnifique adoration le pèlerinage qui est l’un des cinq piliers de l’Islam. Ainsi il a toute son importance et nous avons ",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Le hajj expliqué aux enfants",
+      "url": "https://islamhouse.com/fr/books/376461",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Hajj_explique_aux_enfants.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 376461
+    },
+    {
+      "contenu_fr": "Chers parents, accompagnez votre (ou vos) enfant(s) à la découverte de ce magnifique mois que nous allons passer et qui fait partie d’un des cinq piliers de l’Islam. Ainsi il a toute son importance et",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Le ramadan expliqué aux enfants",
+      "url": "https://islamhouse.com/fr/books/367331",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/chain/fr-Ramadan_enfants/fr-Islamhouse_Ramadan_Enfant_1.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 367331
+    },
+    {
+      "contenu_fr": "Que faire avant, pendant ou après cela :\r\n- La prière du Fadjr (aube)\r\n- La prière du Dhohr (prière du milieu de journée)\r\n- La prière du Asr (milieu de l’après midi)\r\n- L’appel à la prière du Maghreb",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Ton programme journalier du mois de ramadan",
+      "url": "https://islamhouse.com/fr/books/364250",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Ton_Jour_de_Ramadan.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 364250
+    },
+    {
+      "contenu_fr": "L’auteur de ce livre, son excellence cheikh Al-Otheymine (qu’Allah lui accorde sa miséricorde), dit : A l’occasion du mois béni du ramadan, nous avons le plaisir de présenter les points suivants à nos",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Epitres sur le jeûne, la prière de tarawih et la zakat",
+      "url": "https://islamhouse.com/fr/books/364036",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse_Epitre_ramadan_zakat_Otheymine.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 364036
+    },
+    {
+      "contenu_fr": "Son Excellence, le cheikh `Abd-Al-`Azîz ibn `Abd-Allah ibn Bâz, a accepté que l’on rassemble ses fatwas, ses correspondances et ses conférences dans un livre unique en plusieurs volumes, afin de répon",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Compilation des Fatwas de Cheikh Ibn Baz - Volume 15 - (le jeûne de ramadan)",
+      "url": "https://islamhouse.com/fr/books/355909",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Fatawa_ibnBaz_Volume_15.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 355909
+    },
+    {
+      "contenu_fr": "Son Excellence, le cheikh `Abd-Al-`Azîz ibn `Abd-Allah ibn Bâz, a accepté que l’on rassemble ses fatwas, ses correspondances et ses conférences dans un livre unique en plusieurs volumes, afin de répon",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Compilation des Fatwas de Cheikh Ibn Baz - Volume 14 - (la zakat)",
+      "url": "https://islamhouse.com/fr/books/355907",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Fatawa_ibnBaz_Volume_14.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 355907
+    },
+    {
+      "contenu_fr": "Son Excellence, le cheikh `Abd-Al-`Azîz ibn `Abd-Allah ibn Bâz, a accepté que l’on rassemble ses fatwas, ses correspondances et ses conférences dans un livre unique en plusieurs volumes, afin de répon",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Compilation des Fatwas de Cheikh Ibn Baz - Volume 4 -",
+      "url": "https://islamhouse.com/fr/books/343926",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Fatawa_ibnBaz_Volume_4.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 343926
+    },
+    {
+      "contenu_fr": "Son Excellence, le cheikh `Abd-Al-`Azîz ibn `Abd-Allah ibn Bâz, a accepté que l’on rassemble ses fatwas, ses correspondances et ses conférences dans un livre unique en plusieurs volumes, afin de répon",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Compilation des Fatwas de Cheikh Ibn Baz - Volume 3 -",
+      "url": "https://islamhouse.com/fr/books/332609",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Fatawa_ibnBaz_Volume_3.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 332609
+    },
+    {
+      "contenu_fr": "Cheikh Ibn Baz dit dans sa préface de ce livre bénéfique : \"J’ai pris connaissance de cette profession de foi du musulman sous forme de résumé, composé par notre frère l’éminent savant Cheikh Muhammad",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "La Profession de Foi des Gens de la Sunna et du Consensus",
+      "url": "https://islamhouse.com/fr/books/332567",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-faith.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 332567
+    },
+    {
+      "contenu_fr": "Son Excellence, le cheikh `Abd-Al-`Azîz ibn `Abd-Allah ibn Bâz, a accepté que l’on rassemble ses fatwas, ses correspondances et ses conférences dans un livre unique en plusieurs volumes, afin de répon",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Compilation des Fatwas de Cheikh Ibn Baz - Volume 2 -",
+      "url": "https://islamhouse.com/fr/books/331560",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Fatawa_ibnBaz_Volume_2.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 331560
+    },
+    {
+      "contenu_fr": "Ce livre propose les sujets suivants : d’où suis-je venu ? « prouver l’existence de Dieu, Unique », prouver la prophétie de Muhammad, Le caractère inimitable et les miracles scientifiques du Coran, le",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Vous êtes le maitre de votre choix",
+      "url": "https://islamhouse.com/fr/books/330905",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-choose_your_path_French.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 330905
+    },
+    {
+      "contenu_fr": "Dans le souci de participer à l’éradication de l’ignorance et de faciliter l’acquisition de la science obligatoire, nous avons rassemblé dans ce livre concis le minimum nécessaire qu’il faut connaître",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "L’Interprétation du sens des versets du dernier dixième du Coran suivie de quelques enseignements indispensables à tout musulman",
+      "url": "https://islamhouse.com/fr/books/327124",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr_Islamhouse_ouchr_impression.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 327124
+    },
+    {
+      "contenu_fr": "Son Excellence, le cheikh `Abd-Al-`Azîz ibn `Abd-Allah ibn Bâz, a accepté que l’on rassemble ses fatwas, ses correspondances et ses conférences dans un livre unique en plusieurs volumes, afin de répon",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Compilation des Fatwas de Cheikh Ibn Baz - Volume 30 -",
+      "url": "https://islamhouse.com/fr/books/324661",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Fatawa_ibnBaz_Volume_30.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 324661
+    },
+    {
+      "contenu_fr": "Son Excellence, le cheikh `Abd-Al-`Azîz ibn `Abd-Allah ibn Bâz, a accepté que l’on rassemble ses fatwas, ses correspondances et ses conférences dans un livre unique en plusieurs volumes, afin de répon",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Compilation des Fatwas de Cheikh Ibn Baz - Volume 29 -",
+      "url": "https://islamhouse.com/fr/books/324568",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Fatawa_ibnBaz_Volume_29.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 324568
+    },
+    {
+      "contenu_fr": "Son Excellence, le cheikh `Abd-Al-`Azîz ibn `Abd-Allah ibn Bâz, a accepté que l’on rassemble ses fatwas, ses correspondances et ses conférences dans un livre unique en plusieurs volumes, afin de répon",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Compilation des Fatwas de Cheikh Ibn Baz  - Volume 1    -",
+      "url": "https://islamhouse.com/fr/books/324071",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Fatawa_ibnBaz_Volume_1.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 324071
+    },
+    {
+      "contenu_fr": "Prise de conscience, réveil, ressourcement ; tels sont les caractéristiques de ce témoignage apporté par un jeune musulman algérien Zouaoui (kabyle) qui constitue une interpellation à toutes les consc",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "J’étais chrétien : l’histoire bouleversante d’un jeune kabyle",
+      "url": "https://islamhouse.com/fr/books/293412",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-Islamhouse-JetaisChretien.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 293412
+    },
+    {
+      "contenu_fr": "Parmi les tromperies du diable sur les extrémistes et autres terroristes, le fait d’embellir à leurs yeux leur passion, leur suivi aveugle de leurs leaders et la mauvaise compréhension de la religion.",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Quelle raison et quelle religion considèrent les attentats-suicides et la destruction comme un Jihad ?! Réveillez-vous les jeunes !",
+      "url": "https://islamhouse.com/fr/books/272835",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-Islamhouse-Terrorisme-Abbad.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 272835
+    },
+    {
+      "contenu_fr": "Il se peut que certains désapprouvent que nous écrivions au sujet de l’importance de la mosquée Al-Aqsa chez les musulmans et dans la législation islamique, étant donné que cela fait partie des choses",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Les chiites et la mosquée Al-Aqsa",
+      "url": "https://islamhouse.com/fr/books/268692",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr_sheia_aqsa.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 268692
+    },
+    {
+      "contenu_fr": "Voici un livre qui tombe bien, au moment où l’on ne compte plus les langues qui se délient contre nos valeurs religieuses ! Il est des images qui prouvent qu’une société est loin du chemin d’Allâh, et",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Pourquoi ne mets-tu pas le hijab ?!",
+      "url": "https://islamhouse.com/fr/books/265526",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-Islamhouse-16pretextesHijab.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 265526
+    },
+    {
+      "contenu_fr": "Riyâd As-Sâlihîn se passerait bien de présentation tant sa réputation demeure incontestée. La composition de l’ouvrage relève de l’expertise ; l’ordonnancement de ses chapitres est remarquable, la sél",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Le jardin des vertueux (Riyâd As-Sâlihîn)",
+      "url": "https://islamhouse.com/fr/books/260970",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-jardindesvertueux_Kechrid.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 260970
+    },
+    {
+      "contenu_fr": "Ce livre bénéfique de notre grand savant Mouhammed Naserouddine Al-Abany, érudit et maître du hadith à notre époque, explique clairement les différents rites du pèlerinage et de la ’omra selon le Cora",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Les rituels des grands et petits pèlerinages (hajj et omra)",
+      "url": "https://islamhouse.com/fr/books/250869",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-Islamhouse-RiteHajj-Albany.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 250869
+    },
+    {
+      "contenu_fr": "Ce livre montre comment doit être le mari idéal en s’appuyant sur la vie du meilleur époux qu’il soit : le prophète Muhammad (paix sur lui). Différents points sont étudiés, toujours en se basant sur l",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Le Prophète (sur lui la paix) en tant que mari",
+      "url": "https://islamhouse.com/fr/books/250789",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-Islamhouse-PropheteMari.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 250789
+    },
+    {
+      "contenu_fr": "Le débat sur les factions ou les sectes de l’Islam ne se résume pas juste à un compte rendu historique qui, dans ce cas, se limite seulement à l’analyse du fondement des groupuscules, comme cela se fa",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Précis sur les factions égarées",
+      "url": "https://islamhouse.com/fr/books/222291",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-Islamhouse-FactionEgaree-Fawzan.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 222291
+    },
+    {
+      "contenu_fr": "Vous trouverez à travers ce livret,  qui est un des fruits de la nouvelle génération des étudiants français de Médine, des preuves irréfutables tirées du Qur’an et de la Sunnah  authentique mettant en",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "L’importance du tawhid",
+      "url": "https://islamhouse.com/fr/books/221870",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-Islamhouse-ImportanceTawhid-Medine.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 221870
+    },
+    {
+      "contenu_fr": "On trouve dans la Sunnah le hadith authentique suivant :  d’après ‘Uthmân (qu’Allah l’agrée): le Prophète (prière et salut sur lui) a dit : « Celui qui meurt tout en sachant qu’il n’y a d’autre divini",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Ce que tout musulman et musulmane doivent impérativement savoir",
+      "url": "https://islamhouse.com/fr/books/184245",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-duties.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 184245
+    },
+    {
+      "contenu_fr": "Le Sahih d’El Bokhari est l’ouvrage le plus important après le Coran. Il contient des milliers de Hadiths émanant du Prophète de l’Islam, Mohammed – que Dieu répande sur lui Ses Bénédictions et lui ac",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "3 000 hadiths et citations coraniques (tirés du recueil de Al-Boukhary)",
+      "url": "https://islamhouse.com/fr/books/173247",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-boukhary-Kassab-Islamhouse1.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 173247
+    },
+    {
+      "contenu_fr": "Ce livre est un recueil de paroles du Prophète (que la paix et le salut d’Allah soient sur lui). Elles traitent de plusieurs sujets du quotidien. Ces paroles choisies démontrent l’universalité de l’is",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "99 hadiths du Prophète Muhammad",
+      "url": "https://islamhouse.com/fr/books/166506",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-99hadiths_Alwatan-Islamhouse.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 166506
+    },
+    {
+      "contenu_fr": "Ce livre montre combien est important de suivre notre prophète, sur lui la paix, de peur que nos actions ne soient pas acceptées.",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "L’obligation de se conformer à la sunna du Prophète (sur lui la paix)",
+      "url": "https://islamhouse.com/fr/books/2233",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr_Must_work_Sunnah_of_the_Prophet.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 2233
+    },
+    {
+      "contenu_fr": "Les caricatures blasphématoires et autres films ridicules ont déclenché une vague de protestation musulmane dans le monde. Ce livre relate les faits à la lumière du Coran et de la sunna... Ce livre av",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "La réponse éclairée ou la défense de notre Prophète bien-aimé",
+      "url": "https://islamhouse.com/fr/books/1531",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr_Defense_of_the_Prophet.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 1531
+    },
+    {
+      "contenu_fr": "Le titre complet de ce beau livre est : « L’unicité, la signification des deux témoignages et le jugement concernant le suivi du prophète ». Le cheikh -qu’Allah lui fasse miséricorde- montre dans ce l",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "L’unicité (At-Tawhid), la signification des deux témoignages et le jugement concernant le suivi du prophète",
+      "url": "https://islamhouse.com/fr/books/1431",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-lunicite-at-tawhid.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 1431
+    },
+    {
+      "contenu_fr": "Ceci est un petit recueil de questions auxquelles l’auteur (qui vient de mourir qu’Allah lui fasse miséricorde) répond concernant la foi du musulman. Pour chaque réponse, il fournit une preuve par un ",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Résumé du dogme islamique",
+      "url": "https://islamhouse.com/fr/books/1415",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr_croyance_Zinou.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 1415
     }
   ],
-  "statut_global": "VIDE",
-  "sources_utilisees": [],
-  "count_entrees": 0,
+  "statut_global": "REMPLI",
+  "sources_utilisees": [
+    "islamhouse_api"
+  ],
+  "count_entrees": 37,
   "note": "Zone en PENDING_FR - sources islamhouse/islamweb nécessitent spidering"
 }

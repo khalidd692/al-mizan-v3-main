@@ -1,0 +1,96 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "C:/Users/sabri/Desktop/al-mizan-v3-main"
+      ]
+    },
+    "sequentialthinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "github": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "-e",
+        "GITHUB_TOOLSETS",
+        "-e",
+        "GITHUB_READ_ONLY",
+        "ghcr.io/github/github-mcp-server"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "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",
+        "GITHUB_TOOLSETS": "",
+        "GITHUB_READ_ONLY": "1"
+      }
+    },
+    "tavily": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "tavily-mcp@0.2.3"
+      ],
+      "env": {
+        "TAVILY_API_KEY": "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"
+      }
+    },
+    "puppeteer": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-puppeteer"
+      ]
+    },
+    "sqlite": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-sqlite",
+        "--db-path",
+        "C:/Users/sabri/Desktop/al-mizan-v3-main/almizan_v7.db"
+      ]
+    },
+    "exa": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "exa-mcp-server"
+      ],
+      "env": {
+        "EXA_API_KEY": "7197eed4-8873-41bb-b2d0-9ff801a7ab1f"
+      }
+    },
+    "qdrant": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-qdrant"
+      ],
+      "env": {
+        "QDRANT_URL": "https://55adecb1-9fc7-4d6f-aa3e-13c6ee9ac21e.eu-west-1-0.aws.cloud.qdrant.io",
+        "QDRANT_API_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIiwic3ViamVjdCI6ImFwaS1rZXk6NmRlYzE3YzAtNmY2Yi00OTRkLWFiODctNDJmZTk5OWZjZTBmIn0.rMgnZqwJHhIdcE5LEywi7dvS0YrbtshTHej4JyQJdxM",
+        "COLLECTION_NAME": "almizan_hadiths",
+        "EMBEDDING_MODEL": ""
+      }
+    },
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "env": {
+        "DEFAULT_MINIMUM_TOKENS": ""
+      }
+    }
+  }
+}

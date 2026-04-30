@@ -1,0 +1,671 @@
+{
+  "date": "2026-04-30T15:52:34.695337",
+  "api": "IslamHouse v3",
+  "total_books_fetched": 361,
+  "hadith_books_found": 82,
+  "zones_updated": [
+    "zone_19 (+1)",
+    "zone_22 (+39)",
+    "zone_38 (+5)",
+    "zone_11 (+3)",
+    "zone_10 (+35)"
+  ],
+  "hadith_books": [
+    {
+      "id": 2843565,
+      "title": "Résumé des règles liées à la prière du Tarawih",
+      "description": "Résumé des règles liées à la prière du Tarawih",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-taraaweeh-rulings.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2843565",
+      "matched_keyword": "rawi"
+    },
+    {
+      "id": 2842847,
+      "title": "Deux épîtres concises concernant l'impôt légal purificateur (Az-Zakâh) et le jeûne (Aṣ-Ṣiyâm)",
+      "description": "Ce qui pousse à écrire ces quelques mots c'est de conseiller et de rappeler l'obligation de l'impôt légal purificateur (Az-Zakâh) au sujet duquel beaucoup de musulmans font preuve de laxisme. Malgré s",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/risala_fr-risalatan_mujizatan-2.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2842847",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 2842694,
+      "title": "Les butins de toute une vie",
+      "description": "Un livre en langue arabe sur les vertus des bonnes actions établies dans le Coran et la Sunna authentique",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-les-butins-de-toute-une-vie-p.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2842694",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 2840968,
+      "title": "Les hadiths sur le pèlerinage rapportés dans les deux recueils authentiques",
+      "description": "Les hadiths sur le pèlerinage rapportés dans les deux recueils authentiques",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-ahadeethalhaj-pp.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2840968",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 2840915,
+      "title": "Les hadiths sur le jeûne rapportés dans les deux recueils authentiques",
+      "description": "Les hadiths sur le jeûne rapportés dans les deux recueils authentiques",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-ahadeeth-alsyam-pp.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2840915",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 2840909,
+      "title": "Les hadiths sur le faux Messie tirés de la Sunna prophétique avec cartes modernes",
+      "description": "Les hadiths sur le faux Messie tirés de la Sunna prophétique avec cartes modernes",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-ahadeth-aldajaal-pp.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2840909",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 2840705,
+      "title": "Message «de parole équitable» de la part des gens de la sunna du bien-aimé prophète  Muhammad ( paix et bénédictions d'Allah sur lui ), aux chiites",
+      "description": "Message «de parole équitable» de la part des gens de la sunna du bien-aimé prophète  Muhammad ( paix et bénédictions d'Allah sur lui ), aux chiites",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-message-de-parole-equitable.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2840705",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 2840112,
+      "title": "Les Bases du Musulman dans la croyance et l’adoration Niveau 2",
+      "description": "Ce livre est une référence éducative complète qui enseigne au musulman les fondements de sa religion, incluant la croyance (ʿaqīda), la loi islamique (sharīʿa) et le mode de vie islamique. Cette métho",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-asasiat-al-muslim-02-fransy-thani-p.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2840112",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 2840111,
+      "title": "Les Bases du Musulman dans la croyance et l’adoration Niveau 1",
+      "description": "Ce livre est une référence éducative complète qui enseigne au musulman les fondements de sa religion, incluant la croyance (ʿaqīda), la loi islamique (sharīʿa) et le mode de vie islamique. Cette métho",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-asasiat-al-muslim-01-fransy-p.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2840111",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 2839268,
+      "title": "La Sélection issue de l'Encyclopédie des Hadiths Prophétiques",
+      "description": "la fondation au service du contenu islamique en diverses langues et la fondation pour la prédication et la sensibilisation des communautés de Rabwah ont élaboré l'Encyclopédie des Hadiths Prophétiques",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-selected-from-the-encyclopedia-of-prophetic-hadiths.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2839268",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 2834153,
+      "title": "Quarante hadiths expliqués aux enfants",
+      "description": "llah m’a pour ma part, honoré de réunir à mon tour quarante hadiths courts touchant à des thèmes religieux divers, dans la fi-nalité que nos enfants les lisent et s’instruisent. J’ai intitulé ce livre",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-quarante-hadiths-expliques-aux-enfants.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2834153",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 2833803,
+      "title": "L'unicité LA SIGNIFICATION DES DEUX TEMOIGNAGES ET LE JUGEMENT CONCERNANT LE SUIVI DU PROPHETE",
+      "description": "Le titre complet de ce beau livre est : « L’unicité, la signification des deux témoignages et le jugement concernant le suivi du prophète ». Le cheikh -qu’Allah lui fasse miséricorde- montre dans ce l",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-tawheed-and-the-meaning-of-the-two-testimonials.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2833803",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 2832542,
+      "title": "Le dernier Messager d'Allah",
+      "description": "Le dernier Messager d'Allah : Les preuves sur l’authenticité de l’Islam",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-le-dernier-messager.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2832542",
+      "matched_keyword": "authenticité"
+    },
+    {
+      "id": 2831989,
+      "title": "Petit livre sur la croyance la jurisprudence la biographie et l'éthique",
+      "description": "Petit livre sur la croyance la jurisprudence la biographie et l'éthique. Livre en langue française édité par le docteur HAYTHAM SARHAN. Il comporte un ensemble de science religieuse qu'aucun musulman ",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-petit-livre-sur-la-croyance.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2831989",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 2831664,
+      "title": "Les Sunna quotidiennes du prophète",
+      "description": "Les Sunna quotidiennes du prophète",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-les-sunna-quotidiennes-du-prophete.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2831664",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 2831636,
+      "title": "Les 40 hadiths de l’imam An-Nawawi",
+      "description": "Les 40 hadiths de l’imam An-Nawawi",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-40-hadiths.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2831636",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 2831169,
+      "title": "L'Honorable Kaaba (Description – Noms – Construction - Vertus – Spécificités – Règles)",
+      "description": "L'honorable Kaaba, la maison sacrée de Dieu, le centre et le cercle de l'univers, l'adresse et la maison de l'Islam, le symbole et l'essence de la foi, c'est le baiser des musulmans, auquel leurs âmes",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-honorable-kaaba.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2831169",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 2831040,
+      "title": "La miséricorde prophétique",
+      "description": "Définissant le monde occidental comme une miséricorde pour le prophète Mahomet, que Dieu le bénisse et lui accorde la paix, à travers sa biographie et à partir du Coran et de la Sunna",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-misericorde-prophetique.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2831040",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 2830401,
+      "title": "La conduite exemplaire issue de la biographie du Prophète élu (sur lui la paix et le salut) tirée des deux recueils authentiques",
+      "description": "La conduite exemplaire issue de la biographie du Prophète élu (sur lui la paix et le salut) tirée des deux recueils authentiques. [Le recueil de hadiths [récits de la tradition prophétique] authentiqu",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-la-conduite-exemplaire-issue-de-la-biographie-du-prophete.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2830401",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 2829888,
+      "title": "El Adhán Un grandioso Ilamado para un rito grandioso",
+      "description": "Adhân L'éminent appel à accomplir une adoration éminente L'appel à la prière C'est l'appel provenant d'Allah, le Très-Haut. Un appel qui retentit cinq fois au cours d'une journée et d'une nuit, qui pé",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-athan.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2829888",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 2829702,
+      "title": "Invocations et formules d’éloge destinées à Allah -Le Très-Haut- authentiquement transmises",
+      "description": "Invocations et formules d’éloge destinées à Allah -Le Très-Haut- authentiquement transmises :\r\n\r\n-Introduction\r\n-Bienséances de l’invocation\r\n- Formules d’éloge\r\n- Invocations coraniques\r\n- Invocation",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-invocations-et-formules-deloge-destinees-a-allah.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2829702",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 2829450,
+      "title": "Paroles de Prophète",
+      "description": "Plus de 500 hadiths du prophète Mouhammad",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-paroles-de-prophete.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2829450",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 2829443,
+      "title": "100preuves irréfutables, Mouhammad est le prophète de Dieu",
+      "description": "Préface Ce livre est né d’une idée simple, fondée elle-même sur une conviction : Mouhammad est bien un prophète, le dernier d’une série de prophètes sémites issus d’Abraham dont il est le descendant. ",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-100-preuves.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2829443",
+      "matched_keyword": "authenticité"
+    },
+    {
+      "id": 2829228,
+      "title": "L’inimitabilité du Coran et de la Sunna dans la médecine préventive et les micro-organismes",
+      "description": "L’inimitabilité du Coran et de la Sunna dans la médecine préventive et les micro-organismes",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-medecine-preventive.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2829228",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 2829153,
+      "title": "Dix exhortations Pour se protéger de l’épidémie",
+      "description": "Le noble Cheykh Abdel Razzaq Al Badr - qu'Allah le préserve ainsi que son père- a rassemblé dans cet écrit dix exhortations basées sur le Coran et la sunnah afin d'aider la communauté musulmane à fair",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-dix-exhortations-pour-se-proteger-de-lepidemie.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2829153",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 2828721,
+      "title": "La Lumière émane de L’Islam",
+      "description": "La Lumière émane de L’Islam : Ce livre est une modeste tentative permettant d’aider à dissiper certains des doutes communs et des idées fausses que les gens ont sur cette grande religion qu’est l’Is",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-la-lumieere-eemane-de-lislam.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2828721",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 2827928,
+      "title": "La croyance des quatre imams (qu'Allah leur fasse miséricorde)",
+      "description": "Voici une épître traitant de ce qu'il incombe à l'individu d'apprendre et de croire concernant des sujets liés à l'Unicité (« At-Tawḥid ») et aux fondements de religion (« Uṣûl Ad-Dîn »), ainsi que ce",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-croyance-des-quatre-imams.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2827928",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 2818001,
+      "title": "Le traitement du phénomène du terrorisme",
+      "description": "Le traitement du phénomène du terrorisme \r\nà la lumière du Noble Coran et de la Sunna  \r\nDiagnostic du mal et prescription du remède idéal",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr_Le_traitement_du_phenomene_du_terrorisme.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2818001",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 827472,
+      "title": "La valeur de la prière à la lumière du Coran et la sunna",
+      "description": "Ce livre est un abrégé du sens et de la description de la prière en islam. LA prière est le lien entre la personne et son Seigneur.",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-islamhouse-valeur_de_la_priere_Qahtani.pdf",
+      "source_url": "https://islamhouse.com/fr/books/827472",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 727912,
+      "title": "Les fondements de la foi à la lumière du Coran et de la Sunnah",
+      "description": "Les fondements de la foi à la lumière du Coran et de la Sunnah",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr_les_Fondements_de_la_foi_a_la_lumiere_du_coran_et_de_la_sunnah.pdf",
+      "source_url": "https://islamhouse.com/fr/books/727912",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 722343,
+      "title": "Parmi les causes du bonheur",
+      "description": "Dans ce livre, l’auteur a brillamment énuméré les moyens permettant d’être heureux, en y ajoutant de magnifiques enseignements qui méritent d’être médités. Il a débuté la rédaction de son ouvrage en m",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-causes-du-bonheur.pdf",
+      "source_url": "https://islamhouse.com/fr/books/722343",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 452564,
+      "title": "Questions/Réponses Importantes sur la Prière",
+      "description": "Voici un recueil de 75 fatwâs d’une importance majeure sur les règles la prière. Dans ce livre, l’éminent sheikh Ibn Bâz répond avec science et sagesse à des questions qui préoccupent le musulman qui ",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr_Islamhouse_Fatawa_Priere_Ibn_Baz2.pdf",
+      "source_url": "https://islamhouse.com/fr/books/452564",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 443045,
+      "title": "L’unicité d’Allah dans l’adoration",
+      "description": "Ce livre expose clairement le monothéisme pur celui qui différencie le soumis à Allah et celui qui ne l’est pas. Vous constaterez dans ce livre : \r\n1/ Un style facile, de sorte qu’il soit compris par ",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Unicite_Adoration_Chayba.pdf",
+      "source_url": "https://islamhouse.com/fr/books/443045",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 440045,
+      "title": "Sagesses pour distinguer les bonnes des meilleures actions",
+      "description": "Cet épître a pour objectif de faire connaître [au lecteur] quelles sont les œuvres les plus méritoires en décrivant leur hiérarchie, leurs différences, leurs objectifs, leurs catégories en fonction de",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Sagesses-Distinguer-Bonnes-Actions-Hamad.pdf",
+      "source_url": "https://islamhouse.com/fr/books/440045",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 439004,
+      "title": "Origine de la Bible : Ancien et nouveau testaments",
+      "description": "Les hommes sont capables de comprendre le message de la Vérité en faisant appel au raisonnement. La connaissance de cette vérité est le but ultime de l’existence humaine. Elle n’est pas le droit exclu",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Origine_de_la_bible.pdf",
+      "source_url": "https://islamhouse.com/fr/books/439004",
+      "matched_keyword": "authenticité"
+    },
+    {
+      "id": 438676,
+      "title": "L’éveil Islamique : Règles et Conseils  (Partie 1/3)",
+      "description": "Mes très chers frères, personne n’ignore ce avec quoi Allah a comblé cette communauté islamique dans ce pays et dans d’autres, par cet élan béni et cet éveil plein de vitalité que l’on constate chez l",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/parts/Eveil_Islamique/fr-Islamhouse-Eveil-Islamique-Uthaymin.pdf",
+      "source_url": "https://islamhouse.com/fr/books/438676",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 433686,
+      "title": "L’importance de la Sunna en Islam",
+      "description": "L’auteur nous montre l’importance  et l’obligation de suivre de la Sunna : la deuxième révélation de l’Islam. Il illustre cela par la vénération que les compagnons du prophète (paix à lui) lui vouaien",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr_Islamhouse_Importance_Sunna_Islam_Fawzan.pdf",
+      "source_url": "https://islamhouse.com/fr/books/433686",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 414157,
+      "title": "Épître sur les ablutions, les ablutions majeures et la prière",
+      "description": "L’humble serviteur - Muhammad Sâlih Al-‘Utheymine - qui a grand besoin de la miséricorde d’Allah Le Très-Haut dit : \"Ceci est une épître concise concernant les ablutions mineures, les ablutions majeur",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-ablutions-les-ablutions-majeures-et-la-priere.pdf",
+      "source_url": "https://islamhouse.com/fr/books/414157",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 405959,
+      "title": "Compilation des Fatwas de Cheikh Ibn Baz - Volume 19 - (les transactions commerciales)",
+      "description": "Son Excellence, le cheikh Abd-Al-Azîz ibn Abd-Allah ibn Bâz, a accepté que l’on rassemble ses fatwas, ses correspondances et ses conférences dans un livre unique en plusieurs volumes, afin de répondre",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Fatawa_ibnBaz_Volume_19.pdf",
+      "source_url": "https://islamhouse.com/fr/books/405959",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 396561,
+      "title": "Extraits du jardin des pieux (riyadussalihine)",
+      "description": "Riyâd As-Sâlihîn se passerait bien de présentation tant sa réputation demeure incontestée. La composition de l’ouvrage relève de l’expertise ; l’ordonnancement de ses chapitres est remarquable, la sél",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse_Riyad-Salihine-Extraits_Waqf.pdf",
+      "source_url": "https://islamhouse.com/fr/books/396561",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 393613,
+      "title": "Quelques signes mineurs de l’Heure",
+      "description": "La fin du monde est précédée par des signes indiquant son approche, ces signes se divisent en 2 catégories : des petits et des grands. Les grands signes sont surnaturels et extraordinaires qui vont av",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-QQ_Petits_Signes_Fin_des_tps_Rasoulalah.pdf",
+      "source_url": "https://islamhouse.com/fr/books/393613",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 393609,
+      "title": "Message à celui qui ne croit pas au Messager Muhammad",
+      "description": "Il est monnaie courante de nos jours de prendre Dieu et Son prophète comme matière à sarcasmes. Et la plupart de ces attaques proviennent d’athées de l’extérieur, qui prétendent que l’Islam est la rel",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Message_a_ceux_qui_ne_croient_pas_Rassoulalah.pdf",
+      "source_url": "https://islamhouse.com/fr/books/393609",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 380068,
+      "title": "La croyance de l’unicité",
+      "description": "Ce livre essentiel traite des bases de la croyance des gens de la sunna et du consensus (Ahlous-sunna wal-jama’a). Les raisons du choix de ce livre se résument comme suit :\r\n- Ce livre est très comple",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Croyance_de_lunicite_Fawzan.pdf",
+      "source_url": "https://islamhouse.com/fr/books/380068",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 379343,
+      "title": "La fitnah du takfir (les troubles liés à rendre mécréant autrui)",
+      "description": "La question du Takfir en général est une grande et ancienne Fitnah...\r\nUne Fitnah non seulement pour les dirigeants, mais pour le peuple également. Une d’entre les anciennes sectes musulmanes à prendr",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse_La_Fitnah_du_Takfir.pdf",
+      "source_url": "https://islamhouse.com/fr/books/379343",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 376768,
+      "title": "Compilation des Fatwas de Cheikh Ibn Baz - Volume 5",
+      "description": "Son Excellence, le cheikh `Abd-Al-`Azîz ibn `Abd-Allah ibn Bâz, a accepté que l’on rassemble ses fatwas, ses correspondances et ses conférences dans un livre unique en plusieurs volumes, afin de répon",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Fatawa_ibnBaz_Volume_5.pdf",
+      "source_url": "https://islamhouse.com/fr/books/376768",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 376764,
+      "title": "Les ablutions et la prière expliquées aux enfants",
+      "description": "Chers parents, accompagnez votre (ou vos) enfant(s) à la découverte de cette magnifique adoration la prière qui est le second pilier de l’Islam. Ainsi il a toute son importance et nous avons la devoir",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse_Ablution_priere_Enfant.pdf",
+      "source_url": "https://islamhouse.com/fr/books/376764",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 376461,
+      "title": "Le hajj expliqué aux enfants",
+      "description": "Chers parents, accompagnez votre (ou vos) enfant(s) à la découverte de cette magnifique adoration le pèlerinage qui est l’un des cinq piliers de l’Islam. Ainsi il a toute son importance et nous avons ",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Hajj_explique_aux_enfants.pdf",
+      "source_url": "https://islamhouse.com/fr/books/376461",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 367331,
+      "title": "Le ramadan expliqué aux enfants",
+      "description": "Chers parents, accompagnez votre (ou vos) enfant(s) à la découverte de ce magnifique mois que nous allons passer et qui fait partie d’un des cinq piliers de l’Islam. Ainsi il a toute son importance et",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/chain/fr-Ramadan_enfants/fr-Islamhouse_Ramadan_Enfant_1.pdf",
+      "source_url": "https://islamhouse.com/fr/books/367331",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 364250,
+      "title": "Ton programme journalier du mois de ramadan",
+      "description": "Que faire avant, pendant ou après cela :\r\n- La prière du Fadjr (aube)\r\n- La prière du Dhohr (prière du milieu de journée)\r\n- La prière du Asr (milieu de l’après midi)\r\n- L’appel à la prière du Maghreb",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Ton_Jour_de_Ramadan.pdf",
+      "source_url": "https://islamhouse.com/fr/books/364250",
+      "matched_keyword": "rawi"
+    },
+    {
+      "id": 364036,
+      "title": "Epitres sur le jeûne, la prière de tarawih et la zakat",
+      "description": "L’auteur de ce livre, son excellence cheikh Al-Otheymine (qu’Allah lui accorde sa miséricorde), dit : A l’occasion du mois béni du ramadan, nous avons le plaisir de présenter les points suivants à nos",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse_Epitre_ramadan_zakat_Otheymine.pdf",
+      "source_url": "https://islamhouse.com/fr/books/364036",
+      "matched_keyword": "rawi"
+    },
+    {
+      "id": 355909,
+      "title": "Compilation des Fatwas de Cheikh Ibn Baz - Volume 15 - (le jeûne de ramadan)",
+      "description": "Son Excellence, le cheikh `Abd-Al-`Azîz ibn `Abd-Allah ibn Bâz, a accepté que l’on rassemble ses fatwas, ses correspondances et ses conférences dans un livre unique en plusieurs volumes, afin de répon",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Fatawa_ibnBaz_Volume_15.pdf",
+      "source_url": "https://islamhouse.com/fr/books/355909",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 355907,
+      "title": "Compilation des Fatwas de Cheikh Ibn Baz - Volume 14 - (la zakat)",
+      "description": "Son Excellence, le cheikh `Abd-Al-`Azîz ibn `Abd-Allah ibn Bâz, a accepté que l’on rassemble ses fatwas, ses correspondances et ses conférences dans un livre unique en plusieurs volumes, afin de répon",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Fatawa_ibnBaz_Volume_14.pdf",
+      "source_url": "https://islamhouse.com/fr/books/355907",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 343926,
+      "title": "Compilation des Fatwas de Cheikh Ibn Baz - Volume 4 -",
+      "description": "Son Excellence, le cheikh `Abd-Al-`Azîz ibn `Abd-Allah ibn Bâz, a accepté que l’on rassemble ses fatwas, ses correspondances et ses conférences dans un livre unique en plusieurs volumes, afin de répon",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Fatawa_ibnBaz_Volume_4.pdf",
+      "source_url": "https://islamhouse.com/fr/books/343926",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 332609,
+      "title": "Compilation des Fatwas de Cheikh Ibn Baz - Volume 3 -",
+      "description": "Son Excellence, le cheikh `Abd-Al-`Azîz ibn `Abd-Allah ibn Bâz, a accepté que l’on rassemble ses fatwas, ses correspondances et ses conférences dans un livre unique en plusieurs volumes, afin de répon",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Fatawa_ibnBaz_Volume_3.pdf",
+      "source_url": "https://islamhouse.com/fr/books/332609",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 332567,
+      "title": "La Profession de Foi des Gens de la Sunna et du Consensus",
+      "description": "Cheikh Ibn Baz dit dans sa préface de ce livre bénéfique : \"J’ai pris connaissance de cette profession de foi du musulman sous forme de résumé, composé par notre frère l’éminent savant Cheikh Muhammad",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-faith.pdf",
+      "source_url": "https://islamhouse.com/fr/books/332567",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 331560,
+      "title": "Compilation des Fatwas de Cheikh Ibn Baz - Volume 2 -",
+      "description": "Son Excellence, le cheikh `Abd-Al-`Azîz ibn `Abd-Allah ibn Bâz, a accepté que l’on rassemble ses fatwas, ses correspondances et ses conférences dans un livre unique en plusieurs volumes, afin de répon",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Fatawa_ibnBaz_Volume_2.pdf",
+      "source_url": "https://islamhouse.com/fr/books/331560",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 330905,
+      "title": "Vous êtes le maitre de votre choix",
+      "description": "Ce livre propose les sujets suivants : d’où suis-je venu ? « prouver l’existence de Dieu, Unique », prouver la prophétie de Muhammad, Le caractère inimitable et les miracles scientifiques du Coran, le",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-choose_your_path_French.pdf",
+      "source_url": "https://islamhouse.com/fr/books/330905",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 327124,
+      "title": "L’Interprétation du sens des versets du dernier dixième du Coran suivie de quelques enseignements indispensables à tout musulman",
+      "description": "Dans le souci de participer à l’éradication de l’ignorance et de faciliter l’acquisition de la science obligatoire, nous avons rassemblé dans ce livre concis le minimum nécessaire qu’il faut connaître",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr_Islamhouse_ouchr_impression.pdf",
+      "source_url": "https://islamhouse.com/fr/books/327124",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 324661,
+      "title": "Compilation des Fatwas de Cheikh Ibn Baz - Volume 30 -",
+      "description": "Son Excellence, le cheikh `Abd-Al-`Azîz ibn `Abd-Allah ibn Bâz, a accepté que l’on rassemble ses fatwas, ses correspondances et ses conférences dans un livre unique en plusieurs volumes, afin de répon",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Fatawa_ibnBaz_Volume_30.pdf",
+      "source_url": "https://islamhouse.com/fr/books/324661",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 324568,
+      "title": "Compilation des Fatwas de Cheikh Ibn Baz - Volume 29 -",
+      "description": "Son Excellence, le cheikh `Abd-Al-`Azîz ibn `Abd-Allah ibn Bâz, a accepté que l’on rassemble ses fatwas, ses correspondances et ses conférences dans un livre unique en plusieurs volumes, afin de répon",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Fatawa_ibnBaz_Volume_29.pdf",
+      "source_url": "https://islamhouse.com/fr/books/324568",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 324071,
+      "title": "Compilation des Fatwas de Cheikh Ibn Baz  - Volume 1    -",
+      "description": "Son Excellence, le cheikh `Abd-Al-`Azîz ibn `Abd-Allah ibn Bâz, a accepté que l’on rassemble ses fatwas, ses correspondances et ses conférences dans un livre unique en plusieurs volumes, afin de répon",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-Islamhouse-Fatawa_ibnBaz_Volume_1.pdf",
+      "source_url": "https://islamhouse.com/fr/books/324071",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 293412,
+      "title": "J’étais chrétien : l’histoire bouleversante d’un jeune kabyle",
+      "description": "Prise de conscience, réveil, ressourcement ; tels sont les caractéristiques de ce témoignage apporté par un jeune musulman algérien Zouaoui (kabyle) qui constitue une interpellation à toutes les consc",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-Islamhouse-JetaisChretien.pdf",
+      "source_url": "https://islamhouse.com/fr/books/293412",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 272967,
+      "title": "La différence entre le Conseil et la Critique",
+      "description": "Ce livre est une traduction complète du traité classique « Al-Farq bayn an-Nasîha wat-Ta’yîr » [La différence entre le conseil et la critique] de l’Imam Ibn Rajab al-Hanbali, qu’Allah lui fasse miséri",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-Islamhouse-DifferenceCritiqueConseil-IbnRajab.pdf",
+      "source_url": "https://islamhouse.com/fr/books/272967",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 272835,
+      "title": "Quelle raison et quelle religion considèrent les attentats-suicides et la destruction comme un Jihad ?! Réveillez-vous les jeunes !",
+      "description": "Parmi les tromperies du diable sur les extrémistes et autres terroristes, le fait d’embellir à leurs yeux leur passion, leur suivi aveugle de leurs leaders et la mauvaise compréhension de la religion.",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-Islamhouse-Terrorisme-Abbad.pdf",
+      "source_url": "https://islamhouse.com/fr/books/272835",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 272831,
+      "title": "Caractéristiques de la science d’Al-Ghazali dans son livre « La sunna prophétique »",
+      "description": "j’écris quelques mots pour avertir celui qui a une clairvoyance acérée sur ce crime contre la législation d’Allah qu’est le livre « la Sunna prophétique entre les gens de la jurisprudence et les gens ",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-Islamhouse-Ghazali.pdf",
+      "source_url": "https://islamhouse.com/fr/books/272831",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 268692,
+      "title": "Les chiites et la mosquée Al-Aqsa",
+      "description": "Il se peut que certains désapprouvent que nous écrivions au sujet de l’importance de la mosquée Al-Aqsa chez les musulmans et dans la législation islamique, étant donné que cela fait partie des choses",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr_sheia_aqsa.pdf",
+      "source_url": "https://islamhouse.com/fr/books/268692",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 265526,
+      "title": "Pourquoi ne mets-tu pas le hijab ?!",
+      "description": "Voici un livre qui tombe bien, au moment où l’on ne compte plus les langues qui se délient contre nos valeurs religieuses ! Il est des images qui prouvent qu’une société est loin du chemin d’Allâh, et",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-Islamhouse-16pretextesHijab.pdf",
+      "source_url": "https://islamhouse.com/fr/books/265526",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 260970,
+      "title": "Le jardin des vertueux (Riyâd As-Sâlihîn)",
+      "description": "Riyâd As-Sâlihîn se passerait bien de présentation tant sa réputation demeure incontestée. La composition de l’ouvrage relève de l’expertise ; l’ordonnancement de ses chapitres est remarquable, la sél",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-jardindesvertueux_Kechrid.pdf",
+      "source_url": "https://islamhouse.com/fr/books/260970",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 250869,
+      "title": "Les rituels des grands et petits pèlerinages (hajj et omra)",
+      "description": "Ce livre bénéfique de notre grand savant Mouhammed Naserouddine Al-Abany, érudit et maître du hadith à notre époque, explique clairement les différents rites du pèlerinage et de la ’omra selon le Cora",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-Islamhouse-RiteHajj-Albany.pdf",
+      "source_url": "https://islamhouse.com/fr/books/250869",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 250789,
+      "title": "Le Prophète (sur lui la paix) en tant que mari",
+      "description": "Ce livre montre comment doit être le mari idéal en s’appuyant sur la vie du meilleur époux qu’il soit : le prophète Muhammad (paix sur lui). Différents points sont étudiés, toujours en se basant sur l",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-Islamhouse-PropheteMari.pdf",
+      "source_url": "https://islamhouse.com/fr/books/250789",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 222291,
+      "title": "Précis sur les factions égarées",
+      "description": "Le débat sur les factions ou les sectes de l’Islam ne se résume pas juste à un compte rendu historique qui, dans ce cas, se limite seulement à l’analyse du fondement des groupuscules, comme cela se fa",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-Islamhouse-FactionEgaree-Fawzan.pdf",
+      "source_url": "https://islamhouse.com/fr/books/222291",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 221870,
+      "title": "L’importance du tawhid",
+      "description": "Vous trouverez à travers ce livret,  qui est un des fruits de la nouvelle génération des étudiants français de Médine, des preuves irréfutables tirées du Qur’an et de la Sunnah  authentique mettant en",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-Islamhouse-ImportanceTawhid-Medine.pdf",
+      "source_url": "https://islamhouse.com/fr/books/221870",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 203251,
+      "title": "Dossier : Conseils précieux  à nos frères tabligh",
+      "description": "Beaucoup de jeunes et moins jeunes appartiennent à la mouvance islamique nommée Jama’at Tabligh, il est nécessaire que nos frères de cette mouvance se posent les questions essentielles pour que leurs ",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-Islamhouse-ConseilAuTabligh-Othaymine.pdf",
+      "source_url": "https://islamhouse.com/fr/books/203251",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 184245,
+      "title": "Ce que tout musulman et musulmane doivent impérativement savoir",
+      "description": "On trouve dans la Sunnah le hadith authentique suivant :  d’après ‘Uthmân (qu’Allah l’agrée): le Prophète (prière et salut sur lui) a dit : « Celui qui meurt tout en sachant qu’il n’y a d’autre divini",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-duties.pdf",
+      "source_url": "https://islamhouse.com/fr/books/184245",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 173247,
+      "title": "3 000 hadiths et citations coraniques (tirés du recueil de Al-Boukhary)",
+      "description": "Le Sahih d’El Bokhari est l’ouvrage le plus important après le Coran. Il contient des milliers de Hadiths émanant du Prophète de l’Islam, Mohammed – que Dieu répande sur lui Ses Bénédictions et lui ac",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-boukhary-Kassab-Islamhouse1.pdf",
+      "source_url": "https://islamhouse.com/fr/books/173247",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 166506,
+      "title": "99 hadiths du Prophète Muhammad",
+      "description": "Ce livre est un recueil de paroles du Prophète (que la paix et le salut d’Allah soient sur lui). Elles traitent de plusieurs sujets du quotidien. Ces paroles choisies démontrent l’universalité de l’is",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/fr-99hadiths_Alwatan-Islamhouse.pdf",
+      "source_url": "https://islamhouse.com/fr/books/166506",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 2233,
+      "title": "L’obligation de se conformer à la sunna du Prophète (sur lui la paix)",
+      "description": "Ce livre montre combien est important de suivre notre prophète, sur lui la paix, de peur que nos actions ne soient pas acceptées.",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr_Must_work_Sunnah_of_the_Prophet.pdf",
+      "source_url": "https://islamhouse.com/fr/books/2233",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 1531,
+      "title": "La réponse éclairée ou la défense de notre Prophète bien-aimé",
+      "description": "Les caricatures blasphématoires et autres films ridicules ont déclenché une vague de protestation musulmane dans le monde. Ce livre relate les faits à la lumière du Coran et de la sunna... Ce livre av",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr_Defense_of_the_Prophet.pdf",
+      "source_url": "https://islamhouse.com/fr/books/1531",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 1529,
+      "title": "L’explication des fondements de la foi islamique",
+      "description": "De toutes les sciences, le Tawhid (l’unicité d’Allah) est la plus noble et la plus éminente ; c’est la science qui mérite le plus d’être étudiée, parce qu’elle nous permet de connaître Allah, Ses Noms",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-1529-ppp-nubtha.pdf",
+      "source_url": "https://islamhouse.com/fr/books/1529",
+      "matched_keyword": "science"
+    },
+    {
+      "id": 1507,
+      "title": "De la nécéssité de suivre les hadiths authentiques",
+      "description": "Cet écrit démontre combien il est important de connaitre l’authenticité du hadith prophètique avant de le mettre en pratique.",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr_Should_follow_the_proper_conversations.pdf",
+      "source_url": "https://islamhouse.com/fr/books/1507",
+      "matched_keyword": "hadith"
+    },
+    {
+      "id": 1431,
+      "title": "L’unicité (At-Tawhid), la signification des deux témoignages et le jugement concernant le suivi du prophète",
+      "description": "Le titre complet de ce beau livre est : « L’unicité, la signification des deux témoignages et le jugement concernant le suivi du prophète ». Le cheikh -qu’Allah lui fasse miséricorde- montre dans ce l",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-lunicite-at-tawhid.pdf",
+      "source_url": "https://islamhouse.com/fr/books/1431",
+      "matched_keyword": "sunna"
+    },
+    {
+      "id": 1415,
+      "title": "Résumé du dogme islamique",
+      "description": "Ceci est un petit recueil de questions auxquelles l’auteur (qui vient de mourir qu’Allah lui fasse miséricorde) répond concernant la foi du musulman. Pour chaque réponse, il fournit une preuve par un ",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr_croyance_Zinou.pdf",
+      "source_url": "https://islamhouse.com/fr/books/1415",
+      "matched_keyword": "hadith"
+    }
+  ]
+}

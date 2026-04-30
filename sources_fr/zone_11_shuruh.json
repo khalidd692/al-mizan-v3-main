@@ -23,10 +23,39 @@
       "titre_ouvrage": "Méthodologie du sharḥ",
       "url": "https://islamweb.net/fr",
       "statut": "PENDING_FR"
+    },
+    {
+      "contenu_fr": "Petit livre sur la croyance la jurisprudence la biographie et l'éthique. Livre en langue française édité par le docteur HAYTHAM SARHAN. Il comporte un ensemble de science religieuse qu'aucun musulman ",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "Petit livre sur la croyance la jurisprudence la biographie et l'éthique",
+      "url": "https://islamhouse.com/fr/books/2831989",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-petit-livre-sur-la-croyance.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 2831989
+    },
+    {
+      "contenu_fr": "La conduite exemplaire issue de la biographie du Prophète élu (sur lui la paix et le salut) tirée des deux recueils authentiques. [Le recueil de hadiths [récits de la tradition prophétique] authentiqu",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "La conduite exemplaire issue de la biographie du Prophète élu (sur lui la paix et le salut) tirée des deux recueils authentiques",
+      "url": "https://islamhouse.com/fr/books/2830401",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-la-conduite-exemplaire-issue-de-la-biographie-du-prophete.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 2830401
+    },
+    {
+      "contenu_fr": "De toutes les sciences, le Tawhid (l’unicité d’Allah) est la plus noble et la plus éminente ; c’est la science qui mérite le plus d’être étudiée, parce qu’elle nous permet de connaître Allah, Ses Noms",
+      "source": "islamhouse_api",
+      "titre_ouvrage": "L’explication des fondements de la foi islamique",
+      "url": "https://islamhouse.com/fr/books/1529",
+      "pdf_url": "https://d1.islamhouse.com/data/fr/ih_books/single/fr-1529-ppp-nubtha.pdf",
+      "statut": "PENDING_FR",
+      "id_islamhouse": 1529
     }
   ],
-  "statut_global": "VIDE",
-  "sources_utilisees": [],
-  "count_entrees": 0,
+  "statut_global": "REMPLI",
+  "sources_utilisees": [
+    "islamhouse_api"
+  ],
+  "count_entrees": 6,
   "note": "Zone en PENDING_FR - sources islamhouse/islamweb nécessitent spidering"
 }

@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-04-26T15:10:01.793882",
+  "stats": {
+    "categories_crawled": 4,
+    "urls_discovered": 113,
+    "pages_crawled": 100,
+    "takhrij_extracted": 1,
+    "takhrij_matched": 0,
+    "takhrij_rejected": 1,
+    "errors": 0
+  },
+  "quality_samples": []
+}

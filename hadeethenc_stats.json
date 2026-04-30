@@ -1,0 +1,304 @@
+{
+  "timestamp": "2026-04-26T15:40:04.502919",
+  "stats": {
+    "hadiths_crawled": 47,
+    "hadiths_with_arabic": 47,
+    "hadiths_with_french": 47,
+    "hadiths_with_takhrij": 18,
+    "hadiths_matched_db": 17,
+    "hadiths_validated_manhaj": 17,
+    "hadiths_rejected": 30,
+    "errors": 0
+  },
+  "quality_samples": [
+    {
+      "id": 3342,
+      "matn_ar": "×اللغة:العربيةEN - الإنجليزية - EnglishUR - الأوردية - اردوES - الإسبانية - EspañolID - الإندونيسية - IndonesiaUG - الأيغورية - ئۇيغۇرچەBN - البنغالية - বাংলাFR - الفرنسية - FrançaisTR - التركية - Tür",
+      "translation_fr": "Le Prophète(qu'Allah le couvre d'éloges et le préserve)informe qu'Allah, Béni et Exalté soit-Il, a dit être Celui qui se passe le plus qu'on Lui donne des associés. Il est en effet le Riche, Celui qui",
+      "takhrij": {
+        "recueil": "muslim",
+        "numero": "2985",
+        "confidence": 1.0
+      },
+      "db_match": {
+        "id": 10449,
+        "collection": "Sahih Muslim",
+        "hadith_number": "2985",
+        "matn_ar": "وَحَدَّثَنَاهُ ابْنُ نُمَيْرٍ، حَدَّثَنَا خَالِدُ بْنُ مَخْلَدٍ، عَنْ مَالِكٍ، عَنْ نَافِعٍ، عَنِ اب"
+      },
+      "match_score": 1.0
+    },
+    {
+      "id": 3347,
+      "matn_ar": "×اللغة:العربيةEN - الإنجليزية - EnglishUR - الأوردية - اردوES - الإسبانية - EspañolID - الإندونيسية - IndonesiaUG - الأيغورية - ئۇيغۇرچەBN - البنغالية - বাংলাFR - الفرنسية - FrançaisTR - التركية - Tür",
+      "translation_fr": "Le Prophète(qu'Allah le couvre d'éloges et le préserve)a informé de sa position auprès d'Allah, Exalté soit-Il, et qu'elle a atteint le plus haut des degrés de l'amour à l'instar de celle qu'a obtenue",
+      "takhrij": {
+        "recueil": "muslim",
+        "numero": "532",
+        "confidence": 1.0
+      },
+      "db_match": {
+        "id": 8018,
+        "collection": "Sahih Muslim",
+        "hadith_number": "532",
+        "matn_ar": "حَدَّثَنَا عُثْمَانُ بْنُ أَبِي شَيْبَةَ الْعَبْسِيُّ، حَدَّثَنَا جَرِيرٌ، عَنِ الأَعْمَشِ، عَنْ أَب"
+      },
+      "match_score": 1.0
+    },
+    {
+      "id": 3348,
+      "matn_ar": "×اللغة:العربيةEN - الإنجليزية - EnglishUR - الأوردية - اردوES - الإسبانية - EspañolID - الإندونيسية - IndonesiaUG - الأيغورية - ئۇيغۇرچەBN - البنغالية - বাংলাFR - الفرنسية - FrançaisTR - التركية - Tür",
+      "translation_fr": "'Alî ibn Abî Tâlib(qu'Allah l'agrée)a informé qu'il était une personne ayant beaucoup de perte séminale - c'est le liquide blanc, fin et visqueux qui sort du pénis au moment du désir ou avant le rappo",
+      "takhrij": {
+        "recueil": "bukhari",
+        "numero": "269",
+        "confidence": 1.0
+      },
+      "db_match": {
+        "id": 269,
+        "collection": "Sahih al-Bukhari",
+        "hadith_number": "269",
+        "matn_ar": "حَدَّثَنَا أَبُو الْوَلِيدِ، قَالَ حَدَّثَنَا زَائِدَةُ، عَنْ أَبِي حَصِينٍ، عَنْ أَبِي عَبْدِ الرَّ"
+      },
+      "match_score": 1.0
+    },
+    {
+      "id": 3350,
+      "matn_ar": "×اللغة:العربيةEN - الإنجليزية - EnglishUR - الأوردية - اردوES - الإسبانية - EspañolID - الإندونيسية - IndonesiaUG - الأيغورية - ئۇيغۇرچەBN - البنغالية - বাংলাFR - الفرنسية - FrançaisTR - التركية - Tür",
+      "translation_fr": "Le Prophète(qu'Allah le couvre d'éloges et le préserve)a interdit que les maisons soient dépouillées de la prière et deviennent ainsi semblables aux cimetières dans lesquels on ne prie pas, Il a inter",
+      "takhrij": {
+        "recueil": "abudawud",
+        "numero": "2042",
+        "confidence": 1.0
+      },
+      "db_match": {
+        "id": 16981,
+        "collection": "Sunan Abu Dawud",
+        "hadith_number": "2042",
+        "matn_ar": "حَدَّثَنَا أَحْمَدُ بْنُ صَالِحٍ، قَرَأْتُ عَلَى عَبْدِ اللَّهِ بْنِ نَافِعٍ أَخْبَرَنِي ابْنُ أَبِي"
+      },
+      "match_score": 1.0
+    },
+    {
+      "id": 3359,
+      "matn_ar": "×اللغة:العربيةEN - الإنجليزية - EnglishUR - الأوردية - اردوES - الإسبانية - EspañolID - الإندونيسية - IndonesiaUG - الأيغورية - ئۇيغۇرچەBN - البنغالية - বাংলাFR - الفرنسية - FrançaisTR - التركية - Tür",
+      "translation_fr": "Le Prophète(qu'Allah le couvre d'éloges et le préserve)informe que quiconque jure par autre qu'Allah, Ses Noms et Ses Attributs, a certes mécru en Allah ou Lui a donné un associé ; cela parce que jure",
+      "takhrij": {
+        "recueil": "abudawud",
+        "numero": "3251",
+        "confidence": 1.0
+      },
+      "db_match": {
+        "id": 18190,
+        "collection": "Sunan Abu Dawud",
+        "hadith_number": "3251",
+        "matn_ar": "حَدَّثَنَا مُحَمَّدُ بْنُ الْعَلاَءِ، حَدَّثَنَا ابْنُ إِدْرِيسَ، قَالَ سَمِعْتُ الْحَسَنَ بْنَ عُبَ"
+      },
+      "match_score": 1.0
+    },
+    {
+      "id": 3365,
+      "matn_ar": "×اللغة:العربيةEN - الإنجليزية - EnglishUR - الأوردية - اردوES - الإسبانية - EspañolID - الإندونيسية - IndonesiaUG - الأيغورية - ئۇيغۇرچەBN - البنغالية - বাংলাFR - الفرنسية - FrançaisTR - التركية - Tür",
+      "translation_fr": "Le Prophète ﷺ a été interrogé :« Quelle est l’œuvre la plus aimée auprès d’Allah ? »Il répondit :\"[Accomplir]La prière obligatoire dans son temps, celle qui a été définie par le Législateur ; ensuite,",
+      "takhrij": {
+        "recueil": "bukhari",
+        "numero": "527",
+        "confidence": 1.0
+      },
+      "db_match": {
+        "id": 528,
+        "collection": "Sahih al-Bukhari",
+        "hadith_number": "527",
+        "matn_ar": "حَدَّثَنَا أَبُو الْوَلِيدِ، هِشَامُ بْنُ عَبْدِ الْمَلِكِ قَالَ حَدَّثَنَا شُعْبَةُ، قَالَ الْوَلِي"
+      },
+      "match_score": 1.0
+    },
+    {
+      "id": 3372,
+      "matn_ar": "×اللغة:العربيةEN - الإنجليزية - EnglishUR - الأوردية - اردوES - الإسبانية - EspañolID - الإندونيسية - IndonesiaUG - الأيغورية - ئۇيغۇرچەBN - البنغالية - বাংলাFR - الفرنسية - FrançaisTR - التركية - Tür",
+      "translation_fr": "D'après Salamah ibn Al Akwaʽ(qu'Allah l'agrée):Un homme mangeait de la main gauche en présence du Messager d’Allah ﷺ.Ce dernier lui a alors dit :-« Mange de la main droite ! »-« Je ne peux pas. »répon",
+      "takhrij": {
+        "recueil": "muslim",
+        "numero": "2021",
+        "confidence": 1.0
+      },
+      "db_match": {
+        "id": 9489,
+        "collection": "Sahih Muslim",
+        "hadith_number": "2021",
+        "matn_ar": "وَحَدَّثَنِي مُحَمَّدُ بْنُ رَافِعٍ، وَعَبْدُ بْنُ حُمَيْدٍ، قَالَ ابْنُ رَافِعٍ حَدَّثَنَا عَبْدُ ا"
+      },
+      "match_score": 1.0
+    },
+    {
+      "id": 3389,
+      "matn_ar": "×اللغة:العربيةEN - الإنجليزية - EnglishUR - الأوردية - اردوES - الإسبانية - EspañolID - الإندونيسية - IndonesiaUG - الأيغورية - ئۇيغۇرچەBN - البنغالية - বাংলাFR - الفرنسية - FrançaisTR - التركية - Tür",
+      "translation_fr": "Un groupe est venu au Prophète ﷺ et lorsqu'ils sont arrivés à lui, ils ont dit - en le complimentant - certaines paroles qu'il ﷺ désapprouva.Ils ont dit :\" Tu es notre maître. \"Alors,il ﷺ leur a dit :",
+      "takhrij": {
+        "recueil": "abudawud",
+        "numero": "4806",
+        "confidence": 1.0
+      },
+      "db_match": {
+        "id": 19744,
+        "collection": "Sunan Abu Dawud",
+        "hadith_number": "4806",
+        "matn_ar": "حَدَّثَنَا مُسَدَّدٌ، حَدَّثَنَا بِشْرٌ، - يَعْنِي ابْنَ الْمُفَضَّلِ - حَدَّثَنَا أَبُو مَسْلَمَةَ،"
+      },
+      "match_score": 1.0
+    },
+    {
+      "id": 3390,
+      "matn_ar": "×اللغة:العربيةEN - الإنجليزية - EnglishUR - الأوردية - اردوES - الإسبانية - EspañolID - الإندونيسية - IndonesiaUG - الأيغورية - ئۇيغۇرچەBN - البنغالية - বাংলাFR - الفرنسية - FrançaisTR - التركية - Tür",
+      "translation_fr": "Lorsque le Prophète(qu'Allah le couvre d'éloges et le préserve)envoya Mou'âdh ibn Jabal(qu'Allah l'agrée)au Yémen afin qu'il invite les gens à Allah et leur enseigne[l'Islam], il lui a expliqué qu'il ",
+      "takhrij": {
+        "recueil": "bukhari",
+        "numero": "1458",
+        "confidence": 1.0
+      },
+      "db_match": {
+        "id": 1466,
+        "collection": "Sahih al-Bukhari",
+        "hadith_number": "1458",
+        "matn_ar": "حَدَّثَنَا أُمَيَّةُ بْنُ بِسْطَامٍ، حَدَّثَنَا يَزِيدُ بْنُ زُرَيْعٍ، حَدَّثَنَا رَوْحُ بْنُ الْقَا"
+      },
+      "match_score": 1.0
+    },
+    {
+      "id": 3406,
+      "matn_ar": "×اللغة:العربيةEN - الإنجليزية - EnglishUR - الأوردية - اردوES - الإسبانية - EspañolID - الإندونيسية - IndonesiaUG - الأيغورية - ئۇيغۇرچەBN - البنغالية - বাংলাFR - الفرنسية - FrançaisTR - التركية - Tür",
+      "translation_fr": "Le Prophète(qu'Allah le couvre d'éloges et le préserve)interdit l'excès et le dépassement de la limite légale quant à son éloge, le fait d'être décrit par les qualificatifs d'Allah - que Sa Grandeur s",
+      "takhrij": {
+        "recueil": "bukhari",
+        "numero": "3445",
+        "confidence": 1.0
+      },
+      "db_match": {
+        "id": 3457,
+        "collection": "Sahih al-Bukhari",
+        "hadith_number": "3445",
+        "matn_ar": "حَدَّثَنَا الْحُمَيْدِيُّ، حَدَّثَنَا سُفْيَانُ، قَالَ سَمِعْتُ الزُّهْرِيَّ، يَقُولُ أَخْبَرَنِي عُ"
+      },
+      "match_score": 1.0
+    },
+    {
+      "id": 3410,
+      "matn_ar": "×اللغة:العربيةEN - الإنجليزية - EnglishUR - الأوردية - اردوES - الإسبانية - EspañolID - الإندونيسية - IndonesiaUG - الأيغورية - ئۇيغۇرچەBN - البنغالية - বাংলাFR - الفرنسية - FrançaisTR - التركية - Tür",
+      "translation_fr": "Le Prophète ﷺ est entré chez son oncle Abû Tâlib alors qu'il était à l'article de la mort.Il ﷺ lui a alors dit :\" Ô Oncle ! Dis :« Il n'y a aucune divinité[digne d'adoration]excepté Allah »Une parole ",
+      "takhrij": {
+        "recueil": "bukhari",
+        "numero": "4772",
+        "confidence": 1.0
+      },
+      "db_match": {
+        "id": 4788,
+        "collection": "Sahih al-Bukhari",
+        "hadith_number": "4772",
+        "matn_ar": "حَدَّثَنَا أَبُو الْيَمَانِ، أَخْبَرَنَا شُعَيْبٌ، عَنِ الزُّهْرِيِّ، قَالَ أَخْبَرَنِي سَعِيدُ بْنُ"
+      },
+      "match_score": 1.0
+    },
+    {
+      "id": 3414,
+      "matn_ar": "×اللغة:العربيةEN - الإنجليزية - EnglishUR - الأوردية - اردوES - الإسبانية - EspañolID - الإندونيسية - IndonesiaUG - الأيغورية - ئۇيغۇرچەBN - البنغالية - বাংলাFR - الفرنسية - FrançaisTR - التركية - Tür",
+      "translation_fr": "Aboû Hourayrah(qu'Allah l'agrée)relate :On a demandé :\" Ô Messager d'Allah ! Quelle sera la personne la plus heureuse de ton intercession au Jour de la Résurrection ? - Le Messager d'Allah(qu'Allah le",
+      "takhrij": {
+        "recueil": "bukhari",
+        "numero": "99",
+        "confidence": 1.0
+      },
+      "db_match": {
+        "id": 99,
+        "collection": "Sahih al-Bukhari",
+        "hadith_number": "99",
+        "matn_ar": "حَدَّثَنَا عَبْدُ الْعَزِيزِ بْنُ عَبْدِ اللَّهِ، قَالَ حَدَّثَنِي سُلَيْمَانُ، عَنْ عَمْرِو بْنِ أَ"
+      },
+      "match_score": 1.0
+    },
+    {
+      "id": 3418,
+      "matn_ar": "×اللغة:العربيةEN - الإنجليزية - EnglishUR - الأوردية - اردوES - الإسبانية - EspañolID - الإندونيسية - IndonesiaUG - الأيغورية - ئۇيغۇرچەBN - البنغالية - বাংলাFR - الفرنسية - FrançaisTR - التركية - Tür",
+      "translation_fr": "عربيEnglishاردوEspañolIndonesiaئۇيغۇرچەবাংলাTürkçeРусскийBosanskiසිංහලहिन्दी中文فارسیTiếng ViệtTagalogKurdîHausaPortuguêsമലയാളംతెలుగుKiswahiliதமிழ்မြန်မာไทยDeutsch日本語پښتوঅসমীয়াShqipSvenskaአማርኛNederland",
+      "takhrij": {
+        "recueil": "muslim",
+        "numero": "93",
+        "confidence": 1.0
+      },
+      "db_match": {
+        "id": 7584,
+        "collection": "Sahih Muslim",
+        "hadith_number": "93",
+        "matn_ar": "حَدَّثَنِي أَبُو خَيْثَمَةَ، زُهَيْرُ بْنُ حَرْبٍ حَدَّثَنَا وَكِيعٌ، عَنْ كَهْمَسٍ، عَنْ عَبْدِ الل"
+      },
+      "match_score": 1.0
+    },
+    {
+      "id": 3419,
+      "matn_ar": "×اللغة:العربيةEN - الإنجليزية - EnglishUR - الأوردية - اردوES - الإسبانية - EspañolID - الإندونيسية - IndonesiaUG - الأيغورية - ئۇيغۇرچەBN - البنغالية - বাংলাFR - الفرنسية - FrançaisTR - التركية - Tür",
+      "translation_fr": "Le Prophète ﷺ nous informe que le fait de vouer à autre qu'Allah quoi que ce soit qui normalement devrait Lui être voué, que ce soit une invocation à autre que Lui, ou chercher le secours auprès d'un ",
+      "takhrij": {
+        "recueil": "bukhari",
+        "numero": "4497",
+        "confidence": 1.0
+      },
+      "db_match": {
+        "id": 4513,
+        "collection": "Sahih al-Bukhari",
+        "hadith_number": "4497",
+        "matn_ar": "حَدَّثَنَا عَبْدَانُ، عَنْ أَبِي حَمْزَةَ، عَنِ الأَعْمَشِ، عَنْ شَقِيقٍ، عَنْ عَبْدِ اللَّهِ، قَالَ"
+      },
+      "match_score": 1.0
+    },
+    {
+      "id": 3420,
+      "matn_ar": "×اللغة:العربيةEN - الإنجليزية - EnglishUR - الأوردية - اردوES - الإسبانية - EspañolID - الإندونيسية - IndonesiaUG - الأيغورية - ئۇيغۇرچەBN - البنغالية - বাংলাFR - الفرنسية - FrançaisTR - التركية - Tür",
+      "translation_fr": "عربيEnglishاردوEspañolIndonesiaئۇيغۇرچەবাংলাTürkçeРусскийBosanskiසිංහලहिन्दी中文فارسیTiếng ViệtTagalogKurdîHausaPortuguêsമലയാളംతెలుగుKiswahiliதமிழ்မြန်မာไทยDeutsch日本語پښتوঅসমীয়াShqipSvenskaአማርኛNederland",
+      "takhrij": {
+        "recueil": "muslim",
+        "numero": "2670",
+        "confidence": 1.0
+      },
+      "db_match": {
+        "id": 10135,
+        "collection": "Sahih Muslim",
+        "hadith_number": "2670",
+        "matn_ar": "وَحَدَّثَنَاهُ يَحْيَى بْنُ يَحْيَى، حَدَّثَنَا أَبُو مَعْشَرٍ الْعَطَّارُ، عَنْ خَالِدِ بْنِ ذَكْوَ"
+      },
+      "match_score": 1.0
+    },
+    {
+      "id": 3422,
+      "matn_ar": "×اللغة:العربيةEN - الإنجليزية - EnglishUR - الأوردية - اردوES - الإسبانية - EspañolID - الإندونيسية - IndonesiaUG - الأيغورية - ئۇيغۇرچەBN - البنغالية - বাংলাFR - الفرنسية - FrançaisTR - التركية - Tür",
+      "translation_fr": "Le Prophète ﷺ a informé de la fausseté de la contagion à laquelle les gens du paganisme préislamique croyaient, à savoir que la maladie se transmettait d'elle-même à quiconque sans décret d'Allah. Il ",
+      "takhrij": {
+        "recueil": "bukhari",
+        "numero": "5756",
+        "confidence": 1.0
+      },
+      "db_match": {
+        "id": 5776,
+        "collection": "Sahih al-Bukhari",
+        "hadith_number": "5756",
+        "matn_ar": "حَدَّثَنَا مُسْلِمُ بْنُ إِبْرَاهِيمَ، حَدَّثَنَا هِشَامٌ، عَنْ قَتَادَةَ، عَنْ أَنَسٍ ـ رضى الله عن"
+      },
+      "match_score": 1.0
+    },
+    {
+      "id": 3438,
+      "matn_ar": "×اللغة:العربيةEN - الإنجليزية - EnglishUR - الأوردية - اردوES - الإسبانية - EspañolID - الإندونيسية - IndonesiaUG - الأيغورية - ئۇيغۇرچەBN - البنغالية - বাংলাFR - الفرنسية - FrançaisTR - التركية - Tür",
+      "translation_fr": "Le Prophète ﷺ informe que l'amour des Ansârs qui sont les habitants de Médine est un signe de perfection de la foi ; ceci en raison de leur devancement dans le secours de l'Islam et du Prophète ﷺ, leu",
+      "takhrij": {
+        "recueil": "bukhari",
+        "numero": "3783",
+        "confidence": 1.0
+      },
+      "db_match": {
+        "id": 3798,
+        "collection": "Sahih al-Bukhari",
+        "hadith_number": "3783",
+        "matn_ar": "حَدَّثَنَا حَجَّاجُ بْنُ مِنْهَالٍ، حَدَّثَنَا شُعْبَةُ، قَالَ أَخْبَرَنِي عَدِيُّ بْنُ ثَابِتٍ، قَا"
+      },
+      "match_score": 1.0
+    }
+  ]
+}

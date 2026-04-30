@@ -57,11 +57,15 @@ class Orchestrator:
 
     def _load_demo_responses(self) -> dict:
         fixtures_path = Path(__file__).parent / "fixtures" / "demo_responses.json"
+        abs_path = fixtures_path.resolve()
+        log.info(f"[FIXTURES] Chemin: {abs_path}")
         try:
             with open(fixtures_path, "r", encoding="utf-8") as f:
-                return json.load(f)
+                data = json.load(f)
+                log.info(f"[FIXTURES] Clés chargées: {list(data.keys())}")
+                return data
         except Exception as e:
-            log.warning(f"Impossible de charger les fixtures: {e}")
+            log.error(f"[FIXTURES] Impossible de charger: {e}")
             return {}
 
     async def process(self, query: str, demo_mode: bool = None) -> AsyncGenerator[str, None]:

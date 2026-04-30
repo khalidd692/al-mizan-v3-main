@@ -1,0 +1,17 @@
+{
+  "stats": {
+    "spider": "bibliotheque_islamique",
+    "start_url": "https://bibliotheque-islamique.fr/hadith/",
+    "started_at": "2026-04-27T10:11:59.247548",
+    "finished_at": null,
+    "pages_crawled": 60,
+    "extracted": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "db_inserted": 0,
+    "db_updated": 0,
+    "errors": 12
+  },
+  "entries": [],
+  "saved_at": "2026-04-27T10:16:14.945875"
+}

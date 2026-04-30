@@ -1,0 +1,46 @@
+Traceback (most recent call last):
+======================================================================
+ RECHERCHE MULTI-SOURCES DE LIVRES DE SCIENCE DU HADITH
+ Langue: Franþais
+======================================================================
+
+
+======================================================================
+[SOURCE] IslamHouse.com/fr
+======================================================================
+[+] Recherche: 'nukhbat'
+[ERREUR] IslamHouse: 'charmap' codec can't encode characters in position 16-19: character maps to <undefined>
+
+======================================================================
+[SOURCE] Archive.org
+======================================================================
+[+] Recherche: 'Nukhbat Al-Fikar'
+[+] Recherche: 'Taysir Mustalah Al-Hadith'
+[+] Recherche: 'Al-Muqiza'
+[+] Recherche: 'Ikhtisar Ulum Al-Hadith'
+[+] Recherche: 'Al-Ba´qouniyya'
+[ERREUR] Archive.org: 'charmap' codec can't encode character '\u2192' in position 4: character maps to <undefined>
+
+  File "C:\Users\sabri\Desktop\al-mizan-v3-main\find_islamic_books_fr.py", line 495, in <module>
+    main()
+======================================================================
+[SOURCE] GitHub.com
+======================================================================
+[+] Recherche: 'science hadith franþais PDF'
+[+] Recherche: 'mustalah hadith franþais'
+[+] Recherche: 'nukhbat fikar franþais'
+[+] Recherche: 'taysir mustalah hadith'
+    [ERREUR HTTP] 429 Client Error: Too Many Requests for url: https://github.com/search?q=taysir%20mustalah%20hadith&type=repositories
+[ERREUR] GitHub: 'charmap' codec can't encode character '\u2192' in position 4: character maps to <undefined>
+
+======================================================================
+[INFO] Total brut: 0 rÚsultats trouvÚs
+======================================================================
+
+[FILTRAGE] SÚlection des livres de science du hadith...
+  File "C:\Users\sabri\Desktop\al-mizan-v3-main\find_islamic_books_fr.py", line 428, in main
+    print(f"    \u2192 {len(hadith_books)} livres de hadith identifiÚs")
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2192' in position 4: character maps to <undefined>
