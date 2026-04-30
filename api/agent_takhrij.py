@@ -492,7 +492,11 @@ def _parse_takhrij_references(takhrij_text: str) -> Dict[str, Any]:
 def _can_calculate_score(
     zone_02: Dict, zone_06: Dict, zone_11: Dict, zone_26: Dict
 ) -> bool:
-    """Vérifie que les 4 zones requises pour le score sont remplies."""
+    """
+    Vérifie que les 4 zones requises pour le score sont remplies
+    ET que TOUTES ont source="dorar" (données directes uniquement).
+    """
+    # Vérifier présence données
     required_fields = {
         "zone_02": zone_02.get("grade"),
         "zone_06": zone_06.get("narrator_ar") or zone_06.get("rawi"),
@@ -503,9 +507,25 @@ def _can_calculate_score(
     all_filled = all(required_fields.values())
     if not all_filled:
         missing = [k for k, v in required_fields.items() if not v]
-        logger.warning(f"[SCORE] Zones manquantes: {missing}")
+        logger.info(f"[SCORE] Zones manquantes: {missing}")
+        return False
     
-    return all_filled
+    # Vérifier source="dorar" pour TOUTES les zones
+    required_sources = {
+        "zone_02": zone_02.get("source") == "dorar",
+        "zone_06": zone_06.get("source") == "dorar",
+        "zone_11": zone_11.get("source") == "dorar",
+        "zone_26": zone_26.get("source") == "dorar",
+    }
+    
+    all_dorar = all(required_sources.values())
+    if not all_dorar:
+        non_dorar = [k for k, v in required_sources.items() if not v]
+        logger.info(f"[SCORE] Zones non-Dorar: {non_dorar}")
+        return False
+    
+    logger.info("[SCORE] Toutes zones pilier source=dorar → calcul autorisé")
+    return True
 
 
 def analyze(hadith_id: str) -> Dict[str, Any]:
@@ -725,31 +745,32 @@ def analyze(hadith_id: str) -> Dict[str, Any]:
     logger.info("[TAKHRIJ] zone_10 → ABSENT")
     
     # ─────────────────────────────────────────────────────────────────
-    # ZONE 11 — Isnād complet
+    # ZONE 11 — Isnād complet (DONNÉE DIRECTE UNIQUEMENT)
     # ─────────────────────────────────────────────────────────────────
     zone_11 = {}
     isnad = ""
     
+    # UNIQUEMENT si isnad complet fourni par DB ou Dorar — JAMAIS construit
     if db_data and db_data.get("ar_full_isnad"):
         isnad = db_data["ar_full_isnad"]
-    elif dorar_data and dorar_data.get("isnad"):
-        isnad = dorar_data["isnad"]
-    
-    # Si pas d'isnad complet, on construit avec le narrateur
-    if not isnad and rawi and zone_01.get("text_ar"):
-        # Isnad minimal: narrateur + texte
-        isnad = f"{rawi} ← ... ← {zone_01['text_ar'][:50]}..."
-    
-    if isnad and len(isnad) > 10:
         zone_11 = {
             "isnad_ar": isnad,
-            "source": "db_locale" if (db_data and db_data.get("ar_full_isnad")) else "constructed"
+            "source": "db_locale"
         }
         zones_remplies.append("zone_11")
-        logger.info("[TAKHRIJ] zone_11 → isnad présent")
+        logger.info("[TAKHRIJ] zone_11 → isnad db_locale")
+    elif dorar_data and dorar_data.get("isnad"):
+        isnad = dorar_data["isnad"]
+        zone_11 = {
+            "isnad_ar": isnad,
+            "source": "dorar"
+        }
+        zones_remplies.append("zone_11")
+        logger.info("[TAKHRIJ] zone_11 → isnad dorar")
     else:
+        # PAS d'isnad construit — absent
         zones_vides.append("zone_11")
-        logger.info("[TAKHRIJ] zone_11 → ABSENT")
+        logger.info("[TAKHRIJ] zone_11 → ABSENT (donnée directe requise)")
     
     # ─────────────────────────────────────────────────────────────────
     # ZONES 12-16 — Biographies, Jarh, Ta'dil, Tabaqat, Conclusion
@@ -900,82 +921,23 @@ def analyze(hadith_id: str) -> Dict[str, Any]:
     zone_30, zone_31, zone_32, zone_33, zone_34 = {}, {}, {}, {}, {}
     zone_35, zone_36, zone_37, zone_38, zone_39 = {}, {}, {}, {}, {}
     
-    # Zone 30 — Classification thématique (Mawḍūʿ)
-    # Extraction basique depuis le livre/numéro
-    if book_ar:
-        # Déduction basique du thème selon la collection
-        topic_mapping = {
-            "بخاري": "ʿAqīda, Ṣalāh, Ṣawm, Zakāh, Ḥajj",
-            "مسلم": "ʿAqīda, Fiqh, Akhlāq",
-            "أبي داود": "Fiqh, Aḥkām",
-            "ترمذي": "Fiqh, Shamāʾil, Ḥusn al-Khulq",
-            "نسائي": "Fiqh, Ṣalāh, Aḥkām al-Nisāʾ",
-            "ابن ماجه": "Fiqh, Adʿiya, Aḥkām",
-        }
-        topic = "Non classé"
-        for key, val in topic_mapping.items():
-            if key in book_ar:
-                topic = val
-                break
-        
-        zone_30 = {
-            "topics_primary": [topic],
-            "source_book": book_ar,
-            "classification_system": "Al-Mīzān (basé sur collection)",
-            "source": "inferred"
-        }
-        zones_remplies.append("zone_30")
-        logger.info(f"[TAKHRIJ] zone_30 → classification: {topic[:30]}...")
-    else:
-        zones_vides.append("zone_30")
-        logger.info("[TAKHRIJ] zone_30 → ABSENT")
+    # Zone 30 — Classification thématique (UNIQUEMENT si donnée directe)
+    # PAS d'inférence — absent par défaut
+    zone_30 = {}
+    zones_vides.append("zone_30")
+    logger.info("[TAKHRIJ] zone_30 → ABSENT (donnée directe requise)")
     
-    # Zone 31 — Mots-clés (keywords)
+    # Zone 31 — Mots-clés (UNIQUEMENT si donnée directe)
+    # PAS d'extraction — absent par défaut
     zone_31 = {}
-    text_for_keywords = zone_01.get("text_ar", "")
-    if text_for_keywords:
-        # Extraction simple de mots-clés (noms propres, thèmes)
-        keywords = []
-        if "الله" in text_for_keywords:
-            keywords.append("Allah")
-        if "النبي" in text_for_keywords or "الرسول" in text_for_keywords:
-            keywords.append("Prophet")
-        if "الصلاة" in text_for_keywords or "صلاة" in text_for_keywords:
-            keywords.append("Salah")
-        if "الزكاة" in text_for_keywords or "زكاة" in text_for_keywords:
-            keywords.append("Zakah")
-        if "الصوم" in text_for_keywords or "صيام" in text_for_keywords:
-            keywords.append("Sawm")
-        if "الحج" in text_for_keywords or "حج" in text_for_keywords:
-            keywords.append("Hajj")
-        
-        if keywords:
-            zone_31 = {"keywords": keywords, "source": "extracted"}
-            zones_remplies.append("zone_31")
-            logger.info(f"[TAKHRIJ] zone_31 → keywords: {keywords}")
-        else:
-            zones_vides.append("zone_31")
-            logger.info("[TAKHRIJ] zone_31 → ABSENT")
-    else:
-        zones_vides.append("zone_31")
-        logger.info("[TAKHRIJ] zone_31 → ABSENT")
+    zones_vides.append("zone_31")
+    logger.info("[TAKHRIJ] zone_31 → ABSENT (donnée directe requise)")
     
-    # Zone 35 — Turuq (nombre de voies)
+    # Zone 35 — Turuq (UNIQUEMENT si donnée directe avec numéros précis)
+    # PAS d'approximation — absent par défaut
     zone_35 = {}
-    if dorar_data:
-        # Compte approximatif basé sur mutabaat/shawahid
-        turuq_count = 1  # Au moins la voie principale
-        if dorar_data.get("has_mutabaat"):
-            turuq_count += 1
-        if dorar_data.get("has_shawahid"):
-            turuq_count += 1
-        
-        zone_35 = {"turuq_count": turuq_count, "source": "dorar", "note": "basé sur présence mutabaat/shawahid"}
-        zones_remplies.append("zone_35")
-        logger.info(f"[TAKHRIJ] zone_35 → {turuq_count} voies")
-    else:
-        zones_vides.append("zone_35")
-        logger.info("[TAKHRIJ] zone_35 → ABSENT")
+    zones_vides.append("zone_35")
+    logger.info("[TAKHRIJ] zone_35 → ABSENT (donnée directe requise)")
     
     # Zone 33 — LE PONT SALAF: Termes techniques avec définitions savantes
     zone_33 = {}
