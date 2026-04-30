@@ -1,0 +1,23 @@
+{
+  "scan": "CRAWLER_V3",
+  "timestamp": "20260501_001009",
+  "statistiques": {
+    "urls_trouves": 0,
+    "pages_crawlées": 0,
+    "pages_échouées": 0,
+    "candidats_extraits": 0,
+    "matches_confirmés": 0,
+    "fiches_générées": 0,
+    "sites_infectés": {},
+    "courants": {
+      "Ikhwānī": 0,
+      "Tablīghī": 0,
+      "Soufi": 0,
+      "Ash'arī": 0,
+      "Salafī": 0,
+      "Général": 0
+    }
+  },
+  "total_fiches": 0,
+  "total_sites_infectés": 0
+}

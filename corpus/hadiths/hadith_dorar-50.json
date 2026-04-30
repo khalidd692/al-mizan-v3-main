@@ -1,0 +1,141 @@
+{
+  "zone_01": {
+    "text_ar": "1 -  خَطَبَني النَّبيُّ صلَّى اللهُ عليه وسلَّمَ، فاعتذَرْتُ إليه فعَذَرَني، فأَنزلَ اللهُ عزَّ وجلَّ: {يَا أَيُّهَا النَّبِيُّ إِنَّا أَحْلَلْنَا لَكَ أَزْوَاجَكَ} [الأحزاب:50] إلى قولِهِ تَعالَى: {اللَّاتِي هَاجَرْنَ مَعَكَ} [الأحزاب:50] قالتْ: فلمْ أكُنْ أَحِلُّ له، لمْ أُهاجرْ معه، كنتُ مِنَ الطُّلقاءِ.   .",
+    "source": "dorar"
+  },
+  "zone_02": {
+    "grade": "Hasan",
+    "grade_by": "",
+    "book_name_transliterated": "Ṣaḥīḥ al-Bukhārī",
+    "book_name_ar": "صحيح البخاري",
+    "hadith_number": "50",
+    "source": "db_locale"
+  },
+  "zone_03": {
+    "term_ar": "الحسن",
+    "term_fr": "Ḥasan",
+    "transliteration": "ḥasan",
+    "category": "degré",
+    "definition_fr": "Caractère de ce qui est rapporté par une chaîne ininterrompue, par un transmetteur de confiance dont la mémoire est légèrement déficiente, et qui est exempt de défaut et de contradiction.",
+    "source": "mustalah_definitions_fr.json"
+  },
+  "zone_04": {
+    "text_fr": "Rapporté par Abu Huraira : Un jour, alors que le Prophète (ﷺ) était assis avec des gens, l’ange Gabriel est venu et a demandé : « Qu’est-ce que la foi ? » Le Messager d’Allah (ﷺ) a répondu : « La foi, c’est croire en Allah, en Ses anges, en la rencontre avec Lui, en Ses messagers et croire à la Résurrection. » Il a ensuite demandé : « Qu’est-ce que l’islam ? » Le Messager d’Allah (ﷺ) a répondu : « C’est adorer Allah seul sans rien Lui associer, accomplir parfaitement la prière, donner l’aumône obligatoire (Zakat) et jeûner pendant le mois de Ramadan. » Il a ensuite demandé : « Qu’est-ce que l’Ihsan (la perfection) ? » Le Messager d’Allah (ﷺ) a répondu : « C’est adorer Allah comme si tu Le voyais, et si tu ne Le vois pas, sache qu’Il te voit. » Il a ensuite demandé : « Quand aura lieu l’Heure (le Jour du Jugement) ? » Le Messager d’Allah (ﷺ) a répondu : « Celui qui répond n’en sait pas plus que celui qui interroge. Mais je vais vous parler de ses signes : 1. Quand une esclave donnera naissance à sa maîtresse. 2. Quand les gardiens de chameaux noirs rivaliseront dans la construction de hauts bâtiments. Et l’Heure fait partie de cinq choses que seul Allah connaît. » Le Prophète (ﷺ) a ensuite récité : « C’est auprès d’Allah seul que se trouve la connaissance de l’Heure… » (31:34) Puis cet homme (Gabriel) est parti et le Prophète (ﷺ) a demandé à ses compagnons de le rappeler, mais ils ne l’ont pas vu. Le Prophète (ﷺ) a dit : « C’était Gabriel, venu enseigner la religion aux gens. » Abu ‘Abdullah a dit : Le Prophète (ﷺ) considérait tout cela comme faisant partie de la foi",
+    "source": "db_locale"
+  },
+  "zone_05": {
+    "book_name_transliterated": "Ṣaḥīḥ al-Bukhārī",
+    "book_name_ar": "صحيح البخاري",
+    "book_name_fr": "Sahih al-Bukhari",
+    "source": "db_locale"
+  },
+  "zone_06": {
+    "narrator_ar": "أم هانئ",
+    "source": "dorar"
+  },
+  "zone_07": {},
+  "zone_08": {},
+  "zone_09": {},
+  "zone_10": {},
+  "zone_11": {},
+  "zone_12": {
+    "narrator_name": "أم هانئ",
+    "note": "biographie disponible sur Dorar (صفحة الراوي)",
+    "source": "dorar"
+  },
+  "zone_13": {},
+  "zone_14": {},
+  "zone_15": {},
+  "zone_16": {},
+  "zone_17": {},
+  "zone_18": {},
+  "zone_19": {},
+  "zone_20": {},
+  "zone_21": {},
+  "zone_22": {},
+  "zone_23": {},
+  "zone_24": {
+    "collection": "المستدرك على الصحيحين",
+    "source_book": "المستدرك على الصحيحين",
+    "source": "dorar"
+  },
+  "zone_25": {
+    "hadith_number": "50",
+    "hadith_id_dorar": "50",
+    "source": "dorar"
+  },
+  "zone_26": {
+    "verdict": "صحيح الإسناد",
+    "scholar": "Al-Albānī",
+    "source": "dorar"
+  },
+  "zone_27": {},
+  "zone_28": {},
+  "zone_29": {},
+  "zone_30": {},
+  "zone_31": {},
+  "zone_32": {},
+  "zone_33": {},
+  "zone_34": {},
+  "zone_35": {},
+  "zone_36": {},
+  "zone_37": {},
+  "zone_38": {},
+  "zone_39": {},
+  "zone_40": {},
+  "_meta": {
+    "hadith_id": "dorar-50",
+    "zones_remplies": [
+      "zone_01",
+      "zone_02",
+      "zone_03",
+      "zone_04",
+      "zone_05",
+      "zone_06",
+      "zone_12",
+      "zone_24",
+      "zone_25",
+      "zone_26"
+    ],
+    "zones_vides": [
+      "zone_07",
+      "zone_08",
+      "zone_09",
+      "zone_10",
+      "zone_11",
+      "zone_13",
+      "zone_14",
+      "zone_15",
+      "zone_16",
+      "zone_17",
+      "zone_18",
+      "zone_19",
+      "zone_20",
+      "zone_21",
+      "zone_22",
+      "zone_23",
+      "zone_27",
+      "zone_28",
+      "zone_29",
+      "zone_30",
+      "zone_31",
+      "zone_35",
+      "zone_33",
+      "zone_32",
+      "zone_34",
+      "zone_36",
+      "zone_37",
+      "zone_38",
+      "zone_39",
+      "zone_40"
+    ],
+    "timestamp": "2026-04-30T21:27:02.519123",
+    "total_zones": 40,
+    "filled_count": 10,
+    "empty_count": 30,
+    "piliers": {
+      "db_local": true,
+      "dorar": true
+    }
+  }
+}

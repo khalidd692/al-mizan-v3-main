@@ -1,0 +1,29 @@
+{
+  "scan": "DELUGE_V2",
+  "timestamp": "20260430_235751",
+  "statistiques": {
+    "google_calls": 20,
+    "youtube_calls": 15,
+    "candidats_bruts": 8,
+    "candidats_filtres": 8,
+    "matches_confirmes": 5,
+    "fiches_generees": 5,
+    "courants": {
+      "Ikhwānī": 0,
+      "Tablīghī": 0,
+      "Soufi": 0,
+      "Ash'arī": 0,
+      "Salafī": 0,
+      "Général": 5
+    }
+  },
+  "courants_propagateurs": {
+    "Ikhwānī": 0,
+    "Tablīghī": 0,
+    "Soufi": 0,
+    "Ash'arī": 0,
+    "Salafī": 0,
+    "Général": 5
+  },
+  "total_mensonges": 5
+}

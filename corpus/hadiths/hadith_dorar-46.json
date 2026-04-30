@@ -1,0 +1,141 @@
+{
+  "zone_01": {
+    "text_ar": "1 -  {وَلِمَنْ خَافَ مَقَامَ رَبِّهِ جَنَّتَانِ} [الرحمن:46]، فقلتُ: وإنْ زَنَى وإنْ سرَقَ يا رسولَ اللهِ؟! فقال رسولُ اللهِ صلَّى اللهُ عليه وسلَّمَ الثانيةَ: {وَلِمَنْ خَافَ مَقَامَ رَبِّهِ جَنَّتَانِ} [الرحمن:46]، فقلتُ: وإنْ زَنَى وإنْ سرَقَ؟! فقال الثالثةَ: {وَلِمَنْ خَافَ مَقَامَ رَبِّهِ جَنَّتَانِ} [الرحمن:46]، فقلتُ: وإنْ زَنَى وإنْ سرَقَ يا رسولَ اللهِ؟! فقال: وإنْ رَغِمَ أنفُ أبي الدَّرداءِ.  .",
+    "source": "dorar"
+  },
+  "zone_02": {
+    "grade": "Sahih",
+    "grade_by": "",
+    "book_name_transliterated": "Ṣaḥīḥ al-Bukhārī",
+    "book_name_ar": "صحيح البخاري",
+    "hadith_number": "46",
+    "source": "db_locale"
+  },
+  "zone_03": {
+    "term_ar": "الصحيح",
+    "term_fr": "Ṣaḥīḥ",
+    "transliteration": "ṣaḥīḥ",
+    "category": "degré",
+    "definition_fr": "Caractère de ce qui est rapporté par une chaîne ininterrompue, par un transmetteur de confiance (ʿadl) dont la mémoire est fiable (ḍābiṭ tām), et qui est exempt de défaut (ʿilla) et de contradiction (shudhūdh) avec un groupe de rapporteurs de confiance.",
+    "source": "mustalah_definitions_fr.json"
+  },
+  "zone_04": {
+    "text_fr": "Rapporté par Talha bin 'Ubaidullah : Un homme du Najd, aux cheveux en désordre, est venu voir le Messager d’Allah (ﷺ). Nous avons entendu sa voix forte sans comprendre ce qu’il disait, jusqu’à ce qu’il s’approche et nous avons alors compris qu’il posait des questions sur l’islam. Le Messager d’Allah (ﷺ) lui a dit : « Tu dois accomplir parfaitement cinq prières par jour et par nuit (24 heures). » L’homme a demandé : « Y a-t-il d’autres prières ? » Le Messager d’Allah (ﷺ) a répondu : « Non, sauf si tu veux faire des prières surérogatoires (Nawafil). » Le Messager d’Allah (ﷺ) a ensuite dit : « Tu dois jeûner pendant le mois de Ramadan. » L’homme a demandé : « Y a-t-il d’autres jeûnes ? » Le Messager d’Allah (ﷺ) a répondu : « Non, sauf si tu veux faire des jeûnes surérogatoires. » Puis le Messager d’Allah (ﷺ) a ajouté : « Tu dois payer la Zakat (aumône obligatoire). » L’homme a demandé : « Y a-t-il autre chose que la Zakat à donner ? » Le Messager d’Allah (ﷺ) a répondu : « Non, sauf si tu veux donner de ta propre volonté. » Ensuite, cet homme est parti en disant : « Par Allah ! Je ne ferai ni moins ni plus que cela. » Le Messager d’Allah (ﷺ) a dit : « S’il dit vrai, alors il réussira (il entrera au Paradis). »",
+    "source": "db_locale"
+  },
+  "zone_05": {
+    "book_name_transliterated": "Ṣaḥīḥ al-Bukhārī",
+    "book_name_ar": "صحيح البخاري",
+    "book_name_fr": "Sahih al-Bukhari",
+    "source": "db_locale"
+  },
+  "zone_06": {
+    "narrator_ar": "أبو الدرداء",
+    "source": "dorar"
+  },
+  "zone_07": {},
+  "zone_08": {},
+  "zone_09": {},
+  "zone_10": {},
+  "zone_11": {},
+  "zone_12": {
+    "narrator_name": "أبو الدرداء",
+    "note": "biographie disponible sur Dorar (صفحة الراوي)",
+    "source": "dorar"
+  },
+  "zone_13": {},
+  "zone_14": {},
+  "zone_15": {},
+  "zone_16": {},
+  "zone_17": {},
+  "zone_18": {},
+  "zone_19": {},
+  "zone_20": {},
+  "zone_21": {},
+  "zone_22": {},
+  "zone_23": {},
+  "zone_24": {
+    "collection": "تخريج مشكل الآثار",
+    "source_book": "تخريج مشكل الآثار",
+    "source": "dorar"
+  },
+  "zone_25": {
+    "hadith_number": "46",
+    "hadith_id_dorar": "46",
+    "source": "dorar"
+  },
+  "zone_26": {
+    "verdict": "إسناده صحيح",
+    "scholar": "Al-Albānī",
+    "source": "dorar"
+  },
+  "zone_27": {},
+  "zone_28": {},
+  "zone_29": {},
+  "zone_30": {},
+  "zone_31": {},
+  "zone_32": {},
+  "zone_33": {},
+  "zone_34": {},
+  "zone_35": {},
+  "zone_36": {},
+  "zone_37": {},
+  "zone_38": {},
+  "zone_39": {},
+  "zone_40": {},
+  "_meta": {
+    "hadith_id": "dorar-46",
+    "zones_remplies": [
+      "zone_01",
+      "zone_02",
+      "zone_03",
+      "zone_04",
+      "zone_05",
+      "zone_06",
+      "zone_12",
+      "zone_24",
+      "zone_25",
+      "zone_26"
+    ],
+    "zones_vides": [
+      "zone_07",
+      "zone_08",
+      "zone_09",
+      "zone_10",
+      "zone_11",
+      "zone_13",
+      "zone_14",
+      "zone_15",
+      "zone_16",
+      "zone_17",
+      "zone_18",
+      "zone_19",
+      "zone_20",
+      "zone_21",
+      "zone_22",
+      "zone_23",
+      "zone_27",
+      "zone_28",
+      "zone_29",
+      "zone_30",
+      "zone_31",
+      "zone_35",
+      "zone_33",
+      "zone_32",
+      "zone_34",
+      "zone_36",
+      "zone_37",
+      "zone_38",
+      "zone_39",
+      "zone_40"
+    ],
+    "timestamp": "2026-04-30T21:26:54.365806",
+    "total_zones": 40,
+    "filled_count": 10,
+    "empty_count": 30,
+    "piliers": {
+      "db_local": true,
+      "dorar": true
+    }
+  }
+}

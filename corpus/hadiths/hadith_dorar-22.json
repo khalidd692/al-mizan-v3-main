@@ -1,0 +1,141 @@
+{
+  "zone_01": {
+    "text_ar": "1 -  إنَّ أَدْنى أهْلِ الجَنَّةِ مَنْزِلةً لَمَن يَنظُرُ في مُلْكِه ألْفَيْ سَنةٍ، قال: وإنَّ أفضَلَهم مَنْزِلةً لَمَن يَنظُرُ في وجهِ اللهِ كلَّ يومٍ مرَّتَين، قال: ثمَّ تَلى: {وُجُوهٌ يَوْمَئِذٍ نَاضِرَةٌ (22) إِلَى رَبِّهَا نَاظِرَةٌ} [القيامة:22، 23]، قال: بالبَياضِ والصَّفاءِ، قال: إِلَى رَبِّهَا نَاظِرَةٌ} [القيامة:22، 23] قال: تَنظُرُ كلَّ يَومٍ في وجهِ اللهِ جلَّ وعزَّ.  .",
+    "source": "dorar"
+  },
+  "zone_02": {
+    "grade": "Sahih",
+    "grade_by": "",
+    "book_name_transliterated": "Ṣaḥīḥ al-Bukhārī",
+    "book_name_ar": "صحيح البخاري",
+    "hadith_number": "22",
+    "source": "db_locale"
+  },
+  "zone_03": {
+    "term_ar": "الصحيح",
+    "term_fr": "Ṣaḥīḥ",
+    "transliteration": "ṣaḥīḥ",
+    "category": "degré",
+    "definition_fr": "Caractère de ce qui est rapporté par une chaîne ininterrompue, par un transmetteur de confiance (ʿadl) dont la mémoire est fiable (ḍābiṭ tām), et qui est exempt de défaut (ʿilla) et de contradiction (shudhūdh) avec un groupe de rapporteurs de confiance.",
+    "source": "mustalah_definitions_fr.json"
+  },
+  "zone_04": {
+    "text_fr": "Rapporté par Abu Said Al-Khudri : Le Prophète (ﷺ) a dit : Quand les gens du Paradis entreront au Paradis et que les gens de l'Enfer iront en Enfer, Allah ordonnera que ceux qui ont eu la foi, même du poids d'une graine de moutarde, soient sortis de l'Enfer. Ils seront alors sortis, mais ils seront noircis (brûlés). Ensuite, ils seront plongés dans la rivière de Haya' (pluie) ou Hayat (vie) (le narrateur n'est pas sûr du terme exact), et ils reprendront vie comme une graine qui pousse près du bord d'un cours d'eau. Ne vois-tu pas qu'elle sort jaune et tordue ?",
+    "source": "db_locale"
+  },
+  "zone_05": {
+    "book_name_transliterated": "Ṣaḥīḥ al-Bukhārī",
+    "book_name_ar": "صحيح البخاري",
+    "book_name_fr": "Sahih al-Bukhari",
+    "source": "db_locale"
+  },
+  "zone_06": {
+    "narrator_ar": "عبدالله بن عمر",
+    "source": "dorar"
+  },
+  "zone_07": {},
+  "zone_08": {},
+  "zone_09": {},
+  "zone_10": {},
+  "zone_11": {},
+  "zone_12": {
+    "narrator_name": "عبدالله بن عمر",
+    "note": "biographie disponible sur Dorar (صفحة الراوي)",
+    "source": "dorar"
+  },
+  "zone_13": {},
+  "zone_14": {},
+  "zone_15": {},
+  "zone_16": {},
+  "zone_17": {},
+  "zone_18": {},
+  "zone_19": {},
+  "zone_20": {},
+  "zone_21": {},
+  "zone_22": {},
+  "zone_23": {},
+  "zone_24": {
+    "collection": "تخريج شرح الطحاوية",
+    "source_book": "تخريج شرح الطحاوية",
+    "source": "dorar"
+  },
+  "zone_25": {
+    "hadith_number": "22",
+    "hadith_id_dorar": "22",
+    "source": "dorar"
+  },
+  "zone_26": {
+    "verdict": "إسناده ضعيف جدا",
+    "scholar": "Al-Albānī",
+    "source": "dorar"
+  },
+  "zone_27": {},
+  "zone_28": {},
+  "zone_29": {},
+  "zone_30": {},
+  "zone_31": {},
+  "zone_32": {},
+  "zone_33": {},
+  "zone_34": {},
+  "zone_35": {},
+  "zone_36": {},
+  "zone_37": {},
+  "zone_38": {},
+  "zone_39": {},
+  "zone_40": {},
+  "_meta": {
+    "hadith_id": "dorar-22",
+    "zones_remplies": [
+      "zone_01",
+      "zone_02",
+      "zone_03",
+      "zone_04",
+      "zone_05",
+      "zone_06",
+      "zone_12",
+      "zone_24",
+      "zone_25",
+      "zone_26"
+    ],
+    "zones_vides": [
+      "zone_07",
+      "zone_08",
+      "zone_09",
+      "zone_10",
+      "zone_11",
+      "zone_13",
+      "zone_14",
+      "zone_15",
+      "zone_16",
+      "zone_17",
+      "zone_18",
+      "zone_19",
+      "zone_20",
+      "zone_21",
+      "zone_22",
+      "zone_23",
+      "zone_27",
+      "zone_28",
+      "zone_29",
+      "zone_30",
+      "zone_31",
+      "zone_35",
+      "zone_33",
+      "zone_32",
+      "zone_34",
+      "zone_36",
+      "zone_37",
+      "zone_38",
+      "zone_39",
+      "zone_40"
+    ],
+    "timestamp": "2026-04-30T21:26:09.910441",
+    "total_zones": 40,
+    "filled_count": 10,
+    "empty_count": 30,
+    "piliers": {
+      "db_local": true,
+      "dorar": true
+    }
+  }
+}

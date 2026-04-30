@@ -1,0 +1,141 @@
+{
+  "zone_01": {
+    "text_ar": "1 -   عن ابنِ عباسٍ, قال : [41: يس ] { الفُلْكِ الْمَشْحُونِ } : الموقَرُ  .",
+    "source": "dorar"
+  },
+  "zone_02": {
+    "grade": "Hasan",
+    "grade_by": "",
+    "book_name_transliterated": "Ṣaḥīḥ al-Bukhārī",
+    "book_name_ar": "صحيح البخاري",
+    "hadith_number": "41",
+    "source": "db_locale"
+  },
+  "zone_03": {
+    "term_ar": "الحسن",
+    "term_fr": "Ḥasan",
+    "transliteration": "ḥasan",
+    "category": "degré",
+    "definition_fr": "Caractère de ce qui est rapporté par une chaîne ininterrompue, par un transmetteur de confiance dont la mémoire est légèrement déficiente, et qui est exempt de défaut et de contradiction.",
+    "source": "mustalah_definitions_fr.json"
+  },
+  "zone_04": {
+    "text_fr": "Rapporté par Abu Sa'id Al Khudri : Le Messager d'Allah (ﷺ) a dit : « Si une personne embrasse l’islam sincèrement, alors Allah lui pardonne tous ses péchés passés, et ensuite commence le règlement des comptes : la récompense de chaque bonne action sera multipliée par dix jusqu’à sept cents fois, et une mauvaise action sera inscrite telle quelle, sauf si Allah la pardonne. »",
+    "source": "db_locale"
+  },
+  "zone_05": {
+    "book_name_transliterated": "Ṣaḥīḥ al-Bukhārī",
+    "book_name_ar": "صحيح البخاري",
+    "book_name_fr": "Sahih al-Bukhari",
+    "source": "db_locale"
+  },
+  "zone_06": {
+    "narrator_ar": "سعيد بن جبير",
+    "source": "dorar"
+  },
+  "zone_07": {},
+  "zone_08": {},
+  "zone_09": {},
+  "zone_10": {},
+  "zone_11": {},
+  "zone_12": {
+    "narrator_name": "سعيد بن جبير",
+    "note": "biographie disponible sur Dorar (صفحة الراوي)",
+    "source": "dorar"
+  },
+  "zone_13": {},
+  "zone_14": {},
+  "zone_15": {},
+  "zone_16": {},
+  "zone_17": {},
+  "zone_18": {},
+  "zone_19": {},
+  "zone_20": {},
+  "zone_21": {},
+  "zone_22": {},
+  "zone_23": {},
+  "zone_24": {
+    "collection": "تغليق التعليق",
+    "source_book": "تغليق التعليق",
+    "source": "dorar"
+  },
+  "zone_25": {
+    "hadith_number": "41",
+    "hadith_id_dorar": "41",
+    "source": "dorar"
+  },
+  "zone_26": {
+    "verdict": "إسناده حسن",
+    "scholar": "Al-Albānī",
+    "source": "dorar"
+  },
+  "zone_27": {},
+  "zone_28": {},
+  "zone_29": {},
+  "zone_30": {},
+  "zone_31": {},
+  "zone_32": {},
+  "zone_33": {},
+  "zone_34": {},
+  "zone_35": {},
+  "zone_36": {},
+  "zone_37": {},
+  "zone_38": {},
+  "zone_39": {},
+  "zone_40": {},
+  "_meta": {
+    "hadith_id": "dorar-41",
+    "zones_remplies": [
+      "zone_01",
+      "zone_02",
+      "zone_03",
+      "zone_04",
+      "zone_05",
+      "zone_06",
+      "zone_12",
+      "zone_24",
+      "zone_25",
+      "zone_26"
+    ],
+    "zones_vides": [
+      "zone_07",
+      "zone_08",
+      "zone_09",
+      "zone_10",
+      "zone_11",
+      "zone_13",
+      "zone_14",
+      "zone_15",
+      "zone_16",
+      "zone_17",
+      "zone_18",
+      "zone_19",
+      "zone_20",
+      "zone_21",
+      "zone_22",
+      "zone_23",
+      "zone_27",
+      "zone_28",
+      "zone_29",
+      "zone_30",
+      "zone_31",
+      "zone_35",
+      "zone_33",
+      "zone_32",
+      "zone_34",
+      "zone_36",
+      "zone_37",
+      "zone_38",
+      "zone_39",
+      "zone_40"
+    ],
+    "timestamp": "2026-04-30T21:26:46.323255",
+    "total_zones": 40,
+    "filled_count": 10,
+    "empty_count": 30,
+    "piliers": {
+      "db_local": true,
+      "dorar": true
+    }
+  }
+}

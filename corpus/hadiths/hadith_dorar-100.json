@@ -1,5 +1,8 @@
 {
-  "zone_01": {},
+  "zone_01": {
+    "text_ar": "1 -  عن أبي مُوسى في قولِه عَزَّ وجَلَّ: {الْأَوَّلُونَ مِنَ الْمُهَاجِرِينَ} [التوبة:100]، قال: مَن صلَّى القِبْلتينِ مع النَّبيِّ صَلَّى اللهُ عليه وسلَّمَ.  .",
+    "source": "dorar"
+  },
   "zone_02": {
     "grade": "Sahih",
     "grade_by": "",
@@ -14,7 +17,6 @@
     "transliteration": "ṣaḥīḥ",
     "category": "degré",
     "definition_fr": "Caractère de ce qui est rapporté par une chaîne ininterrompue, par un transmetteur de confiance (ʿadl) dont la mémoire est fiable (ḍābiṭ tām), et qui est exempt de défaut (ʿilla) et de contradiction (shudhūdh) avec un groupe de rapporteurs de confiance.",
-    "source_reference": "Lexique de terminologie du hadith — 3ilmchar3i.net",
     "source": "mustalah_definitions_fr.json"
   },
   "zone_04": {
@@ -27,13 +29,20 @@
     "book_name_fr": "Sahih al-Bukhari",
     "source": "db_locale"
   },
-  "zone_06": {},
+  "zone_06": {
+    "narrator_ar": "[مولاة لأبي موسى]",
+    "source": "dorar"
+  },
   "zone_07": {},
   "zone_08": {},
   "zone_09": {},
   "zone_10": {},
   "zone_11": {},
-  "zone_12": {},
+  "zone_12": {
+    "narrator_name": "[مولاة لأبي موسى]",
+    "note": "biographie disponible sur Dorar (صفحة الراوي)",
+    "source": "dorar"
+  },
   "zone_13": {},
   "zone_14": {},
   "zone_15": {},
@@ -45,13 +54,21 @@
   "zone_21": {},
   "zone_22": {},
   "zone_23": {},
-  "zone_24": {},
+  "zone_24": {
+    "collection": "إتحاف الخيرة المهرة",
+    "source_book": "إتحاف الخيرة المهرة",
+    "source": "dorar"
+  },
   "zone_25": {
     "hadith_number": "100",
     "hadith_id_dorar": "100",
-    "source": "db_locale"
+    "source": "dorar"
   },
-  "zone_26": {},
+  "zone_26": {
+    "verdict": "سنده فيه راو لم يسم",
+    "scholar": "Al-Albānī",
+    "source": "dorar"
+  },
   "zone_27": {},
   "zone_28": {},
   "zone_29": {},
@@ -69,21 +86,23 @@
   "_meta": {
     "hadith_id": "dorar-100",
     "zones_remplies": [
+      "zone_01",
       "zone_02",
       "zone_03",
       "zone_04",
       "zone_05",
-      "zone_25"
+      "zone_06",
+      "zone_12",
+      "zone_24",
+      "zone_25",
+      "zone_26"
     ],
     "zones_vides": [
-      "zone_01",
-      "zone_06",
       "zone_07",
       "zone_08",
       "zone_09",
       "zone_10",
       "zone_11",
-      "zone_12",
       "zone_13",
       "zone_14",
       "zone_15",
@@ -95,30 +114,28 @@
       "zone_21",
       "zone_22",
       "zone_23",
-      "zone_24",
-      "zone_26",
       "zone_27",
       "zone_28",
       "zone_29",
       "zone_30",
       "zone_31",
-      "zone_32",
-      "zone_33",
-      "zone_34",
       "zone_35",
+      "zone_33",
+      "zone_32",
+      "zone_34",
       "zone_36",
       "zone_37",
       "zone_38",
       "zone_39",
       "zone_40"
     ],
-    "timestamp": "2026-04-30T20:12:09.822510",
+    "timestamp": "2026-04-30T21:25:45.595073",
     "total_zones": 40,
-    "filled_count": 5,
-    "empty_count": 35,
+    "filled_count": 10,
+    "empty_count": 30,
     "piliers": {
       "db_local": true,
-      "dorar": false
+      "dorar": true
     }
   }
 }

@@ -1,0 +1,172 @@
+[
+  {
+    "id": "FICHE_0001",
+    "timestamp": "2026-04-30T23:57:51.801044",
+    "detection": {
+      "source": "youtube",
+      "plateforme": "YOUTUBE",
+      "url": "youtube.com/watch?v=I98yHfE76Wo",
+      "titre": "Hadith : Ce bas monde prison du croyant. Par Abdullah Limani",
+      "score_match": "68.1%"
+    },
+    "mensonge_detecte": {
+      "texte_circulant": "Hadith : Ce bas monde prison du croyant",
+      "longueur": 39
+    },
+    "verite_revelée": {
+      "grade_authentique": "saheeh",
+      "savant_verificateur": "Muslim",
+      "reference": "",
+      "texte_reference": "Le Prophète a dit que le monde est la prison du croyant"
+    },
+    "verdict_savants": {
+      "couperet": "SAHEEH — Muslim",
+      "reference_livre": ""
+    },
+    "propagation_analysee": {
+      "courant_identifie": "Général",
+      "pratique_justifiee": [
+        "monde",
+        "prison",
+        "croyant"
+      ],
+      "niveau_viralite": "ÉLEVÉ"
+    }
+  },
+  {
+    "id": "FICHE_0002",
+    "timestamp": "2026-04-30T23:57:51.805342",
+    "detection": {
+      "source": "youtube",
+      "plateforme": "YOUTUBE",
+      "url": "youtube.com/watch?v=x8CPuJJqcJ0",
+      "titre": "Le cas du croyant est ÉTONNANT! - Hadith [HD]",
+      "score_match": "50.0%"
+    },
+    "mensonge_detecte": {
+      "texte_circulant": "e cas du croyant est étonnant !",
+      "longueur": 31
+    },
+    "verite_revelée": {
+      "grade_authentique": "saheeh",
+      "savant_verificateur": "Bukhari",
+      "reference": "",
+      "texte_reference": "Le Prophète a dit que le rêve du croyant est vrai"
+    },
+    "verdict_savants": {
+      "couperet": "SAHEEH — Bukhari",
+      "reference_livre": ""
+    },
+    "propagation_analysee": {
+      "courant_identifie": "Général",
+      "pratique_justifiee": [
+        "rêve",
+        "croyant",
+        "vérité"
+      ],
+      "niveau_viralite": "ÉLEVÉ"
+    }
+  },
+  {
+    "id": "FICHE_0003",
+    "timestamp": "2026-04-30T23:57:51.810651",
+    "detection": {
+      "source": "youtube",
+      "plateforme": "YOUTUBE",
+      "url": "youtube.com/watch?v=n7xkRdzXX6s",
+      "titre": "Elle priait, jeûnait, portait le hijab… mais le Prophète a dit : Elle est en Enfer !&quot;",
+      "score_match": "43.8%"
+    },
+    "mensonge_detecte": {
+      "texte_circulant": "t en Enfer !&quot; Elle priait",
+      "longueur": 30
+    },
+    "verite_revelée": {
+      "grade_authentique": "mawdou",
+      "savant_verificateur": "Ibn Bāz",
+      "reference": "FT 19493",
+      "texte_reference": "La femme en Enfer suspendue par les cheveux"
+    },
+    "verdict_savants": {
+      "couperet": "MAWDOU — Ibn Bāz",
+      "reference_livre": "FT 19493"
+    },
+    "propagation_analysee": {
+      "courant_identifie": "Général",
+      "pratique_justifiee": [
+        "femme",
+        "enfer",
+        "cheveux"
+      ],
+      "niveau_viralite": "ÉLEVÉ"
+    }
+  },
+  {
+    "id": "FICHE_0004",
+    "timestamp": "2026-04-30T23:57:51.819865",
+    "detection": {
+      "source": "youtube",
+      "plateforme": "YOUTUBE",
+      "url": "youtube.com/watch?v=igzs_0bv_C8",
+      "titre": "Fâ&#39;ida hadith: les prophètes n&#39;ont légué ni dinars ni dirhams... | cheikh Ahmad Bâzmoul حفظه اللّٰه",
+      "score_match": "79.3%"
+    },
+    "mensonge_detecte": {
+      "texte_circulant": "comprendre le hadith (les savants sont les héritiers des prophètes)",
+      "longueur": 67
+    },
+    "verite_revelée": {
+      "grade_authentique": "daif",
+      "savant_verificateur": "al-Albānī",
+      "reference": "SD 629",
+      "texte_reference": "Les savants sont les héritiers des prophètes"
+    },
+    "verdict_savants": {
+      "couperet": "DAIF — al-Albānī",
+      "reference_livre": "SD 629"
+    },
+    "propagation_analysee": {
+      "courant_identifie": "Général",
+      "pratique_justifiee": [
+        "savants",
+        "héritiers",
+        "prophètes"
+      ],
+      "niveau_viralite": "ÉLEVÉ"
+    }
+  },
+  {
+    "id": "FICHE_0005",
+    "timestamp": "2026-04-30T23:57:51.827173",
+    "detection": {
+      "source": "youtube",
+      "plateforme": "YOUTUBE",
+      "url": "youtube.com/watch?v=b8hOSlbBU8A",
+      "titre": "Le croyant est tel un miroir pour son frère croyant - Shaykh Gilles Sadek",
+      "score_match": "45.5%"
+    },
+    "mensonge_detecte": {
+      "texte_circulant": "signifie : « Le croyant est tel un miroir pour son frère croyant",
+      "longueur": 64
+    },
+    "verite_revelée": {
+      "grade_authentique": "saheeh",
+      "savant_verificateur": "Abu Dawud",
+      "reference": "",
+      "texte_reference": "Le Prophète a dit que le musulman est le miroir du musulman"
+    },
+    "verdict_savants": {
+      "couperet": "SAHEEH — Abu Dawud",
+      "reference_livre": ""
+    },
+    "propagation_analysee": {
+      "courant_identifie": "Général",
+      "pratique_justifiee": [
+        "miroir",
+        "musulman",
+        "frère"
+      ],
+      "niveau_viralite": "ÉLEVÉ"
+    }
+  }
+]

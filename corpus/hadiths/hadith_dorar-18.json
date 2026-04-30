@@ -1,0 +1,141 @@
+{
+  "zone_01": {
+    "text_ar": "1 -  عنْ عبدِ الرَّحمنِ بنِ غَنْمٍ، قالَ: سألتُ مُعاذًا عنْ قولِ اللهِ عزَّ وجلَّ: {مَا كَانَ يَنْبَغِي لَنَا أَنْ نَتَّخِذَ} [الفرقان:18] أوْ: (نُتَّخَدَ)؟ قالَ: سَمِعْتُ النَّبيَّ صلَّى اللهُ عليه وسلَّمَ يَقرأُ: {أَنْ نَتَّخِذَ مِن دُونِكَ} [الفرقان:18] بِنَصْبِ النُّونِ.  .",
+    "source": "dorar"
+  },
+  "zone_02": {
+    "grade": "Hasan",
+    "grade_by": "",
+    "book_name_transliterated": "Ṣaḥīḥ al-Bukhārī",
+    "book_name_ar": "صحيح البخاري",
+    "hadith_number": "18",
+    "source": "db_locale"
+  },
+  "zone_03": {
+    "term_ar": "الحسن",
+    "term_fr": "Ḥasan",
+    "transliteration": "ḥasan",
+    "category": "degré",
+    "definition_fr": "Caractère de ce qui est rapporté par une chaîne ininterrompue, par un transmetteur de confiance dont la mémoire est légèrement déficiente, et qui est exempt de défaut et de contradiction.",
+    "source": "mustalah_definitions_fr.json"
+  },
+  "zone_04": {
+    "text_fr": "Rapporté par 'Ubada bin As-Samit : qui a participé à la bataille de Badr et était un Naqib (chef d'un groupe de six personnes), lors de la nuit du pacte d'Al-'Aqaba : Le Messager d'Allah a dit alors qu'un groupe de ses compagnons était autour de lui : Jurez-moi fidélité pour : 1. N'associer personne à Allah dans l'adoration. 2. Ne pas voler. 3. Ne pas commettre d'adultère. 4. Ne pas tuer vos enfants. 5. Ne pas accuser injustement une personne innocente. 6. Ne pas désobéir lorsqu'on vous ordonne de faire le bien. Le Prophète (ﷺ) a ajouté : Celui d'entre vous qui respecte son engagement sera récompensé par Allah. Et celui qui commet l'une de ces fautes (sauf l'association à Allah) et reçoit une punition dans ce monde, cette punition effacera son péché. Mais si quelqu'un commet l'une de ces fautes et qu'Allah cache son péché, c'est à Lui de le pardonner ou de le punir dans l'au-delà. 'Ubada bin As-Samit a ajouté : Nous avons donc juré fidélité pour ces choses-là. (Il désigne le Messager d'Allah)",
+    "source": "db_locale"
+  },
+  "zone_05": {
+    "book_name_transliterated": "Ṣaḥīḥ al-Bukhārī",
+    "book_name_ar": "صحيح البخاري",
+    "book_name_fr": "Sahih al-Bukhari",
+    "source": "db_locale"
+  },
+  "zone_06": {
+    "narrator_ar": "معاذ بن جبل",
+    "source": "dorar"
+  },
+  "zone_07": {},
+  "zone_08": {},
+  "zone_09": {},
+  "zone_10": {},
+  "zone_11": {},
+  "zone_12": {
+    "narrator_name": "معاذ بن جبل",
+    "note": "biographie disponible sur Dorar (صفحة الراوي)",
+    "source": "dorar"
+  },
+  "zone_13": {},
+  "zone_14": {},
+  "zone_15": {},
+  "zone_16": {},
+  "zone_17": {},
+  "zone_18": {},
+  "zone_19": {},
+  "zone_20": {},
+  "zone_21": {},
+  "zone_22": {},
+  "zone_23": {},
+  "zone_24": {
+    "collection": "المستدرك على الصحيحين",
+    "source_book": "المستدرك على الصحيحين",
+    "source": "dorar"
+  },
+  "zone_25": {
+    "hadith_number": "18",
+    "hadith_id_dorar": "18",
+    "source": "dorar"
+  },
+  "zone_26": {
+    "verdict": "[لم نكتب الحديث إلَّا بهذا الإسناد، إلَّا أن محمد بن سعيد الشامي ليس من شرط الكتاب]",
+    "scholar": "Al-Albānī",
+    "source": "dorar"
+  },
+  "zone_27": {},
+  "zone_28": {},
+  "zone_29": {},
+  "zone_30": {},
+  "zone_31": {},
+  "zone_32": {},
+  "zone_33": {},
+  "zone_34": {},
+  "zone_35": {},
+  "zone_36": {},
+  "zone_37": {},
+  "zone_38": {},
+  "zone_39": {},
+  "zone_40": {},
+  "_meta": {
+    "hadith_id": "dorar-18",
+    "zones_remplies": [
+      "zone_01",
+      "zone_02",
+      "zone_03",
+      "zone_04",
+      "zone_05",
+      "zone_06",
+      "zone_12",
+      "zone_24",
+      "zone_25",
+      "zone_26"
+    ],
+    "zones_vides": [
+      "zone_07",
+      "zone_08",
+      "zone_09",
+      "zone_10",
+      "zone_11",
+      "zone_13",
+      "zone_14",
+      "zone_15",
+      "zone_16",
+      "zone_17",
+      "zone_18",
+      "zone_19",
+      "zone_20",
+      "zone_21",
+      "zone_22",
+      "zone_23",
+      "zone_27",
+      "zone_28",
+      "zone_29",
+      "zone_30",
+      "zone_31",
+      "zone_35",
+      "zone_33",
+      "zone_32",
+      "zone_34",
+      "zone_36",
+      "zone_37",
+      "zone_38",
+      "zone_39",
+      "zone_40"
+    ],
+    "timestamp": "2026-04-30T21:25:58.658461",
+    "total_zones": 40,
+    "filled_count": 10,
+    "empty_count": 30,
+    "piliers": {
+      "db_local": true,
+      "dorar": true
+    }
+  }
+}

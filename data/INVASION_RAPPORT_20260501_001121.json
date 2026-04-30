@@ -1,0 +1,23 @@
+{
+  "stats": {
+    "sites_ciblés": 28,
+    "pages_crawlées": 24,
+    "pages_réussies": 22,
+    "pages_échouées": 5,
+    "hadiths_extraits": 15,
+    "mawdou_trouvés": 0,
+    "daif_trouvés": 0,
+    "saheeh_trouvés": 0,
+    "matches_total": 0,
+    "fiches_générées": 0,
+    "courants": {
+      "Ikhwānī": 0,
+      "Tablīghī": 0,
+      "Soufi": 0,
+      "Ash'arī": 0,
+      "Salafī": 0,
+      "Général": 0
+    }
+  },
+  "fiches": 0
+}

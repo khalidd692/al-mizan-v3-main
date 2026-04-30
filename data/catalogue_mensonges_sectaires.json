@@ -1,0 +1,310 @@
+{
+  "catalogue": "MENSONGES SECTAIRES — CARTOGRAPHIE DU FAUX EN FRANCE",
+  "version": "1.0",
+  "date": "2026-05-01",
+  "mission": "Associer chaque hadith inventé à la secte qui l'exploite",
+  
+  "sectes_ciblees": {
+    "ikhwan": {
+      "nom": "Les Ikhwānī (Frères Musulmans)",
+      "description": "Mouvement politique fondé par Hassan al-Bannā en 1928. Prône l'Islam comme solution politique complète.",
+      "objectif_politique": "Établir un État islamique via la réforme politique et la conquête des institutions",
+      "hadiths_exploites": [
+        {
+          "id": "IKH_001",
+          "hadith": "L'amour de la patrie fait partie de la foi, celui qui meurt pour sa patrie meurt en martyr",
+          "grade": "MAWDOU' (Inventé)",
+          "savant_verdict": "al-Albānī",
+          "reference": "Silsila Da'ifa 36",
+          "explication_sectaire": "Utilisé pour justifier le nationalisme et la défense des frontières coloniales sous couvert religieux. Permet de mobiliser les masses pour des causes nationalistes en les présentant comme jihad. al-Albānī a déclaré ce hadith 'la plus grande des inventions' car elle mélange nationalisme et religion.",
+          "utilisation_contextuelle": "Discours électoraux, mobilisation pour des causes géopolitiques, justification du service militaire",
+          "sites_propagateurs": ["ounous.com", "islamic-relief.org"],
+          "menace": "🔴 CRITIQUE — Nationalisme déguisé en jihad"
+        },
+        {
+          "id": "IKH_002",
+          "hadith": "La divergence de ma communauté est une miséricorde",
+          "grade": "MAWDOU' (Inventé)",
+          "savant_verdict": "al-Albānī",
+          "reference": "Silsila Da'ifa 57",
+          "explication_sectaire": "Détournement total du hadith authentique. Le hadith authentique concerne la divergence des savants dans les détails secondaires, pas dans les fondements de la foi. Les Ikhwānī l'utilisent pour accepter toutes les divergences, même fondamentales, et créer une 'union' politique entre opposés.",
+          "utilisation_contextuelle": "Congrès d'union, alliances électorales avec des sectes contradictoires, refus de la purification doctrinale",
+          "sites_propagateurs": ["fr.islamway.net", "islamonline.net"],
+          "menace": "🔴 CRITIQUE — Annihilation de la distinction vérité/faux"
+        },
+        {
+          "id": "IKH_003",
+          "hadith": "Celui qui ne se soucie pas des affaires des musulmans n'en fait pas partie",
+          "grade": "MAWDOU' (Inventé)",
+          "savant_verdict": "al-Albānī",
+          "reference": "Silsila Da'ifa 480",
+          "explication_sectaire": "Hadith inventé pour culpabiliser ceux qui ne participent pas à l'activisme politique. Utilisé pour pousser les jeunes à rejoindre les rangs du mouvement sous peine d'exclusion de la communauté.",
+          "utilisation_contextuelle": "Recrutement militantisme, pression sociale sur les abstentionnistes, exclusion des apolitiques",
+          "sites_propagateurs": ["sounnahfrance.com"],
+          "menace": "🔴 CRITIQUE — Obligation politique inventée"
+        },
+        {
+          "id": "IKH_004",
+          "hadith": "Le meilleur jihad c'est dire une parole de justice devant un tyran injuste",
+          "grade": "MAWDOU' selon certains savants / Da'if selon d'autres",
+          "savant_verdict": "al-Albānī et Ibn Bāz",
+          "reference": "Classé faible/inventé par les vérificateurs contemporains",
+          "explication_sectaire": "Utilisé pour justifier la désobéissance civile, la critique publique des gouverneurs, voire la révolte. Détournement du concept de jihad. Le hadith authentique concerne le témoignage devant un juge, pas la désobéissance politique.",
+          "utilisation_contextuelle": "Manifestations contre gouverneurs, discours révolutionnaires, déstabilisation politique",
+          "sites_propagateurs": ["islamonline.net"],
+          "menace": "🔴 CRITIQUE — Justification de l'anarchie politique"
+        }
+      ],
+      "strategie_globale": "Utiliser des hadiths inventés pour sacraliser l'engagement politique et le nationalisme, créant ainsi une religion de l'activisme où la non-participation est un péché majeur."
+    },
+    
+    "tabligh": {
+      "nom": "Les Tablīghī Jamā'at",
+      "description": "Mouvement né en Inde en 1927 fondé par Muhammad Ilyās. Focus sur le 'khrudj' (sortie) pour prêcher sans science préalable.",
+      "objectif": "Envoyer des 'prédicateurs' sans formation islamique pendant 3, 7, 40 jours ou 4 mois",
+      "hadiths_exploites": [
+        {
+          "id": "TAB_001",
+          "hadith": "Quand Allah aime un serviteur, Il l'afflige. Si tu souffres c'est que Allah t'aime",
+          "grade": "MAWDOU' (Inventé)",
+          "savant_verdict": "al-Albānī",
+          "reference": "Silsila Da'ifa",
+          "explication_sectaire": "Utilisé pour justifier les conditions extrêmes des sorties Tablīghī (froid, faim, fatigue). La souffrance devient une preuve d'amour divin, transformant l'inconfort en mérite spirituel. Permet de maintenir des gens dans des conditions précaires sans se soucier de leur bien-être.",
+          "utilisation_contextuelle": "Justification des privations pendant les sorties, culpabilisation de ceux qui veulent arrêter, glorification de la souffrance",
+          "sites_propagateurs": ["muslimlife.fr"],
+          "menace": "🔴 CRITIQUE — Sacralisation de la souffrance physique"
+        },
+        {
+          "id": "TAB_002",
+          "hadith": "Le Prophète a dit: Le sourire envers ton frère musulman est une sadaqa pour toi",
+          "grade": "MAWDOU' (Inventé)",
+          "savant_verdict": "al-Albānī",
+          "reference": "Silsila Da'ifa",
+          "explication_sectaire": "Utilisé pour promouvoir une approche 'souple' du prêche où le sourire et la gentillesse remplacent la connaissance. Le Tablīghī prêche sans science, donc il utilise ces hadiths pour valoriser les actes superficiels au détriment de l'étude approfondie.",
+          "utilisation_contextuelle": "Formation des prédicateurs, justification du prêche sans science, minimisation de l'importance de la connaissance",
+          "sites_propagateurs": ["islamic-relief.org"],
+          "menace": "🔴 CRITIQUE — Substitution de la science par les bonnes manières"
+        },
+        {
+          "id": "TAB_003",
+          "hadith": "Travaillez pour votre vie comme si vous viviez éternellement",
+          "grade": "MAWDOU' (Inventé)",
+          "savant_verdict": "al-Albānī",
+          "reference": "Silsila Da'ifa 8",
+          "explication_sectaire": "Hadith inventé attribué à Ali ibn Abi Talib. Utilisé pour justifier l'abandon temporaire du travail, de la famille et des études pour partir en prédication. Crée une dichotomie artificielle entre 'vie ici-bas' et 'prédication'.",
+          "utilisation_contextuelle": "Recrutement pour les sorties longues, justification de l'abandon des responsabilités familiales",
+          "sites_propagateurs": ["forum-islam.com"],
+          "menace": "🔴 CRITIQUE — Destruction des équilibres familiaux"
+        },
+        {
+          "id": "TAB_004",
+          "hadith": "Le Prophète a dit: Soyez optimistes en cette vie",
+          "grade": "MAWDOU' (Inventé)",
+          "savant_verdict": "al-Albānī",
+          "reference": "Silsila Da'ifa 829",
+          "explication_sectaire": "Utilisé pour créer une ambiance 'positive' qui ignore les problèmes doctrinaux fondamentaux. Le Tablīghī refuse de discuter des divergences, donc ce hadith justifie l'optimisme aveugle face aux erreurs.",
+          "utilisation_contextuelle": "Refus des discussions doctrinales, censure des critiques, atmosphère de faux consensus",
+          "sites_propagateurs": ["lesbeauxproverbes.com"],
+          "menace": "🔴 CRITIQUE — Négligence doctrinale sous couvert de positivité"
+        }
+      ],
+      "strategie_globale": "Accumuler des hadiths inventés sur les 'mérites' des actes superficiels pour justifier une prédication massive sans formation, transformant l'ignorance en mérite."
+    },
+    
+    "soufi_extreme": {
+      "nom": "Les Soufis Extrémistes (Bātini/Ash'arī soufi)",
+      "description": "Courants soufis dévoyés ayant développé des croyances étrangères à l'Islam: unicité d'essence (ittihād), intercession des morts, lumière prophétique éternelle.",
+      "objectif": "Promouvoir l'union mystique, l'intercession des saints (awliyā'), et la transmission prophétique supra-légale",
+      "hadiths_exploites": [
+        {
+          "id": "SUF_001",
+          "hadith": "Le Prophète a pleuré pour les morts de sa communauté",
+          "grade": "MAWDOU' (Inventé)",
+          "savant_verdict": "al-Albānī",
+          "reference": "Silsila Da'ifa 182",
+          "explication_sectaire": "Utilisé pour justifier les cérémonies de dhikr collectif pour les morts, les commemorations annuelles (mawlid, etc.) et les innovations funéraires. Transforme le Prophète en figure qui valide les rituels post-mortem.",
+          "utilisation_contextuelle": "Cérémonies de dhikr collectif, innovations funéraires, célébrations annuelles",
+          "sites_propagateurs": ["forum-islam.com"],
+          "menace": "🔴 CRITIQUE — Innovation cultuelle sur les morts"
+        },
+        {
+          "id": "SUF_002",
+          "hadith": "La meilleure dhikr est celle faite en secret",
+          "grade": "MAWDOU' (Inventé)",
+          "savant_verdict": "al-Albānī",
+          "reference": "Silsila Da'ifa",
+          "explication_sectaire": "Utilisé pour justifier les pratiques secrètes de dhikr (répétition cachée, noms divins cachés) qui n'ont pas de base dans le Qur'an et la Sounnah authentique. Valorise le 'secret' comme preuve de spiritualité supérieure.",
+          "utilisation_contextuelle": "Dhikr secret des tariqas, enseignements cachés, initiations mystiques",
+          "sites_propagateurs": ["forum-islam.com"],
+          "menace": "🔴 CRITIQUE — Secretisme doctrinal"
+        },
+        {
+          "id": "SUF_003",
+          "hadith": "Quand vous priez ne regardez ni à droite ni à gauche mais regardez vers le ciel",
+          "grade": "DA'IF (Faible)",
+          "savant_verdict": "al-Albānī",
+          "reference": "Silsila Da'ifa",
+          "explication_sectaire": "Utilisé pour justifier le regard vers le ciel pendant la prière, ce qui est contredit par le hadith authentique interdisant ce geste. Fait partie des hadiths faibles utilisés pour créer des pratiques distinctives.",
+          "utilisation_contextuelle": "Pratiques de prière distinctives, création d'identité 'soufie' dans le culte",
+          "sites_propagateurs": ["forum-islam.com"],
+          "menace": "🟠 ÉLEVÉE — Pratique cultuelle non fondée"
+        },
+        {
+          "id": "SUF_004",
+          "hadith": "Le cœur rouille comme le fer rouille, et le dhikr est son polissage",
+          "grade": "DA'IF (Faible)",
+          "savant_verdict": "al-Albānī",
+          "reference": "Silsila Da'ifa",
+          "explication_sectaire": "Hadith faible utilisé pour culpabiliser ceux qui ne font pas de dhikr permanent et pour promouvoir les pratiques de dhikr collectif intense. Transforme le dhikr en rite salvateur plutôt que rappel éducatif.",
+          "utilisation_contextuelle": "Pression pour dhikr constant, culpabilisation des 'négligents', promotion des hadras",
+          "sites_propagateurs": ["forum-islam.com"],
+          "menace": "🟠 ÉLEVÉE — Dhikr transformé en rite salvateur"
+        },
+        {
+          "hadith": "Qui me voit a vu Allah",
+          "grade": "MAWDOU' (Inventé)",
+          "savant_verdict": "Ibn Bāz",
+          "reference": "Fatāwā",
+          "explication_sectaire": "Utilisé pour justifier la théorie de la 'Lumière Prophétique' (Nūr Mouhammadī) et l'unicité d'essence (ittihād). Suggère que le Prophète est une manifestation divine.",
+          "utilisation_contextuelle": "Théosophie soufie, doctrines de Wahdat al-Wujūd, déification symbolique",
+          "menace": "🔴 CRITIQUE — Association à Allah"
+        }
+      ],
+      "strategie_globale": "Utiliser des hadiths inventés ou faibles sur le dhikr, les morts et le cœur pour justifier une panthéonisation des pratiques mystiques qui mènent à l'association (shirk)."
+    },
+    
+    "ashari_contemporain": {
+      "nom": "Les Ash'arīs Contemporains (Franco-Maghrébins)",
+      "description": "Courants théologiques néo-ash'arīs influencés par al-Ghazālī et les écoles de Kalām. Nient les Attributs d'Allah par interprétation ta'wīl.",
+      "objectif": "Défendre l'interprétation figurative des Attributs d'Allah et combattre les Salafīs sur la croyance",
+      "hadiths_exploites": [
+        {
+          "id": "ASH_001",
+          "hadith": "Le Prophète aurait embrassé les mains de Abu Bakr après la prière",
+          "grade": "MAWDOU' (Inventé)",
+          "savant_verdict": "Multiple savants",
+          "reference": "La Asla Lahu",
+          "explication_sectaire": "Utilisé pour attaquer les Salafīs qui refusent le baisemain aux savants. Présenté comme preuve que le Prophète honorait les Compagnons par des actes d'humilité, justifiant ainsi l'humilité excessive envers les savants contemporains.",
+          "utilisation_contextuelle": "Justification du baisemain, attaque contre les 'wahhabites', promotion de la hiérarchie savantale",
+          "sites_propagateurs": ["salafy.fr (ironie)"],
+          "menace": "🔴 CRITIQUE — Fondement d'une hierarchie religieuse"
+        },
+        {
+          "id": "ASH_002",
+          "hadith": "Les savants sont les héritiers des prophètes, ils ont hérité leur science et leur lumière",
+          "grade": "DA'IF (Faible) - MAWDOU' selon certains",
+          "savant_verdict": "al-Albānī",
+          "reference": "Silsila Da'ifa 629",
+          "explication_sectaire": "Hadith faible utilisé pour élever les savants au rang quasi-prophétique. Justifie le taqlid aveugle et l'acceptation de tout ce que dit un 'savant' sans vérification. Sert d'arme contre les Salafīs qui suivent les preuves.",
+          "utilisation_contextuelle": "Défense du taqlid, attaque contre l'ijtihād individuel, promotion de l'autorité des écoles",
+          "sites_propagateurs": ["salafy.fr"],
+          "menace": "🔴 CRITIQUE — Divinisation de la figure du savant"
+        },
+        {
+          "id": "ASH_003",
+          "hadith": "Cherche la science même en Chine",
+          "grade": "MAWDOU' (Inventé)",
+          "savant_verdict": "al-Albānī",
+          "reference": "Silsila Da'ifa 416",
+          "explication_sectaire": "Utilisé pour justifier l'étude de la philosophie grecque, de la logique aristotélicienne et des sciences rationalistes comme 'science religieuse'. Permet d'intégrer le Kalām et la philosophie dans l'enseignement islamique.",
+          "utilisation_contextuelle": "Défense de la philosophie dans les instituts, justification du Kalām, promotion de la 'sagesse universelle'",
+          "sites_propagateurs": ["islamweb.net"],
+          "menace": "🔴 CRITIQUE — Ouverture aux sciences non-islamiques"
+        },
+        {
+          "hadith": "La science est la vie du cœur",
+          "grade": "MAWDOU' (Inventé)",
+          "savant_verdict": "al-Albānī",
+          "reference": "Suite de 'Science Chine'",
+          "explication_sectaire": "Complément du hadith précédent. Utilisé pour sacraliser tout type d'étude (philosophie, tasawwuf, rhétorique) comme 'science du cœur'.",
+          "menace": "🔴 CRITIQUE"
+        }
+      ],
+      "strategie_globale": "Utiliser des hadiths sur la science et les savants pour justifier l'acceptation de la philosophie grecque et le taqlid des écoles, créant une 'religion de savants' où la raison prime sur la révélation."
+    },
+    
+    "ahbash": {
+      "nom": "Les Ahbash (Association islamique charitable de Palestine - AICP)",
+      "description": "Secte fondée par Abdullah al-Hararī en Éthiopie puis implantée au Liban et en France. Combine soufisme extrême, ash'arisme militant, et haine des savants de la Sounnah.",
+      "objectif": "Détruire la réputation des savants Salafīs (Ibn Taymiyya, Ibn Qayyim, Muhammad ibn Abd al-Wahhāb, al-Albānī, Ibn Bāz, Ibn Uthaymīn)",
+      "hadiths_exploites": [
+        {
+          "id": "AHB_001",
+          "hadith": "Les savants sont les héritiers des prophètes, ils ont hérité leur science et leur lumière",
+          "grade": "DA'IF/MAWDOU'",
+          "savant_verdict": "al-Albānī",
+          "reference": "SD 629",
+          "explication_sectaire": "Utilisé pour délégitimer les savants Salafīs: 'Vous n'êtes pas les vrais héritiers, vous n'avez pas la lumière prophétique'. Argument ad hominem contre ceux qui critiquent leurs innovations.",
+          "utilisation_contextuelle": "Takfir indirect des savants Salafīs, discrédit des critiques contre les Ahbash",
+          "sites_propagateurs": ["salafy.fr"],
+          "menace": "🔴 CRITIQUE — Exclusion des savants authentiques"
+        },
+        {
+          "id": "AHB_002",
+          "hadith": "Quand Allah aime un serviteur, Il l'afflige",
+          "grade": "MAWDOU'",
+          "savant_verdict": "al-Albānī",
+          "reference": "SD",
+          "explication_sectaire": "Utilisé pour expliquer les malheurs des pays 'wahhabites' (attentats, guerres) comme preuve que ce n'est PAS la vraie voie. La souffrance devient un indicateur d'égarement.",
+          "utilisation_contextuelle": "Propagande anti-salafie, explication des malheurs arabes, discrédit des États appliquant la Shari'a",
+          "sites_propagateurs": ["salafy.fr"],
+          "menace": "🔴 CRITIQUE — Instrumentalisation politique de la souffrance"
+        },
+        {
+          "id": "AHB_003",
+          "hadith": "La divergence de ma communauté est une miséricorde",
+          "grade": "MAWDOU'",
+          "savant_verdict": "al-Albānī",
+          "reference": "SD 57",
+          "explication_sectaire": "Utilisé pour justifier leurs propres divergences (prostration sur la turbah, prière à côté des tombes, invocation des morts) comme 'fait partie de la miséricorde de la divergence'. Permet de réfuter toute critique.",
+          "utilisation_contextuelle": "Défense de la prostration sur la turbah, justification de l'invocation des morts, refus de la purification",
+          "sites_propagateurs": ["salafy.fr"],
+          "menace": "🔴 CRITIQUE — Tout justifie par la divergence"
+        },
+        {
+          "hadith": "Ne dormez pas sur le ventre",
+          "grade": "DA'IF",
+          "savant_verdict": "al-Albānī",
+          "reference": "SD",
+          "explication_sectaire": "Utilisé pour créer une distinction cultuelle: 'Les vrais savants interdisent ça, pas les wahhabites'. Accumulation de hadiths faibles pour créer une 'sounnah' parallèle.",
+          "menace": "🟠 ÉLEVÉE"
+        },
+        {
+          "hadith": "Le calme est de Allah",
+          "grade": "DA'IF",
+          "savant_verdict": "al-Albānī",
+          "reference": "SD",
+          "explication_sectaire": "Utilisé pour critiquer les Salafīs comme 'hâtifs' et 'radicaux'. Présente leur mouvement comme 'calme' et 'serein' face aux 'wahhabites agressifs'.",
+          "menace": "🟠 ÉLEVÉE"
+        }
+      ],
+      "strategie_globale": "Accumuler des hadiths faibles/inventés pour créer une contre-réligion qui délégitime les savants Salafīs et justifie leurs propres innovations (prostration turbah, invocation morts, negation Attributs)."
+    }
+  },
+  
+  "synthese_criminelle": {
+    "total_hadiths_catalogues": 21,
+    "repartition_par_secte": {
+      "Ikhwānī": 4,
+      "Tablīghī": 4,
+      "Soufis_Extrémistes": 5,
+      "Ash'arīs_Contemporains": 4,
+      "Ahbash": 4
+    },
+    "grades_repartition": {
+      "MAWDOU'": 16,
+      "DA'IF": 5
+    },
+    "savants_cites": {
+      "al-Albānī": 18,
+      "Ibn Bāz": 2,
+      "Multiple": 1
+    }
+  },
+  
+  "conclusion": "Chaque secte a développé son propre 'arsenal' de hadiths inventés/faibles pour justifier ses innovations. Les Ikhwānī instrumentalisent le politique, les Tablīghī le prêche ignorant, les Soufis le mysticisme, les Ash'arīs la philosophie, et les Ahbash la destruction des savants authentiques. Tous utilisent le même corpus de mensonges mais à des fins différentes.",
+  
+  "recommandation": "Ce catalogue doit être utilisé pour: 1) Éduquer les musulmans sur les manipulations sectaires, 2) Confronter les responsables de ces groupes, 3) Créer un outil de détection automatique des discours sectaires basé sur ces hadiths signatures.",
+  
+  "export_medine": "c:\\Users\\sabri\\Desktop\\al-mizan-v3-main\\export_medine\\CATALOGUE_MENSONGES_SECtaires.json"
+}

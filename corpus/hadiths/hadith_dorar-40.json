@@ -1,0 +1,141 @@
+{
+  "zone_01": {
+    "text_ar": "1 -  عنْ أُبيِّ بنِ كَعْبٍ رَضيَ اللهُ عنه في قولِهِ عزَّ وجلَّ: {وَحُمِلَتِ الْأَرْضُ وَالْجِبَالُ فَدُكَّتَا دَكَّةً وَاحِدَةً} [الحاقة: 14] قالَ: يَصيرانِ غَبَرةً على وجوهِ الكُفَّارِ لا على وجوهِ المؤمنينَ، وذلك قولُهُ عزَّ وجلَّ: {وُجُوهٌ يَوْمَئِذٍ عَلَيْهَا غَبَرَةٌ (40) تَرْهَقُهَا قَتَرَةٌ} [عبس:40، 41].  .",
+    "source": "dorar"
+  },
+  "zone_02": {
+    "grade": "Sahih",
+    "grade_by": "",
+    "book_name_transliterated": "Ṣaḥīḥ al-Bukhārī",
+    "book_name_ar": "صحيح البخاري",
+    "hadith_number": "40",
+    "source": "db_locale"
+  },
+  "zone_03": {
+    "term_ar": "الصحيح",
+    "term_fr": "Ṣaḥīḥ",
+    "transliteration": "ṣaḥīḥ",
+    "category": "degré",
+    "definition_fr": "Caractère de ce qui est rapporté par une chaîne ininterrompue, par un transmetteur de confiance (ʿadl) dont la mémoire est fiable (ḍābiṭ tām), et qui est exempt de défaut (ʿilla) et de contradiction (shudhūdh) avec un groupe de rapporteurs de confiance.",
+    "source": "mustalah_definitions_fr.json"
+  },
+  "zone_04": {
+    "text_fr": "Rapporté par Al-Bara' (bin 'Azib) : Lorsque le Prophète (ﷺ) est arrivé à Médine, il a d'abord séjourné chez ses grands-pères ou ses oncles maternels parmi les Ansar. Il priait en direction de Bayt al-Maqdis (Jérusalem) pendant seize ou dix-sept mois, mais il souhaitait pouvoir prier en direction de la Ka'ba (à La Mecque). La première prière qu’il a faite en direction de la Ka'ba fut la prière d’‘Asr, accompagné de quelques personnes. Ensuite, l’un de ceux qui avaient prié avec lui est sorti et a croisé des gens dans une mosquée qui étaient en train de prier en direction de Jérusalem. Il leur a dit : « Par Allah, je témoigne que j’ai prié avec le Messager d’Allah (ﷺ) en direction de La Mecque (Ka'ba). » En entendant cela, ces personnes ont immédiatement changé de direction vers la Ka'ba. Les Juifs et les gens des Écritures étaient contents de voir le Prophète (ﷺ) prier en direction de Jérusalem, mais lorsqu’il a changé la direction vers la Ka'ba pendant la prière, ils l’ont désapprouvé. Al-Bara' a ajouté : « Avant que nous changions la direction de la prière vers la Ka'ba (La Mecque), certains musulmans étaient morts ou avaient été tués et nous ne savions pas quoi dire à leur sujet (concernant leurs prières). Allah a alors révélé : “Et Allah ne laissera jamais perdre votre foi (vos prières),” c’est-à-dire que les prières de ces musulmans étaient valides. »",
+    "source": "db_locale"
+  },
+  "zone_05": {
+    "book_name_transliterated": "Ṣaḥīḥ al-Bukhārī",
+    "book_name_ar": "صحيح البخاري",
+    "book_name_fr": "Sahih al-Bukhari",
+    "source": "db_locale"
+  },
+  "zone_06": {
+    "narrator_ar": "أبو العالية",
+    "source": "dorar"
+  },
+  "zone_07": {},
+  "zone_08": {},
+  "zone_09": {},
+  "zone_10": {},
+  "zone_11": {},
+  "zone_12": {
+    "narrator_name": "أبو العالية",
+    "note": "biographie disponible sur Dorar (صفحة الراوي)",
+    "source": "dorar"
+  },
+  "zone_13": {},
+  "zone_14": {},
+  "zone_15": {},
+  "zone_16": {},
+  "zone_17": {},
+  "zone_18": {},
+  "zone_19": {},
+  "zone_20": {},
+  "zone_21": {},
+  "zone_22": {},
+  "zone_23": {},
+  "zone_24": {
+    "collection": "المستدرك على الصحيحين",
+    "source_book": "المستدرك على الصحيحين",
+    "source": "dorar"
+  },
+  "zone_25": {
+    "hadith_number": "40",
+    "hadith_id_dorar": "40",
+    "source": "dorar"
+  },
+  "zone_26": {
+    "verdict": "صحيح على شرط الشيخين",
+    "scholar": "Al-Albānī",
+    "source": "dorar"
+  },
+  "zone_27": {},
+  "zone_28": {},
+  "zone_29": {},
+  "zone_30": {},
+  "zone_31": {},
+  "zone_32": {},
+  "zone_33": {},
+  "zone_34": {},
+  "zone_35": {},
+  "zone_36": {},
+  "zone_37": {},
+  "zone_38": {},
+  "zone_39": {},
+  "zone_40": {},
+  "_meta": {
+    "hadith_id": "dorar-40",
+    "zones_remplies": [
+      "zone_01",
+      "zone_02",
+      "zone_03",
+      "zone_04",
+      "zone_05",
+      "zone_06",
+      "zone_12",
+      "zone_24",
+      "zone_25",
+      "zone_26"
+    ],
+    "zones_vides": [
+      "zone_07",
+      "zone_08",
+      "zone_09",
+      "zone_10",
+      "zone_11",
+      "zone_13",
+      "zone_14",
+      "zone_15",
+      "zone_16",
+      "zone_17",
+      "zone_18",
+      "zone_19",
+      "zone_20",
+      "zone_21",
+      "zone_22",
+      "zone_23",
+      "zone_27",
+      "zone_28",
+      "zone_29",
+      "zone_30",
+      "zone_31",
+      "zone_35",
+      "zone_33",
+      "zone_32",
+      "zone_34",
+      "zone_36",
+      "zone_37",
+      "zone_38",
+      "zone_39",
+      "zone_40"
+    ],
+    "timestamp": "2026-04-30T21:26:44.506314",
+    "total_zones": 40,
+    "filled_count": 10,
+    "empty_count": 30,
+    "piliers": {
+      "db_local": true,
+      "dorar": true
+    }
+  }
+}

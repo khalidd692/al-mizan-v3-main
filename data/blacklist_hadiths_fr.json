@@ -1,0 +1,215 @@
+[
+  {
+    "id": 1,
+    "texte_fr": "Cherche la science même en Chine",
+    "texte_ar": "اطلبوا العلم ولو في الصين",
+    "grade": "mawdou",
+    "savant": "al-Albānī",
+    "reference": "Silsila Daifa n°416",
+    "source_detection": "manuel",
+    "source_url": null,
+    "frequence_detection": 1,
+    "statut_dorar": "ERREUR",
+    "url_dorar": null,
+    "statut_base": "ABSENT",
+    "hadith_id_base": null,
+    "courants_concernes": [
+      "Général"
+    ],
+    "pratique_justifiee": "Justifier l'étude sans cadre méthodologique islamique",
+    "refutation_savant": "al-Albānī : inventé — Silsila Daifa vol.1 n°416",
+    "date_detection": "2026-04-30T22:20:23.457578"
+  },
+  {
+    "id": 2,
+    "texte_fr": "Mes compagnons sont comme des étoiles suivez n'importe lequel",
+    "texte_ar": "أصحابي كالنجوم بأيهم اقتديتم اهتديتم",
+    "grade": "mawdou",
+    "savant": "al-Albānī",
+    "reference": "Silsila Daifa n°144",
+    "source_detection": "manuel",
+    "source_url": null,
+    "frequence_detection": 1,
+    "statut_dorar": "ERREUR",
+    "url_dorar": null,
+    "statut_base": "ABSENT",
+    "hadith_id_base": null,
+    "courants_concernes": [
+      "Ikhwānī",
+      "Ash'arī"
+    ],
+    "pratique_justifiee": "Justifier le taqlīd aveugle et légitimer tous les madhhabs sans critère",
+    "refutation_savant": "al-Albānī : inventé — Ibn Ḥazm : faux et mensonge — Silsila Daifa n°144",
+    "date_detection": "2026-04-30T22:20:27.334156"
+  },
+  {
+    "id": 3,
+    "texte_fr": "La divergence de ma communauté est une miséricorde",
+    "texte_ar": "اختلاف أمتي رحمة",
+    "grade": "mawdou",
+    "savant": "al-Albānī",
+    "reference": "Silsila Daifa n°57",
+    "source_detection": "manuel",
+    "source_url": null,
+    "frequence_detection": 1,
+    "statut_dorar": "ERREUR",
+    "url_dorar": null,
+    "statut_base": "ABSENT",
+    "hadith_id_base": null,
+    "courants_concernes": [
+      "Ikhwānī",
+      "Ash'arī",
+      "Soufi"
+    ],
+    "pratique_justifiee": "Légitimer toutes les divergences doctrinales et neutraliser le manhaj",
+    "refutation_savant": "al-Albānī : inventé et sans fondement — Silsila Daifa n°57",
+    "date_detection": "2026-04-30T22:20:31.425970"
+  },
+  {
+    "id": 4,
+    "texte_fr": "L'amour de la patrie fait partie de la foi",
+    "texte_ar": "حب الوطن من الإيمان",
+    "grade": "mawdou",
+    "savant": "al-Albānī",
+    "reference": "Silsila Daifa n°36",
+    "source_detection": "manuel",
+    "source_url": null,
+    "frequence_detection": 1,
+    "statut_dorar": "ERREUR",
+    "url_dorar": null,
+    "statut_base": "ABSENT",
+    "hadith_id_base": null,
+    "courants_concernes": [
+      "Ikhwānī"
+    ],
+    "pratique_justifiee": "Légitimer le nationalisme au sein de l'Islam",
+    "refutation_savant": "al-Albānī : inventé — Silsila Daifa n°36",
+    "date_detection": "2026-04-30T22:20:34.117686"
+  },
+  {
+    "id": 5,
+    "texte_fr": "Travaillez pour votre vie comme si vous viviez éternellement",
+    "texte_ar": "اعمل لدنياك كأنك تعيش أبداً",
+    "grade": "mawdou",
+    "savant": "al-Albānī",
+    "reference": "Silsila Daifa n°8",
+    "source_detection": "manuel",
+    "source_url": null,
+    "frequence_detection": 1,
+    "statut_dorar": "ERREUR",
+    "url_dorar": null,
+    "statut_base": "ABSENT",
+    "hadith_id_base": null,
+    "courants_concernes": [
+      "Général"
+    ],
+    "pratique_justifiee": "Fausse sagesse attribuée au Prophète pour justifier l'attachement au dunya",
+    "refutation_savant": "al-Albānī : inventé — Silsila Daifa n°8",
+    "date_detection": "2026-04-30T22:20:38.356044"
+  },
+  {
+    "id": 6,
+    "texte_fr": "Celui qui ne se soucie pas des affaires des musulmans n'en fait pas partie",
+    "texte_ar": "من لم يهتم بأمر المسلمين فليس منهم",
+    "grade": "daif_jiddan",
+    "savant": "al-Albānī",
+    "reference": "Silsila Daifa n°480",
+    "source_detection": "manuel",
+    "source_url": null,
+    "frequence_detection": 1,
+    "statut_dorar": "ERREUR",
+    "url_dorar": null,
+    "statut_base": "ABSENT",
+    "hadith_id_base": null,
+    "courants_concernes": [
+      "Ikhwānī"
+    ],
+    "pratique_justifiee": "Justifier l'activisme politique partisan au nom de l'Islam",
+    "refutation_savant": "al-Albānī : très faible — Silsila Daifa vol.1 n°480",
+    "date_detection": "2026-04-30T22:20:42.435181"
+  },
+  {
+    "id": 7,
+    "texte_fr": "Hadith de la femme en Enfer suspendue par les cheveux",
+    "texte_ar": null,
+    "grade": "mawdou",
+    "savant": "Ibn Bāz",
+    "reference": "Fatwā Ibn Bāz n°19493",
+    "source_detection": "manuel",
+    "source_url": null,
+    "frequence_detection": 1,
+    "statut_dorar": "EN_ATTENTE",
+    "url_dorar": null,
+    "statut_base": "ABSENT",
+    "hadith_id_base": null,
+    "courants_concernes": [
+      "Général"
+    ],
+    "pratique_justifiee": "Effrayer les femmes par des châtiments inventés",
+    "refutation_savant": "Ibn Bāz : faux et inventé — mensonge envers le Prophète — Fatwā n°19493",
+    "date_detection": "2026-04-30T22:20:42.435181"
+  },
+  {
+    "id": 8,
+    "texte_fr": "Soyez optimistes vous trouverez le bien",
+    "texte_ar": "تفاءلوا بالخير تجدوه",
+    "grade": "la_asla_lahu",
+    "savant": "al-Albānī",
+    "reference": "Silsila Daifa n°829",
+    "source_detection": "manuel",
+    "source_url": null,
+    "frequence_detection": 1,
+    "statut_dorar": "ERREUR",
+    "url_dorar": null,
+    "statut_base": "ABSENT",
+    "hadith_id_base": null,
+    "courants_concernes": [
+      "Général"
+    ],
+    "pratique_justifiee": "Citation pieuse sans fondement attribuée au Prophète",
+    "refutation_savant": "al-Albānī : je n'en connais pas de source — Silsila Daifa n°829",
+    "date_detection": "2026-04-30T22:20:47.098446"
+  },
+  {
+    "id": 9,
+    "texte_fr": "Les Fadhail al-Amal utilisés par les Tablīghī",
+    "texte_ar": null,
+    "grade": "daif_jiddan",
+    "savant": "al-Albānī",
+    "reference": "Silsila Daifa — multiples entrées",
+    "source_detection": "manuel",
+    "source_url": null,
+    "frequence_detection": 1,
+    "statut_dorar": "EN_ATTENTE",
+    "url_dorar": null,
+    "statut_base": "ABSENT",
+    "hadith_id_base": null,
+    "courants_concernes": [
+      "Tablīghī"
+    ],
+    "pratique_justifiee": "Justifier les pratiques du mouvement Tablīgh par des hadiths très faibles",
+    "refutation_savant": "al-Albānī a réfuté systématiquement les hadiths du Fadhail al-Amal dans la Silsila Daifa",
+    "date_detection": "2026-04-30T22:20:47.098446"
+  },
+  {
+    "id": 10,
+    "texte_fr": "Visitez les tombes car elles vous rappellent la mort",
+    "texte_ar": "زوروا القبور فإنها تذكركم الآخرة",
+    "grade": "daif",
+    "savant": "al-Albānī",
+    "reference": "Silsila Daifa n°50",
+    "source_detection": "manuel",
+    "source_url": null,
+    "frequence_detection": 1,
+    "statut_dorar": "ERREUR",
+    "url_dorar": null,
+    "statut_base": "ABSENT",
+    "hadith_id_base": null,
+    "courants_concernes": [
+      "Soufi"
+    ],
+    "pratique_justifiee": "Légitimer la visite des tombes des saints et le culte des morts",
+    "refutation_savant": "al-Albānī : faible — utilisé abusivement pour légitimer le culte des tombes — Silsila Daifa n°50",
+    "date_detection": "2026-04-30T22:20:49.747916"
+  }
+]

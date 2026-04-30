@@ -1,0 +1,18 @@
+{
+  "date": "2026-04-30T17:39:17.570821",
+  "api": "HadeethEnc v1",
+  "endpoint": "https://hadeethenc.com/api/v1",
+  "categories_fetched": 7,
+  "total_hadeeths": 1432,
+  "details_fetched": 1432,
+  "zones_updated": [
+    "zone_22_fawaid_tarhawiyyah"
+  ],
+  "by_category": {
+    "Le hadith et ses sciences": 6,
+    "Le dogme": 350,
+    "La jurisprudence et son fondement": 500,
+    "Les vertus et les convenances": 500,
+    "La prédication et la police religieuse": 76
+  }
+}

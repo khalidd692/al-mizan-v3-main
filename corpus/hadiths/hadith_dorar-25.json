@@ -1,0 +1,141 @@
+{
+  "zone_01": {
+    "text_ar": "1 -  عنْ أبي قِلابَةَ، عمَّنْ أقْرأهُ النَّبيُّ صلَّى اللهُ عليه وسلَّمَ: {فَيَوْمَئِذٍ لَا يُعَذِّبُ عَذَابَهُ أَحَدٌ (25) وَلَا يُوثِقُ وَثَاقَهُ أَحَدٌ} [الفجر:25، 26].  .",
+    "source": "dorar"
+  },
+  "zone_02": {
+    "grade": "Sahih",
+    "grade_by": "",
+    "book_name_transliterated": "Ṣaḥīḥ al-Bukhārī",
+    "book_name_ar": "صحيح البخاري",
+    "hadith_number": "25",
+    "source": "db_locale"
+  },
+  "zone_03": {
+    "term_ar": "الصحيح",
+    "term_fr": "Ṣaḥīḥ",
+    "transliteration": "ṣaḥīḥ",
+    "category": "degré",
+    "definition_fr": "Caractère de ce qui est rapporté par une chaîne ininterrompue, par un transmetteur de confiance (ʿadl) dont la mémoire est fiable (ḍābiṭ tām), et qui est exempt de défaut (ʿilla) et de contradiction (shudhūdh) avec un groupe de rapporteurs de confiance.",
+    "source": "mustalah_definitions_fr.json"
+  },
+  "zone_04": {
+    "text_fr": "Rapporté par Ibn 'Umar : Le Messager d'Allah (ﷺ) a dit : J'ai reçu l'ordre (d'Allah) de combattre les gens jusqu'à ce qu'ils témoignent qu'il n'y a de dieu qu'Allah et que Muhammad est le Messager d'Allah (ﷺ), qu'ils accomplissent la prière correctement et qu'ils donnent l'aumône obligatoire. S'ils le font, alors ils préservent leur vie et leurs biens de moi, sauf selon les lois de l'islam, et leur compte sera réglé par Allah",
+    "source": "db_locale"
+  },
+  "zone_05": {
+    "book_name_transliterated": "Ṣaḥīḥ al-Bukhārī",
+    "book_name_ar": "صحيح البخاري",
+    "book_name_fr": "Sahih al-Bukhari",
+    "source": "db_locale"
+  },
+  "zone_06": {
+    "narrator_ar": "من أقرأ أبا قلابة",
+    "source": "dorar"
+  },
+  "zone_07": {},
+  "zone_08": {},
+  "zone_09": {},
+  "zone_10": {},
+  "zone_11": {},
+  "zone_12": {
+    "narrator_name": "من أقرأ أبا قلابة",
+    "note": "biographie disponible sur Dorar (صفحة الراوي)",
+    "source": "dorar"
+  },
+  "zone_13": {},
+  "zone_14": {},
+  "zone_15": {},
+  "zone_16": {},
+  "zone_17": {},
+  "zone_18": {},
+  "zone_19": {},
+  "zone_20": {},
+  "zone_21": {},
+  "zone_22": {},
+  "zone_23": {},
+  "zone_24": {
+    "collection": "المستدرك على الصحيحين",
+    "source_book": "المستدرك على الصحيحين",
+    "source": "dorar"
+  },
+  "zone_25": {
+    "hadith_number": "25",
+    "hadith_id_dorar": "25",
+    "source": "dorar"
+  },
+  "zone_26": {
+    "verdict": "صحيح على شرط الشيخين",
+    "scholar": "Al-Albānī",
+    "source": "dorar"
+  },
+  "zone_27": {},
+  "zone_28": {},
+  "zone_29": {},
+  "zone_30": {},
+  "zone_31": {},
+  "zone_32": {},
+  "zone_33": {},
+  "zone_34": {},
+  "zone_35": {},
+  "zone_36": {},
+  "zone_37": {},
+  "zone_38": {},
+  "zone_39": {},
+  "zone_40": {},
+  "_meta": {
+    "hadith_id": "dorar-25",
+    "zones_remplies": [
+      "zone_01",
+      "zone_02",
+      "zone_03",
+      "zone_04",
+      "zone_05",
+      "zone_06",
+      "zone_12",
+      "zone_24",
+      "zone_25",
+      "zone_26"
+    ],
+    "zones_vides": [
+      "zone_07",
+      "zone_08",
+      "zone_09",
+      "zone_10",
+      "zone_11",
+      "zone_13",
+      "zone_14",
+      "zone_15",
+      "zone_16",
+      "zone_17",
+      "zone_18",
+      "zone_19",
+      "zone_20",
+      "zone_21",
+      "zone_22",
+      "zone_23",
+      "zone_27",
+      "zone_28",
+      "zone_29",
+      "zone_30",
+      "zone_31",
+      "zone_35",
+      "zone_33",
+      "zone_32",
+      "zone_34",
+      "zone_36",
+      "zone_37",
+      "zone_38",
+      "zone_39",
+      "zone_40"
+    ],
+    "timestamp": "2026-04-30T21:26:14.754968",
+    "total_zones": 40,
+    "filled_count": 10,
+    "empty_count": 30,
+    "piliers": {
+      "db_local": true,
+      "dorar": true
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "timestamp": "20260430_235607",
+  "stats": {
+    "google_calls": 8,
+    "youtube_calls": 19,
+    "telegram_msgs": 0,
+    "candidats_total": 5,
+    "matches_confirmes": 0,
+    "fiches_generees": 0,
+    "courants": {
+      "Ikhwānī": 0,
+      "Tablīghī": 0,
+      "Soufi": 0,
+      "Ash'arī": 0,
+      "Salafī": 0,
+      "Général": 0
+    }
+  },
+  "courants_propagateurs": {
+    "Ikhwānī": 0,
+    "Tablīghī": 0,
+    "Soufi": 0,
+    "Ash'arī": 0,
+    "Salafī": 0,
+    "Général": 0
+  },
+  "total_fiches": 0
+}
