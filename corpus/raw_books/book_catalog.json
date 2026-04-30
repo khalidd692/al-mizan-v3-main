@@ -1,0 +1,118 @@
+{
+  "generated_at": "2026-04-30T17:54:43",
+  "project": "Al-Mīzān — Ingestion ouvrages Muṣṭalaḥ",
+  "books": [
+    {
+      "id": "bayquniyya_uthaymin",
+      "priority": 1,
+      "title_ar": "شرح المنظومة البيقونية في مصطلح الحديث",
+      "title_fr": "Sharḥ al-Bayqūniyya — Commentaire du poème de ʿUmar al-Bayqūnī",
+      "author": "ʿAllāma Muḥammad ibn Ṣāliḥ al-ʿUthaymīn",
+      "validating_scholar": "Cheikh Ibn al-ʿUthaymīn (m. 1421 H)",
+      "sources": [
+        {
+          "type": "audio",
+          "platform": "archive.org",
+          "url": "https://archive.org/details/charh_al_bayquniyya",
+          "description": "9 cours audio en français par Abū Yūsuf ʿAbd Allāh Al-ʿĀjī (école de Dammāj)",
+          "reliability": "très_haute"
+        },
+        {
+          "type": "pdf_arabic",
+          "platform": "al-maktaba",
+          "search_terms": [
+            "شرح البيقونية",
+            "العثيمين",
+            "مصطلح الحديث"
+          ],
+          "reliability": "haute"
+        },
+        {
+          "type": "print_reference",
+          "publisher": "Éditions Al-Ḥadīth",
+          "isbn": "978-2875450845",
+          "purchase_urls": [
+            "https://albayyinah.fr/hadith-sunnah/1533-le-commentaire-de-la-bayquniyya",
+            "https://www.librairie-sana.com/fr/le-hadith-livre/7239-le-commentaire-de-la-bayquniyya"
+          ],
+          "note": "Version imprimée française — référence maximale"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "taysir_tahhan",
+      "priority": 1,
+      "title_ar": "تيسير مصطلح الحديث",
+      "title_fr": "Taysīr Muṣṭalaḥ al-Ḥadīth — Précis des Sciences du Hadith",
+      "author": "Dr. Mahmoud ibn Aḥmad Aṭ-Ṭaḥḥān",
+      "validating_scholar": "Dr. Mahmoud Aṭ-Ṭaḥḥān (univ. Koweït/Médine)",
+      "sources": [
+        {
+          "type": "print_reference",
+          "publisher": "Éditions Al-Qalam",
+          "isbn": "979-1092883022",
+          "purchase_url": "https://albayyinah.fr/hadith-sunnah/1749-precis-des-sciences-du-hadith",
+          "note": "Manuel universitaire complet — référence très haute"
+        },
+        {
+          "type": "web_extracts",
+          "platform": "salafislam.fr",
+          "url": "https://salafislam.fr/introduction-sur-les-sciences-et-regles-du-hadith",
+          "description": "Extraits traduits du Taysīr (p. 100)",
+          "reliability": "très_haute"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "nukhbat_fikar",
+      "priority": 2,
+      "title_ar": "نخبة الفكر في مصطلح أهل الأثر",
+      "title_fr": "Nukhbat al-Fikar — Le choix de la pensée sur la terminologie des gens du hadith",
+      "author": "Imām Ibn Ḥajar al-ʿAsqalānī (m. 852 H)",
+      "validating_scholar": "Ibn Ḥajar + Sharḥ al-Lāḥim",
+      "sources": [
+        {
+          "type": "pdf_arabic",
+          "platform": "al-maktaba.org",
+          "search_terms": [
+            "نخبة الفكر",
+            "ابن حجر",
+            "مصطلح"
+          ],
+          "reliability": "haute"
+        },
+        {
+          "type": "sharh_pdf",
+          "title": "Sharḥ Nuzhat an-Naẓar",
+          "author": "Dr. Ibrāhīm al-Lāḥim (~900 pages)",
+          "platform": "sifatusafwa.com / al-maktaba",
+          "reliability": "très_haute"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "muqiza_dhahabi",
+      "priority": 3,
+      "title_ar": "المقيزة في علم مصطلح الحديث",
+      "title_fr": "Al-Mūqiẓa fī ʿIlm Muṣṭalaḥ al-Ḥadīth — L'éveil sur la science de la terminologie",
+      "author": "Imām Adh-Dhahabī (m. 748 H)",
+      "validating_scholar": "Adh-Dhahabī + Sharḥ al-Lāḥim + al-Rāziḥī",
+      "sources": [
+        {
+          "type": "pdf_arabic",
+          "platform": "al-maktaba.org",
+          "search_terms": [
+            "المقيزة",
+            "الذهبي",
+            "مصطلح الحديث"
+          ],
+          "reliability": "haute"
+        }
+      ],
+      "status": "pending"
+    }
+  ]
+}
