@@ -1,0 +1,74 @@
+{
+  "scan_info": {
+    "date": "2026-05-01T02:10:00",
+    "db_source": "almizan_v7.db",
+    "db_hadiths_loaded": 2712,
+    "urls_visited": 8,
+    "urls_blocked": 6
+  },
+  "alertes_db": [],
+  "alertes_externes": [],
+  "non_references": [
+    {
+      "type": "NON_REFERENCE",
+      "url": "https://hisnii.com/hadith-personne-ne-sait-a-allah-accordera-pardon/",
+      "extrait": "Le Messager d'Allah a dit: « Un homme a dit une fois : Par Allah ! Allah ne pardonnera pas à un tel ! Allah dit alors : Qui ose jurer par Moi que Je ne pardonnerai pas à un Tel ! Je lui ai pardonné et J'ai certes annulé ton œuvre. »",
+      "match_db": {
+        "id": "fawaz-fra-qudsi-31",
+        "grade": "unknown",
+        "score": 83
+      },
+      "note": "Hadith authentique (Muslim) - pas d'alerte"
+    },
+    {
+      "type": "NON_REFERENCE",
+      "url": "https://www.islamreligion.fr/hadith-du-jour",
+      "extrait": "Les actes ne valent que par les intentions - Rapporté par Umar ibn al-Khattab",
+      "note": "Hadith #1 Nawawi (Sahih) - pas d'alerte"
+    },
+    {
+      "type": "REFERENCE_PARTIELLE",
+      "url": "https://www.alfurqane.net/iqra/hadith_mawdu_cause_existence_du_monde/",
+      "extrait_arabe": "لولاك ما خلقت الجنة و ما خلقت النار",
+      "extrait_fr": "Si ce n'était pas toi, je n'aurais pas créé le Paradis ni l'Enfer",
+      "match_db": {
+        "id": "fawaz-fra-nasai-2067",
+        "grade": "Sahih",
+        "score": 64
+      },
+      "note": "Version longue sahih en DB, version courte 'Lau laka' est Mawdou' selon al-Albani"
+    }
+  ],
+  "sites_blocked": [
+    {
+      "url": "https://salafs.com",
+      "raison": "Page vide - protection anti-bot",
+      "timestamp": "2026-05-01T01:42:00"
+    },
+    {
+      "url": "https://assunnah.be",
+      "raison": "ERR_NAME_NOT_RESOLVED",
+      "timestamp": "2026-05-01T01:43:00"
+    },
+    {
+      "url": "https://sounnah.com",
+      "raison": "Domaine en vente (HugeDomains)",
+      "timestamp": "2026-05-01T01:44:00"
+    },
+    {
+      "url": "https://daroussalam.fr",
+      "raison": "ERR_NAME_NOT_RESOLVED",
+      "timestamp": "2026-05-01T01:45:00"
+    }
+  ],
+  "urls_discovered": [
+    "https://hisnii.com/",
+    "https://www.islamreligion.fr/hadith-du-jour",
+    "https://www.alfurqane.net/iqra/hadith_mawdu_cause_existence_du_monde/",
+    "https://fr.wikipedia.org/wiki/Mawdû'",
+    "https://islamhouse.com/fr/books/166506/",
+    "https://islamweb.net/fr/articles/38/",
+    "https://www.islamsounnah.com/",
+    "https://sounnahconferences.com/"
+  ]
+}
