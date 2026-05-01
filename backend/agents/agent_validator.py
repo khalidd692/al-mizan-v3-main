@@ -1,3 +1,4 @@
+# Lire REGLES_SUPREMES.md en priorité avant toute action.
 # ⚠️ RÈGLE SUPRÊME — PRIORITÉ ABSOLUE
 # G est le seul décideur. Si une règle bloque → signaler : (1) quelle règle (2) pourquoi (3) proposition. G valide. Aucun blocage silencieux.
 # Contrainte absolue : conformité manhaj Salaf — al-Albānī, Ibn Bāz, Ibn ʿUthaymīn.
