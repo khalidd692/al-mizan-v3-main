@@ -14,6 +14,10 @@
 - Attendre une validation explicite de l'utilisateur ("oui", "go", "valide")
 - **Aucune exception. Même pour un changement d'une seule ligne.**
 
+## 🔴 RÈGLE 1 BIS — VERROU FRONTEND ROOT
+**Ne jamais modifier `_FRONTEND_DIR` dans `backend/main.py` sans validation explicite de l'architecte.**
+- Le frontend est servi depuis `_REPO_ROOT`, pas depuis un sous-dossier.
+
 ## 🔴 RÈGLE 2 — LE SANCTUAIRE
 **Interdiction formelle, sans ordre explicite et mot-clé de déverrouillage :**
 - Modifier la logique de verdict dans `engine.js` (`_getTechnicalGrade`, `_normalizeGrade`, `_gradeColor`, `_gradeLabel`, `_mzVerdictCls`)
