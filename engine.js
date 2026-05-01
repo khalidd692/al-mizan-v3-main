@@ -1135,21 +1135,21 @@ function _orchAuthorityScore(source) {
 }
 
 function _mapOrchToDorar(d) {
-  var gradeAr = _orchGradeToAr(d.grade_raw);
+  var gradeAr = _orchGradeToAr(d.grade_primary);
   return {
-    arabic_text : d.matn      || '',
-    ar          : d.matn      || '',
+    arabic_text : d.ar_text   || '',
+    ar          : d.ar_text   || '',
     savant      : d.grade_by  || '',
     source      : d.source    || '',
     grade_ar    : gradeAr,
     grade       : gradeAr,
-    grade_level : _orchGradeLevel(d.grade_raw),
+    grade_level : _orchGradeLevel(d.grade_primary),
   };
 }
 
 function _mapOrchToEnrich(d) {
   return {
-    french          : d.translation_fr    || '',
+    french          : d.fr_text           || '',
     grade_explique  : d.grade_explanation || '',
     grade           : _orchGradeToAr(d.grade_raw),
     isnad_chain     : d.full_isnad        || '',
@@ -1586,9 +1586,9 @@ async function _searchDorarTopic(query) {
 
             /* zone_3 : hadith_core | no_result | jarh_tadil (AgentIsnad) */
             if (evtName === 'zone_3') {
-              if (msg.type === 'hadith_core' && msg.data) {
-                var orchCard   = _mapOrchToDorar(msg.data);
-                var orchEnrich = _mapOrchToEnrich(msg.data);
+              if (msg.type === 'hadith_core' && msg.row) {
+                var orchCard   = _mapOrchToDorar(msg.row);
+                var orchEnrich = _mapOrchToEnrich(msg.row);
                 if (!dorarOK) {
                   _renderDorarCards([orchCard], query);
                   dorarOK = true;
