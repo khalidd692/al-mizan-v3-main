@@ -33,6 +33,15 @@ _FRONTEND_DIR = _REPO_ROOT
 
 VERSION = "5.0.0-dev"
 
+_FR_STOPWORDS = {
+    "a", "au", "aux", "avec", "ce", "ces", "dans", "de", "des", "du", "elle", "en", "et",
+    "eux", "il", "je", "la", "le", "les", "leur", "leurs", "lui", "ma", "mais", "me", "meme",
+    "mes", "moi", "mon", "ne", "nos", "notre", "nous", "on", "ou", "par", "pas", "pour",
+    "qu", "que", "qui", "sa", "se", "ses", "son", "sur", "ta", "te", "tes", "toi", "ton",
+    "tu", "un", "une", "vos", "votre", "vous", "c", "d", "j", "l", "n", "s", "t", "y",
+    "est", "sont", "etre", "etaient", "etait", "valent", "leurs", "leurs",
+}
+
 
 def _get_db_path() -> pathlib.Path:
     db_url = os.environ.get("DATABASE_URL", "sqlite:///backend/database/almizan_v7.db")
@@ -48,18 +57,46 @@ def _tokenize_fts_query(query: str) -> list[str]:
     return [token for token in re.findall(r"[\w\u0600-\u06FF]+", query, flags=re.UNICODE) if token]
 
 
-def _build_fts_match(query: str) -> str:
+def _extract_significant_tokens(query: str) -> list[str]:
     tokens = _tokenize_fts_query(query)
+    significant: list[str] = []
+    seen: set[str] = set()
+    for token in tokens:
+        low = token.lower()
+        if len(low) <= 2 or low in _FR_STOPWORDS:
+            continue
+        if low in seen:
+            continue
+        seen.add(low)
+        significant.append(low)
+    return significant
+
+
+def _build_fts_match_from_tokens(tokens: list[str], operator: str = "AND") -> str:
     if not tokens:
-        raise ValueError("Requête vide après normalisation FTS")
+        raise ValueError("Aucun token pour la requête FTS")
 
     escaped_tokens = [token.replace('"', '""') for token in tokens]
     if len(escaped_tokens) == 1:
         term_expr = f'"{escaped_tokens[0]}"'
     else:
-        term_expr = " AND ".join(f'"{token}"' for token in escaped_tokens)
+        op = " OR " if operator.upper() == "OR" else " AND "
+        term_expr = op.join(f'"{token}"' for token in escaped_tokens)
 
     return f"(ar_text_clean : {term_expr}) OR (fr_text : {term_expr})"
+
+
+def _build_fts_exact_phrase_match(query: str) -> str:
+    phrase_tokens = _tokenize_fts_query(query)
+    if not phrase_tokens:
+        raise ValueError("Requête vide après normalisation FTS")
+    phrase = " ".join(phrase_tokens).replace('"', '""')
+    return f'(ar_text_clean : "{phrase}") OR (fr_text : "{phrase}")'
+
+
+def _build_fts_match(query: str) -> str:
+    tokens = _tokenize_fts_query(query)
+    return _build_fts_match_from_tokens(tokens, operator="AND")
 
 
 def _fetch_entries(query: str, limit: int) -> list[dict]:
@@ -67,7 +104,6 @@ def _fetch_entries(query: str, limit: int) -> list[dict]:
     if not db_path.exists():
         raise FileNotFoundError(f"Base SQLite introuvable: {db_path}")
 
-    fts_query = _build_fts_match(query)
     sql = """
         WITH ranked_matches AS (
             SELECT
@@ -121,11 +157,31 @@ def _fetch_entries(query: str, limit: int) -> list[dict]:
         if not fts_exists:
             raise sqlite3.OperationalError("Table FTS5 entries_fts introuvable")
 
-        rows = conn.execute(
-            sql,
-            (fts_query, query, query, limit),
-        ).fetchall()
-        return [dict(row) for row in rows]
+        def _run_with_fts(fts_match: str) -> list[dict]:
+            rows = conn.execute(sql, (fts_match, query, query, limit)).fetchall()
+            return [dict(row) for row in rows]
+
+        # Tentative 1 : phrase complète normalisée.
+        rows = _run_with_fts(_build_fts_exact_phrase_match(query))
+        if rows:
+            return rows
+
+        # Tentative 2 : mots significatifs en OR (sans stopwords).
+        significant = _extract_significant_tokens(query)
+        if significant:
+            rows = _run_with_fts(_build_fts_match_from_tokens(significant, operator="OR"))
+            if rows:
+                return rows
+
+        # Tentative 3 : mot le plus long de la requête.
+        all_tokens = _tokenize_fts_query(query)
+        if all_tokens:
+            longest = max(all_tokens, key=len)
+            rows = _run_with_fts(_build_fts_match_from_tokens([longest], operator="OR"))
+            if rows:
+                return rows
+
+        return []
     finally:
         conn.close()
 
