@@ -1586,9 +1586,9 @@ async function _searchDorarTopic(query) {
 
             /* zone_3 : hadith_core | no_result | jarh_tadil (AgentIsnad) */
             if (evtName === 'zone_3') {
-              if (msg.type === 'hadith_core' && msg.row) {
-                var orchCard   = _mapOrchToDorar(msg.row);
-                var orchEnrich = _mapOrchToEnrich(msg.row);
+              if (msg.type === 'hadith_core' && msg.data) {
+                var orchCard   = _mapOrchToDorar(msg.data);
+                var orchEnrich = _mapOrchToEnrich(msg.data);
                 if (!dorarOK) {
                   _renderDorarCards([orchCard], query);
                   dorarOK = true;
