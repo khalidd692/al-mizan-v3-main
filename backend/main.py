@@ -34,7 +34,7 @@ def _get_orch():
     return _orch
 
 _REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent
-_FRONTEND_DIR = _REPO_ROOT / "frontend"
+_FRONTEND_DIR = _REPO_ROOT
 
 VERSION = "5.0.0-dev"
 
