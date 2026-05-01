@@ -1,3 +1,5 @@
+// ⚠️ RÈGLE SUPRÊME — G est le seul décideur. Blocage silencieux interdit.
+// Contrainte absolue : manhaj Salaf — al-Albānī, Ibn Bāz, Ibn ʿUthaymīn.
 /**
  * Cloudflare Worker — AL-MĪZĀN V7.0
  * Routes complètes avec Lexique de Fer

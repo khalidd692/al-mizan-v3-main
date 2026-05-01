@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# ⚠️ RÈGLE SUPRÊME — PRIORITÉ ABSOLUE
+# G est le seul décideur. Si une règle bloque → signaler : (1) quelle règle (2) pourquoi (3) proposition. G valide. Aucun blocage silencieux.
+# Contrainte absolue : conformité manhaj Salaf — al-Albānī, Ibn Bāz, Ibn ʿUthaymīn.
 """
 Filtre de Termes Protégés — AL-MĪZĀN V7.0
 Détection regex AR/FR des déviations doctrinales (Bid'ah, Ta'wîl).

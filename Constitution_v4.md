@@ -1,3 +1,6 @@
+> ⚠️ RÈGLE SUPRÊME — PRIORITÉ ABSOLUE
+> G est le seul décideur du projet. Si une règle de ce fichier bloque une tâche concrète, l'agent signale immédiatement : (1) quelle règle, (2) pourquoi, (3) proposition de modification. G valide ou refuse. Aucun blocage silencieux. Contrainte absolue unique : conformité manhaj Salaf as-Ṣāliḥ — al-Albānī, Ibn Bāz, Ibn ʿUthaymīn.
+
 # ◈ CONSTITUTION UNIVERSELLE AL-MĪZĀN — VERSION 5.0 UNIFIÉE
 
 ## La Charte Suprême de l'Encyclopédie Totale de la Sunnah
