@@ -166,20 +166,13 @@ def _fetch_entries(query: str, limit: int) -> list[dict]:
         if rows:
             return rows
 
-        # Tentative 2 : mots significatifs en OR (sans stopwords).
-        significant = _extract_significant_tokens(query)
-        if significant:
-            rows = _run_with_fts(_build_fts_match_from_tokens(significant, operator="OR"))
-            if rows:
-                return rows
-
-        # Tentative 3 : mot le plus long de la requête.
-        all_tokens = _tokenize_fts_query(query)
-        if all_tokens:
-            longest = max(all_tokens, key=len)
-            rows = _run_with_fts(_build_fts_match_from_tokens([longest], operator="OR"))
-            if rows:
-                return rows
+            # Tentative 2 : AND sur les 2 mots significatifs les plus longs.
+            significant = _extract_significant_tokens(query)
+            if significant:
+                fallback_tokens = sorted(significant, key=len, reverse=True)[:2]
+                rows = _run_with_fts(_build_fts_match_from_tokens(fallback_tokens, operator="AND"))
+                if rows:
+                    return rows
 
         return []
     finally:
@@ -332,7 +325,7 @@ async def search(request):
             return
 
         if not rows:
-            yield _sse("zone_3", {"type": "no_result", "query": query})
+            yield _sse("zone_3", {"type": "no_result", "query": query, "message": "Hadith non trouvé dans la base"})
             yield _sse("zone_40", {"zone": 40, "type": "done", "total": 0, "query": query, "source": "db_locale"})
             yield _sse("done", {"ok": True, "total": 0, "query": query})
             return
