@@ -1223,6 +1223,7 @@ function _finishLoading() {
    progressives avant que _enrichCardSSE ne remplace le contenu.
    Anti-doublon via data-mz-zone sur le conteneur.              */
 function _mzZoneAccAppend(containerId, title, content, color) {
+  if (/^sec-acc-/.test(containerId)) return;
   var cont = document.getElementById(containerId);
   if (!cont) return;
   var c = color || '#d4af37';
@@ -1287,7 +1288,6 @@ function _renderDorarCards(rawHadiths, query) {
 
     if (r.grade_albani) html += '<div class="mz-grade-detail"><span class="mz-grade-label">al-Albānī :</span> ' + r.grade_albani + '</div>';
     if (r.grade_by_mohdith) html += '<div class="mz-grade-detail"><span class="mz-grade-label">Muḥaddith :</span> ' + r.grade_by_mohdith + '</div>';
-    if (r.grade_explanation) html += '<div class="mz-grade-expl">' + r.grade_explanation + '</div>';
     if (r.book_name_fr || r.book_name_ar) { var bookLabel = r.book_name_fr || r.book_name_ar; var numLabel = r.hadith_number ? ' · n° ' + r.hadith_number : ''; html += '<div class="mz-source-detail">' + bookLabel + numLabel + '</div>'; }
     if (r.takhrij) html += '<div class="mz-takhrij">' + r.takhrij + '</div>';
     if (r.ar_full_isnad) html += '<div class="mz-isnad-ar" dir="rtl">' + r.ar_full_isnad + '</div>';
