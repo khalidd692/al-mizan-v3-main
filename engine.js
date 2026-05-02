@@ -1137,13 +1137,22 @@ function _orchAuthorityScore(source) {
 function _mapOrchToDorar(d) {
   var gradeAr = _orchGradeToAr(d.grade_primary);
   return {
-    arabic_text : d.ar_text   || '',
-    ar          : d.ar_text   || '',
-    savant      : d.grade_by  || '',
-    source      : d.source    || '',
-    grade_ar    : gradeAr,
-    grade       : gradeAr,
-    grade_level : _orchGradeLevel(d.grade_primary),
+    arabic_text      : d.ar_text            || '',
+    ar               : d.ar_text            || '',
+    fr_text          : d.fr_text            || '',
+    ar_narrator      : d.ar_narrator        || null,
+    grade_ar         : gradeAr,
+    grade            : gradeAr,
+    grade_level      : _orchGradeLevel(d.grade_primary),
+    grade_albani     : d.grade_albani       || null,
+    grade_by_mohdith : d.grade_by_mohdith   || null,
+    grade_explanation: d.grade_explanation  || null,
+    book_name_fr     : d.book_name_fr       || '',
+    book_name_ar     : d.book_name_ar       || '',
+    hadith_number    : d.hadith_number      || '',
+    takhrij          : d.takhrij            || null,
+    ar_full_isnad    : d.ar_full_isnad      || null,
+    source_url       : d.source_url         || null,
   };
 }
 
@@ -1255,9 +1264,6 @@ function _renderDorarCards(rawHadiths, query) {
   rawHadiths.forEach(function(r, idx) {
     var gradeRaw = r.grade_ar || r.grade || '';
     var tg = _getTechnicalGrade(gradeRaw);
-    var metaStr = '';
-    if (r.savant && r.savant !== '\u2014') metaStr += '\u0627\u0644\u0645\u062d\u062f\u062b\u202f: ' + r.savant;
-    if (r.source && r.source !== '\u2014') metaStr += (metaStr ? '\u202f\u00b7\u202f' : '') + '\u0627\u0644\u0645\u0635\u062f\u0631\u202f: ' + r.source;
 
     html += '<div class="mz-card" id="topic-card-' + idx + '" '
       + 'style="animation:argCardIn .4s ease both;animation-delay:' + (idx * 0.08) + 's;overflow:hidden;">';
@@ -1268,7 +1274,7 @@ function _renderDorarCards(rawHadiths, query) {
       html += '<div class="mz-matn-ar">' + (r.arabic_text || r.ar) + '</div>';
     }
     html += '<div class="mz-matn-fr" id="fr-zone-' + idx + '" style="min-height:2px;"></div>';
-    if (metaStr) html += '<div class="mz-matn-meta">' + metaStr + '</div>';
+    if (r.ar_narrator) html += '<div class="mz-matn-meta" dir="rtl">' + r.ar_narrator + '</div>';
     html += '</div>'; /* /mz-matn */
 
     /* ── Badge verdict immédiat (via _getTechnicalGrade) ── */
@@ -1279,23 +1285,13 @@ function _renderDorarCards(rawHadiths, query) {
       + '<div class="mz-illah-text" id="hukm-text-' + idx + '"></div>'
       + '</div>';
 
-    /* ── Zone 2 — Chaîne de Transmission (Isnad) — NEXUS GALACTIQUE ── */
-    html += `<div style="border-top:1px solid rgba(212,175,55,.18);border-bottom:1px solid rgba(212,175,55,.18);background:linear-gradient(165deg,rgba(10,6,0,.92) 0%,rgba(15,10,2,.85) 40%,rgba(8,5,0,.95) 100%);margin:6px 0 0;position:relative;overflow:hidden;">`;
-    html += `<div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(212,175,55,.06) 0%,transparent 70%);pointer-events:none;"></div>`;
-    html += `<div style="position:relative;z-index:1;padding:12px 20px 4px;font-family:Cinzel,serif;font-size:6px;letter-spacing:.28em;color:rgba(212,175,55,.45);text-transform:uppercase;text-shadow:0 0 12px rgba(212,175,55,.2);">ZONE 2 \u2014 SILSILAT AL-ISN\u0100D \u2014 CHA\u00ceNE DE TRANSMISSION</div>`;
-    html += '<div id="isnad-zone-' + idx + '" style="min-height:40px;transition:min-height .4s ease;position:relative;z-index:1;">' + _mzSkeletonZone2() + '</div>';
-    html += `</div>`; /* /zone-2-isnad */
-
-    /* ── Accordéons Zone 2 (Jarh wa Ta\'dil, 5 conditions, Mutaba\'at) ── */
-    html += '<div id="sanad-acc-' + idx + '" style="padding:0 18px;"></div>';
-
-    /* ── Typewriter SSE (intermédiaire) ── */
-    html += '<div id="typewriter-zone-' + idx + '" style="padding:4px 18px 0;">'
-      + '<div id="typewriter-' + idx + '" style="font-family:\'Cormorant Garamond\',serif;'
-      + 'font-size:13px;color:rgba(201,168,76,.45);line-height:1.7;font-style:italic;'
-      + 'min-height:0;white-space:pre-wrap;word-break:break-word;overflow-anchor:none;"></div>'
-      + '</div>';
-
+    if (r.grade_albani) html += '<div class="mz-grade-detail"><span class="mz-grade-label">al-Albānī :</span> ' + r.grade_albani + '</div>';
+    if (r.grade_by_mohdith) html += '<div class="mz-grade-detail"><span class="mz-grade-label">Muḥaddith :</span> ' + r.grade_by_mohdith + '</div>';
+    if (r.grade_explanation) html += '<div class="mz-grade-expl">' + r.grade_explanation + '</div>';
+    if (r.book_name_fr || r.book_name_ar) { var bookLabel = r.book_name_fr || r.book_name_ar; var numLabel = r.hadith_number ? ' · n° ' + r.hadith_number : ''; html += '<div class="mz-source-detail">' + bookLabel + numLabel + '</div>'; }
+    if (r.takhrij) html += '<div class="mz-takhrij">' + r.takhrij + '</div>';
+    if (r.ar_full_isnad) html += '<div class="mz-isnad-ar" dir="rtl">' + r.ar_full_isnad + '</div>';
+    if (r.source_url) html += '<a class="mz-source-link" href="' + r.source_url + '" target="_blank" rel="noopener">Source originale ↗</a>';
     /* ── Zone 3 — Trésor des 14 siècles (accordéon ouvert par défaut) ── */
     html += '<div id="sec-acc-' + idx + '" style="padding:0 0 4px;"></div>';
 
