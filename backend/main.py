@@ -20,6 +20,7 @@ from collections import defaultdict
 import time
 
 from backend.utils.logging import get_logger
+from backend.core.guard import translate_with_guard, translate_with_guard_async
 
 log = get_logger("mizan.main")
 
@@ -264,6 +265,43 @@ async def health(request):
         "demo_banner": "MODE DÉMONSTRATION" if _is_demo_mode() else None,
     })
 
+async def translate(request):
+    """
+    Route de traduction sécurisée utilisant le Guard Middleware.
+    Point d'entrée obligatoire pour toute traduction arabe→français.
+    """
+    source_ar = request.query_params.get("source", "").strip()
+    if not source_ar:
+        return JSONResponse({"error": "Paramètre 'source' requis (texte arabe)"}, status_code=400)
+    
+    client_ip = request.client.host if request.client else "unknown"
+    
+    # Vérifier le rate limit
+    allowed, error_msg = _check_rate_limit(client_ip)
+    if not allowed:
+        log.warning(f"[RATE_LIMIT] {client_ip}: {error_msg}")
+        return JSONResponse(
+            {"error": error_msg, "code": "RATE_LIMIT_EXCEEDED"},
+            status_code=429
+        )
+    
+    log.info(f"[TRANSLATE] Source: {source_ar[:50]}... | IP: {client_ip}")
+    
+    # Utiliser le Guard pour la traduction sécurisée
+    result = await translate_with_guard_async(source_ar)
+    
+    return JSONResponse({
+        "success": result.success,
+        "traduction": result.traduction,
+        "termes_conserves": result.termes_conserves,
+        "translitterations": result.translitterations,
+        "triage_status": result.triage_status,
+        "erreur": result.erreur,
+        "audit_log": result.audit_log,
+        "sha256_hash": result.sha256_hash,
+        "cached": result.cached,
+    })
+
 def _check_rate_limit(ip: str) -> tuple[bool, str]:
     """Vérifie le rate limit pour une IP"""
     now = time.time()
@@ -363,6 +401,7 @@ async def search(request):
 routes = [
     Route("/api/health", health),
     Route("/api/search", search),
+    Route("/api/translate", translate),
     Mount("/", app=StaticFiles(
         directory=str(_FRONTEND_DIR),
         html=True
